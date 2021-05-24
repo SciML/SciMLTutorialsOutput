@@ -1,0 +1,13 @@
+*.jl.cov
+*.jl.*.cov
+*.jl.mem
+.ipynb_checkpoints
+*.tmp
+*.aux
+*.log
+*.out
+*.tex
+Manifest.toml
+tutorials/**/*.html
+tutorials/**/*.pdf
+/*/*/jl_*/
