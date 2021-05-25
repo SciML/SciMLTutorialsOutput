@@ -714,20 +714,20 @@ lorenz &#40;generic function with 1 method&#41;
 
 <pre class="output">
 BenchmarkTools.Trial: 
-  memory estimate:  10.83 MiB
-  allocs estimate:  101434
+  memory estimate:  10.81 MiB
+  allocs estimate:  100152
   --------------
-  minimum time:     3.308 ms &#40;0.00&#37; GC&#41;
-  median time:      3.375 ms &#40;0.00&#37; GC&#41;
-  mean time:        3.887 ms &#40;13.02&#37; GC&#41;
-  maximum time:     9.092 ms &#40;33.26&#37; GC&#41;
+  minimum time:     3.613 ms &#40;0.00&#37; GC&#41;
+  median time:      3.744 ms &#40;0.00&#37; GC&#41;
+  mean time:        4.838 ms &#40;12.95&#37; GC&#41;
+  maximum time:     13.302 ms &#40;67.82&#37; GC&#41;
   --------------
-  samples:          1286
+  samples:          1031
   evals/sample:     1
 </pre>
 
 
-<p>The BenchmarkTools package&#39;s <code>@benchmark</code> runs the code multiple times to get an accurate measurement. The minimum time is the time it takes when your OS and other background processes aren&#39;t getting in the way. Notice that in this case it takes about 5ms to solve and allocates around 11.11 MiB. However, if we were to use this inside of a real user code we&#39;d see a lot of time spent doing garbage collection &#40;GC&#41; to clean up all of the arrays we made. Even if we turn off saving we have these allocations.</p>
+<p>The <code>BenchmarkTools.jl</code> package&#39;s <code>@benchmark</code> runs the code multiple times to get an accurate measurement. The minimum time is the time it takes when your OS and other background processes aren&#39;t getting in the way. Notice that in this case it takes about 5ms to solve and allocates around 11.11 MiB. However, if we were to use this inside of a real user code we&#39;d see a lot of time spent doing garbage collection &#40;GC&#41; to clean up all of the arrays we made. Even if we turn off saving we have these allocations.</p>
 
 
 <pre class='hljl'>
@@ -738,14 +738,14 @@ BenchmarkTools.Trial:
 <pre class="output">
 BenchmarkTools.Trial: 
   memory estimate:  9.47 MiB
-  allocs estimate:  88652
+  allocs estimate:  88645
   --------------
-  minimum time:     2.909 ms &#40;0.00&#37; GC&#41;
-  median time:      2.917 ms &#40;0.00&#37; GC&#41;
-  mean time:        3.259 ms &#40;9.71&#37; GC&#41;
-  maximum time:     6.673 ms &#40;30.76&#37; GC&#41;
+  minimum time:     3.233 ms &#40;0.00&#37; GC&#41;
+  median time:      3.348 ms &#40;0.00&#37; GC&#41;
+  mean time:        4.425 ms &#40;11.89&#37; GC&#41;
+  maximum time:     11.764 ms &#40;51.89&#37; GC&#41;
   --------------
-  samples:          1533
+  samples:          1127
   evals/sample:     1
 </pre>
 
@@ -780,15 +780,15 @@ lorenz&#33; &#40;generic function with 1 method&#41;
 
 <pre class="output">
 BenchmarkTools.Trial: 
-  memory estimate:  1.38 MiB
-  allocs estimate:  12996
+  memory estimate:  1.37 MiB
+  allocs estimate:  11752
   --------------
-  minimum time:     778.454 μs &#40;0.00&#37; GC&#41;
-  median time:      785.712 μs &#40;0.00&#37; GC&#41;
-  mean time:        851.452 μs &#40;6.89&#37; GC&#41;
-  maximum time:     3.895 ms &#40;72.64&#37; GC&#41;
+  minimum time:     770.421 μs &#40;0.00&#37; GC&#41;
+  median time:      792.791 μs &#40;0.00&#37; GC&#41;
+  mean time:        936.532 μs &#40;8.20&#37; GC&#41;
+  maximum time:     7.417 ms &#40;84.98&#37; GC&#41;
   --------------
-  samples:          5859
+  samples:          5308
   evals/sample:     1
 </pre>
 
@@ -801,13 +801,13 @@ BenchmarkTools.Trial:
 
 <pre class="output">
 BenchmarkTools.Trial: 
-  memory estimate:  5.22 KiB
-  allocs estimate:  54
+  memory estimate:  6.70 KiB
+  allocs estimate:  47
   --------------
-  minimum time:     346.300 μs &#40;0.00&#37; GC&#41;
-  median time:      349.081 μs &#40;0.00&#37; GC&#41;
-  mean time:        349.778 μs &#40;0.11&#37; GC&#41;
-  maximum time:     4.335 ms &#40;91.49&#37; GC&#41;
+  minimum time:     345.686 μs &#40;0.00&#37; GC&#41;
+  median time:      350.476 μs &#40;0.00&#37; GC&#41;
+  mean time:        351.953 μs &#40;0.12&#37; GC&#41;
+  maximum time:     4.719 ms &#40;91.27&#37; GC&#41;
   --------------
   samples:          10000
   evals/sample:     1
@@ -826,15 +826,15 @@ BenchmarkTools.Trial:
 
 <pre class="output">
 BenchmarkTools.Trial: 
-  memory estimate:  5.22 KiB
-  allocs estimate:  54
+  memory estimate:  6.70 KiB
+  allocs estimate:  47
   --------------
-  minimum time:     1.738 ms &#40;0.00&#37; GC&#41;
-  median time:      1.745 ms &#40;0.00&#37; GC&#41;
-  mean time:        1.746 ms &#40;0.00&#37; GC&#41;
-  maximum time:     1.854 ms &#40;0.00&#37; GC&#41;
+  minimum time:     1.729 ms &#40;0.00&#37; GC&#41;
+  median time:      1.749 ms &#40;0.00&#37; GC&#41;
+  mean time:        1.753 ms &#40;0.00&#37; GC&#41;
+  maximum time:     5.282 ms &#40;0.00&#37; GC&#41;
   --------------
-  samples:          2862
+  samples:          2848
   evals/sample:     1
 </pre>
 
@@ -853,7 +853,7 @@ BenchmarkTools.Trial:
 
 
 <pre class="output">
-3-element StaticArrays.SArray&#123;Tuple&#123;3&#125;,Float64,1,3&#125; with indices SOneTo&#40;3&#41;:
+3-element StaticArrays.SVector&#123;3, Float64&#125; with indices SOneTo&#40;3&#41;:
  2.0
  3.0
  5.0
@@ -893,13 +893,13 @@ lorenz_static &#40;generic function with 1 method&#41;
 
 <pre class="output">
 BenchmarkTools.Trial: 
-  memory estimate:  466.28 KiB
-  allocs estimate:  2595
+  memory estimate:  446.73 KiB
+  allocs estimate:  1314
   --------------
-  minimum time:     336.309 μs &#40;0.00&#37; GC&#41;
-  median time:      340.596 μs &#40;0.00&#37; GC&#41;
-  mean time:        353.354 μs &#40;3.13&#37; GC&#41;
-  maximum time:     2.111 ms &#40;78.97&#37; GC&#41;
+  minimum time:     313.937 μs &#40;0.00&#37; GC&#41;
+  median time:      320.696 μs &#40;0.00&#37; GC&#41;
+  mean time:        348.313 μs &#40;4.60&#37; GC&#41;
+  maximum time:     5.044 ms &#40;90.94&#37; GC&#41;
   --------------
   samples:          10000
   evals/sample:     1
@@ -914,13 +914,13 @@ BenchmarkTools.Trial:
 
 <pre class="output">
 BenchmarkTools.Trial: 
-  memory estimate:  3.33 KiB
-  allocs estimate:  28
+  memory estimate:  3.69 KiB
+  allocs estimate:  22
   --------------
-  minimum time:     237.341 μs &#40;0.00&#37; GC&#41;
-  median time:      240.594 μs &#40;0.00&#37; GC&#41;
-  mean time:        241.256 μs &#40;0.00&#37; GC&#41;
-  maximum time:     277.143 μs &#40;0.00&#37; GC&#41;
+  minimum time:     194.038 μs &#40;0.00&#37; GC&#41;
+  median time:      196.887 μs &#40;0.00&#37; GC&#41;
+  mean time:        200.723 μs &#40;0.00&#37; GC&#41;
+  maximum time:     3.633 ms &#40;0.00&#37; GC&#41;
   --------------
   samples:          10000
   evals/sample:     1
@@ -947,12 +947,12 @@ BenchmarkTools.Trial:
   memory estimate:  7.63 MiB
   allocs estimate:  2
   --------------
-  minimum time:     1.102 ms &#40;0.00&#37; GC&#41;
-  median time:      1.124 ms &#40;0.00&#37; GC&#41;
-  mean time:        1.214 ms &#40;7.41&#37; GC&#41;
-  maximum time:     2.059 ms &#40;37.65&#37; GC&#41;
+  minimum time:     1.176 ms &#40;0.00&#37; GC&#41;
+  median time:      1.240 ms &#40;0.00&#37; GC&#41;
+  mean time:        1.558 ms &#40;10.94&#37; GC&#41;
+  maximum time:     4.484 ms &#40;34.51&#37; GC&#41;
   --------------
-  samples:          4100
+  samples:          3142
   evals/sample:     1
 </pre>
 
@@ -969,14 +969,14 @@ BenchmarkTools.Trial:
 <pre class="output">
 BenchmarkTools.Trial: 
   memory estimate:  7.63 MiB
-  allocs estimate:  8
+  allocs estimate:  2
   --------------
-  minimum time:     2.652 ms &#40;0.00&#37; GC&#41;
-  median time:      2.665 ms &#40;0.00&#37; GC&#41;
-  mean time:        2.755 ms &#40;3.20&#37; GC&#41;
-  maximum time:     3.586 ms &#40;25.01&#37; GC&#41;
+  minimum time:     1.104 ms &#40;0.00&#37; GC&#41;
+  median time:      1.233 ms &#40;0.00&#37; GC&#41;
+  mean time:        1.570 ms &#40;10.76&#37; GC&#41;
+  maximum time:     4.938 ms &#40;31.12&#37; GC&#41;
   --------------
-  samples:          1813
+  samples:          3118
   evals/sample:     1
 </pre>
 
@@ -1001,12 +1001,12 @@ BenchmarkTools.Trial:
   memory estimate:  7.63 MiB
   allocs estimate:  2
   --------------
-  minimum time:     1.135 ms &#40;0.00&#37; GC&#41;
-  median time:      1.190 ms &#40;0.00&#37; GC&#41;
-  mean time:        1.470 ms &#40;8.36&#37; GC&#41;
-  maximum time:     3.864 ms &#40;23.62&#37; GC&#41;
+  minimum time:     1.170 ms &#40;0.00&#37; GC&#41;
+  median time:      1.232 ms &#40;0.00&#37; GC&#41;
+  mean time:        1.552 ms &#40;11.03&#37; GC&#41;
+  maximum time:     11.761 ms &#40;46.68&#37; GC&#41;
   --------------
-  samples:          3386
+  samples:          3155
   evals/sample:     1
 </pre>
 
@@ -1025,12 +1025,12 @@ BenchmarkTools.Trial:
   memory estimate:  7.63 MiB
   allocs estimate:  2
   --------------
-  minimum time:     1.098 ms &#40;0.00&#37; GC&#41;
-  median time:      1.124 ms &#40;0.00&#37; GC&#41;
-  mean time:        1.215 ms &#40;7.55&#37; GC&#41;
-  maximum time:     2.096 ms &#40;43.88&#37; GC&#41;
+  minimum time:     1.180 ms &#40;0.00&#37; GC&#41;
+  median time:      1.253 ms &#40;0.00&#37; GC&#41;
+  mean time:        1.564 ms &#40;10.94&#37; GC&#41;
+  maximum time:     4.450 ms &#40;35.00&#37; GC&#41;
   --------------
-  samples:          4097
+  samples:          3131
   evals/sample:     1
 </pre>
 
@@ -1044,27 +1044,27 @@ BenchmarkTools.Trial:
 
 
 <pre class="output">
-1000×1000 Array&#123;Float64,2&#125;:
- 0.840378  0.485274  0.924572  0.757179  …  1.39955   0.773387  0.657392
- 1.41323   0.793729  0.831187  0.950668     0.654319  1.46885   1.52804
- 1.20182   0.653114  0.482528  0.95313      0.913951  0.222537  0.610174
- 1.49242   0.868178  1.01561   1.13976      1.24413   0.399607  0.527826
- 1.07206   0.813371  0.816984  0.811787     0.258578  1.17443   1.42978
- 0.842218  1.32533   1.08801   0.582951  …  0.926491  1.38897   0.849803
- 0.989953  1.06931   1.33685   0.549195     1.49118   0.709916  0.906874
- 0.469665  0.601914  0.377434  0.467431     0.862483  1.00223   0.840039
- 0.883291  0.758317  0.660366  1.20652      0.890935  0.584826  0.691214
- 0.298193  1.22886   0.60293   1.57381      1.08244   0.462226  1.58976
- ⋮                                       ⋱                      
- 0.840968  0.84119   1.10298   0.778372     0.654766  0.461317  0.76752
- 0.931224  0.68087   0.549049  0.484713     1.43144   0.627723  0.267985
- 0.351612  0.310498  0.975875  0.843578     1.16872   1.29762   0.729312
- 1.37635   0.510036  1.50359   1.48308      1.2985    0.79823   0.774335
- 1.41766   0.566584  0.609064  0.492235  …  0.735346  0.145164  0.604026
- 0.999136  1.06297   0.936562  0.660093     1.0534    1.39612   0.868007
- 0.615487  0.504845  1.18105   0.849568     0.160437  1.15834   1.34111
- 0.5038    1.14377   1.06801   0.857203     1.06988   0.765729  1.17879
- 0.578855  1.22678   0.919697  1.1925       0.538303  0.809692  0.89885
+1000×1000 Matrix&#123;Float64&#125;:
+ 0.720069  0.182457  0.763895  1.04962   …  0.41588    0.508065  0.361555
+ 0.896943  1.41017   0.409182  0.825458     0.812476   0.785988  0.881462
+ 1.36059   0.394225  1.11242   0.538726     0.714643   1.38476   1.34051
+ 0.540476  0.817361  0.600552  0.446012     1.16538    0.786801  0.927957
+ 1.58465   0.709142  0.872294  0.615889     0.834811   0.323699  0.773447
+ 0.911922  1.34667   0.887216  1.35896   …  0.677299   1.02647   1.43337
+ 1.27911   0.269067  0.829162  0.930278     0.273203   0.904372  0.682316
+ 0.927549  0.788235  0.469908  1.18655      0.264846   0.634813  1.18439
+ 0.781568  0.695038  1.13002   0.837556     1.10733    0.840558  1.10162
+ 1.15982   1.01843   1.02094   0.590594     1.09131    0.489211  0.643781
+ ⋮                                       ⋱                       
+ 1.15489   1.13873   1.25706   1.09846      0.836945   1.45453   0.668872
+ 1.50925   0.339285  0.63122   1.31708      0.0284809  0.675261  0.414872
+ 1.21772   0.933767  1.1721    1.125        0.539415   0.336139  0.796335
+ 0.62414   0.907673  0.24076   1.06522      1.28061    0.663797  1.10831
+ 0.420111  1.07505   0.910339  1.5706    …  0.879288   0.96245   0.602083
+ 0.60329   1.41653   1.03081   0.840123     0.344945   1.26708   0.810059
+ 0.430383  0.407107  0.242699  0.941784     1.09034    0.614127  0.883191
+ 0.942736  0.90306   0.415315  0.892401     1.07394    0.934953  0.346971
+ 0.441236  1.33947   1.39745   0.718495     0.417654   0.733623  1.45458
 </pre>
 
 
@@ -1082,12 +1082,12 @@ BenchmarkTools.Trial:
   memory estimate:  7.63 MiB
   allocs estimate:  2
   --------------
-  minimum time:     1.100 ms &#40;0.00&#37; GC&#41;
-  median time:      1.123 ms &#40;0.00&#37; GC&#41;
-  mean time:        1.217 ms &#40;7.67&#37; GC&#41;
-  maximum time:     2.102 ms &#40;44.50&#37; GC&#41;
+  minimum time:     1.171 ms &#40;0.00&#37; GC&#41;
+  median time:      1.266 ms &#40;0.00&#37; GC&#41;
+  mean time:        1.564 ms &#40;11.02&#37; GC&#41;
+  maximum time:     6.052 ms &#40;79.63&#37; GC&#41;
   --------------
-  samples:          4089
+  samples:          3130
   evals/sample:     1
 </pre>
 
@@ -1099,49 +1099,6 @@ BenchmarkTools.Trial:
 <span class='hljl-n'>D</span><span class='hljl-t'> </span><span class='hljl-oB'>=</span><span class='hljl-t'> </span><span class='hljl-nf'>zeros</span><span class='hljl-p'>(</span><span class='hljl-ni'>1000</span><span class='hljl-p'>,</span><span class='hljl-ni'>1000</span><span class='hljl-p'>);</span>
 </pre>
 
-
-<pre class="output">
-1000×1000 Array&#123;Float64,2&#125;:
- 0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  …  0.0  0.0  0.0  0.0  0.0  0.0  0
-.0
- 0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0     0.0  0.0  0.0  0.0  0.0  0.0  0
-.0
- 0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0     0.0  0.0  0.0  0.0  0.0  0.0  0
-.0
- 0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0     0.0  0.0  0.0  0.0  0.0  0.0  0
-.0
- 0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0     0.0  0.0  0.0  0.0  0.0  0.0  0
-.0
- 0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  …  0.0  0.0  0.0  0.0  0.0  0.0  0
-.0
- 0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0     0.0  0.0  0.0  0.0  0.0  0.0  0
-.0
- 0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0     0.0  0.0  0.0  0.0  0.0  0.0  0
-.0
- 0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0     0.0  0.0  0.0  0.0  0.0  0.0  0
-.0
- 0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0     0.0  0.0  0.0  0.0  0.0  0.0  0
-.0
- ⋮                        ⋮              ⋱            ⋮                   
- 0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0     0.0  0.0  0.0  0.0  0.0  0.0  0
-.0
- 0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0     0.0  0.0  0.0  0.0  0.0  0.0  0
-.0
- 0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0     0.0  0.0  0.0  0.0  0.0  0.0  0
-.0
- 0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0     0.0  0.0  0.0  0.0  0.0  0.0  0
-.0
- 0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0  …  0.0  0.0  0.0  0.0  0.0  0.0  0
-.0
- 0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0     0.0  0.0  0.0  0.0  0.0  0.0  0
-.0
- 0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0     0.0  0.0  0.0  0.0  0.0  0.0  0
-.0
- 0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0     0.0  0.0  0.0  0.0  0.0  0.0  0
-.0
- 0.0  0.0  0.0  0.0  0.0  0.0  0.0  0.0     0.0  0.0  0.0  0.0  0.0  0.0  0
-.0
-</pre>
 
 
 <p>Then we can keep re-using this cache for subsequent calculations. The mutating broadcasting form is:</p>
@@ -1158,12 +1115,12 @@ BenchmarkTools.Trial:
   memory estimate:  0 bytes
   allocs estimate:  0
   --------------
-  minimum time:     1.044 ms &#40;0.00&#37; GC&#41;
-  median time:      1.051 ms &#40;0.00&#37; GC&#41;
-  mean time:        1.053 ms &#40;0.00&#37; GC&#41;
-  maximum time:     1.328 ms &#40;0.00&#37; GC&#41;
+  minimum time:     1.197 ms &#40;0.00&#37; GC&#41;
+  median time:      1.210 ms &#40;0.00&#37; GC&#41;
+  mean time:        1.220 ms &#40;0.00&#37; GC&#41;
+  maximum time:     1.425 ms &#40;0.00&#37; GC&#41;
   --------------
-  samples:          4725
+  samples:          3991
   evals/sample:     1
 </pre>
 
@@ -1182,12 +1139,12 @@ BenchmarkTools.Trial:
   memory estimate:  0 bytes
   allocs estimate:  0
   --------------
-  minimum time:     1.042 ms &#40;0.00&#37; GC&#41;
-  median time:      1.048 ms &#40;0.00&#37; GC&#41;
-  mean time:        1.050 ms &#40;0.00&#37; GC&#41;
-  maximum time:     1.334 ms &#40;0.00&#37; GC&#41;
+  minimum time:     1.190 ms &#40;0.00&#37; GC&#41;
+  median time:      1.204 ms &#40;0.00&#37; GC&#41;
+  mean time:        1.213 ms &#40;0.00&#37; GC&#41;
+  maximum time:     1.325 ms &#40;0.00&#37; GC&#41;
   --------------
-  samples:          4738
+  samples:          4013
   evals/sample:     1
 </pre>
 
@@ -1203,15 +1160,15 @@ BenchmarkTools.Trial:
 
 <pre class="output">
 BenchmarkTools.Trial: 
-  memory estimate:  32 bytes
-  allocs estimate:  1
+  memory estimate:  0 bytes
+  allocs estimate:  0
   --------------
-  minimum time:     2.283 ms &#40;0.00&#37; GC&#41;
-  median time:      2.293 ms &#40;0.00&#37; GC&#41;
-  mean time:        2.296 ms &#40;0.00&#37; GC&#41;
-  maximum time:     2.554 ms &#40;0.00&#37; GC&#41;
+  minimum time:     2.340 ms &#40;0.00&#37; GC&#41;
+  median time:      2.371 ms &#40;0.00&#37; GC&#41;
+  mean time:        2.374 ms &#40;0.00&#37; GC&#41;
+  maximum time:     4.860 ms &#40;0.00&#37; GC&#41;
   --------------
-  samples:          2174
+  samples:          2078
   evals/sample:     1
 </pre>
 
@@ -1229,12 +1186,12 @@ BenchmarkTools.Trial:
   memory estimate:  7.63 MiB
   allocs estimate:  2
   --------------
-  minimum time:     6.649 ms &#40;0.00&#37; GC&#41;
-  median time:      6.747 ms &#40;0.00&#37; GC&#41;
-  mean time:        6.827 ms &#40;1.30&#37; GC&#41;
-  maximum time:     7.731 ms &#40;12.68&#37; GC&#41;
+  minimum time:     9.142 ms &#40;0.00&#37; GC&#41;
+  median time:      9.285 ms &#40;0.00&#37; GC&#41;
+  mean time:        10.756 ms &#40;5.28&#37; GC&#41;
+  maximum time:     59.078 ms &#40;75.02&#37; GC&#41;
   --------------
-  samples:          732
+  samples:          465
   evals/sample:     1
 </pre>
 
@@ -1253,12 +1210,12 @@ BenchmarkTools.Trial:
   memory estimate:  0 bytes
   allocs estimate:  0
   --------------
-  minimum time:     6.171 ms &#40;0.00&#37; GC&#41;
-  median time:      6.207 ms &#40;0.00&#37; GC&#41;
-  mean time:        6.210 ms &#40;0.00&#37; GC&#41;
-  maximum time:     6.837 ms &#40;0.00&#37; GC&#41;
+  minimum time:     9.368 ms &#40;0.00&#37; GC&#41;
+  median time:      9.445 ms &#40;0.00&#37; GC&#41;
+  mean time:        9.496 ms &#40;0.00&#37; GC&#41;
+  maximum time:     15.280 ms &#40;0.00&#37; GC&#41;
   --------------
-  samples:          805
+  samples:          527
   evals/sample:     1
 </pre>
 
@@ -1308,19 +1265,52 @@ dv &= D_2 (A_y v + v A_x) + a u^2 + \beta v
 
 
 <pre class="output">
-ODEProblem with uType Array&#123;Float64,3&#125; and tType Float64. In-place: true
+ODEProblem with uType Array&#123;Float64, 3&#125; and tType Float64. In-place: true
 timespan: &#40;0.0, 0.1&#41;
-u0: &#91;11.028183604723862 11.034140483848649 … 11.04431642440116 11.004246829
-655633; 11.078060648317335 11.038529617964667 … 11.02954445637886 11.010586
-806215018; … ; 11.022685024396019 11.066408552141311 … 11.064943225759754 1
-1.020455881763404; 11.072762015164164 11.074104020463531 … 11.0357794065046
-16 11.096153551663113&#93;
+u0: 100×100×2 Array&#123;Float64, 3&#125;:
+&#91;:, :, 1&#93; &#61;
+ 11.0535  11.0553  11.0402  11.0053  …  11.0975  11.0065  11.0951  11.0041
+ 11.0283  11.0561  11.0491  11.0346     11.0782  11.0436  11.0835  11.0784
+ 11.0295  11.0513  11.0118  11.094      11.0985  11.0237  11.0473  11.0772
+ 11.0145  11.0466  11.0063  11.0786     11.0292  11.0336  11.0165  11.0419
+ 11.0513  11.0845  11.0594  11.0967     11.0168  11.0135  11.0916  11.0869
+ 11.0839  11.0767  11.071   11.0097  …  11.0897  11.083   11.006   11.016
+ 11.0555  11.0919  11.0273  11.0584     11.0101  11.0598  11.091   11.0167
+ 11.0541  11.0224  11.0639  11.0231     11.0663  11.0907  11.0749  11.0622
+ 11.0221  11.0687  11.0463  11.0196     11.0641  11.0938  11.0106  11.0371
+ 11.0166  11.0454  11.0653  11.0541     11.0252  11.0313  11.0899  11.0836
+  ⋮                                  ⋱                             
+ 11.0299  11.0717  11.0751  11.0816     11.09    11.0345  11.0006  11.0903
+ 11.0981  11.0425  11.0727  11.0055     11.0366  11.0544  11.0733  11.0173
+ 11.0215  11.0698  11.0698  11.0454     11.051   11.0632  11.0058  11.0155
+ 11.0634  11.0611  11.0109  11.0358     11.0083  11.0335  11.0634  11.0081
+ 11.0737  11.0231  11.047   11.0946  …  11.0005  11.0105  11.0803  11.0531
+ 11.0879  11.002   11.0728  11.0653     11.093   11.0359  11.0358  11.0107
+ 11.0922  11.0321  11.0863  11.0364     11.0522  11.052   11.0148  11.0803
+ 11.0329  11.0417  11.0288  11.0093     11.0713  11.0173  11.0276  11.0738
+ 11.0884  11.0505  11.0854  11.0922     11.0139  11.0249  11.031   11.0494
 
-&#91;12.100000000000001 12.100000000000001 … 12.100000000000001 12.100000000000
-001; 12.100000000000001 12.100000000000001 … 12.100000000000001 12.10000000
-0000001; … ; 12.100000000000001 12.100000000000001 … 12.100000000000001 12.
-100000000000001; 12.100000000000001 12.100000000000001 … 12.100000000000001
- 12.100000000000001&#93;
+&#91;:, :, 2&#93; &#61;
+ 12.1  12.1  12.1  12.1  12.1  12.1  …  12.1  12.1  12.1  12.1  12.1  12.1
+ 12.1  12.1  12.1  12.1  12.1  12.1     12.1  12.1  12.1  12.1  12.1  12.1
+ 12.1  12.1  12.1  12.1  12.1  12.1     12.1  12.1  12.1  12.1  12.1  12.1
+ 12.1  12.1  12.1  12.1  12.1  12.1     12.1  12.1  12.1  12.1  12.1  12.1
+ 12.1  12.1  12.1  12.1  12.1  12.1     12.1  12.1  12.1  12.1  12.1  12.1
+ 12.1  12.1  12.1  12.1  12.1  12.1  …  12.1  12.1  12.1  12.1  12.1  12.1
+ 12.1  12.1  12.1  12.1  12.1  12.1     12.1  12.1  12.1  12.1  12.1  12.1
+ 12.1  12.1  12.1  12.1  12.1  12.1     12.1  12.1  12.1  12.1  12.1  12.1
+ 12.1  12.1  12.1  12.1  12.1  12.1     12.1  12.1  12.1  12.1  12.1  12.1
+ 12.1  12.1  12.1  12.1  12.1  12.1     12.1  12.1  12.1  12.1  12.1  12.1
+  ⋮                             ⋮    ⋱         ⋮                      
+ 12.1  12.1  12.1  12.1  12.1  12.1     12.1  12.1  12.1  12.1  12.1  12.1
+ 12.1  12.1  12.1  12.1  12.1  12.1     12.1  12.1  12.1  12.1  12.1  12.1
+ 12.1  12.1  12.1  12.1  12.1  12.1     12.1  12.1  12.1  12.1  12.1  12.1
+ 12.1  12.1  12.1  12.1  12.1  12.1     12.1  12.1  12.1  12.1  12.1  12.1
+ 12.1  12.1  12.1  12.1  12.1  12.1  …  12.1  12.1  12.1  12.1  12.1  12.1
+ 12.1  12.1  12.1  12.1  12.1  12.1     12.1  12.1  12.1  12.1  12.1  12.1
+ 12.1  12.1  12.1  12.1  12.1  12.1     12.1  12.1  12.1  12.1  12.1  12.1
+ 12.1  12.1  12.1  12.1  12.1  12.1     12.1  12.1  12.1  12.1  12.1  12.1
+ 12.1  12.1  12.1  12.1  12.1  12.1     12.1  12.1  12.1  12.1  12.1  12.1
 </pre>
 
 
@@ -1334,15 +1324,15 @@ u0: &#91;11.028183604723862 11.034140483848649 … 11.04431642440116 11.00424682
 
 <pre class="output">
 BenchmarkTools.Trial: 
-  memory estimate:  186.88 MiB
-  allocs estimate:  8551
+  memory estimate:  186.90 MiB
+  allocs estimate:  7348
   --------------
-  minimum time:     47.767 ms &#40;2.97&#37; GC&#41;
-  median time:      49.226 ms &#40;5.63&#37; GC&#41;
-  mean time:        49.188 ms &#40;5.56&#37; GC&#41;
-  maximum time:     49.334 ms &#40;5.61&#37; GC&#41;
+  minimum time:     71.670 ms &#40;3.61&#37; GC&#41;
+  median time:      74.963 ms &#40;6.90&#37; GC&#41;
+  mean time:        76.086 ms &#40;6.73&#37; GC&#41;
+  maximum time:     114.990 ms &#40;10.78&#37; GC&#41;
   --------------
-  samples:          102
+  samples:          66
   evals/sample:     1
 </pre>
 
@@ -1362,14 +1352,14 @@ BenchmarkTools.Trial:
 
 
 <pre class="output">
-A &#61; &#91;0.2409747399305775, 0.7345305736521792, 0.5717443440936183, 0.20656756
-482662297&#93;
-A &#61; &#91;0.2409747399305775, 2.0, 0.5717443440936183, 0.20656756482662297&#93;
-4-element Array&#123;Float64,1&#125;:
- 0.2409747399305775
+A &#61; &#91;0.08839464722234869, 0.4314571825499718, 0.4874308762081436, 0.8265892
+248309634&#93;
+A &#61; &#91;0.08839464722234869, 2.0, 0.4874308762081436, 0.8265892248309634&#93;
+4-element Vector&#123;Float64&#125;:
+ 0.08839464722234869
  2.0
- 0.5717443440936183
- 0.20656756482662297
+ 0.4874308762081436
+ 0.8265892248309634
 </pre>
 
 
@@ -1395,15 +1385,15 @@ A &#61; &#91;0.2409747399305775, 2.0, 0.5717443440936183, 0.20656756482662297&#9
 
 <pre class="output">
 BenchmarkTools.Trial: 
-  memory estimate:  119.55 MiB
-  allocs estimate:  7081
+  memory estimate:  119.76 MiB
+  allocs estimate:  5878
   --------------
-  minimum time:     38.166 ms &#40;3.92&#37; GC&#41;
-  median time:      38.400 ms &#40;3.95&#37; GC&#41;
-  mean time:        38.856 ms &#40;5.13&#37; GC&#41;
-  maximum time:     40.026 ms &#40;7.45&#37; GC&#41;
+  minimum time:     49.146 ms &#40;5.53&#37; GC&#41;
+  median time:      62.558 ms &#40;4.49&#37; GC&#41;
+  mean time:        61.436 ms &#40;6.35&#37; GC&#41;
+  maximum time:     94.152 ms &#40;13.61&#37; GC&#41;
   --------------
-  samples:          129
+  samples:          82
   evals/sample:     1
 </pre>
 
@@ -1440,15 +1430,15 @@ BenchmarkTools.Trial:
 
 <pre class="output">
 BenchmarkTools.Trial: 
-  memory estimate:  29.75 MiB
-  allocs estimate:  5317
+  memory estimate:  29.98 MiB
+  allocs estimate:  4702
   --------------
-  minimum time:     33.330 ms &#40;0.00&#37; GC&#41;
-  median time:      33.477 ms &#40;0.00&#37; GC&#41;
-  mean time:        33.944 ms &#40;1.39&#37; GC&#41;
-  maximum time:     35.020 ms &#40;4.19&#37; GC&#41;
+  minimum time:     50.864 ms &#40;0.00&#37; GC&#41;
+  median time:      52.639 ms &#40;0.00&#37; GC&#41;
+  mean time:        53.631 ms &#40;1.66&#37; GC&#41;
+  maximum time:     57.861 ms &#40;7.23&#37; GC&#41;
   --------------
-  samples:          148
+  samples:          94
   evals/sample:     1
 </pre>
 
@@ -1481,14 +1471,14 @@ BenchmarkTools.Trial:
 <pre class="output">
 BenchmarkTools.Trial: 
   memory estimate:  29.66 MiB
-  allocs estimate:  1053
+  allocs estimate:  1027
   --------------
-  minimum time:     26.884 ms &#40;0.00&#37; GC&#41;
-  median time:      27.187 ms &#40;0.00&#37; GC&#41;
-  mean time:        27.634 ms &#40;1.70&#37; GC&#41;
-  maximum time:     28.720 ms &#40;4.98&#37; GC&#41;
+  minimum time:     46.163 ms &#40;0.00&#37; GC&#41;
+  median time:      50.698 ms &#40;0.00&#37; GC&#41;
+  mean time:        51.970 ms &#40;1.86&#37; GC&#41;
+  maximum time:     80.866 ms &#40;11.54&#37; GC&#41;
   --------------
-  samples:          181
+  samples:          97
   evals/sample:     1
 </pre>
 
@@ -1586,15 +1576,15 @@ BenchmarkTools.Trial:
 
 <pre class="output">
 BenchmarkTools.Trial: 
-  memory estimate:  29.62 MiB
-  allocs estimate:  466
+  memory estimate:  29.63 MiB
+  allocs estimate:  439
   --------------
-  minimum time:     8.027 ms &#40;0.00&#37; GC&#41;
-  median time:      8.179 ms &#40;0.00&#37; GC&#41;
-  mean time:        8.618 ms &#40;5.18&#37; GC&#41;
-  maximum time:     9.634 ms &#40;14.07&#37; GC&#41;
+  minimum time:     6.669 ms &#40;0.00&#37; GC&#41;
+  median time:      6.818 ms &#40;0.00&#37; GC&#41;
+  mean time:        8.679 ms &#40;12.16&#37; GC&#41;
+  maximum time:     18.755 ms &#40;34.68&#37; GC&#41;
   --------------
-  samples:          580
+  samples:          574
   evals/sample:     1
 </pre>
 
@@ -1613,14 +1603,14 @@ BenchmarkTools.Trial:
 <pre class="output">
 BenchmarkTools.Trial: 
   memory estimate:  2.76 GiB
-  allocs estimate:  41632
+  allocs estimate:  39336
   --------------
-  minimum time:     1.491 s &#40;47.78&#37; GC&#41;
-  median time:      1.748 s &#40;27.82&#37; GC&#41;
-  mean time:        1.714 s &#40;32.45&#37; GC&#41;
-  maximum time:     1.904 s &#40;24.70&#37; GC&#41;
+  minimum time:     1.033 s &#40;37.02&#37; GC&#41;
+  median time:      1.294 s &#40;43.35&#37; GC&#41;
+  mean time:        1.296 s &#40;42.87&#37; GC&#41;
+  maximum time:     1.563 s &#40;47.48&#37; GC&#41;
   --------------
-  samples:          3
+  samples:          4
   evals/sample:     1
 </pre>
 
@@ -1634,15 +1624,15 @@ BenchmarkTools.Trial:
 
 <pre class="output">
 BenchmarkTools.Trial: 
-  memory estimate:  44.93 MiB
-  allocs estimate:  7051
+  memory estimate:  120.29 MiB
+  allocs estimate:  20210
   --------------
-  minimum time:     277.657 ms &#40;0.00&#37; GC&#41;
-  median time:      279.860 ms &#40;0.29&#37; GC&#41;
-  mean time:        279.719 ms &#40;0.31&#37; GC&#41;
-  maximum time:     281.571 ms &#40;0.61&#37; GC&#41;
+  minimum time:     666.229 ms &#40;0.48&#37; GC&#41;
+  median time:      668.269 ms &#40;0.48&#37; GC&#41;
+  mean time:        668.412 ms &#40;0.48&#37; GC&#41;
+  maximum time:     670.411 ms &#40;0.47&#37; GC&#41;
   --------------
-  samples:          18
+  samples:          8
   evals/sample:     1
 </pre>
 
@@ -1657,15 +1647,15 @@ BenchmarkTools.Trial:
 
 <pre class="output">
 BenchmarkTools.Trial: 
-  memory estimate:  2.90 MiB
-  allocs estimate:  74
+  memory estimate:  2.91 MiB
+  allocs estimate:  67
   --------------
-  minimum time:     5.685 s &#40;0.00&#37; GC&#41;
-  median time:      5.685 s &#40;0.00&#37; GC&#41;
-  mean time:        5.685 s &#40;0.00&#37; GC&#41;
-  maximum time:     5.685 s &#40;0.00&#37; GC&#41;
+  minimum time:     4.247 s &#40;0.00&#37; GC&#41;
+  median time:      4.249 s &#40;0.00&#37; GC&#41;
+  mean time:        4.249 s &#40;0.00&#37; GC&#41;
+  maximum time:     4.250 s &#40;0.00&#37; GC&#41;
   --------------
-  samples:          1
+  samples:          2
   evals/sample:     1
 </pre>
 
@@ -1678,13 +1668,13 @@ BenchmarkTools.Trial:
 
 <pre class="output">
 BenchmarkTools.Trial: 
-  memory estimate:  267.86 MiB
-  allocs estimate:  48458
+  memory estimate:  302.44 MiB
+  allocs estimate:  52631
   --------------
-  minimum time:     1.992 s &#40;0.00&#37; GC&#41;
-  median time:      2.025 s &#40;1.39&#37; GC&#41;
-  mean time:        2.042 s &#40;2.43&#37; GC&#41;
-  maximum time:     2.109 s &#40;5.72&#37; GC&#41;
+  minimum time:     1.805 s &#40;1.83&#37; GC&#41;
+  median time:      1.807 s &#40;1.82&#37; GC&#41;
+  mean time:        1.859 s &#40;4.09&#37; GC&#41;
+  maximum time:     1.966 s &#40;9.93&#37; GC&#41;
   --------------
   samples:          3
   evals/sample:     1
@@ -1701,13 +1691,13 @@ BenchmarkTools.Trial:
 
 <pre class="output">
 BenchmarkTools.Trial: 
-  memory estimate:  3.23 MiB
-  allocs estimate:  40351
+  memory estimate:  3.46 MiB
+  allocs estimate:  44125
   --------------
-  minimum time:     1.962 s &#40;0.00&#37; GC&#41;
-  median time:      1.962 s &#40;0.00&#37; GC&#41;
-  mean time:        1.962 s &#40;0.00&#37; GC&#41;
-  maximum time:     1.964 s &#40;0.00&#37; GC&#41;
+  minimum time:     1.738 s &#40;0.00&#37; GC&#41;
+  median time:      1.744 s &#40;0.00&#37; GC&#41;
+  mean time:        1.754 s &#40;0.00&#37; GC&#41;
+  maximum time:     1.779 s &#40;0.00&#37; GC&#41;
   --------------
   samples:          3
   evals/sample:     1
@@ -1723,15 +1713,15 @@ BenchmarkTools.Trial:
 
 <pre class="output">
 BenchmarkTools.Trial: 
-  memory estimate:  4.19 MiB
-  allocs estimate:  57133
+  memory estimate:  4.44 MiB
+  allocs estimate:  61057
   --------------
-  minimum time:     2.783 s &#40;0.00&#37; GC&#41;
-  median time:      2.785 s &#40;0.00&#37; GC&#41;
-  mean time:        2.785 s &#40;0.00&#37; GC&#41;
-  maximum time:     2.787 s &#40;0.00&#37; GC&#41;
+  minimum time:     2.410 s &#40;0.00&#37; GC&#41;
+  median time:      2.413 s &#40;0.00&#37; GC&#41;
+  mean time:        2.412 s &#40;0.00&#37; GC&#41;
+  maximum time:     2.413 s &#40;0.00&#37; GC&#41;
   --------------
-  samples:          2
+  samples:          3
   evals/sample:     1
 </pre>
 
@@ -1743,39 +1733,304 @@ BenchmarkTools.Trial:
 
 
 <div class="markdown"><h2>Appendix</h2>
-<p>This tutorial is part of the SciMLTutorials.jl repository, found at: <a href="https://github.com/SciML/SciMLTutorials.jl">https://github.com/SciML/SciMLTutorials.jl</a>.  For more information on doing scientific machine learning &#40;SciML&#41; with open source software, check out <a href="https://sciml.ai/">https://sciml.ai/</a>.</p>
+<p>These tutorials are a part of the SciMLTutorials.jl repository, found at: <a href="https://github.com/SciML/SciMLTutorials.jl">https://github.com/SciML/SciMLTutorials.jl</a>. For more information on high-performance scientific machine learning, check out the SciML Open Source Software Organization <a href="https://sciml.ai">https://sciml.ai</a>.</p>
 </div>
 <div class="markdown"><p>To locally run this tutorial, do the following commands:</p>
 <pre><code>using SciMLTutorials
-SciMLTutorials.weave_file&#40;&quot;introduction&quot;,&quot;03-optimizing_diffeq_code.jmd&quot;&#41;</code></pre>
+SciMLTutorials.weave_file&#40;&quot;tutorials/introduction&quot;,&quot;03-optimizing_diffeq_code.jmd&quot;&#41;</code></pre>
 </div>
 <div class="markdown"><p>Computer Information:</p>
 </div>
-<div class="markdown"><pre><code>Julia Version 1.4.2
-Commit 44fa15b150* &#40;2020-05-23 18:35 UTC&#41;
+<div class="markdown"><pre><code>Julia Version 1.6.1
+Commit 6aaedecc44 &#40;2021-04-23 05:59 UTC&#41;
 Platform Info:
   OS: Linux &#40;x86_64-pc-linux-gnu&#41;
-  CPU: Intel&#40;R&#41; Core&#40;TM&#41; i7-9700K CPU @ 3.60GHz
+  CPU: AMD EPYC 7502 32-Core Processor
   WORD_SIZE: 64
   LIBM: libopenlibm
-  LLVM: libLLVM-8.0.1 &#40;ORCJIT, skylake&#41;
+  LLVM: libLLVM-11.0.1 &#40;ORCJIT, znver2&#41;
 Environment:
-  JULIA_LOAD_PATH &#61; /builds/JuliaGPU/DiffEqTutorials.jl:
-  JULIA_DEPOT_PATH &#61; /builds/JuliaGPU/DiffEqTutorials.jl/.julia
-  JULIA_CUDA_MEMORY_LIMIT &#61; 2147483648
-  JULIA_NUM_THREADS &#61; 8
+  JULIA_DEPOT_PATH &#61; /root/.cache/julia-buildkite-plugin/depots/a6029d3a-f78b-41ea-bc97-28aa57c6c6ea
+  JULIA_NUM_THREADS &#61; 16
 </code></pre>
 </div>
 <div class="markdown"><p>Package Information:</p>
 </div>
-<div class="markdown"><pre><code>Status &#96;/builds/JuliaGPU/DiffEqTutorials.jl/tutorials/introduction/Project.toml&#96;
-&#91;6e4b80f9-dd63-53aa-95a3-0cdb28fa8baf&#93; BenchmarkTools 0.5.0
-&#91;0c46a032-eb83-5123-abaf-570d42b7fbaa&#93; DifferentialEquations 6.15.0
-&#91;65888b18-ceab-5e60-b2b9-181511a3b968&#93; ParameterizedFunctions 5.5.0
-&#91;91a5bcdd-55d7-5caf-9e0b-520d859cae80&#93; Plots 1.6.3
-&#91;90137ffa-7385-5640-81b9-e52037218182&#93; StaticArrays 0.12.4
-&#91;c3572dad-4567-51f8-b174-8c6c989267f4&#93; Sundials 4.3.0
-&#91;37e2e46d-f89d-539d-b4ee-838fcccc9c8e&#93; LinearAlgebra</code></pre>
+<div class="markdown"><pre><code>      Status &#96;/var/lib/buildkite-agent/builds/6-amdci4-julia-csail-mit-edu/julialang/scimltutorials/tutorials/introduction/Project.toml&#96;
+  &#91;6e4b80f9&#93; BenchmarkTools v1.0.0
+  &#91;0c46a032&#93; DifferentialEquations v6.17.1
+  &#91;65888b18&#93; ParameterizedFunctions v5.10.0
+  &#91;91a5bcdd&#93; Plots v1.15.2
+  &#91;30cb0354&#93; SciMLTutorials v0.9.0
+  &#91;90137ffa&#93; StaticArrays v1.2.0
+  &#91;c3572dad&#93; Sundials v4.4.3
+  &#91;37e2e46d&#93; LinearAlgebra</code></pre>
+<p>And the full manifest:</p>
+<pre><code>      Status &#96;/var/lib/buildkite-agent/builds/6-amdci4-julia-csail-mit-edu/julialang/scimltutorials/tutorials/introduction/Manifest.toml&#96;
+  &#91;c3fe647b&#93; AbstractAlgebra v0.16.0
+  &#91;1520ce14&#93; AbstractTrees v0.3.4
+  &#91;79e6a3ab&#93; Adapt v3.3.0
+  &#91;ec485272&#93; ArnoldiMethod v0.1.0
+  &#91;4fba245c&#93; ArrayInterface v3.1.15
+  &#91;4c555306&#93; ArrayLayouts v0.7.0
+  &#91;aae01518&#93; BandedMatrices v0.16.9
+  &#91;6e4b80f9&#93; BenchmarkTools v1.0.0
+  &#91;764a87c0&#93; BoundaryValueDiffEq v2.7.1
+  &#91;fa961155&#93; CEnum v0.4.1
+  &#91;d360d2e6&#93; ChainRulesCore v0.9.44
+  &#91;b630d9fa&#93; CheapThreads v0.2.5
+  &#91;35d6a980&#93; ColorSchemes v3.12.1
+  &#91;3da002f7&#93; ColorTypes v0.11.0
+  &#91;5ae59095&#93; Colors v0.12.8
+  &#91;861a8166&#93; Combinatorics v1.0.2
+  &#91;38540f10&#93; CommonSolve v0.2.0
+  &#91;bbf7d656&#93; CommonSubexpressions v0.3.0
+  &#91;34da2185&#93; Compat v3.30.0
+  &#91;8f4d0f93&#93; Conda v1.5.2
+  &#91;187b0558&#93; ConstructionBase v1.2.1
+  &#91;d38c429a&#93; Contour v0.5.7
+  &#91;9a962f9c&#93; DataAPI v1.6.0
+  &#91;864edb3b&#93; DataStructures v0.18.9
+  &#91;e2d170a0&#93; DataValueInterfaces v1.0.0
+  &#91;bcd4f6db&#93; DelayDiffEq v5.31.0
+  &#91;2b5f629d&#93; DiffEqBase v6.62.2
+  &#91;459566f4&#93; DiffEqCallbacks v2.16.1
+  &#91;5a0ffddc&#93; DiffEqFinancial v2.4.0
+  &#91;c894b116&#93; DiffEqJump v6.14.2
+  &#91;77a26b50&#93; DiffEqNoiseProcess v5.7.3
+  &#91;055956cb&#93; DiffEqPhysics v3.9.0
+  &#91;163ba53b&#93; DiffResults v1.0.3
+  &#91;b552c78f&#93; DiffRules v1.0.2
+  &#91;0c46a032&#93; DifferentialEquations v6.17.1
+  &#91;c619ae07&#93; DimensionalPlotRecipes v1.2.0
+  &#91;b4f34e82&#93; Distances v0.10.3
+  &#91;31c24e10&#93; Distributions v0.24.18
+  &#91;ffbed154&#93; DocStringExtensions v0.8.4
+  &#91;d4d017d3&#93; ExponentialUtilities v1.8.4
+  &#91;e2ba6199&#93; ExprTools v0.1.3
+  &#91;c87230d0&#93; FFMPEG v0.4.0
+  &#91;7034ab61&#93; FastBroadcast v0.1.8
+  &#91;9aa1b823&#93; FastClosures v0.3.2
+  &#91;1a297f60&#93; FillArrays v0.11.7
+  &#91;6a86dc24&#93; FiniteDiff v2.8.0
+  &#91;53c48c17&#93; FixedPointNumbers v0.8.4
+  &#91;59287772&#93; Formatting v0.4.2
+  &#91;f6369f11&#93; ForwardDiff v0.10.18
+  &#91;069b7b12&#93; FunctionWrappers v1.1.2
+  &#91;28b8d3ca&#93; GR v0.57.4
+  &#91;5c1252a2&#93; GeometryBasics v0.3.12
+  &#91;42e2da0e&#93; Grisu v1.0.2
+  &#91;cd3eb016&#93; HTTP v0.9.9
+  &#91;eafb193a&#93; Highlights v0.4.5
+  &#91;0e44f5e4&#93; Hwloc v2.0.0
+  &#91;7073ff75&#93; IJulia v1.23.2
+  &#91;615f187c&#93; IfElse v0.1.0
+  &#91;d25df0c9&#93; Inflate v0.1.2
+  &#91;83e8ac13&#93; IniFile v0.5.0
+  &#91;c8e1da08&#93; IterTools v1.3.0
+  &#91;42fd0dbc&#93; IterativeSolvers v0.9.1
+  &#91;82899510&#93; IteratorInterfaceExtensions v1.0.0
+  &#91;692b3bcd&#93; JLLWrappers v1.3.0
+  &#91;682c06a0&#93; JSON v0.21.1
+  &#91;b964fa9f&#93; LaTeXStrings v1.2.1
+  &#91;2ee39098&#93; LabelledArrays v1.6.1
+  &#91;23fbe1c1&#93; Latexify v0.15.5
+  &#91;093fc24a&#93; LightGraphs v1.3.5
+  &#91;d3d80556&#93; LineSearches v7.1.1
+  &#91;2ab3a3ac&#93; LogExpFunctions v0.2.4
+  &#91;bdcacae8&#93; LoopVectorization v0.12.23
+  &#91;1914dd2f&#93; MacroTools v0.5.6
+  &#91;739be429&#93; MbedTLS v1.0.3
+  &#91;442fdcdd&#93; Measures v0.3.1
+  &#91;e1d29d7a&#93; Missings v1.0.0
+  &#91;961ee093&#93; ModelingToolkit v5.16.0
+  &#91;46d2c3a1&#93; MuladdMacro v0.2.2
+  &#91;f9640e96&#93; MultiScaleArrays v1.8.1
+  &#91;ffc61752&#93; Mustache v1.0.10
+  &#91;d41bc354&#93; NLSolversBase v7.8.0
+  &#91;2774e3e8&#93; NLsolve v4.5.1
+  &#91;77ba4419&#93; NaNMath v0.3.5
+  &#91;8913a72c&#93; NonlinearSolve v0.3.8
+  &#91;6fe1bfb0&#93; OffsetArrays v1.9.0
+  &#91;429524aa&#93; Optim v1.3.0
+  &#91;bac558e1&#93; OrderedCollections v1.4.1
+  &#91;1dea7af3&#93; OrdinaryDiffEq v5.56.0
+  &#91;90014a1f&#93; PDMats v0.11.0
+  &#91;65888b18&#93; ParameterizedFunctions v5.10.0
+  &#91;d96e819e&#93; Parameters v0.12.2
+  &#91;69de0a69&#93; Parsers v1.1.0
+  &#91;ccf2f8ad&#93; PlotThemes v2.0.1
+  &#91;995b91a9&#93; PlotUtils v1.0.10
+  &#91;91a5bcdd&#93; Plots v1.15.2
+  &#91;e409e4f3&#93; PoissonRandom v0.4.0
+  &#91;f517fe37&#93; Polyester v0.3.1
+  &#91;85a6dd25&#93; PositiveFactorizations v0.2.4
+  &#91;21216c6a&#93; Preferences v1.2.2
+  &#91;1fd47b50&#93; QuadGK v2.4.1
+  &#91;74087812&#93; Random123 v1.3.1
+  &#91;fb686558&#93; RandomExtensions v0.4.3
+  &#91;e6cf234a&#93; RandomNumbers v1.4.0
+  &#91;3cdcf5f2&#93; RecipesBase v1.1.1
+  &#91;01d81517&#93; RecipesPipeline v0.3.2
+  &#91;731186ca&#93; RecursiveArrayTools v2.11.4
+  &#91;f2c3362d&#93; RecursiveFactorization v0.1.12
+  &#91;189a3867&#93; Reexport v1.0.0
+  &#91;ae029012&#93; Requires v1.1.3
+  &#91;ae5879a3&#93; ResettableStacks v1.1.0
+  &#91;79098fc4&#93; Rmath v0.7.0
+  &#91;7e49a35a&#93; RuntimeGeneratedFunctions v0.5.2
+  &#91;476501e8&#93; SLEEFPirates v0.6.20
+  &#91;1bc83da4&#93; SafeTestsets v0.0.1
+  &#91;0bca4576&#93; SciMLBase v1.13.4
+  &#91;30cb0354&#93; SciMLTutorials v0.9.0
+  &#91;6c6a2e73&#93; Scratch v1.0.3
+  &#91;efcf1570&#93; Setfield v0.7.0
+  &#91;992d4aef&#93; Showoff v1.0.3
+  &#91;699a6c99&#93; SimpleTraits v0.9.3
+  &#91;b85f4697&#93; SoftGlobalScope v1.1.0
+  &#91;a2af1166&#93; SortingAlgorithms v1.0.0
+  &#91;47a9eef4&#93; SparseDiffTools v1.13.2
+  &#91;276daf66&#93; SpecialFunctions v1.4.1
+  &#91;aedffcd0&#93; Static v0.2.4
+  &#91;90137ffa&#93; StaticArrays v1.2.0
+  &#91;82ae8749&#93; StatsAPI v1.0.0
+  &#91;2913bbd2&#93; StatsBase v0.33.8
+  &#91;4c63d2b9&#93; StatsFuns v0.9.8
+  &#91;9672c7b4&#93; SteadyStateDiffEq v1.6.2
+  &#91;789caeaf&#93; StochasticDiffEq v6.34.1
+  &#91;7792a7ef&#93; StrideArraysCore v0.1.11
+  &#91;09ab397b&#93; StructArrays v0.5.1
+  &#91;c3572dad&#93; Sundials v4.4.3
+  &#91;d1185830&#93; SymbolicUtils v0.11.2
+  &#91;0c5d862f&#93; Symbolics v0.1.25
+  &#91;3783bdb8&#93; TableTraits v1.0.1
+  &#91;bd369af6&#93; Tables v1.4.2
+  &#91;8290d209&#93; ThreadingUtilities v0.4.4
+  &#91;a759f4b9&#93; TimerOutputs v0.5.9
+  &#91;a2a6695c&#93; TreeViews v0.3.0
+  &#91;5c2747f8&#93; URIs v1.3.0
+  &#91;3a884ed6&#93; UnPack v1.0.2
+  &#91;1986cc42&#93; Unitful v1.7.0
+  &#91;3d5dd08c&#93; VectorizationBase v0.20.11
+  &#91;81def892&#93; VersionParsing v1.2.0
+  &#91;19fa3120&#93; VertexSafeGraphs v0.1.2
+  &#91;44d3d7a6&#93; Weave v0.10.8
+  &#91;ddb6d928&#93; YAML v0.4.6
+  &#91;c2297ded&#93; ZMQ v1.2.1
+  &#91;700de1a5&#93; ZygoteRules v0.2.1
+  &#91;6e34b625&#93; Bzip2_jll v1.0.6&#43;5
+  &#91;83423d85&#93; Cairo_jll v1.16.0&#43;6
+  &#91;5ae413db&#93; EarCut_jll v2.1.5&#43;1
+  &#91;2e619515&#93; Expat_jll v2.2.10&#43;0
+  &#91;b22a6f82&#93; FFMPEG_jll v4.3.1&#43;4
+  &#91;a3f928ae&#93; Fontconfig_jll v2.13.1&#43;14
+  &#91;d7e528f0&#93; FreeType2_jll v2.10.1&#43;5
+  &#91;559328eb&#93; FriBidi_jll v1.0.5&#43;6
+  &#91;0656b61e&#93; GLFW_jll v3.3.4&#43;0
+  &#91;d2c73de3&#93; GR_jll v0.57.2&#43;0
+  &#91;78b55507&#93; Gettext_jll v0.21.0&#43;0
+  &#91;7746bdde&#93; Glib_jll v2.68.1&#43;0
+  &#91;e33a78d0&#93; Hwloc_jll v2.4.1&#43;0
+  &#91;aacddb02&#93; JpegTurbo_jll v2.0.1&#43;3
+  &#91;c1c5ebd0&#93; LAME_jll v3.100.0&#43;3
+  &#91;dd4b983a&#93; LZO_jll v2.10.1&#43;0
+  &#91;dd192d2f&#93; LibVPX_jll v1.9.0&#43;1
+  &#91;e9f186c6&#93; Libffi_jll v3.2.2&#43;0
+  &#91;d4300ac3&#93; Libgcrypt_jll v1.8.7&#43;0
+  &#91;7e76a0d4&#93; Libglvnd_jll v1.3.0&#43;3
+  &#91;7add5ba3&#93; Libgpg_error_jll v1.42.0&#43;0
+  &#91;94ce4f54&#93; Libiconv_jll v1.16.1&#43;0
+  &#91;4b2f31a3&#93; Libmount_jll v2.35.0&#43;0
+  &#91;89763e89&#93; Libtiff_jll v4.1.0&#43;2
+  &#91;38a345b3&#93; Libuuid_jll v2.36.0&#43;0
+  &#91;e7412a2a&#93; Ogg_jll v1.3.4&#43;2
+  &#91;458c3c95&#93; OpenSSL_jll v1.1.1&#43;6
+  &#91;efe28fd5&#93; OpenSpecFun_jll v0.5.4&#43;0
+  &#91;91d4177d&#93; Opus_jll v1.3.1&#43;3
+  &#91;2f80f16e&#93; PCRE_jll v8.44.0&#43;0
+  &#91;30392449&#93; Pixman_jll v0.40.1&#43;0
+  &#91;ea2cea3b&#93; Qt5Base_jll v5.15.2&#43;0
+  &#91;f50d1b31&#93; Rmath_jll v0.3.0&#43;0
+  &#91;fb77eaff&#93; Sundials_jll v5.2.0&#43;1
+  &#91;a2964d1f&#93; Wayland_jll v1.17.0&#43;4
+  &#91;2381bf8a&#93; Wayland_protocols_jll v1.18.0&#43;4
+  &#91;02c8fc9c&#93; XML2_jll v2.9.12&#43;0
+  &#91;aed1982a&#93; XSLT_jll v1.1.34&#43;0
+  &#91;4f6342f7&#93; Xorg_libX11_jll v1.6.9&#43;4
+  &#91;0c0b7dd1&#93; Xorg_libXau_jll v1.0.9&#43;4
+  &#91;935fb764&#93; Xorg_libXcursor_jll v1.2.0&#43;4
+  &#91;a3789734&#93; Xorg_libXdmcp_jll v1.1.3&#43;4
+  &#91;1082639a&#93; Xorg_libXext_jll v1.3.4&#43;4
+  &#91;d091e8ba&#93; Xorg_libXfixes_jll v5.0.3&#43;4
+  &#91;a51aa0fd&#93; Xorg_libXi_jll v1.7.10&#43;4
+  &#91;d1454406&#93; Xorg_libXinerama_jll v1.1.4&#43;4
+  &#91;ec84b674&#93; Xorg_libXrandr_jll v1.5.2&#43;4
+  &#91;ea2f1a96&#93; Xorg_libXrender_jll v0.9.10&#43;4
+  &#91;14d82f49&#93; Xorg_libpthread_stubs_jll v0.1.0&#43;3
+  &#91;c7cfdc94&#93; Xorg_libxcb_jll v1.13.0&#43;3
+  &#91;cc61e674&#93; Xorg_libxkbfile_jll v1.1.0&#43;4
+  &#91;12413925&#93; Xorg_xcb_util_image_jll v0.4.0&#43;1
+  &#91;2def613f&#93; Xorg_xcb_util_jll v0.4.0&#43;1
+  &#91;975044d2&#93; Xorg_xcb_util_keysyms_jll v0.4.0&#43;1
+  &#91;0d47668e&#93; Xorg_xcb_util_renderutil_jll v0.3.9&#43;1
+  &#91;c22f9ab0&#93; Xorg_xcb_util_wm_jll v0.4.1&#43;1
+  &#91;35661453&#93; Xorg_xkbcomp_jll v1.4.2&#43;4
+  &#91;33bec58e&#93; Xorg_xkeyboard_config_jll v2.27.0&#43;4
+  &#91;c5fb5394&#93; Xorg_xtrans_jll v1.4.0&#43;3
+  &#91;8f1865be&#93; ZeroMQ_jll v4.3.2&#43;6
+  &#91;3161d3a3&#93; Zstd_jll v1.5.0&#43;0
+  &#91;0ac62f75&#93; libass_jll v0.14.0&#43;4
+  &#91;f638f0a6&#93; libfdk_aac_jll v0.1.6&#43;4
+  &#91;b53b4c65&#93; libpng_jll v1.6.38&#43;0
+  &#91;a9144af2&#93; libsodium_jll v1.0.20&#43;0
+  &#91;f27f6e37&#93; libvorbis_jll v1.3.6&#43;6
+  &#91;1270edf5&#93; x264_jll v2020.7.14&#43;2
+  &#91;dfaa095f&#93; x265_jll v3.0.0&#43;3
+  &#91;d8fb68d0&#93; xkbcommon_jll v0.9.1&#43;5
+  &#91;0dad84c5&#93; ArgTools
+  &#91;56f22d72&#93; Artifacts
+  &#91;2a0f44e3&#93; Base64
+  &#91;ade2ca70&#93; Dates
+  &#91;8bb1440f&#93; DelimitedFiles
+  &#91;8ba89e20&#93; Distributed
+  &#91;f43a241f&#93; Downloads
+  &#91;7b1f6079&#93; FileWatching
+  &#91;9fa8497b&#93; Future
+  &#91;b77e0a4c&#93; InteractiveUtils
+  &#91;b27032c2&#93; LibCURL
+  &#91;76f85450&#93; LibGit2
+  &#91;8f399da3&#93; Libdl
+  &#91;37e2e46d&#93; LinearAlgebra
+  &#91;56ddb016&#93; Logging
+  &#91;d6f4376e&#93; Markdown
+  &#91;a63ad114&#93; Mmap
+  &#91;ca575930&#93; NetworkOptions
+  &#91;44cfe95a&#93; Pkg
+  &#91;de0858da&#93; Printf
+  &#91;3fa0cd96&#93; REPL
+  &#91;9a3f8284&#93; Random
+  &#91;ea8e919c&#93; SHA
+  &#91;9e88b42a&#93; Serialization
+  &#91;1a1011a3&#93; SharedArrays
+  &#91;6462fe0b&#93; Sockets
+  &#91;2f01184e&#93; SparseArrays
+  &#91;10745b16&#93; Statistics
+  &#91;4607b0f0&#93; SuiteSparse
+  &#91;fa267f1f&#93; TOML
+  &#91;a4e569a6&#93; Tar
+  &#91;8dfed614&#93; Test
+  &#91;cf7118a7&#93; UUIDs
+  &#91;4ec0a83e&#93; Unicode
+  &#91;e66e0078&#93; CompilerSupportLibraries_jll
+  &#91;deac9b47&#93; LibCURL_jll
+  &#91;29816b5a&#93; LibSSH2_jll
+  &#91;c8ffd9c3&#93; MbedTLS_jll
+  &#91;14a3606d&#93; MozillaCACerts_jll
+  &#91;4536629a&#93; OpenBLAS_jll
+  &#91;bea87d4a&#93; SuiteSparse_jll
+  &#91;83775a58&#93; Zlib_jll
+  &#91;8e850ede&#93; nghttp2_jll
+  &#91;3f19e933&#93; p7zip_jll</code></pre>
 </div>
 
 
@@ -1783,7 +2038,7 @@ Environment:
         <div class="footer">
           <p>
             Published from <a href="03-optimizing_diffeq_code.jmd">03-optimizing_diffeq_code.jmd</a>
-            using <a href="http://github.com/JunoLab/Weave.jl">Weave.jl</a> v0.10.3 on 2020-09-04.
+            using <a href="http://github.com/JunoLab/Weave.jl">Weave.jl</a> v0.10.8 on 2021-05-25.
           </p>
         </div>
       </div>
