@@ -102,3 +102,7 @@ x′ = substitute(x, vals)
 X = (𝜀, 𝑀) -> substitute(x′, Dict(ϵ => 𝜀, M => 𝑀))
 X(0.01671, π/2)
 
+
+using SciMLTutorials
+SciMLTutorials.tutorial_footer(WEAVE_ARGS[:folder],WEAVE_ARGS[:file])
+

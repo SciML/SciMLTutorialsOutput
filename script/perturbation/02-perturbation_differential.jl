@@ -76,8 +76,8 @@ plot(sol.t, hcat([X(𝜀) for 𝜀 = 0.0:0.1:0.5]...))
 
 n = 2
 @variables ϵ t y[0:n](t) ∂y[0:n] ∂∂y[0:n]
-x = def_taylor(ϵ, y[2:end], y[1])  
-∂x = def_taylor(ϵ, ∂y[2:end], ∂y[1])  
+x = def_taylor(ϵ, y[2:end], y[1])
+∂x = def_taylor(ϵ, ∂y[2:end], ∂y[1])
 ∂∂x = def_taylor(ϵ, ∂∂y[2:end], ∂∂y[1])
 
 
@@ -104,9 +104,13 @@ u0[3] = 1.0   # y₀ˍt
 prob = ODEProblem(sys, u0, (0, 50.0))
 sol = solve(prob; dtmax=0.01)
 
-X = 𝜀 -> sum([𝜀^(i-1) * sol[y[i]] for i in eachindex(y)])  
+X = 𝜀 -> sum([𝜀^(i-1) * sol[y[i]] for i in eachindex(y)])
 T = sol.t
 Y = 𝜀 -> exp.(-𝜀*T) .* sin.(sqrt(1 - 𝜀^2)*T) / sqrt(1 - 𝜀^2)    # exact solution
 
 plot(sol.t, [Y(0.1), X(0.1)])
+
+
+using SciMLTutorials
+SciMLTutorials.tutorial_footer(WEAVE_ARGS[:folder],WEAVE_ARGS[:file])
 
