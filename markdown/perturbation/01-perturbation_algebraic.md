@@ -488,9 +488,10 @@ Environment:
 Package Information:
 
 ```
-      Status `/var/lib/buildkite-agent/builds/7-amdci4-julia-csail-mit-edu/julialang/scimltutorials-dot-jl/tutorials/perturbation/Project.toml`
+      Status `/var/lib/buildkite-agent/builds/1-amdci4-julia-csail-mit-edu/julialang/scimltutorials-dot-jl/tutorials/perturbation/Project.toml`
   [0c46a032] DifferentialEquations v6.17.1
   [961ee093] ModelingToolkit v5.17.3
+  [91a5bcdd] Plots v1.15.2
   [30cb0354] SciMLTutorials v0.9.0
   [d1185830] SymbolicUtils v0.11.2
   [0c5d862f] Symbolics v0.1.25
@@ -499,7 +500,7 @@ Package Information:
 And the full manifest:
 
 ```
-      Status `/var/lib/buildkite-agent/builds/7-amdci4-julia-csail-mit-edu/julialang/scimltutorials-dot-jl/tutorials/perturbation/Manifest.toml`
+      Status `/var/lib/buildkite-agent/builds/1-amdci4-julia-csail-mit-edu/julialang/scimltutorials-dot-jl/tutorials/perturbation/Manifest.toml`
   [c3fe647b] AbstractAlgebra v0.16.0
   [1520ce14] AbstractTrees v0.3.4
   [79e6a3ab] Adapt v3.3.0

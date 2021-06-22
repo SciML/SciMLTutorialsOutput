@@ -293,12 +293,7 @@ using Plots
 plot(sol.t, hcat([X(𝜀) for 𝜀 = 0.0:0.1:0.5]...))
 ```
 
-```
-Error: ArgumentError: Package Plots not found in current path:
-- Run `import Pkg; Pkg.add("Plots")` to install the Plots package.
-```
-
-
+![](figures/02-perturbation_differential_12_1.png)
 
 
 
@@ -376,7 +371,7 @@ sys = ode_order_lowering(sys)
 ```
 
 ```
-Model ##ODESystem#2095 with 6 equations
+Model ##ODESystem#2100 with 6 equations
 States (6):
   y₁ˍt(t)
   y₀ˍt(t)
@@ -403,11 +398,7 @@ Y = 𝜀 -> exp.(-𝜀*T) .* sin.(sqrt(1 - 𝜀^2)*T) / sqrt(1 - 𝜀^2)    # ex
 plot(sol.t, [Y(0.1), X(0.1)])
 ```
 
-```
-Error: UndefVarError: plot not defined
-```
-
-
+![](figures/02-perturbation_differential_17_1.png)
 
 
 
@@ -445,9 +436,10 @@ Environment:
 Package Information:
 
 ```
-      Status `/var/lib/buildkite-agent/builds/7-amdci4-julia-csail-mit-edu/julialang/scimltutorials-dot-jl/tutorials/perturbation/Project.toml`
+      Status `/var/lib/buildkite-agent/builds/1-amdci4-julia-csail-mit-edu/julialang/scimltutorials-dot-jl/tutorials/perturbation/Project.toml`
   [0c46a032] DifferentialEquations v6.17.1
   [961ee093] ModelingToolkit v5.17.3
+  [91a5bcdd] Plots v1.15.2
   [30cb0354] SciMLTutorials v0.9.0
   [d1185830] SymbolicUtils v0.11.2
   [0c5d862f] Symbolics v0.1.25
@@ -456,7 +448,7 @@ Package Information:
 And the full manifest:
 
 ```
-      Status `/var/lib/buildkite-agent/builds/7-amdci4-julia-csail-mit-edu/julialang/scimltutorials-dot-jl/tutorials/perturbation/Manifest.toml`
+      Status `/var/lib/buildkite-agent/builds/1-amdci4-julia-csail-mit-edu/julialang/scimltutorials-dot-jl/tutorials/perturbation/Manifest.toml`
   [c3fe647b] AbstractAlgebra v0.16.0
   [1520ce14] AbstractTrees v0.3.4
   [79e6a3ab] Adapt v3.3.0
