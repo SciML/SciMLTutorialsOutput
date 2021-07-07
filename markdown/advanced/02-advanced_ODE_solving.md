@@ -154,7 +154,7 @@ using BenchmarkTools
 ```
 
 ```
-447.845 μs (2561 allocations: 186.89 KiB)
+592.133 μs (2561 allocations: 186.89 KiB)
 retcode: Success
 Interpolation: automatic order switching interpolation
 t: 115-element Vector{Float64}:
@@ -230,7 +230,7 @@ prob_jac = ODEProblem(f,[1.0,0.0,0.0],(0.0,1e5),(0.04,3e7,1e4))
 ```
 
 ```
-291.287 μs (2002 allocations: 126.28 KiB)
+367.386 μs (2002 allocations: 126.28 KiB)
 retcode: Success
 Interpolation: automatic order switching interpolation
 t: 115-element Vector{Float64}:
@@ -291,19 +291,52 @@ the Julia code for this.
 ```julia
 using ModelingToolkit
 de = modelingtoolkitize(prob)
-ModelingToolkit.generate_jacobian(de...)[2] # Second is in-place
+ModelingToolkit.generate_jacobian(de)[2] # Second is in-place
 ```
 
 ```
-Error: MethodError: no method matching iterate(::ModelingToolkit.ODESystem)
-Closest candidates are:
-  iterate(!Matched::Union{LinRange, StepRangeLen}) at range.jl:664
-  iterate(!Matched::Union{LinRange, StepRangeLen}, !Matched::Int64) at rang
-e.jl:664
-  iterate(!Matched::T) where T<:Union{Base.KeySet{var"#s79", var"#s78"} whe
-re {var"#s79", var"#s78"<:Dict}, Base.ValueIterator{var"#s77"} where var"#s
-77"<:Dict} at dict.jl:693
-  ...
+:(function (var"##out#7430", var"##arg#7428", var"##arg#7429", t)
+      #= /root/.cache/julia-buildkite-plugin/depots/a6029d3a-f78b-41ea-bc97
+-28aa57c6c6ea/packages/SymbolicUtils/9iQGH/src/code.jl:282 =#
+      #= /root/.cache/julia-buildkite-plugin/depots/a6029d3a-f78b-41ea-bc97
+-28aa57c6c6ea/packages/SymbolicUtils/9iQGH/src/code.jl:283 =#
+      let var"x₁(t)" = #= /root/.cache/julia-buildkite-plugin/depots/a6029d
+3a-f78b-41ea-bc97-28aa57c6c6ea/packages/SymbolicUtils/9iQGH/src/code.jl:169
+ =# @inbounds(var"##arg#7428"[1]), var"x₂(t)" = #= /root/.cache/julia-build
+kite-plugin/depots/a6029d3a-f78b-41ea-bc97-28aa57c6c6ea/packages/SymbolicUt
+ils/9iQGH/src/code.jl:169 =# @inbounds(var"##arg#7428"[2]), var"x₃(t)" = #=
+ /root/.cache/julia-buildkite-plugin/depots/a6029d3a-f78b-41ea-bc97-28aa57c
+6c6ea/packages/SymbolicUtils/9iQGH/src/code.jl:169 =# @inbounds(var"##arg#7
+428"[3]), α₁ = #= /root/.cache/julia-buildkite-plugin/depots/a6029d3a-f78b-
+41ea-bc97-28aa57c6c6ea/packages/SymbolicUtils/9iQGH/src/code.jl:169 =# @inb
+ounds(var"##arg#7429"[1]), α₂ = #= /root/.cache/julia-buildkite-plugin/depo
+ts/a6029d3a-f78b-41ea-bc97-28aa57c6c6ea/packages/SymbolicUtils/9iQGH/src/co
+de.jl:169 =# @inbounds(var"##arg#7429"[2]), α₃ = #= /root/.cache/julia-buil
+dkite-plugin/depots/a6029d3a-f78b-41ea-bc97-28aa57c6c6ea/packages/SymbolicU
+tils/9iQGH/src/code.jl:169 =# @inbounds(var"##arg#7429"[3])
+          #= /root/.cache/julia-buildkite-plugin/depots/a6029d3a-f78b-41ea-
+bc97-28aa57c6c6ea/packages/Symbolics/h8kPL/src/build_function.jl:331 =#
+          #= /root/.cache/julia-buildkite-plugin/depots/a6029d3a-f78b-41ea-
+bc97-28aa57c6c6ea/packages/SymbolicUtils/9iQGH/src/code.jl:329 =# @inbounds
+ begin
+                  #= /root/.cache/julia-buildkite-plugin/depots/a6029d3a-f7
+8b-41ea-bc97-28aa57c6c6ea/packages/SymbolicUtils/9iQGH/src/code.jl:325 =#
+                  var"##out#7430"[1] = (*)(-1, α₁)
+                  var"##out#7430"[2] = α₁
+                  var"##out#7430"[3] = 0
+                  var"##out#7430"[4] = (*)(α₃, var"x₃(t)")
+                  var"##out#7430"[5] = (+)((*)(-2, α₂, var"x₂(t)"), (*)(-1,
+ α₃, var"x₃(t)"))
+                  var"##out#7430"[6] = (*)(2, α₂, var"x₂(t)")
+                  var"##out#7430"[7] = (*)(α₃, var"x₂(t)")
+                  var"##out#7430"[8] = (*)(-1, α₃, var"x₂(t)")
+                  var"##out#7430"[9] = 0
+                  #= /root/.cache/julia-buildkite-plugin/depots/a6029d3a-f7
+8b-41ea-bc97-28aa57c6c6ea/packages/SymbolicUtils/9iQGH/src/code.jl:327 =#
+                  nothing
+              end
+      end
+  end)
 ```
 
 
@@ -337,21 +370,18 @@ which outputs:
 Now let's use that to give the analytical solution Jacobian:
 
 ```julia
-jac = eval(ModelingToolkit.generate_jacobian(de...)[2])
+jac = eval(ModelingToolkit.generate_jacobian(de)[2])
 f = ODEFunction(rober, jac=jac)
 prob_jac = ODEProblem(f,[1.0,0.0,0.0],(0.0,1e5),(0.04,3e7,1e4))
 ```
 
 ```
-Error: MethodError: no method matching iterate(::ModelingToolkit.ODESystem)
-Closest candidates are:
-  iterate(!Matched::Union{LinRange, StepRangeLen}) at range.jl:664
-  iterate(!Matched::Union{LinRange, StepRangeLen}, !Matched::Int64) at rang
-e.jl:664
-  iterate(!Matched::T) where T<:Union{Base.KeySet{var"#s79", var"#s78"} whe
-re {var"#s79", var"#s78"<:Dict}, Base.ValueIterator{var"#s77"} where var"#s
-77"<:Dict} at dict.jl:693
-  ...
+ODEProblem with uType Vector{Float64} and tType Float64. In-place: true
+timespan: (0.0, 100000.0)
+u0: 3-element Vector{Float64}:
+ 1.0
+ 0.0
+ 0.0
 ```
 
 
@@ -395,7 +425,12 @@ prob_jac = ODEProblem(f,[1.0,0.0,0.0],(0.0,1e5),(0.04,3e7,1e4))
 ```
 
 ```
-Error: UndefVarError: jac not defined
+ODEProblem with uType Vector{Float64} and tType Float64. In-place: true
+timespan: (0.0, 100000.0)
+u0: 3-element Vector{Float64}:
+ 1.0
+ 0.0
+ 0.0
 ```
 
 
@@ -499,7 +534,7 @@ f = ODEFunction(brusselator_2d_loop;jac_prototype=jac_sparsity)
 ```
 
 ```
-(::SciMLBase.ODEFunction{true, typeof(Main.##WeaveSandBox#7200.brusselator_
+(::SciMLBase.ODEFunction{true, typeof(Main.##WeaveSandBox#7022.brusselator_
 2d_loop), LinearAlgebra.UniformScaling{Bool}, Nothing, Nothing, Nothing, No
 thing, Nothing, SparseArrays.SparseMatrixCSC{Float64, Int64}, SparseArrays.
 SparseMatrixCSC{Float64, Int64}, Nothing, Nothing, Nothing, Nothing, Nothin
@@ -594,8 +629,8 @@ Now let's see how the version with sparsity compares to the version without:
 ```
 
 ```
-4.190 s (3332 allocations: 65.33 MiB)
-  870.451 ms (40171 allocations: 276.18 MiB)
+4.443 s (3332 allocations: 65.33 MiB)
+  867.988 ms (40169 allocations: 276.18 MiB)
 retcode: Success
 Interpolation: 1st order linear
 t: 2-element Vector{Float64}:
@@ -667,7 +702,7 @@ prob_ode_brusselator_2d_sparse = ODEProblem(f,
 ```
 
 ```
-868.578 ms (7390 allocations: 272.21 MiB)
+866.651 ms (7386 allocations: 272.21 MiB)
 retcode: Success
 Interpolation: 1st order linear
 t: 2-element Vector{Float64}:
@@ -718,8 +753,8 @@ GMRES linear solver.
 ```
 
 ```
-55.095 s (1440760 allocations: 148.08 MiB)
-  3.540 s (487052 allocations: 19.49 MiB)
+54.826 s (1440760 allocations: 148.08 MiB)
+  3.373 s (487052 allocations: 19.49 MiB)
 retcode: Success
 Interpolation: 1st order linear
 t: 2-element Vector{Float64}:
@@ -769,11 +804,11 @@ Jv = JacVecOperator(brusselator_2d_loop,u0,p,0.0)
 ```
 
 ```
-DiffEqOperators.JacVecOperator{Float64, typeof(Main.##WeaveSandBox#7200.bru
+DiffEqOperators.JacVecOperator{Float64, typeof(Main.##WeaveSandBox#7022.bru
 sselator_2d_loop), Array{ForwardDiff.Dual{DiffEqOperators.JacVecTag, Float6
 4, 1}, 3}, Array{ForwardDiff.Dual{DiffEqOperators.JacVecTag, Float64, 1}, 3
 }, Array{Float64, 3}, NTuple{4, Float64}, Float64, Bool}(Main.##WeaveSandBo
-x#7200.brusselator_2d_loop, ForwardDiff.Dual{DiffEqOperators.JacVecTag, Flo
+x#7022.brusselator_2d_loop, ForwardDiff.Dual{DiffEqOperators.JacVecTag, Flo
 at64, 1}[Dual{DiffEqOperators.JacVecTag}(0.0,0.0) Dual{DiffEqOperators.JacV
 ecTag}(0.12134432813715876,0.12134432813715876) … Dual{DiffEqOperators.JacV
 ecTag}(0.1213443281371586,0.1213443281371586) Dual{DiffEqOperators.JacVecTa
@@ -852,7 +887,7 @@ prob_ode_brusselator_2d_jacfree = ODEProblem(f,u0,(0.,11.5),p)
 ```
 
 ```
-2.135 s (942433 allocations: 1.05 GiB)
+2.052 s (942433 allocations: 1.05 GiB)
 retcode: Success
 Interpolation: 1st order linear
 t: 2-element Vector{Float64}:
@@ -898,7 +933,7 @@ pc = aspreconditioner(ruge_stuben(jac_sparsity))
 ```
 
 ```
-52.841 ms (2126 allocations: 4.62 MiB)
+57.068 ms (2126 allocations: 4.62 MiB)
 retcode: Success
 Interpolation: 1st order linear
 t: 2-element Vector{Float64}:
@@ -976,8 +1011,8 @@ using Sundials
 ```
 
 ```
-14.894 s (51406 allocations: 3.40 MiB)
-  296.532 ms (54356 allocations: 3.24 MiB)
+18.035 s (51406 allocations: 3.40 MiB)
+  296.814 ms (54356 allocations: 3.24 MiB)
 retcode: Success
 Interpolation: 1st order linear
 t: 2-element Vector{Float64}:
@@ -1099,7 +1134,7 @@ Environment:
 Package Information:
 
 ```
-      Status `/var/lib/buildkite-agent/builds/4-amdci4-julia-csail-mit-edu/julialang/scimltutorials-dot-jl/tutorials/advanced/Project.toml`
+      Status `/var/lib/buildkite-agent/builds/2-amdci4-julia-csail-mit-edu/julialang/scimltutorials-dot-jl/tutorials/advanced/Project.toml`
   [2169fc97] AlgebraicMultigrid v0.4.0
   [6e4b80f9] BenchmarkTools v1.0.0
   [052768ef] CUDA v2.6.3
@@ -1125,7 +1160,7 @@ Package Information:
 And the full manifest:
 
 ```
-      Status `/var/lib/buildkite-agent/builds/4-amdci4-julia-csail-mit-edu/julialang/scimltutorials-dot-jl/tutorials/advanced/Manifest.toml`
+      Status `/var/lib/buildkite-agent/builds/2-amdci4-julia-csail-mit-edu/julialang/scimltutorials-dot-jl/tutorials/advanced/Manifest.toml`
   [c3fe647b] AbstractAlgebra v0.16.0
   [621f4979] AbstractFFTs v1.0.1
   [1520ce14] AbstractTrees v0.3.4
