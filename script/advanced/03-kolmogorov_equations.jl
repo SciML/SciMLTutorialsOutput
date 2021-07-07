@@ -36,14 +36,14 @@ trajectories = 100000
 
 m = Chain(Dense(d, 64, elu),Dense(64, 128, elu),Dense(128 , 16 , elu) , Dense(16 , 1))
 use_gpu = false
-if CUDAnative.functional() == true
-  m = fmap(CuArrays.cu , m)
+if CUDA.functional() == true
+  m = fmap(CUDA.cu , m)
   use_gpu = true
 end
 opt = Flux.ADAM(0.0005)
 
 
-@time sol = solve(prob, NeuralNetDiffEq.NNKolmogorov(m, opt, sdealg, ensemblealg), verbose = true, dt = dt,
+@time sol = solve(prob, NeuralPDE.NNKolmogorov(m, opt, sdealg, ensemblealg), verbose = true, dt = dt,
             dx = dx , trajectories = trajectories , abstol=1e-6, maxiters = 1000 , use_gpu = use_gpu)
 
 
