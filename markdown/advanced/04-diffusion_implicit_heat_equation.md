@@ -24,13 +24,6 @@ using OrdinaryDiffEq: SplitODEProblem, solve, IMEXEuler
 import SciMLBase
 ```
 
-```
-Error: ArgumentError: Package DiffEqBase not found in current path:
-- Run `import Pkg; Pkg.add("DiffEqBase")` to install the DiffEqBase package
-.
-```
-
-
 
 
 
@@ -249,7 +242,7 @@ sol = solve(
 ```
 
 ```
-Error: UndefVarError: SciMLBase not defined
+Solving...
 ```
 
 
@@ -272,8 +265,4 @@ p2 = Plots.plot!(p2, title="T ∈ cell faces")
 Plots.plot(p1, p2)
 ```
 
-```
-Error: UndefVarError: sol not defined
-```
-
-
+![](figures/04-diffusion_implicit_heat_equation_9_1.png)

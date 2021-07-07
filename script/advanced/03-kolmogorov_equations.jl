@@ -1,9 +1,8 @@
 
 using Flux, StochasticDiffEq
-using NeuralNetDiffEq
+using NeuralPDE
 using Plots
-using CuArrays
-using CUDAnative
+using CUDA
 
 
 function phi(xi)
@@ -76,4 +75,8 @@ y_out = reshape(y_out , 13 , 1)
 
 plot(x_out , y_out , lw = 3 ,  xaxis="Initial Stock Price", yaxis="Payoff" , label = "NNKolmogorov")
 plot!(x_out , monte_carlo_sol , lw = 3 ,  xaxis="Initial Stock Price", yaxis="Payoff" ,label = "Monte Carlo Solutions")
+
+
+using SciMLTutorials
+SciMLTutorials.tutorial_footer(WEAVE_ARGS[:folder],WEAVE_ARGS[:file])
 

@@ -2,14 +2,12 @@
 author: "Ashutosh Bharambe"
 title: "Kolmogorov Backward Equations"
 ---
-````julia
+```julia
 using Flux, StochasticDiffEq
-using NeuralNetDiffEq
+using NeuralPDE
 using Plots
-using CuArrays
-using CUDAnative
-````
-
+using CUDA
+```
 
 
 
@@ -49,7 +47,7 @@ $$
 We will train our model and the model itself will be the solution of the equation
 ## Defining the problem and the solver
 We should start defining the terminal condition for our equation:
-````julia
+```julia
 function phi(xi)
     y = Float64[]
     K = 100
@@ -60,19 +58,18 @@ function phi(xi)
     y = reshape(y , 1 , size(y)[1] )
     return y
 end
-````
+```
 
-
-````
+```
 phi (generic function with 1 method)
-````
+```
 
 
 
 
 Now we shall define the problem :
 We will define the σ and μ by comparing it to the orignal equation. The xspan is the span of initial stock prices.
-````julia
+```julia
 d = 1
 r = 0.04
 sigma = 0.2
@@ -81,39 +78,36 @@ tspan = (0.0 , 1.0)
 σ(du , u , p , t) = du .= sigma.*u
 μ(du , u , p , t) = du .= r.*u
 prob = KolmogorovPDEProblem(μ , σ , phi , xspan , tspan, d)
-````
+```
 
-
-````
-KolmogorovPDEProblem
-timespan: (0.0, 1.0)xspan: (80.0, 115.0)μ
-Main.##WeaveSandBox#583.μSigma
-Main.##WeaveSandBox#583.σ
-````
+```
+KolmogorovPDEProblem with uType Int64 and tType Float64. In-place: nothing
+timespan: (0.0, 1.0)
+u0: 0
+```
 
 
 
 
 Now once we have defined our problem it is necessary to define the parameters for the solver.
-````julia
+```julia
 sdealg = EM()
 ensemblealg = EnsembleThreads()
 dt = 0.01
 dx = 0.01
 trajectories = 100000
-````
+```
 
-
-````
+```
 100000
-````
+```
 
 
 
 
 
 Now lets define our model m and the optimiser
-````julia
+```julia
 m = Chain(Dense(d, 64, elu),Dense(64, 128, elu),Dense(128 , 16 , elu) , Dense(16 , 1))
 use_gpu = false
 if CUDAnative.functional() == true
@@ -121,1035 +115,31 @@ if CUDAnative.functional() == true
   use_gpu = true
 end
 opt = Flux.ADAM(0.0005)
-````
+```
 
-
-````
-Flux.Optimise.ADAM(0.0005, (0.9, 0.999), IdDict{Any,Any}())
-````
+```
+Error: UndefVarError: CUDAnative not defined
+```
 
 
 
 
 And then finally call the solver
-````julia
+```julia
 @time sol = solve(prob, NeuralNetDiffEq.NNKolmogorov(m, opt, sdealg, ensemblealg), verbose = true, dt = dt,
             dx = dx , trajectories = trajectories , abstol=1e-6, maxiters = 1000 , use_gpu = use_gpu)
-````
+```
 
-
-````
-Current loss is: 134.80429
-Current loss is: 132.68681
-Current loss is: 135.3199
-Current loss is: 137.07219
-Current loss is: 136.294
-Current loss is: 134.30772
-Current loss is: 132.60184
-Current loss is: 131.96268
-Current loss is: 132.3382
-Current loss is: 133.06836
-Current loss is: 133.43152
-Current loss is: 133.12303
-Current loss is: 132.3151
-Current loss is: 131.4221
-Current loss is: 130.83995
-Current loss is: 130.79732
-Current loss is: 131.25005
-Current loss is: 131.46846
-Current loss is: 131.15599
-Current loss is: 130.4978
-Current loss is: 129.96117
-Current loss is: 129.75539
-Current loss is: 129.71904
-Current loss is: 129.63995
-Current loss is: 129.3646
-Current loss is: 128.98088
-Current loss is: 128.70297
-Current loss is: 128.67253
-Current loss is: 128.56552
-Current loss is: 128.2728
-Current loss is: 127.932205
-Current loss is: 127.685234
-Current loss is: 127.514496
-Current loss is: 127.33897
-Current loss is: 127.106346
-Current loss is: 126.884125
-Current loss is: 126.73983
-Current loss is: 126.590836
-Current loss is: 126.38942
-Current loss is: 126.20772
-Current loss is: 126.069145
-Current loss is: 125.926544
-Current loss is: 125.74502
-Current loss is: 125.56654
-Current loss is: 125.417435
-Current loss is: 125.261314
-Current loss is: 125.075195
-Current loss is: 124.8964
-Current loss is: 124.730034
-Current loss is: 124.5438
-Current loss is: 124.339836
-Current loss is: 124.14451
-Current loss is: 123.94598
-Current loss is: 123.72298
-Current loss is: 123.520996
-Current loss is: 123.333206
-Current loss is: 123.139755
-Current loss is: 122.92544
-Current loss is: 122.70611
-Current loss is: 122.48011
-Current loss is: 122.226814
-Current loss is: 121.971535
-Current loss is: 121.75648
-Current loss is: 121.552986
-Current loss is: 121.36565
-Current loss is: 121.182846
-Current loss is: 121.00063
-Current loss is: 120.81369
-Current loss is: 120.62416
-Current loss is: 120.430595
-Current loss is: 120.23543
-Current loss is: 120.04179
-Current loss is: 119.84623
-Current loss is: 119.64889
-Current loss is: 119.45074
-Current loss is: 119.25155
-Current loss is: 119.0524
-Current loss is: 118.851326
-Current loss is: 118.64724
-Current loss is: 118.4423
-Current loss is: 118.236824
-Current loss is: 118.03023
-Current loss is: 117.82283
-Current loss is: 117.61483
-Current loss is: 117.40691
-Current loss is: 117.19704
-Current loss is: 116.98524
-Current loss is: 116.772896
-Current loss is: 116.56058
-Current loss is: 116.3482
-Current loss is: 116.13504
-Current loss is: 115.92165
-Current loss is: 115.7075
-Current loss is: 115.49324
-Current loss is: 115.278595
-Current loss is: 115.06389
-Current loss is: 114.84874
-Current loss is: 114.63367
-Current loss is: 114.41883
-Current loss is: 114.204384
-Current loss is: 113.98986
-Current loss is: 113.775795
-Current loss is: 113.56257
-Current loss is: 113.35043
-Current loss is: 113.13885
-Current loss is: 112.92783
-Current loss is: 112.7173
-Current loss is: 112.50773
-Current loss is: 112.299484
-Current loss is: 112.09243
-Current loss is: 111.88636
-Current loss is: 111.68146
-Current loss is: 111.47822
-Current loss is: 111.27672
-Current loss is: 111.07702
-Current loss is: 110.87928
-Current loss is: 110.68345
-Current loss is: 110.489494
-Current loss is: 110.29752
-Current loss is: 110.10763
-Current loss is: 109.920044
-Current loss is: 109.734856
-Current loss is: 109.55201
-Current loss is: 109.37162
-Current loss is: 109.19388
-Current loss is: 109.018906
-Current loss is: 108.84678
-Current loss is: 108.67749
-Current loss is: 108.511116
-Current loss is: 108.347855
-Current loss is: 108.1879
-Current loss is: 108.0312
-Current loss is: 107.87794
-Current loss is: 107.72861
-Current loss is: 107.58311
-Current loss is: 107.44066
-Current loss is: 107.30092
-Current loss is: 107.164536
-Current loss is: 107.03286
-Current loss is: 106.908615
-Current loss is: 106.801956
-Current loss is: 106.73256
-Current loss is: 106.69902
-Current loss is: 106.55405
-Current loss is: 106.32728
-Current loss is: 106.26285
-Current loss is: 106.22597
-Current loss is: 106.04488
-Current loss is: 105.94188
-Current loss is: 105.91665
-Current loss is: 105.7794
-Current loss is: 105.6735
-Current loss is: 105.64521
-Current loss is: 105.54008
-Current loss is: 105.44043
-Current loss is: 105.40802
-Current loss is: 105.32928
-Current loss is: 105.238
-Current loss is: 105.20087
-Current loss is: 105.1448
-Current loss is: 105.06444
-Current loss is: 105.020996
-Current loss is: 104.9824
-Current loss is: 104.91737
-Current loss is: 104.86755
-Current loss is: 104.83761
-Current loss is: 104.791374
-Current loss is: 104.740135
-Current loss is: 104.70874
-Current loss is: 104.67808
-Current loss is: 104.63434
-Current loss is: 104.59739
-Current loss is: 104.57168
-Current loss is: 104.53992
-Current loss is: 104.502625
-Current loss is: 104.473206
-Current loss is: 104.44804
-Current loss is: 104.417
-Current loss is: 104.38543
-Current loss is: 104.36066
-Current loss is: 104.336845
-Current loss is: 104.309845
-Current loss is: 104.28572
-Current loss is: 104.26604
-Current loss is: 104.24493
-Current loss is: 104.22253
-Current loss is: 104.202995
-Current loss is: 104.18428
-Current loss is: 104.1636
-Current loss is: 104.14368
-Current loss is: 104.12613
-Current loss is: 104.10859
-Current loss is: 104.09064
-Current loss is: 104.07438
-Current loss is: 104.05957
-Current loss is: 104.04452
-Current loss is: 104.029434
-Current loss is: 104.01552
-Current loss is: 104.002335
-Current loss is: 103.988884
-Current loss is: 103.97555
-Current loss is: 103.96309
-Current loss is: 103.95121
-Current loss is: 103.939354
-Current loss is: 103.9277
-Current loss is: 103.916756
-Current loss is: 103.90632
-Current loss is: 103.895935
-Current loss is: 103.88572
-Current loss is: 103.87595
-Current loss is: 103.86663
-Current loss is: 103.857414
-Current loss is: 103.84836
-Current loss is: 103.83966
-Current loss is: 103.83134
-Current loss is: 103.82323
-Current loss is: 103.81524
-Current loss is: 103.80745
-Current loss is: 103.79995
-Current loss is: 103.792656
-Current loss is: 103.7855
-Current loss is: 103.77846
-Current loss is: 103.771614
-Current loss is: 103.765015
-Current loss is: 103.75859
-Current loss is: 103.75229
-Current loss is: 103.74612
-Current loss is: 103.74012
-Current loss is: 103.7343
-Current loss is: 103.728615
-Current loss is: 103.723045
-Current loss is: 103.71759
-Current loss is: 103.712296
-Current loss is: 103.70713
-Current loss is: 103.70212
-Current loss is: 103.697174
-Current loss is: 103.692375
-Current loss is: 103.6877
-Current loss is: 103.683105
-Current loss is: 103.67866
-Current loss is: 103.67428
-Current loss is: 103.670006
-Current loss is: 103.665825
-Current loss is: 103.66175
-Current loss is: 103.657745
-Current loss is: 103.65385
-Current loss is: 103.65004
-Current loss is: 103.64631
-Current loss is: 103.64264
-Current loss is: 103.63907
-Current loss is: 103.63556
-Current loss is: 103.63214
-Current loss is: 103.628784
-Current loss is: 103.625496
-Current loss is: 103.6223
-Current loss is: 103.61915
-Current loss is: 103.616066
-Current loss is: 103.61306
-Current loss is: 103.610115
-Current loss is: 103.607216
-Current loss is: 103.604385
-Current loss is: 103.60161
-Current loss is: 103.598885
-Current loss is: 103.59623
-Current loss is: 103.59362
-Current loss is: 103.59106
-Current loss is: 103.58855
-Current loss is: 103.58609
-Current loss is: 103.58369
-Current loss is: 103.581314
-Current loss is: 103.57901
-Current loss is: 103.576744
-Current loss is: 103.574524
-Current loss is: 103.572334
-Current loss is: 103.570206
-Current loss is: 103.5681
-Current loss is: 103.566055
-Current loss is: 103.56404
-Current loss is: 103.562065
-Current loss is: 103.56012
-Current loss is: 103.55822
-Current loss is: 103.55636
-Current loss is: 103.554504
-Current loss is: 103.55272
-Current loss is: 103.55095
-Current loss is: 103.54922
-Current loss is: 103.54754
-Current loss is: 103.545876
-Current loss is: 103.544235
-Current loss is: 103.542656
-Current loss is: 103.54113
-Current loss is: 103.539635
-Current loss is: 103.53827
-Current loss is: 103.53701
-Current loss is: 103.53602
-Current loss is: 103.5355
-Current loss is: 103.535904
-Current loss is: 103.53801
-Current loss is: 103.543785
-Current loss is: 103.5554
-Current loss is: 103.57909
-Current loss is: 103.610985
-Current loss is: 103.65288
-Current loss is: 103.648766
-Current loss is: 103.60535
-Current loss is: 103.53725
-Current loss is: 103.5234
-Current loss is: 103.56164
-Current loss is: 103.58419
-Current loss is: 103.561844
-Current loss is: 103.52108
-Current loss is: 103.520256
-Current loss is: 103.54771
-Current loss is: 103.55117
-Current loss is: 103.52707
-Current loss is: 103.51009
-Current loss is: 103.521355
-Current loss is: 103.53498
-Current loss is: 103.52456
-Current loss is: 103.50821
-Current loss is: 103.50875
-Current loss is: 103.519035
-Current loss is: 103.51868
-Current loss is: 103.506966
-Current loss is: 103.502335
-Current loss is: 103.50819
-Current loss is: 103.51102
-Current loss is: 103.505165
-Current loss is: 103.49897
-Current loss is: 103.50019
-Current loss is: 103.50383
-Current loss is: 103.50214
-Current loss is: 103.49712
-Current loss is: 103.49517
-Current loss is: 103.497116
-Current loss is: 103.49804
-Current loss is: 103.49537
-Current loss is: 103.49238
-Current loss is: 103.49212
-Current loss is: 103.49322
-Current loss is: 103.49282
-Current loss is: 103.49061
-Current loss is: 103.488914
-Current loss is: 103.48891
-Current loss is: 103.4893
-Current loss is: 103.48861
-Current loss is: 103.487015
-Current loss is: 103.48588
-Current loss is: 103.48572
-Current loss is: 103.48572
-Current loss is: 103.48513
-Current loss is: 103.483986
-Current loss is: 103.48308
-Current loss is: 103.48273
-Current loss is: 103.48257
-Current loss is: 103.48212
-Current loss is: 103.4813
-Current loss is: 103.480484
-Current loss is: 103.479996
-Current loss is: 103.479706
-Current loss is: 103.47937
-Current loss is: 103.478806
-Current loss is: 103.478134
-Current loss is: 103.47757
-Current loss is: 103.477165
-Current loss is: 103.47683
-Current loss is: 103.476425
-Current loss is: 103.47594
-Current loss is: 103.47539
-Current loss is: 103.474915
-Current loss is: 103.474525
-Current loss is: 103.474174
-Current loss is: 103.4738
-Current loss is: 103.47338
-Current loss is: 103.472916
-Current loss is: 103.47249
-Current loss is: 103.47211
-Current loss is: 103.471756
-Current loss is: 103.471405
-Current loss is: 103.47104
-Current loss is: 103.47066
-Current loss is: 103.47027
-Current loss is: 103.469894
-Current loss is: 103.46955
-Current loss is: 103.46921
-Current loss is: 103.468895
-Current loss is: 103.46856
-Current loss is: 103.46822
-Current loss is: 103.46788
-Current loss is: 103.467545
-Current loss is: 103.46722
-Current loss is: 103.4669
-Current loss is: 103.4666
-Current loss is: 103.4663
-Current loss is: 103.46601
-Current loss is: 103.465706
-Current loss is: 103.46541
-Current loss is: 103.46511
-Current loss is: 103.46482
-Current loss is: 103.464516
-Current loss is: 103.46424
-Current loss is: 103.46396
-Current loss is: 103.4637
-Current loss is: 103.46342
-Current loss is: 103.46316
-Current loss is: 103.46289
-Current loss is: 103.46264
-Current loss is: 103.46238
-Current loss is: 103.46212
-Current loss is: 103.46187
-Current loss is: 103.46162
-Current loss is: 103.461365
-Current loss is: 103.46112
-Current loss is: 103.460884
-Current loss is: 103.46064
-Current loss is: 103.46041
-Current loss is: 103.460175
-Current loss is: 103.459946
-Current loss is: 103.45972
-Current loss is: 103.459496
-Current loss is: 103.459274
-Current loss is: 103.459045
-Current loss is: 103.45884
-Current loss is: 103.45861
-Current loss is: 103.458405
-Current loss is: 103.4582
-Current loss is: 103.45798
-Current loss is: 103.45778
-Current loss is: 103.45758
-Current loss is: 103.457375
-Current loss is: 103.457184
-Current loss is: 103.457
-Current loss is: 103.45681
-Current loss is: 103.45665
-Current loss is: 103.45649
-Current loss is: 103.456375
-Current loss is: 103.4563
-Current loss is: 103.456345
-Current loss is: 103.4566
-Current loss is: 103.45721
-Current loss is: 103.45848
-Current loss is: 103.46117
-Current loss is: 103.46625
-Current loss is: 103.476555
-Current loss is: 103.4943
-Current loss is: 103.52849
-Current loss is: 103.572174
-Current loss is: 103.63482
-Current loss is: 103.64093
-Current loss is: 103.60299
-Current loss is: 103.50194
-Current loss is: 103.45424
-Current loss is: 103.48843
-Current loss is: 103.539986
-Current loss is: 103.54612
-Current loss is: 103.488914
-Current loss is: 103.453094
-Current loss is: 103.47266
-Current loss is: 103.50531
-Current loss is: 103.50383
-Current loss is: 103.46754
-Current loss is: 103.45237
-Current loss is: 103.471214
-Current loss is: 103.486
-Current loss is: 103.47446
-Current loss is: 103.45409
-Current loss is: 103.455246
-Current loss is: 103.46999
-Current loss is: 103.47134
-Current loss is: 103.458786
-Current loss is: 103.45082
-Current loss is: 103.45688
-Current loss is: 103.464424
-Current loss is: 103.46062
-Current loss is: 103.45225
-Current loss is: 103.45083
-Current loss is: 103.45613
-Current loss is: 103.45858
-Current loss is: 103.45418
-Current loss is: 103.44989
-Current loss is: 103.450935
-Current loss is: 103.4542
-Current loss is: 103.4543
-Current loss is: 103.45105
-Current loss is: 103.44907
-Current loss is: 103.45029
-Current loss is: 103.45202
-Current loss is: 103.45156
-Current loss is: 103.449486
-Current loss is: 103.44851
-Current loss is: 103.449356
-Current loss is: 103.45028
-Current loss is: 103.449844
-Current loss is: 103.448555
-Current loss is: 103.44797
-Current loss is: 103.44841
-Current loss is: 103.448944
-Current loss is: 103.448715
-Current loss is: 103.447945
-Current loss is: 103.44745
-Current loss is: 103.44757
-Current loss is: 103.44788
-Current loss is: 103.44784
-Current loss is: 103.447395
-Current loss is: 103.44697
-Current loss is: 103.4469
-Current loss is: 103.44704
-Current loss is: 103.447075
-Current loss is: 103.44688
-Current loss is: 103.446556
-Current loss is: 103.44635
-Current loss is: 103.446335
-Current loss is: 103.44639
-Current loss is: 103.446335
-Current loss is: 103.44614
-Current loss is: 103.44593
-Current loss is: 103.445816
-Current loss is: 103.44578
-Current loss is: 103.445755
-Current loss is: 103.44568
-Current loss is: 103.44553
-Current loss is: 103.44538
-Current loss is: 103.445274
-Current loss is: 103.44522
-Current loss is: 103.44516
-Current loss is: 103.4451
-Current loss is: 103.445
-Current loss is: 103.44487
-Current loss is: 103.44478
-Current loss is: 103.444695
-Current loss is: 103.444626
-Current loss is: 103.44456
-Current loss is: 103.44448
-Current loss is: 103.44439
-Current loss is: 103.4443
-Current loss is: 103.4442
-Current loss is: 103.44413
-Current loss is: 103.444046
-Current loss is: 103.44398
-Current loss is: 103.44391
-Current loss is: 103.443825
-Current loss is: 103.44375
-Current loss is: 103.443665
-Current loss is: 103.44359
-Current loss is: 103.443504
-Current loss is: 103.443436
-Current loss is: 103.443375
-Current loss is: 103.44329
-Current loss is: 103.443214
-Current loss is: 103.443146
-Current loss is: 103.443085
-Current loss is: 103.443
-Current loss is: 103.442924
-Current loss is: 103.442856
-Current loss is: 103.44278
-Current loss is: 103.44272
-Current loss is: 103.442635
-Current loss is: 103.44258
-Current loss is: 103.4425
-Current loss is: 103.44244
-Current loss is: 103.44237
-Current loss is: 103.44228
-Current loss is: 103.44223
-Current loss is: 103.442154
-Current loss is: 103.442085
-Current loss is: 103.44202
-Current loss is: 103.441956
-Current loss is: 103.44189
-Current loss is: 103.441826
-Current loss is: 103.44175
-Current loss is: 103.44168
-Current loss is: 103.44162
-Current loss is: 103.441536
-Current loss is: 103.44149
-Current loss is: 103.441414
-Current loss is: 103.44134
-Current loss is: 103.441284
-Current loss is: 103.44123
-Current loss is: 103.441154
-Current loss is: 103.441086
-Current loss is: 103.44102
-Current loss is: 103.44096
-Current loss is: 103.440895
-Current loss is: 103.44083
-Current loss is: 103.44078
-Current loss is: 103.44072
-Current loss is: 103.440636
-Current loss is: 103.440575
-Current loss is: 103.44053
-Current loss is: 103.44047
-Current loss is: 103.4404
-Current loss is: 103.44034
-Current loss is: 103.44027
-Current loss is: 103.440216
-Current loss is: 103.44017
-Current loss is: 103.440094
-Current loss is: 103.44005
-Current loss is: 103.43998
-Current loss is: 103.439926
-Current loss is: 103.43988
-Current loss is: 103.43983
-Current loss is: 103.43979
-Current loss is: 103.43976
-Current loss is: 103.439766
-Current loss is: 103.43982
-Current loss is: 103.43996
-Current loss is: 103.44028
-Current loss is: 103.44094
-Current loss is: 103.44223
-Current loss is: 103.44484
-Current loss is: 103.44976
-Current loss is: 103.459785
-Current loss is: 103.47774
-Current loss is: 103.51408
-Current loss is: 103.568
-Current loss is: 103.662094
-Current loss is: 103.7201
-Current loss is: 103.74898
-Current loss is: 103.608154
-Current loss is: 103.472244
-Current loss is: 103.44884
-Current loss is: 103.53315
-Current loss is: 103.60432
-Current loss is: 103.5456
-Current loss is: 103.459496
-Current loss is: 103.444885
-Current loss is: 103.50066
-Current loss is: 103.535
-Current loss is: 103.48749
-Current loss is: 103.44096
-Current loss is: 103.4545
-Current loss is: 103.4893
-Current loss is: 103.48536
-Current loss is: 103.448326
-Current loss is: 103.44094
-Current loss is: 103.46509
-Current loss is: 103.4725
-Current loss is: 103.453354
-Current loss is: 103.438126
-Current loss is: 103.447845
-Current loss is: 103.460945
-Current loss is: 103.453545
-Current loss is: 103.43982
-Current loss is: 103.44017
-Current loss is: 103.449844
-Current loss is: 103.45099
-Current loss is: 103.44179
-Current loss is: 103.437675
-Current loss is: 103.44292
-Current loss is: 103.44671
-Current loss is: 103.44301
-Current loss is: 103.437836
-Current loss is: 103.43866
-Current loss is: 103.4425
-Current loss is: 103.44243
-Current loss is: 103.43889
-Current loss is: 103.437195
-Current loss is: 103.439095
-Current loss is: 103.440796
-Current loss is: 103.43947
-Current loss is: 103.43732
-Current loss is: 103.437256
-Current loss is: 103.4387
-Current loss is: 103.43915
-Current loss is: 103.437904
-Current loss is: 103.43682
-Current loss is: 103.43716
-Current loss is: 103.43798
-Current loss is: 103.437965
-Current loss is: 103.43711
-Current loss is: 103.4366
-Current loss is: 103.4369
-Current loss is: 103.43735
-Current loss is: 103.437225
-Current loss is: 103.436676
-Current loss is: 103.43639
-Current loss is: 103.436584
-Current loss is: 103.43684
-Current loss is: 103.43676
-Current loss is: 103.43641
-Current loss is: 103.43622
-Current loss is: 103.436295
-Current loss is: 103.43645
-Current loss is: 103.43641
-Current loss is: 103.436195
-Current loss is: 103.43605
-Current loss is: 103.43605
-Current loss is: 103.43613
-Current loss is: 103.43613
-Current loss is: 103.436005
-Current loss is: 103.435875
-Current loss is: 103.43584
-Current loss is: 103.43586
-Current loss is: 103.43587
-Current loss is: 103.435814
-Current loss is: 103.43573
-Current loss is: 103.43567
-Current loss is: 103.43564
-Current loss is: 103.435646
-Current loss is: 103.43564
-Current loss is: 103.43558
-Current loss is: 103.43552
-Current loss is: 103.43548
-Current loss is: 103.43545
-Current loss is: 103.43545
-Current loss is: 103.43541
-Current loss is: 103.435356
-Current loss is: 103.43532
-Current loss is: 103.43528
-Current loss is: 103.43526
-Current loss is: 103.435234
-Current loss is: 103.43522
-Current loss is: 103.435165
-Current loss is: 103.435135
-Current loss is: 103.4351
-Current loss is: 103.43507
-Current loss is: 103.43505
-Current loss is: 103.43502
-Current loss is: 103.43499
-Current loss is: 103.43497
-Current loss is: 103.43493
-Current loss is: 103.434906
-Current loss is: 103.43487
-Current loss is: 103.43484
-Current loss is: 103.434814
-Current loss is: 103.434784
-Current loss is: 103.43476
-Current loss is: 103.43473
-Current loss is: 103.43471
-Current loss is: 103.43467
-Current loss is: 103.43464
-Current loss is: 103.434616
-Current loss is: 103.434586
-Current loss is: 103.43457
-Current loss is: 103.43454
-Current loss is: 103.434494
-Current loss is: 103.43447
-Current loss is: 103.43445
-Current loss is: 103.43442
-Current loss is: 103.434395
-Current loss is: 103.434364
-Current loss is: 103.43433
-Current loss is: 103.43432
-Current loss is: 103.43429
-Current loss is: 103.43426
-Current loss is: 103.43425
-Current loss is: 103.43422
-Current loss is: 103.43419
-Current loss is: 103.434166
-Current loss is: 103.434135
-Current loss is: 103.43412
-Current loss is: 103.434074
-Current loss is: 103.43407
-Current loss is: 103.43404
-Current loss is: 103.43402
-Current loss is: 103.433975
-Current loss is: 103.43397
-Current loss is: 103.43394
-Current loss is: 103.433914
-Current loss is: 103.4339
-Current loss is: 103.43387
-Current loss is: 103.433846
-Current loss is: 103.433815
-Current loss is: 103.4338
-Current loss is: 103.43378
-Current loss is: 103.433754
-Current loss is: 103.43373
-Current loss is: 103.43371
-Current loss is: 103.43367
-Current loss is: 103.43364
-Current loss is: 103.433624
-Current loss is: 103.43361
-Current loss is: 103.433586
-Current loss is: 103.433556
-Current loss is: 103.43354
-Current loss is: 103.43351
-Current loss is: 103.433495
-Current loss is: 103.433464
-Current loss is: 103.43345
-Current loss is: 103.433426
-Current loss is: 103.43341
-Current loss is: 103.43338
-Current loss is: 103.43335
-Current loss is: 103.433334
-Current loss is: 103.43332
-Current loss is: 103.4333
-Current loss is: 103.433266
-Current loss is: 103.43325
-Current loss is: 103.43323
-Current loss is: 103.433205
-Current loss is: 103.43319
-Current loss is: 103.43317
-Current loss is: 103.433136
-Current loss is: 103.43312
-Current loss is: 103.4331
-Current loss is: 103.433075
-Current loss is: 103.43306
-Current loss is: 103.43304
-Current loss is: 103.433014
-Current loss is: 103.43299
-Current loss is: 103.432976
-Current loss is: 103.43296
-Current loss is: 103.43294
-Current loss is: 103.432915
-Current loss is: 103.432884
-Current loss is: 103.43287
-Current loss is: 103.432846
-Current loss is: 103.43284
-Current loss is: 103.43281
-Current loss is: 103.43281
-Current loss is: 103.43278
-Current loss is: 103.43277
-Current loss is: 103.43275
-Current loss is: 103.43274
-Current loss is: 103.43274
-Current loss is: 103.43278
-Current loss is: 103.43284
-Current loss is: 103.432976
-Current loss is: 103.43326
-Current loss is: 103.433815
-Current loss is: 103.434944
-Current loss is: 103.437126
-Current loss is: 103.44159
-Current loss is: 103.450096
-Current loss is: 103.46775
-Current loss is: 103.499306
-Current loss is: 103.56385
-Current loss is: 103.653496
-Current loss is: 103.804985
-Current loss is: 103.85194
-Current loss is: 103.82547
-Current loss is: 103.58208
-Current loss is: 103.4388
-Current loss is: 103.50228
-Current loss is: 103.629974
-Current loss is: 103.65676
-Current loss is: 103.5153
-Current loss is: 103.43291
-Current loss is: 103.488914
-Current loss is: 103.5605
-Current loss is: 103.53976
-Current loss is: 103.45113
-Current loss is: 103.442894
-Current loss is: 103.50251
-Current loss is: 103.506134
-Current loss is: 103.45501
-Current loss is: 103.433815
-Current loss is: 103.467896
-Current loss is: 103.48778
-Current loss is: 103.45598
-Current loss is: 103.43242
-Current loss is: 103.448845
-Current loss is: 103.46609
-Current loss is: 103.45338
-Current loss is: 103.43339
-Current loss is: 103.4394
-Current loss is: 103.45417
-Current loss is: 103.44815
-Current loss is: 103.43404
-Current loss is: 103.43477
-Current loss is: 103.44482
-Current loss is: 103.44488
-Current loss is: 103.435135
-Current loss is: 103.43252
-Current loss is: 103.438774
-Current loss is: 103.44092
-Current loss is: 103.435555
-Current loss is: 103.431915
-Current loss is: 103.434975
-Current loss is: 103.437965
-Current loss is: 103.43539
-Current loss is: 103.432014
-Current loss is: 103.432846
-Current loss is: 103.43536
-Current loss is: 103.435
-Current loss is: 103.432465
-Current loss is: 103.43184
-Current loss is: 103.433426
-Current loss is: 103.4341
-Current loss is: 103.432785
-Current loss is: 103.431656
-Current loss is: 103.43222
-Current loss is: 103.433136
-Current loss is: 103.432785
-Current loss is: 103.4318
-Current loss is: 103.431625
-Current loss is: 103.43225
-Current loss is: 103.43251
-Current loss is: 103.431984
-Current loss is: 103.43151
-Current loss is: 103.431656
-Current loss is: 103.43203
-Current loss is: 103.431984
-Current loss is: 103.431595
-Current loss is: 103.43142
-Current loss is: 103.43161
-Current loss is: 103.43178
-Current loss is: 103.43165
-Current loss is: 103.431404
-Current loss is: 103.43136
-Current loss is: 103.43149
-Current loss is: 103.43155
-Current loss is: 103.431435
-Current loss is: 103.43129
-Current loss is: 103.4313
-Current loss is: 103.431366
-Current loss is: 103.43139
-Current loss is: 103.431305
-Current loss is: 103.43122
-Current loss is: 103.43122
-Current loss is: 103.43126
-Current loss is: 103.431244
-Current loss is: 103.4312
-Current loss is: 103.431145
-Current loss is: 103.431145
-Current loss is: 103.43117
-Current loss is: 103.431145
-Current loss is: 103.43113
-Current loss is: 103.43108
-Current loss is: 103.43107
-Current loss is: 103.43107
-Current loss is: 103.43107
-Current loss is: 103.431046
-Current loss is: 103.431015
-Current loss is: 103.430984
-Current loss is: 103.431
-Current loss is: 103.431
-Current loss is: 103.43098
-Current loss is: 103.430954
-Current loss is: 103.43093
-Current loss is: 103.43093
-Current loss is: 103.430916
-Current loss is: 103.43091
-Current loss is: 103.430885
-Current loss is: 103.43087
-Current loss is: 103.430855
-Current loss is: 103.43085
-Current loss is: 103.43084
-Current loss is: 103.43082
-Current loss is: 103.43081
-Current loss is: 103.43079
-Current loss is: 103.43078
-Current loss is: 103.43078
-Current loss is: 103.430756
-Current loss is: 103.430756
-Current loss is: 103.43074
-Current loss is: 103.43072
-Current loss is: 103.43071
-Current loss is: 103.430695
-Current loss is: 103.43069
-Current loss is: 103.43068
-Current loss is: 103.43066
-Current loss is: 103.43064
-Current loss is: 103.43064
-Current loss is: 103.43062
-Current loss is: 103.43061
-Current loss is: 103.430595
-Current loss is: 103.43058
-Current loss is: 103.43058
-Current loss is: 103.43056
-Current loss is: 103.43055
-Current loss is: 103.43053
-Current loss is: 103.430534
-Current loss is: 103.43052
-Current loss is: 103.430504
-Current loss is: 103.4305
-Current loss is: 103.43048
-Current loss is: 103.43046
-Current loss is: 103.43045
-Current loss is: 103.430435
-Current loss is: 103.43042
-Current loss is: 103.43042
-Current loss is: 103.430405
-Current loss is: 103.430405
-Current loss is: 103.430374
-Current loss is: 103.43037
-Current loss is: 103.43036
-Current loss is: 103.43034
-Current loss is: 103.430336
-Current loss is: 103.43032
-Current loss is: 103.43032
-Current loss is: 103.4303
-Current loss is: 103.43029
-Current loss is: 103.430275
-Current loss is: 103.43027
-Current loss is: 103.43026
-Current loss is: 103.430244
-Current loss is: 103.43023
-Current loss is: 103.43023
-Current loss is: 103.43021
-Current loss is: 103.43021
-Current loss is: 103.43019
-Current loss is: 103.430176
-Current loss is: 103.43016
-Current loss is: 103.430145
-Current loss is: 103.43014
-Current loss is: 103.43014
-Current loss is: 103.430115
-Current loss is: 103.430115
-Current loss is: 103.4301
- 33.133163 seconds (120.32 M allocations: 122.216 GiB, 17.01% gc time)
-(Float32[100.14 109.89 … 91.93 86.57], Float32[6.1517444 3.207456 … 10.0985
-22 13.538801])
-````
+```
+Error: UndefVarError: NeuralNetDiffEq not defined
+```
 
 
 
 
 ## Analyzing the solution
 Now let us find a Monte-Carlo Solution and plot the both:
-````julia
+```julia
 monte_carlo_sol = []
 x_out = collect(85:2.00:110.00)
 for x in x_out
@@ -1166,49 +156,451 @@ for x in x_out
   mean_phi = sum(phi(s))/length(phi(s))
   global monte_carlo_sol = push!(monte_carlo_sol , mean_phi)
 end
-````
-
+```
 
 
 
 
 ##Plotting the Solutions
 We should reshape the inputs and outputs to make it compatible with our model. This is the most important part. The algorithm gives a distributed function over all initial prices in the xspan.
-````julia
+```julia
 x_model = reshape(x_out, 1 , size(x_out)[1])
 if use_gpu == true
   m = fmap(cpu , m)
 end
 y_out = m(x_model)
 y_out = reshape(y_out , 13 , 1)
-````
+```
 
-
-````
-13×1 Array{Float32,2}:
- 14.650005
- 13.240433
- 11.890396
- 10.645651
-  9.488981
-  8.407096
-  7.4523544
-  6.5946817
-  5.8396764
-  5.169847
-  4.5574126
-  3.9850886
-  3.441834
-````
+```
+13×1 Matrix{Float64}:
+ 6.311148396673564
+ 6.418806212087505
+ 6.52702160453747
+ 6.635768334506842
+ 6.74504301847917
+ 6.854824672420757
+ 6.965087321633501
+ 7.075805947119412
+ 7.186956517689904
+ 7.298516006968565
+ 7.410462398179545
+ 7.522774679127252
+ 7.635432829368065
+```
 
 
 
 
 And now finally we can plot the solutions
-````julia
+```julia
 plot(x_out , y_out , lw = 3 ,  xaxis="Initial Stock Price", yaxis="Payoff" , label = "NNKolmogorov")
 plot!(x_out , monte_carlo_sol , lw = 3 ,  xaxis="Initial Stock Price", yaxis="Payoff" ,label = "Monte Carlo Solutions")
-````
-
+```
 
 ![](figures/03-kolmogorov_equations_9_1.png)
+
+
+## Appendix
+
+These tutorials are a part of the SciMLTutorials.jl repository, found at: [https://github.com/SciML/SciMLTutorials.jl](https://github.com/SciML/SciMLTutorials.jl). For more information on high-performance scientific machine learning, check out the SciML Open Source Software Organization [https://sciml.ai](https://sciml.ai).
+
+To locally run this tutorial, do the following commands:
+
+```
+using SciMLTutorials
+SciMLTutorials.weave_file("tutorials/advanced","03-kolmogorov_equations.jmd")
+```
+
+Computer Information:
+
+```
+Julia Version 1.6.1
+Commit 6aaedecc44 (2021-04-23 05:59 UTC)
+Platform Info:
+  OS: Linux (x86_64-pc-linux-gnu)
+  CPU: AMD EPYC 7502 32-Core Processor
+  WORD_SIZE: 64
+  LIBM: libopenlibm
+  LLVM: libLLVM-11.0.1 (ORCJIT, znver2)
+Environment:
+  JULIA_DEPOT_PATH = /root/.cache/julia-buildkite-plugin/depots/a6029d3a-f78b-41ea-bc97-28aa57c6c6ea
+  JULIA_NUM_THREADS = 16
+
+```
+
+Package Information:
+
+```
+      Status `/var/lib/buildkite-agent/builds/4-amdci4-julia-csail-mit-edu/julialang/scimltutorials-dot-jl/tutorials/advanced/Project.toml`
+  [2169fc97] AlgebraicMultigrid v0.4.0
+  [6e4b80f9] BenchmarkTools v1.0.0
+  [052768ef] CUDA v2.6.3
+  [2b5f629d] DiffEqBase v6.62.2
+  [9fdde737] DiffEqOperators v4.26.0
+  [0c46a032] DifferentialEquations v6.17.1
+  [587475ba] Flux v0.12.1
+  [961ee093] ModelingToolkit v5.17.3
+  [2774e3e8] NLsolve v4.5.1
+  [315f7962] NeuralPDE v3.10.1
+  [1dea7af3] OrdinaryDiffEq v5.56.0
+  [91a5bcdd] Plots v1.15.2
+  [0bca4576] SciMLBase v1.13.4
+  [30cb0354] SciMLTutorials v0.9.0
+  [47a9eef4] SparseDiffTools v1.13.2
+  [684fba80] SparsityDetection v0.3.4
+  [789caeaf] StochasticDiffEq v6.34.1
+  [c3572dad] Sundials v4.4.3
+  [37e2e46d] LinearAlgebra
+  [2f01184e] SparseArrays
+```
+
+And the full manifest:
+
+```
+      Status `/var/lib/buildkite-agent/builds/4-amdci4-julia-csail-mit-edu/julialang/scimltutorials-dot-jl/tutorials/advanced/Manifest.toml`
+  [c3fe647b] AbstractAlgebra v0.16.0
+  [621f4979] AbstractFFTs v1.0.1
+  [1520ce14] AbstractTrees v0.3.4
+  [79e6a3ab] Adapt v3.3.0
+  [2169fc97] AlgebraicMultigrid v0.4.0
+  [ec485272] ArnoldiMethod v0.1.0
+  [4fba245c] ArrayInterface v3.1.15
+  [4c555306] ArrayLayouts v0.7.0
+  [13072b0f] AxisAlgorithms v1.0.0
+  [ab4f0b2a] BFloat16s v0.1.0
+  [aae01518] BandedMatrices v0.16.9
+  [6e4b80f9] BenchmarkTools v1.0.0
+  [8e7c35d0] BlockArrays v0.15.3
+  [ffab5731] BlockBandedMatrices v0.10.6
+  [764a87c0] BoundaryValueDiffEq v2.7.1
+  [fa961155] CEnum v0.4.1
+  [00ebfdb7] CSTParser v2.5.0
+  [052768ef] CUDA v2.6.3
+  [7057c7e9] Cassette v0.3.6
+  [082447d4] ChainRules v0.7.65
+  [d360d2e6] ChainRulesCore v0.9.44
+  [b630d9fa] CheapThreads v0.2.5
+  [944b1d66] CodecZlib v0.7.0
+  [35d6a980] ColorSchemes v3.12.1
+  [3da002f7] ColorTypes v0.11.0
+  [5ae59095] Colors v0.12.8
+  [861a8166] Combinatorics v1.0.2
+  [a80b9123] CommonMark v0.8.1
+  [38540f10] CommonSolve v0.2.0
+  [bbf7d656] CommonSubexpressions v0.3.0
+  [34da2185] Compat v3.30.0
+  [aa819f21] CompatHelper v1.18.6
+  [8f4d0f93] Conda v1.5.2
+  [88cd18e8] ConsoleProgressMonitor v0.1.2
+  [187b0558] ConstructionBase v1.2.1
+  [d38c429a] Contour v0.5.7
+  [a8cc5b0e] Crayons v4.0.4
+  [8a292aeb] Cuba v2.2.0
+  [667455a9] Cubature v1.5.1
+  [9a962f9c] DataAPI v1.6.0
+  [82cc6244] DataInterpolations v3.3.1
+  [864edb3b] DataStructures v0.18.9
+  [e2d170a0] DataValueInterfaces v1.0.0
+  [bcd4f6db] DelayDiffEq v5.31.0
+  [2b5f629d] DiffEqBase v6.62.2
+  [459566f4] DiffEqCallbacks v2.16.1
+  [5a0ffddc] DiffEqFinancial v2.4.0
+  [aae7a2af] DiffEqFlux v1.37.0
+  [c894b116] DiffEqJump v6.14.2
+  [77a26b50] DiffEqNoiseProcess v5.7.3
+  [9fdde737] DiffEqOperators v4.26.0
+  [055956cb] DiffEqPhysics v3.9.0
+  [41bf760c] DiffEqSensitivity v6.45.0
+  [163ba53b] DiffResults v1.0.3
+  [b552c78f] DiffRules v1.0.2
+  [0c46a032] DifferentialEquations v6.17.1
+  [c619ae07] DimensionalPlotRecipes v1.2.0
+  [b4f34e82] Distances v0.10.3
+  [31c24e10] Distributions v0.24.18
+  [ced4e74d] DistributionsAD v0.6.26
+  [ffbed154] DocStringExtensions v0.8.4
+  [e30172f5] Documenter v0.26.3
+  [d4d017d3] ExponentialUtilities v1.8.4
+  [e2ba6199] ExprTools v0.1.3
+  [8f5d6c58] EzXML v1.1.0
+  [c87230d0] FFMPEG v0.4.0
+  [7a1cc6ca] FFTW v1.4.1
+  [7034ab61] FastBroadcast v0.1.8
+  [9aa1b823] FastClosures v0.3.2
+  [1a297f60] FillArrays v0.11.7
+  [6a86dc24] FiniteDiff v2.8.0
+  [53c48c17] FixedPointNumbers v0.8.4
+  [587475ba] Flux v0.12.1
+  [59287772] Formatting v0.4.2
+  [f6369f11] ForwardDiff v0.10.18
+  [069b7b12] FunctionWrappers v1.1.2
+  [d9f16b24] Functors v0.2.1
+  [0c68f7d7] GPUArrays v6.4.1
+  [61eb1bfa] GPUCompiler v0.10.0
+  [28b8d3ca] GR v0.57.4
+  [a75be94c] GalacticOptim v1.2.0
+  [5c1252a2] GeometryBasics v0.3.12
+  [bc5e4493] GitHub v5.4.0
+  [af5da776] GlobalSensitivity v1.0.0
+  [42e2da0e] Grisu v1.0.2
+  [19dc6840] HCubature v1.5.0
+  [cd3eb016] HTTP v0.9.9
+  [eafb193a] Highlights v0.4.5
+  [0e44f5e4] Hwloc v2.0.0
+  [7073ff75] IJulia v1.23.2
+  [b5f81e59] IOCapture v0.1.1
+  [7869d1d1] IRTools v0.4.2
+  [615f187c] IfElse v0.1.0
+  [d25df0c9] Inflate v0.1.2
+  [83e8ac13] IniFile v0.5.0
+  [a98d9a8b] Interpolations v0.13.2
+  [c8e1da08] IterTools v1.3.0
+  [42fd0dbc] IterativeSolvers v0.9.1
+  [82899510] IteratorInterfaceExtensions v1.0.0
+  [692b3bcd] JLLWrappers v1.3.0
+  [682c06a0] JSON v0.21.1
+  [98e50ef6] JuliaFormatter v0.13.7
+  [e5e0dc1b] Juno v0.8.4
+  [5ab0869b] KernelDensity v0.6.3
+  [929cbde3] LLVM v3.7.1
+  [b964fa9f] LaTeXStrings v1.2.1
+  [2ee39098] LabelledArrays v1.6.1
+  [23fbe1c1] Latexify v0.15.5
+  [a5e1c1ea] LatinHypercubeSampling v1.8.0
+  [73f95e8e] LatticeRules v0.0.1
+  [5078a376] LazyArrays v0.21.4
+  [d7e5e226] LazyBandedMatrices v0.5.7
+  [1d6d02ad] LeftChildRightSiblingTrees v0.1.2
+  [093fc24a] LightGraphs v1.3.5
+  [d3d80556] LineSearches v7.1.1
+  [2ab3a3ac] LogExpFunctions v0.2.4
+  [e6f89c97] LoggingExtras v0.4.6
+  [bdcacae8] LoopVectorization v0.12.23
+  [1914dd2f] MacroTools v0.5.6
+  [a3b82374] MatrixFactorizations v0.8.3
+  [739be429] MbedTLS v1.0.3
+  [442fdcdd] Measures v0.3.1
+  [e89f7d12] Media v0.5.0
+  [c03570c3] Memoize v0.4.4
+  [e1d29d7a] Missings v1.0.0
+  [78c3b35d] Mocking v0.7.1
+  [961ee093] ModelingToolkit v5.17.3
+  [4886b29c] MonteCarloIntegration v0.0.2
+  [46d2c3a1] MuladdMacro v0.2.2
+  [f9640e96] MultiScaleArrays v1.8.1
+  [ffc61752] Mustache v1.0.10
+  [d41bc354] NLSolversBase v7.8.0
+  [2774e3e8] NLsolve v4.5.1
+  [872c559c] NNlib v0.7.19
+  [77ba4419] NaNMath v0.3.5
+  [315f7962] NeuralPDE v3.10.1
+  [8913a72c] NonlinearSolve v0.3.8
+  [6fe1bfb0] OffsetArrays v1.9.0
+  [429524aa] Optim v1.3.0
+  [bac558e1] OrderedCollections v1.4.1
+  [1dea7af3] OrdinaryDiffEq v5.56.0
+  [90014a1f] PDMats v0.11.0
+  [65888b18] ParameterizedFunctions v5.10.0
+  [d96e819e] Parameters v0.12.2
+  [69de0a69] Parsers v1.1.0
+  [ccf2f8ad] PlotThemes v2.0.1
+  [995b91a9] PlotUtils v1.0.10
+  [91a5bcdd] Plots v1.15.2
+  [e409e4f3] PoissonRandom v0.4.0
+  [f517fe37] Polyester v0.3.1
+  [85a6dd25] PositiveFactorizations v0.2.4
+  [21216c6a] Preferences v1.2.2
+  [33c8b6b6] ProgressLogging v0.1.4
+  [92933f4c] ProgressMeter v1.6.2
+  [1fd47b50] QuadGK v2.4.1
+  [67601950] Quadrature v1.8.1
+  [8a4e6c94] QuasiMonteCarlo v0.2.2
+  [74087812] Random123 v1.3.1
+  [fb686558] RandomExtensions v0.4.3
+  [e6cf234a] RandomNumbers v1.4.0
+  [c84ed2f1] Ratios v0.4.0
+  [3cdcf5f2] RecipesBase v1.1.1
+  [01d81517] RecipesPipeline v0.3.2
+  [731186ca] RecursiveArrayTools v2.11.4
+  [f2c3362d] RecursiveFactorization v0.1.12
+  [189a3867] Reexport v1.0.0
+  [ae029012] Requires v1.1.3
+  [ae5879a3] ResettableStacks v1.1.0
+  [37e2e3b7] ReverseDiff v1.9.0
+  [79098fc4] Rmath v0.7.0
+  [7e49a35a] RuntimeGeneratedFunctions v0.5.2
+  [476501e8] SLEEFPirates v0.6.20
+  [1bc83da4] SafeTestsets v0.0.1
+  [0bca4576] SciMLBase v1.13.4
+  [30cb0354] SciMLTutorials v0.9.0
+  [6c6a2e73] Scratch v1.0.3
+  [efcf1570] Setfield v0.7.0
+  [992d4aef] Showoff v1.0.3
+  [699a6c99] SimpleTraits v0.9.3
+  [ed01d8cd] Sobol v1.5.0
+  [2133526b] SodiumSeal v0.1.1
+  [b85f4697] SoftGlobalScope v1.1.0
+  [a2af1166] SortingAlgorithms v1.0.0
+  [47a9eef4] SparseDiffTools v1.13.2
+  [684fba80] SparsityDetection v0.3.4
+  [276daf66] SpecialFunctions v1.4.1
+  [860ef19b] StableRNGs v1.0.0
+  [aedffcd0] Static v0.2.4
+  [90137ffa] StaticArrays v1.2.0
+  [82ae8749] StatsAPI v1.0.0
+  [2913bbd2] StatsBase v0.33.8
+  [4c63d2b9] StatsFuns v0.9.8
+  [9672c7b4] SteadyStateDiffEq v1.6.2
+  [789caeaf] StochasticDiffEq v6.34.1
+  [7792a7ef] StrideArraysCore v0.1.11
+  [09ab397b] StructArrays v0.5.1
+  [c3572dad] Sundials v4.4.3
+  [d1185830] SymbolicUtils v0.11.2
+  [0c5d862f] Symbolics v0.1.25
+  [3783bdb8] TableTraits v1.0.1
+  [bd369af6] Tables v1.4.2
+  [5d786b92] TerminalLoggers v0.1.3
+  [8290d209] ThreadingUtilities v0.4.4
+  [f269a46b] TimeZones v1.5.5
+  [a759f4b9] TimerOutputs v0.5.9
+  [0796e94c] Tokenize v0.5.16
+  [9f7883ad] Tracker v0.2.16
+  [3bb67fe8] TranscodingStreams v0.9.5
+  [592b5752] Trapz v2.0.2
+  [a2a6695c] TreeViews v0.3.0
+  [5c2747f8] URIs v1.3.0
+  [3a884ed6] UnPack v1.0.2
+  [1986cc42] Unitful v1.7.0
+  [3d5dd08c] VectorizationBase v0.20.11
+  [81def892] VersionParsing v1.2.0
+  [19fa3120] VertexSafeGraphs v0.1.2
+  [44d3d7a6] Weave v0.10.8
+  [efce3f68] WoodburyMatrices v0.5.3
+  [ddb6d928] YAML v0.4.6
+  [c2297ded] ZMQ v1.2.1
+  [a5390f91] ZipFile v0.9.3
+  [e88e6eb3] Zygote v0.6.11
+  [700de1a5] ZygoteRules v0.2.1
+  [6e34b625] Bzip2_jll v1.0.6+5
+  [83423d85] Cairo_jll v1.16.0+6
+  [3bed1096] Cuba_jll v4.2.1+0
+  [7bc98958] Cubature_jll v1.0.4+0
+  [5ae413db] EarCut_jll v2.1.5+1
+  [2e619515] Expat_jll v2.2.10+0
+  [b22a6f82] FFMPEG_jll v4.3.1+4
+  [f5851436] FFTW_jll v3.3.9+7
+  [a3f928ae] Fontconfig_jll v2.13.1+14
+  [d7e528f0] FreeType2_jll v2.10.1+5
+  [559328eb] FriBidi_jll v1.0.5+6
+  [0656b61e] GLFW_jll v3.3.4+0
+  [d2c73de3] GR_jll v0.57.2+0
+  [78b55507] Gettext_jll v0.21.0+0
+  [7746bdde] Glib_jll v2.68.1+0
+  [e33a78d0] Hwloc_jll v2.4.1+0
+  [1d5cc7b8] IntelOpenMP_jll v2018.0.3+2
+  [aacddb02] JpegTurbo_jll v2.0.1+3
+  [c1c5ebd0] LAME_jll v3.100.0+3
+  [dd4b983a] LZO_jll v2.10.1+0
+  [dd192d2f] LibVPX_jll v1.9.0+1
+  [e9f186c6] Libffi_jll v3.2.2+0
+  [d4300ac3] Libgcrypt_jll v1.8.7+0
+  [7e76a0d4] Libglvnd_jll v1.3.0+3
+  [7add5ba3] Libgpg_error_jll v1.42.0+0
+  [94ce4f54] Libiconv_jll v1.16.1+0
+  [4b2f31a3] Libmount_jll v2.35.0+0
+  [89763e89] Libtiff_jll v4.1.0+2
+  [38a345b3] Libuuid_jll v2.36.0+0
+  [856f044c] MKL_jll v2021.1.1+1
+  [e7412a2a] Ogg_jll v1.3.4+2
+  [458c3c95] OpenSSL_jll v1.1.1+6
+  [efe28fd5] OpenSpecFun_jll v0.5.4+0
+  [91d4177d] Opus_jll v1.3.1+3
+  [2f80f16e] PCRE_jll v8.44.0+0
+  [30392449] Pixman_jll v0.40.1+0
+  [ea2cea3b] Qt5Base_jll v5.15.2+0
+  [f50d1b31] Rmath_jll v0.3.0+0
+  [fb77eaff] Sundials_jll v5.2.0+1
+  [a2964d1f] Wayland_jll v1.17.0+4
+  [2381bf8a] Wayland_protocols_jll v1.18.0+4
+  [02c8fc9c] XML2_jll v2.9.12+0
+  [aed1982a] XSLT_jll v1.1.34+0
+  [4f6342f7] Xorg_libX11_jll v1.6.9+4
+  [0c0b7dd1] Xorg_libXau_jll v1.0.9+4
+  [935fb764] Xorg_libXcursor_jll v1.2.0+4
+  [a3789734] Xorg_libXdmcp_jll v1.1.3+4
+  [1082639a] Xorg_libXext_jll v1.3.4+4
+  [d091e8ba] Xorg_libXfixes_jll v5.0.3+4
+  [a51aa0fd] Xorg_libXi_jll v1.7.10+4
+  [d1454406] Xorg_libXinerama_jll v1.1.4+4
+  [ec84b674] Xorg_libXrandr_jll v1.5.2+4
+  [ea2f1a96] Xorg_libXrender_jll v0.9.10+4
+  [14d82f49] Xorg_libpthread_stubs_jll v0.1.0+3
+  [c7cfdc94] Xorg_libxcb_jll v1.13.0+3
+  [cc61e674] Xorg_libxkbfile_jll v1.1.0+4
+  [12413925] Xorg_xcb_util_image_jll v0.4.0+1
+  [2def613f] Xorg_xcb_util_jll v0.4.0+1
+  [975044d2] Xorg_xcb_util_keysyms_jll v0.4.0+1
+  [0d47668e] Xorg_xcb_util_renderutil_jll v0.3.9+1
+  [c22f9ab0] Xorg_xcb_util_wm_jll v0.4.1+1
+  [35661453] Xorg_xkbcomp_jll v1.4.2+4
+  [33bec58e] Xorg_xkeyboard_config_jll v2.27.0+4
+  [c5fb5394] Xorg_xtrans_jll v1.4.0+3
+  [8f1865be] ZeroMQ_jll v4.3.2+6
+  [3161d3a3] Zstd_jll v1.5.0+0
+  [0ac62f75] libass_jll v0.14.0+4
+  [f638f0a6] libfdk_aac_jll v0.1.6+4
+  [b53b4c65] libpng_jll v1.6.38+0
+  [a9144af2] libsodium_jll v1.0.20+0
+  [f27f6e37] libvorbis_jll v1.3.6+6
+  [1270edf5] x264_jll v2020.7.14+2
+  [dfaa095f] x265_jll v3.0.0+3
+  [d8fb68d0] xkbcommon_jll v0.9.1+5
+  [0dad84c5] ArgTools
+  [56f22d72] Artifacts
+  [2a0f44e3] Base64
+  [ade2ca70] Dates
+  [8bb1440f] DelimitedFiles
+  [8ba89e20] Distributed
+  [f43a241f] Downloads
+  [7b1f6079] FileWatching
+  [9fa8497b] Future
+  [b77e0a4c] InteractiveUtils
+  [4af54fe1] LazyArtifacts
+  [b27032c2] LibCURL
+  [76f85450] LibGit2
+  [8f399da3] Libdl
+  [37e2e46d] LinearAlgebra
+  [56ddb016] Logging
+  [d6f4376e] Markdown
+  [a63ad114] Mmap
+  [ca575930] NetworkOptions
+  [44cfe95a] Pkg
+  [de0858da] Printf
+  [9abbd945] Profile
+  [3fa0cd96] REPL
+  [9a3f8284] Random
+  [ea8e919c] SHA
+  [9e88b42a] Serialization
+  [1a1011a3] SharedArrays
+  [6462fe0b] Sockets
+  [2f01184e] SparseArrays
+  [10745b16] Statistics
+  [4607b0f0] SuiteSparse
+  [fa267f1f] TOML
+  [a4e569a6] Tar
+  [8dfed614] Test
+  [cf7118a7] UUIDs
+  [4ec0a83e] Unicode
+  [e66e0078] CompilerSupportLibraries_jll
+  [deac9b47] LibCURL_jll
+  [29816b5a] LibSSH2_jll
+  [c8ffd9c3] MbedTLS_jll
+  [14a3606d] MozillaCACerts_jll
+  [4536629a] OpenBLAS_jll
+  [bea87d4a] SuiteSparse_jll
+  [83775a58] Zlib_jll
+  [8e850ede] nghttp2_jll
+  [3f19e933] p7zip_jll
+```
+
