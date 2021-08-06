@@ -257,8 +257,8 @@ solve_coef(eqs, a)
 
 ```
 Dict{Any, Any} with 2 entries:
-  a₁ => -0.2
   a₂ => -0.04
+  a₁ => -0.2
 ```
 
 
@@ -410,11 +410,11 @@ vals = solve_coef(eqs, a)
 
 ```
 Dict{Any, Any} with 3 entries:
-  a₁ => M + 0.00833333(M^5) - (0.166667(M^3))
   a₂ => M + 0.00833333(M^5) + 0.0416667(M + 0.00833333(M^5) - (0.166667(M^3
 )))*…
   a₃ => M + 0.00833333(M^5) + 0.0416667(M + 0.00833333(M^5) - (0.166667(M^3
 )))*…
+  a₁ => M + 0.00833333(M^5) - (0.166667(M^3))
 ```
 
 
@@ -471,8 +471,8 @@ SciMLTutorials.weave_file("tutorials/perturbation","01-perturbation_algebraic.jm
 Computer Information:
 
 ```
-Julia Version 1.6.1
-Commit 6aaedecc44 (2021-04-23 05:59 UTC)
+Julia Version 1.6.2
+Commit 1b93d53fc4 (2021-07-14 15:36 UTC)
 Platform Info:
   OS: Linux (x86_64-pc-linux-gnu)
   CPU: AMD EPYC 7502 32-Core Processor
@@ -488,7 +488,7 @@ Environment:
 Package Information:
 
 ```
-      Status `/var/lib/buildkite-agent/builds/1-amdci4-julia-csail-mit-edu/julialang/scimltutorials-dot-jl/tutorials/perturbation/Project.toml`
+      Status `/var/lib/buildkite-agent/builds/3-amdci4-julia-csail-mit-edu/julialang/scimltutorials-dot-jl/tutorials/perturbation/Project.toml`
   [0c46a032] DifferentialEquations v6.17.1
   [961ee093] ModelingToolkit v5.17.3
   [91a5bcdd] Plots v1.15.2
@@ -500,7 +500,7 @@ Package Information:
 And the full manifest:
 
 ```
-      Status `/var/lib/buildkite-agent/builds/1-amdci4-julia-csail-mit-edu/julialang/scimltutorials-dot-jl/tutorials/perturbation/Manifest.toml`
+      Status `/var/lib/buildkite-agent/builds/3-amdci4-julia-csail-mit-edu/julialang/scimltutorials-dot-jl/tutorials/perturbation/Manifest.toml`
   [c3fe647b] AbstractAlgebra v0.16.0
   [1520ce14] AbstractTrees v0.3.4
   [79e6a3ab] Adapt v3.3.0
