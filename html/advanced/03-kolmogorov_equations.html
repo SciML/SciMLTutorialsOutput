@@ -671,6 +671,14 @@ div.title {text-align: center;}
 </pre>
 
 
+<pre class="julia-error">
+ERROR: LoadError: LoadError: LoadError: LoadError: UndefVarError: CUDA not defined
+in expression starting at /root/.cache/julia-buildkite-plugin/depots/a6029d3a-f78b-41ea-bc97-28aa57c6c6ea/packages/Zygote/i1R8y/src/forward/number.jl:6
+in expression starting at /root/.cache/julia-buildkite-plugin/depots/a6029d3a-f78b-41ea-bc97-28aa57c6c6ea/packages/Zygote/i1R8y/src/forward/Forward.jl:1
+in expression starting at /root/.cache/julia-buildkite-plugin/depots/a6029d3a-f78b-41ea-bc97-28aa57c6c6ea/packages/Zygote/i1R8y/src/Zygote.jl:1
+in expression starting at /root/.cache/julia-buildkite-plugin/depots/a6029d3a-f78b-41ea-bc97-28aa57c6c6ea/packages/Flux/qp1gc/src/Flux.jl:1
+</pre>
+
 
 <h2>Introduction on Backward Kolmogorov Equations</h2>
 <p>The backward Kolmogorov Equation deals with a terminal condtion. The one dimensional backward kolmogorov equation that we are going to deal with is of the form :</p>
@@ -736,10 +744,8 @@ phi &#40;generic function with 1 method&#41;
 </pre>
 
 
-<pre class="output">
-KolmogorovPDEProblem with uType Int64 and tType Float64. In-place: nothing
-timespan: &#40;0.0, 1.0&#41;
-u0: 0
+<pre class="julia-error">
+ERROR: UndefVarError: KolmogorovPDEProblem not defined
 </pre>
 
 
@@ -755,8 +761,8 @@ u0: 0
 </pre>
 
 
-<pre class="output">
-100000
+<pre class="julia-error">
+ERROR: UndefVarError: EM not defined
 </pre>
 
 
@@ -774,8 +780,8 @@ u0: 0
 </pre>
 
 
-<pre class="output">
-Flux.Optimise.ADAM&#40;0.0005, &#40;0.9, 0.999&#41;, IdDict&#123;Any, Any&#125;&#40;&#41;&#41;
+<pre class="julia-error">
+ERROR: UndefVarError: Dense not defined
 </pre>
 
 
@@ -788,1011 +794,8 @@ Flux.Optimise.ADAM&#40;0.0005, &#40;0.9, 0.999&#41;, IdDict&#123;Any, Any&#125;&
 </pre>
 
 
-<pre class="output">
-Current loss is: 362.4400687975742
-Current loss is: 266.9260144046259
-Current loss is: 196.92089377589292
-Current loss is: 153.9871119909288
-Current loss is: 135.71042211435176
-Current loss is: 137.0788491997071
-Current loss is: 149.14931049102833
-Current loss is: 163.61038338868767
-Current loss is: 174.7951265832032
-Current loss is: 180.1210946175749
-Current loss is: 179.46925593274113
-Current loss is: 174.11329136558138
-Current loss is: 165.88081742581963
-Current loss is: 156.6250536231014
-Current loss is: 147.9053384595556
-Current loss is: 140.86195589446393
-Current loss is: 136.16391799882024
-Current loss is: 134.01439750181058
-Current loss is: 134.19977835662831
-Current loss is: 136.18105889536486
-Current loss is: 138.6457213068254
-Current loss is: 140.68940455022513
-Current loss is: 141.81715985596875
-Current loss is: 141.97777733423368
-Current loss is: 141.3495615440754
-Current loss is: 140.19034644636207
-Current loss is: 138.76256266477748
-Current loss is: 137.31170988063212
-Current loss is: 136.04763018292226
-Current loss is: 135.12239339951216
-Current loss is: 134.61250153714846
-Current loss is: 134.5085366482067
-Current loss is: 134.7283366779524
-Current loss is: 135.1230735260812
-Current loss is: 135.5352272698285
-Current loss is: 135.83120643915137
-Current loss is: 135.9256089946157
-Current loss is: 135.7903362738107
-Current loss is: 135.44875063096214
-Current loss is: 134.9600023577367
-Current loss is: 134.39933734586543
-Current loss is: 133.83904155480252
-Current loss is: 133.33707516630184
-Current loss is: 132.91046483321867
-Current loss is: 132.5394829418304
-Current loss is: 132.2235697346451
-Current loss is: 131.94958255436885
-Current loss is: 131.73049891457921
-Current loss is: 131.52588363841772
-Current loss is: 131.30180535534222
-Current loss is: 131.07674915154524
-Current loss is: 130.88790195388094
-Current loss is: 130.6681679524393
-Current loss is: 130.45417225688308
-Current loss is: 130.26926004677162
-Current loss is: 130.0754875513421
-Current loss is: 129.87879915739882
-Current loss is: 129.72310611432528
-Current loss is: 129.59935760493914
-Current loss is: 129.47267855179444
-Current loss is: 129.3120344297835
-Current loss is: 129.16947669362082
-Current loss is: 129.06432631322832
-Current loss is: 128.95292764755754
-Current loss is: 128.8342691246506
-Current loss is: 128.71438595495212
-Current loss is: 128.59616454033898
-Current loss is: 128.47303956534537
-Current loss is: 128.34635228719338
-Current loss is: 128.21668340896224
-Current loss is: 128.0851592692275
-Current loss is: 127.95272683838579
-Current loss is: 127.81371748861459
-Current loss is: 127.67649588670336
-Current loss is: 127.54335157263655
-Current loss is: 127.39956944696382
-Current loss is: 127.24299534162301
-Current loss is: 127.07762374493403
-Current loss is: 126.9073779808224
-Current loss is: 126.75148573149971
-Current loss is: 126.60242567872692
-Current loss is: 126.44806505626623
-Current loss is: 126.30684047784601
-Current loss is: 126.16351481462486
-Current loss is: 126.02877391446776
-Current loss is: 125.89708964028657
-Current loss is: 125.76698220399503
-Current loss is: 125.64085339510835
-Current loss is: 125.5126073819739
-Current loss is: 125.38172570109282
-Current loss is: 125.24682394923087
-Current loss is: 125.10718224780514
-Current loss is: 124.96147284178727
-Current loss is: 124.80905748325259
-Current loss is: 124.65184155050211
-Current loss is: 124.50198145885294
-Current loss is: 124.37510824496701
-Current loss is: 124.24437359957405
-Current loss is: 124.1142399120783
-Current loss is: 123.98465504515029
-Current loss is: 123.85350566868966
-Current loss is: 123.72005051241872
-Current loss is: 123.58608284004013
-Current loss is: 123.45254245800174
-Current loss is: 123.31477016114644
-Current loss is: 123.1743851308417
-Current loss is: 123.02877411002972
-Current loss is: 122.88232564397681
-Current loss is: 122.73345265123376
-Current loss is: 122.5885565718542
-Current loss is: 122.45004322882819
-Current loss is: 122.31193677128728
-Current loss is: 122.17763930953255
-Current loss is: 122.04191475024687
-Current loss is: 121.90708164738288
-Current loss is: 121.76987311807086
-Current loss is: 121.6332770703957
-Current loss is: 121.49521221857188
-Current loss is: 121.36273964811632
-Current loss is: 121.23222766851947
-Current loss is: 121.10507051913106
-Current loss is: 120.97818077027611
-Current loss is: 120.85221527749036
-Current loss is: 120.72454063861827
-Current loss is: 120.59515850903358
-Current loss is: 120.46517737102792
-Current loss is: 120.3350285389379
-Current loss is: 120.20629384333273
-Current loss is: 120.07650036260432
-Current loss is: 119.94693012332372
-Current loss is: 119.8161230055545
-Current loss is: 119.68592026516878
-Current loss is: 119.55474148367944
-Current loss is: 119.42395622243235
-Current loss is: 119.2924341224182
-Current loss is: 119.16106890968003
-Current loss is: 119.02938275937248
-Current loss is: 118.89748513440192
-Current loss is: 118.76547542538677
-Current loss is: 118.63306282977034
-Current loss is: 118.50094175510873
-Current loss is: 118.36847468761314
-Current loss is: 118.23613378614256
-Current loss is: 118.10354851227105
-Current loss is: 117.97087984099768
-Current loss is: 117.83830075783689
-Current loss is: 117.70549324585565
-Current loss is: 117.57273818795206
-Current loss is: 117.439837385789
-Current loss is: 117.30698933712488
-Current loss is: 117.1743464972161
-Current loss is: 117.04147997651656
-Current loss is: 116.90839839619109
-Current loss is: 116.7752008869126
-Current loss is: 116.64239013980273
-Current loss is: 116.51001704843462
-Current loss is: 116.3766560998024
-Current loss is: 116.24212176808749
-Current loss is: 116.10748365532935
-Current loss is: 115.97277618686635
-Current loss is: 115.83734210268722
-Current loss is: 115.70084814894965
-Current loss is: 115.56371927978512
-Current loss is: 115.42905245431527
-Current loss is: 115.29748400271271
-Current loss is: 115.16495218376934
-Current loss is: 115.03169550745848
-Current loss is: 114.89797270415414
-Current loss is: 114.76459190916152
-Current loss is: 114.63208461630674
-Current loss is: 114.50033080853417
-Current loss is: 114.36868966258452
-Current loss is: 114.23671828812907
-Current loss is: 114.10468511211332
-Current loss is: 113.97305056010332
-Current loss is: 113.8418923877568
-Current loss is: 113.71101117265425
-Current loss is: 113.58025994076651
-Current loss is: 113.44971036910691
-Current loss is: 113.31956255891073
-Current loss is: 113.18991459113393
-Current loss is: 113.06070528138017
-Current loss is: 112.93185452407188
-Current loss is: 112.80367025768768
-Current loss is: 112.67700975551959
-Current loss is: 112.55057217403201
-Current loss is: 112.42342312230397
-Current loss is: 112.29721975848183
-Current loss is: 112.17266732409303
-Current loss is: 112.04986006585013
-Current loss is: 111.93155280507472
-Current loss is: 111.82442643290533
-Current loss is: 111.74113455537531
-Current loss is: 111.63193542916201
-Current loss is: 111.46081472463425
-Current loss is: 111.31733411794409
-Current loss is: 111.24060857454755
-Current loss is: 111.11006827262975
-Current loss is: 110.95941432113081
-Current loss is: 110.87390999817583
-Current loss is: 110.75223270368684
-Current loss is: 110.61188660273572
-Current loss is: 110.52241641369913
-Current loss is: 110.40096030339774
-Current loss is: 110.27261626903709
-Current loss is: 110.18077521625116
-Current loss is: 110.05988113994006
-Current loss is: 109.94174462121542
-Current loss is: 109.84762101559429
-Current loss is: 109.7294748964369
-Current loss is: 109.61881882451739
-Current loss is: 109.52346342223687
-Current loss is: 109.40986375164277
-Current loss is: 109.30421587979419
-Current loss is: 109.209114928183
-Current loss is: 109.10076377681543
-Current loss is: 108.99840152666671
-Current loss is: 108.904709327612
-Current loss is: 108.80181774694053
-Current loss is: 108.70193303374421
-Current loss is: 108.61019281451452
-Current loss is: 108.51300502474811
-Current loss is: 108.41564687721436
-Current loss is: 108.3256712256753
-Current loss is: 108.23426544591453
-Current loss is: 108.14035619971958
-Current loss is: 108.05158614040029
-Current loss is: 107.96522127987312
-Current loss is: 107.87636307116286
-Current loss is: 107.78902248919209
-Current loss is: 107.70578328410947
-Current loss is: 107.62284314158352
-Current loss is: 107.53899615998857
-Current loss is: 107.45737000056576
-Current loss is: 107.37864095140468
-Current loss is: 107.30038929986192
-Current loss is: 107.2220196748147
-Current loss is: 107.14535848086541
-Current loss is: 107.07111961789943
-Current loss is: 106.99809179075429
-Current loss is: 106.92541841113533
-Current loss is: 106.85367911822681
-Current loss is: 106.78376902458339
-Current loss is: 106.71567547626812
-Current loss is: 106.6487516142047
-Current loss is: 106.58262595939765
-Current loss is: 106.51747556375476
-Current loss is: 106.45370489184015
-Current loss is: 106.39148830616891
-Current loss is: 106.3307095082634
-Current loss is: 106.27115176175914
-Current loss is: 106.21266459706729
-Current loss is: 106.15524413989742
-Current loss is: 106.09895118076868
-Current loss is: 106.04387014396355
-Current loss is: 105.99003898863766
-Current loss is: 105.93746727123819
-Current loss is: 105.88613409321535
-Current loss is: 105.83601501421678
-Current loss is: 105.78709271561395
-Current loss is: 105.73935794275489
-Current loss is: 105.69282684756449
-Current loss is: 105.64754376691296
-Current loss is: 105.6036298266799
-Current loss is: 105.56135256050555
-Current loss is: 105.52130176129029
-Current loss is: 105.48477523809564
-Current loss is: 105.45404153989874
-Current loss is: 105.43268270898646
-Current loss is: 105.418483547712
-Current loss is: 105.39807179556988
-Current loss is: 105.33886534968094
-Current loss is: 105.26294891980983
-Current loss is: 105.21923206159256
-Current loss is: 105.21223495673958
-Current loss is: 105.19406846458234
-Current loss is: 105.13890274085018
-Current loss is: 105.0907866365037
-Current loss is: 105.07544175883571
-Current loss is: 105.05890762574558
-Current loss is: 105.01776810674336
-Current loss is: 104.9777073280127
-Current loss is: 104.96078430713658
-Current loss is: 104.94362839513798
-Current loss is: 104.90828200220096
-Current loss is: 104.87625955248814
-Current loss is: 104.85985765211667
-Current loss is: 104.84098348194003
-Current loss is: 104.81113097838626
-Current loss is: 104.78500927677325
-Current loss is: 104.76899240010664
-Current loss is: 104.75023777895171
-Current loss is: 104.72430746908027
-Current loss is: 104.70240891036238
-Current loss is: 104.68686640659364
-Current loss is: 104.66850852817892
-Current loss is: 104.64620122868392
-Current loss is: 104.62722286737707
-Current loss is: 104.61218992542587
-Current loss is: 104.59507949395042
-Current loss is: 104.57563844343002
-Current loss is: 104.55888161831889
-Current loss is: 104.5445855653771
-Current loss is: 104.52869927476002
-Current loss is: 104.51166449355654
-Current loss is: 104.4966557575478
-Current loss is: 104.48316564037845
-Current loss is: 104.46861612288471
-Current loss is: 104.4534953210561
-Current loss is: 104.4398739356081
-Current loss is: 104.42721128444474
-Current loss is: 104.4138396929421
-Current loss is: 104.40025813246967
-Current loss is: 104.38776184232701
-Current loss is: 104.37591401275635
-Current loss is: 104.36366583781906
-Current loss is: 104.35135617707219
-Current loss is: 104.33982465979487
-Current loss is: 104.3287910543006
-Current loss is: 104.31756484380696
-Current loss is: 104.30634288254475
-Current loss is: 104.29567529682551
-Current loss is: 104.28542209781594
-Current loss is: 104.27512262421794
-Current loss is: 104.26484894641918
-Current loss is: 104.25496643312306
-Current loss is: 104.24543688274034
-Current loss is: 104.23595361058838
-Current loss is: 104.22650867999862
-Current loss is: 104.21734202604931
-Current loss is: 104.20847543022387
-Current loss is: 104.19971121023954
-Current loss is: 104.19100298333504
-Current loss is: 104.18249563193527
-Current loss is: 104.17424069886476
-Current loss is: 104.16612310118143
-Current loss is: 104.15807684338877
-Current loss is: 104.1501801079823
-Current loss is: 104.14249044944626
-Current loss is: 104.13494982931118
-Current loss is: 104.12749635560785
-Current loss is: 104.12015882208694
-Current loss is: 104.11298899780031
-Current loss is: 104.10596861843433
-Current loss is: 104.09904804336507
-Current loss is: 104.09222708044902
-Current loss is: 104.08554000723699
-Current loss is: 104.078992540019
-Current loss is: 104.0725546309185
-Current loss is: 104.06620937468116
-Current loss is: 104.05997310760178
-Current loss is: 104.05385961534195
-Current loss is: 104.04785696319836
-Current loss is: 104.04194680538475
-Current loss is: 104.03612876662318
-Current loss is: 104.03041481609799
-Current loss is: 104.02480573553918
-Current loss is: 104.01928950940646
-Current loss is: 104.01385866257733
-Current loss is: 104.00851647084802
-Current loss is: 104.00326823478446
-Current loss is: 103.99811090089302
-Current loss is: 103.99303639941387
-Current loss is: 103.98804176542725
-Current loss is: 103.98312980731023
-Current loss is: 103.97830238178645
-Current loss is: 103.97355606232216
-Current loss is: 103.96888492666272
-Current loss is: 103.96428704551552
-Current loss is: 103.95976359774465
-Current loss is: 103.95531453464777
-Current loss is: 103.95093715059824
-Current loss is: 103.94662805732203
-Current loss is: 103.94238556183554
-Current loss is: 103.93820979343229
-Current loss is: 103.93410037970956
-Current loss is: 103.93005537138745
-Current loss is: 103.92607256317433
-Current loss is: 103.92215045565516
-Current loss is: 103.91828836694572
-Current loss is: 103.91448552761491
-Current loss is: 103.91074073134722
-Current loss is: 103.90705181842111
-Current loss is: 103.90341726530785
-Current loss is: 103.89983614285809
-Current loss is: 103.89630869505238
-Current loss is: 103.89283448193139
-Current loss is: 103.88941279450734
-Current loss is: 103.8860431491731
-Current loss is: 103.88272556290697
-Current loss is: 103.87946008799322
-Current loss is: 103.87624652183115
-Current loss is: 103.87308381346386
-Current loss is: 103.86997145326329
-Current loss is: 103.86690894079169
-Current loss is: 103.86389564995825
-Current loss is: 103.86093080930621
-Current loss is: 103.85801389667492
-Current loss is: 103.8551440926107
-Current loss is: 103.85232018313218
-Current loss is: 103.84954138372514
-Current loss is: 103.84680627866204
-Current loss is: 103.84411407286652
-Current loss is: 103.84146421674352
-Current loss is: 103.83885582880937
-Current loss is: 103.83628833237555
-Current loss is: 103.83376119527307
-Current loss is: 103.83127378435832
-Current loss is: 103.82882554641118
-Current loss is: 103.82641582050123
-Current loss is: 103.82404386340008
-Current loss is: 103.82170868203562
-Current loss is: 103.81940952146508
-Current loss is: 103.81714576511126
-Current loss is: 103.81491664068643
-Current loss is: 103.81272150389394
-Current loss is: 103.81055974071789
-Current loss is: 103.80843067883302
-Current loss is: 103.80633371843993
-Current loss is: 103.8042683146591
-Current loss is: 103.80223395449104
-Current loss is: 103.80023002892005
-Current loss is: 103.7982559703166
-Current loss is: 103.79631122725345
-Current loss is: 103.79439528383284
-Current loss is: 103.79250770326745
-Current loss is: 103.79064795010987
-Current loss is: 103.78881568092083
-Current loss is: 103.78701044797285
-Current loss is: 103.78523186169883
-Current loss is: 103.78347946184027
-Current loss is: 103.78175282186605
-Current loss is: 103.78005148994039
-Current loss is: 103.7783751306979
-Current loss is: 103.77672330341359
-Current loss is: 103.77509564902334
-Current loss is: 103.77349172974273
-Current loss is: 103.77191120559058
-Current loss is: 103.77035380255502
-Current loss is: 103.76881917015324
-Current loss is: 103.76730699678794
-Current loss is: 103.76581694415644
-Current loss is: 103.76434862794558
-Current loss is: 103.76290180126846
-Current loss is: 103.76147607249234
-Current loss is: 103.76007111866281
-Current loss is: 103.7586865771425
-Current loss is: 103.75732213710795
-Current loss is: 103.75597741972395
-Current loss is: 103.75465216141163
-Current loss is: 103.75334615138486
-Current loss is: 103.7520591125291
-Current loss is: 103.7507907517074
-Current loss is: 103.74954061238829
-Current loss is: 103.74830839335615
-Current loss is: 103.7470937425454
-Current loss is: 103.74589625882905
-Current loss is: 103.7447156543062
-Current loss is: 103.7435516575731
-Current loss is: 103.74240391648024
-Current loss is: 103.74127215792697
-Current loss is: 103.74015621354144
-Current loss is: 103.7390558799448
-Current loss is: 103.73797102293815
-Current loss is: 103.73690148663555
-Current loss is: 103.7358470298802
-Current loss is: 103.7348076086481
-Current loss is: 103.7337831217915
-Current loss is: 103.73277386558779
-Current loss is: 103.73178055846326
-Current loss is: 103.73080473429238
-Current loss is: 103.72984961660059
-Current loss is: 103.72892210426886
-Current loss is: 103.7280364926578
-Current loss is: 103.7272206275615
-Current loss is: 103.72653520158025
-Current loss is: 103.72609394268768
-Current loss is: 103.72616203842766
-Current loss is: 103.72720097039381
-Current loss is: 103.73036419503916
-Current loss is: 103.73714074414123
-Current loss is: 103.75161998277316
-Current loss is: 103.77295235850595
-Current loss is: 103.80414343848389
-Current loss is: 103.80794374182344
-Current loss is: 103.78393949369624
-Current loss is: 103.73251977120098
-Current loss is: 103.71743018042575
-Current loss is: 103.74368764886633
-Current loss is: 103.76085698579874
-Current loss is: 103.74428767488494
-Current loss is: 103.71570540504159
-Current loss is: 103.71921965298682
-Current loss is: 103.73928156496082
-Current loss is: 103.73465311441849
-Current loss is: 103.71502812529141
-Current loss is: 103.71120929904919
-Current loss is: 103.72362888076474
-Current loss is: 103.72581491087213
-Current loss is: 103.71216029990516
-Current loss is: 103.70736771611527
-Current loss is: 103.71535513461096
-Current loss is: 103.7167638837355
-Current loss is: 103.70835708107069
-Current loss is: 103.70441096255831
-Current loss is: 103.7092068352362
-Current loss is: 103.71076420669368
-Current loss is: 103.70481567507296
-Current loss is: 103.70184813803526
-Current loss is: 103.70483694116531
-Current loss is: 103.70556344318952
-Current loss is: 103.70168385568653
-Current loss is: 103.69938000504902
-Current loss is: 103.70105196176644
-Current loss is: 103.7016626718653
-Current loss is: 103.69894224907402
-Current loss is: 103.69704842718951
-Current loss is: 103.69785810295504
-Current loss is: 103.69822149610597
-Current loss is: 103.6964522972857
-Current loss is: 103.69483005724283
-Current loss is: 103.69501538454283
-Current loss is: 103.69529026996881
-Current loss is: 103.69411222857822
-Current loss is: 103.69273276393083
-Current loss is: 103.69249388777342
-Current loss is: 103.69260977861474
-Current loss is: 103.69189013975371
-Current loss is: 103.69074397180901
-Current loss is: 103.69022520515779
-Current loss is: 103.69017689666474
-Current loss is: 103.68972821913576
-Current loss is: 103.68883718302904
-Current loss is: 103.68817265887277
-Current loss is: 103.68793585050007
-Current loss is: 103.68763699438331
-Current loss is: 103.68698387341047
-Current loss is: 103.68629794285971
-Current loss is: 103.68589439918905
-Current loss is: 103.68561258476585
-Current loss is: 103.68515185294484
-Current loss is: 103.68454247303208
-Current loss is: 103.68403916702636
-Current loss is: 103.68369862177819
-Current loss is: 103.68333770752069
-Current loss is: 103.68284720807117
-Current loss is: 103.68233064515766
-Current loss is: 103.68191618765414
-Current loss is: 103.68156998094072
-Current loss is: 103.68117618110793
-Current loss is: 103.68071463809213
-Current loss is: 103.68026752272965
-Current loss is: 103.67988784419819
-Current loss is: 103.67953376732673
-Current loss is: 103.67914364067558
-Current loss is: 103.67872152770016
-Current loss is: 103.67831782462768
-Current loss is: 103.67795505308206
-Current loss is: 103.67760465960927
-Current loss is: 103.67723346537694
-Current loss is: 103.67684628779436
-Current loss is: 103.67647187489689
-Current loss is: 103.67612280622889
-Current loss is: 103.67578336542364
-Current loss is: 103.67543433569654
-Current loss is: 103.67507645375069
-Current loss is: 103.67472538417768
-Current loss is: 103.67439033037357
-Current loss is: 103.67406466389352
-Current loss is: 103.67373675632598
-Current loss is: 103.67340402076218
-Current loss is: 103.67307390039812
-Current loss is: 103.67275351724852
-Current loss is: 103.67244181405306
-Current loss is: 103.6721323657883
-Current loss is: 103.67182133235843
-Current loss is: 103.67151093684643
-Current loss is: 103.67120578922822
-Current loss is: 103.6709076331298
-Current loss is: 103.6706139803711
-Current loss is: 103.67032153958444
-Current loss is: 103.67002965050071
-Current loss is: 103.66974034319546
-Current loss is: 103.66945571508278
-Current loss is: 103.66917586869647
-Current loss is: 103.66889922331333
-Current loss is: 103.66862431083065
-Current loss is: 103.66835103633713
-Current loss is: 103.66808051134333
-Current loss is: 103.66781370443202
-Current loss is: 103.66755056809572
-Current loss is: 103.66729030244673
-Current loss is: 103.66703215463784
-Current loss is: 103.66677602083135
-Current loss is: 103.66652235819109
-Current loss is: 103.66627171192792
-Current loss is: 103.66602419348992
-Current loss is: 103.66577947224975
-Current loss is: 103.6655371081251
-Current loss is: 103.6652968902865
-Current loss is: 103.66505891318013
-Current loss is: 103.66482344558695
-Current loss is: 103.66459059731534
-Current loss is: 103.66436034713448
-Current loss is: 103.66413246779956
-Current loss is: 103.66390677106556
-Current loss is: 103.66368316984676
-Current loss is: 103.66346173780772
-Current loss is: 103.66324255524091
-Current loss is: 103.66302566184655
-Current loss is: 103.66281103844412
-Current loss is: 103.6625985414714
-Current loss is: 103.66238807070134
-Current loss is: 103.66217956549859
-Current loss is: 103.6619730297414
-Current loss is: 103.66176845245597
-Current loss is: 103.66156586463251
-Current loss is: 103.66136525424932
-Current loss is: 103.66116661027253
-Current loss is: 103.6609699008828
-Current loss is: 103.66077507439448
-Current loss is: 103.66058209789948
-Current loss is: 103.66039095133469
-Current loss is: 103.66020162305558
-Current loss is: 103.6600141076256
-Current loss is: 103.65982840041164
-Current loss is: 103.65964449382052
-Current loss is: 103.65946234201269
-Current loss is: 103.65928193719733
-Current loss is: 103.65910326732099
-Current loss is: 103.6589263140583
-Current loss is: 103.65875109084914
-Current loss is: 103.65857757397615
-Current loss is: 103.65840576820474
-Current loss is: 103.65823566303307
-Current loss is: 103.65806723790546
-Current loss is: 103.65790046581822
-Current loss is: 103.65773535616347
-Current loss is: 103.65757185783599
-Current loss is: 103.65740996527336
-Current loss is: 103.65724964965939
-Current loss is: 103.65709087151446
-Current loss is: 103.65693359725576
-Current loss is: 103.65677780566816
-Current loss is: 103.65662348229479
-Current loss is: 103.6564706386961
-Current loss is: 103.65631926417804
-Current loss is: 103.65616932056233
-Current loss is: 103.6560207918361
-Current loss is: 103.65587366277187
-Current loss is: 103.65572796469286
-Current loss is: 103.65558365373947
-Current loss is: 103.6554406902994
-Current loss is: 103.65529905744263
-Current loss is: 103.65515875120357
-Current loss is: 103.65501975620705
-Current loss is: 103.65488205762968
-Current loss is: 103.65474564557422
-Current loss is: 103.6546105495552
-Current loss is: 103.65447675605196
-Current loss is: 103.65434425822485
-Current loss is: 103.65421303709194
-Current loss is: 103.6540830621195
-Current loss is: 103.65395433581472
-Current loss is: 103.6538268734929
-Current loss is: 103.6537006606308
-Current loss is: 103.65357568401551
-Current loss is: 103.65345196061502
-Current loss is: 103.65332947711319
-Current loss is: 103.65320822323602
-Current loss is: 103.65308819741361
-Current loss is: 103.65296936720401
-Current loss is: 103.65285171345185
-Current loss is: 103.65273524135962
-Current loss is: 103.65261994681612
-Current loss is: 103.65250587081358
-Current loss is: 103.65239309490133
-Current loss is: 103.65228175557213
-Current loss is: 103.65217212364223
-Current loss is: 103.65206465508271
-Current loss is: 103.651960207335
-Current loss is: 103.65186033526395
-Current loss is: 103.65176794783143
-Current loss is: 103.65168834274512
-Current loss is: 103.65163182794396
-Current loss is: 103.65161680747315
-Current loss is: 103.65168136308093
-Current loss is: 103.65189169376565
-Current loss is: 103.65239489822825
-Current loss is: 103.65342813467983
-Current loss is: 103.65557474069193
-Current loss is: 103.65960405128506
-Current loss is: 103.66772940261359
-Current loss is: 103.68126169210825
-Current loss is: 103.70622472845301
-Current loss is: 103.73341191914517
-Current loss is: 103.76462722251775
-Current loss is: 103.74794489455398
-Current loss is: 103.70544862463288
-Current loss is: 103.65752145901963
-Current loss is: 103.65593357775143
-Current loss is: 103.6888246454012
-Current loss is: 103.70315099847998
-Current loss is: 103.68412917829328
-Current loss is: 103.65379716354774
-Current loss is: 103.65462681653949
-Current loss is: 103.67647780682013
-Current loss is: 103.67983605319209
-Current loss is: 103.66233387121943
-Current loss is: 103.64930703573856
-Current loss is: 103.65785804975543
-Current loss is: 103.66954496005515
-Current loss is: 103.66315014285946
-Current loss is: 103.65094408544876
-Current loss is: 103.650689159942
-Current loss is: 103.65912429865155
-Current loss is: 103.66061959429472
-Current loss is: 103.65249887399204
-Current loss is: 103.64863079851455
-Current loss is: 103.65317278488104
-Current loss is: 103.6563721730015
-Current loss is: 103.65289115800887
-Current loss is: 103.64849027314102
-Current loss is: 103.64967557545586
-Current loss is: 103.65297912671836
-Current loss is: 103.65221600592687
-Current loss is: 103.6489185772337
-Current loss is: 103.64809303930055
-Current loss is: 103.65012474999627
-Current loss is: 103.65101238018742
-Current loss is: 103.64919675629092
-Current loss is: 103.64765658333764
-Current loss is: 103.64833197192527
-Current loss is: 103.64948720523947
-Current loss is: 103.64906016327485
-Current loss is: 103.64770816725562
-Current loss is: 103.64740096154105
-Current loss is: 103.64817290610262
-Current loss is: 103.64847049152601
-Current loss is: 103.64777266612603
-Current loss is: 103.64708797249034
-Current loss is: 103.64724083938351
-Current loss is: 103.64769582417894
-Current loss is: 103.64758730210121
-Current loss is: 103.64703975335516
-Current loss is: 103.64676677258466
-Current loss is: 103.6469714445193
-Current loss is: 103.64715514785351
-Current loss is: 103.64694390164037
-Current loss is: 103.64659455524777
-Current loss is: 103.64650193974734
-Current loss is: 103.64663932247568
-Current loss is: 103.64667693744879
-Current loss is: 103.64648351395768
-Current loss is: 103.64626970747864
-Current loss is: 103.64623210135125
-Current loss is: 103.64629907819491
-Current loss is: 103.64627857148074
-Current loss is: 103.64612991108008
-Current loss is: 103.64599048770029
-Current loss is: 103.64595901153896
-Current loss is: 103.64597860725365
-Current loss is: 103.6459403351133
-Current loss is: 103.64583013719533
-Current loss is: 103.64572919803571
-Current loss is: 103.64569179366268
-Current loss is: 103.64568381970409
-Current loss is: 103.64564267844453
-Current loss is: 103.64555901331424
-Current loss is: 103.64547812060341
-Current loss is: 103.64543349767781
-Current loss is: 103.64540942160522
-Current loss is: 103.64536949755733
-Current loss is: 103.64530365634822
-Current loss is: 103.64523488995076
-Current loss is: 103.64518542740464
-Current loss is: 103.64515137085218
-Current loss is: 103.64511239860762
-Current loss is: 103.64505817912092
-Current loss is: 103.64499806338061
-Current loss is: 103.64494650698936
-Current loss is: 103.64490597353324
-Current loss is: 103.64486663615342
-Current loss is: 103.64481955471352
-Current loss is: 103.64476625625169
-Current loss is: 103.64471496274842
-Current loss is: 103.64467034874998
-Current loss is: 103.64462931627266
-Current loss is: 103.64458585988628
-Current loss is: 103.64453786632856
-Current loss is: 103.644488531755
-Current loss is: 103.64444195157964
-Current loss is: 103.64439881405029
-Current loss is: 103.64435639417391
-Current loss is: 103.64431196875475
-Current loss is: 103.64426550673282
-Current loss is: 103.64421912267636
-Current loss is: 103.64417460557144
-Current loss is: 103.64413177212886
-Current loss is: 103.64408904448621
-Current loss is: 103.6440452446473
-Current loss is: 103.6440005782938
-Current loss is: 103.64395615917273
-Current loss is: 103.64391279464314
-Current loss is: 103.64387031551186
-Current loss is: 103.64382794252292
-Current loss is: 103.64378506145984
-Current loss is: 103.6437417463676
-Current loss is: 103.64369853184313
-Current loss is: 103.64365586089475
-Current loss is: 103.64361373698716
-Current loss is: 103.6435717882441
-Current loss is: 103.6435296501387
-Current loss is: 103.6434872222746
-Current loss is: 103.64344467963234
-Current loss is: 103.64340223680021
-Current loss is: 103.64335997753462
-Current loss is: 103.64331778352584
-Current loss is: 103.64327544605956
-Current loss is: 103.64323282357392
-Current loss is: 103.64318988279052
-Current loss is: 103.64314671548823
-Current loss is: 103.64310339894827
-Current loss is: 103.64305996351816
-Current loss is: 103.64301630611995
-Current loss is: 103.6429722943775
-Current loss is: 103.64292785000674
-Current loss is: 103.64288298139223
-Current loss is: 103.64283771200812
-Current loss is: 103.64279207452945
-Current loss is: 103.64274606542152
-Current loss is: 103.64269970611296
-Current loss is: 103.64265300291639
-Current loss is: 103.64260595935944
-Current loss is: 103.6425585746789
-Current loss is: 103.64251096395243
-Current loss is: 103.6424631398157
-Current loss is: 103.64241512795154
-Current loss is: 103.64236715028173
-Current loss is: 103.64231928141453
-Current loss is: 103.64227157582805
-Current loss is: 103.64222405627355
-Current loss is: 103.64217677776332
-Current loss is: 103.64212985306129
-Current loss is: 103.64208329175044
-Current loss is: 103.64203712059883
-Current loss is: 103.64199135187991
-Current loss is: 103.64194603862055
-Current loss is: 103.64190123076443
-Current loss is: 103.64185694633342
-Current loss is: 103.64181314772732
-Current loss is: 103.64176992498105
-Current loss is: 103.6417272612497
-Current loss is: 103.64168518138547
-Current loss is: 103.64164369201
-Current loss is: 103.64160276776283
-Current loss is: 103.64156234785263
-Current loss is: 103.64152235792507
-Current loss is: 103.64148279099062
-Current loss is: 103.64144364271174
-Current loss is: 103.64140491497993
-Current loss is: 103.64136658697225
-Current loss is: 103.64132866732857
-Current loss is: 103.64129115959001
-Current loss is: 103.64125404677607
-Current loss is: 103.64121733340286
-Current loss is: 103.6411810250751
-Current loss is: 103.64114509147558
-Current loss is: 103.64110951134525
-Current loss is: 103.64107427443382
-Current loss is: 103.64103936414668
-Current loss is: 103.6410047539283
-Current loss is: 103.64097043202595
-Current loss is: 103.64093639398824
-Current loss is: 103.64090262071493
-Current loss is: 103.6408690941278
-Current loss is: 103.64083580623002
-Current loss is: 103.64080273929778
-Current loss is: 103.64076988515313
-Current loss is: 103.6407372483135
-Current loss is: 103.64070482077415
-Current loss is: 103.6406725968353
-Current loss is: 103.64064058399197
-Current loss is: 103.64060877892148
-Current loss is: 103.64057717857584
-Current loss is: 103.6405457855099
-Current loss is: 103.64051459993296
-Current loss is: 103.64048361574018
-Current loss is: 103.6404528278269
-Current loss is: 103.64042223919883
-Current loss is: 103.6403918401761
-Current loss is: 103.64036163150165
-Current loss is: 103.64033160961405
-Current loss is: 103.64030176830273
-Current loss is: 103.64027209975339
-Current loss is: 103.64024260443624
-Current loss is: 103.64021327756359
-Current loss is: 103.6401841319266
-Current loss is: 103.64015516023228
-Current loss is: 103.6401263630636
-Current loss is: 103.6400977348641
-Current loss is: 103.64006927954554
-Current loss is: 103.64004098838609
-Current loss is: 103.6400128677599
-Current loss is: 103.63998490795571
-Current loss is: 103.639957113488
-Current loss is: 103.63992947741703
-Current loss is: 103.63990200228812
-Current loss is: 103.63987468405871
-Current loss is: 103.63984752218016
-Current loss is: 103.63982051713354
-Current loss is: 103.6397936724137
-Current loss is: 103.63976699237621
-Current loss is: 103.6397404994601
-Current loss is: 103.63971422043468
-Current loss is: 103.6396881989591
-Current loss is: 103.6396625252502
-Current loss is: 103.63963735617533
-Current loss is: 103.63961296767623
-Current loss is: 103.63958987725127
-Current loss is: 103.63956902534667
-Current loss is: 103.6395522047757
-Current loss is: 103.63954267726587
-Current loss is: 103.63954678733512
-Current loss is: 103.63957606921741
-Current loss is: 103.63965403042168
-Current loss is: 103.63982221752889
-Current loss is: 103.64017065917376
-Current loss is: 103.64084913796948
-Current loss is: 103.64221541098485
-Current loss is: 103.64479245990569
-Current loss is: 103.6500055065095
-Current loss is: 103.65931947499318
-Current loss is: 103.6778488506025
-Current loss is: 103.70514204953376
-Current loss is: 103.75159235623624
-Current loss is: 103.77988613038961
-Current loss is: 103.79256170928042
-Current loss is: 103.72378835643042
-Current loss is: 103.65654953624875
-Current loss is: 103.64254994680259
-Current loss is: 103.68232194113203
-Current loss is: 103.71758855559219
-Current loss is: 103.69064355823271
-Current loss is: 103.64878213025123
-Current loss is: 103.64234912130277
-Current loss is: 103.66987842108558
-Current loss is: 103.68494146738657
-Current loss is: 103.66096232248677
-Current loss is: 103.63964730948966
-Current loss is: 103.64766475751291
-Current loss is: 103.66415900430434
-Current loss is: 103.66133505432845
-Current loss is: 103.6434216716041
-Current loss is: 103.64020273802508
-Current loss is: 103.65193415379453
-Current loss is: 103.6550149116329
-Current loss is: 103.6453139905899
-Current loss is: 103.638694406192
-Current loss is: 103.64415951454498
-Current loss is: 103.64988544361819
-Current loss is: 103.64538041886941
-Current loss is: 103.63911540798922
-Current loss is: 103.64029719302376
-Current loss is: 103.64489493279153
-Current loss is: 103.64455385454073
-Current loss is: 103.63996204541385
-Current loss is: 103.63871927413773
-Current loss is: 103.64160575016614
-Current loss is: 103.64280151871556
-Current loss is: 103.64044394333534
-Current loss is: 103.63843010216362
-Current loss is: 103.63953758250548
-Current loss is: 103.64118178823068
-Current loss is: 103.64039921719086
-Current loss is: 103.63864535855626
-Current loss is: 103.63852978578024
-Current loss is: 103.6397152028026
-Current loss is: 103.63999316979911
-Current loss is: 103.63892106789157
-Current loss is: 103.63823035501663
-Current loss is: 103.63872946548
-Current loss is: 103.63931193706378
-Current loss is: 103.63899049821785
-Current loss is: 103.6382871131954
-Current loss is: 103.6382143798352
-Current loss is: 103.63866429851565
-Current loss is: 103.6387896943031
-Current loss is: 103.63839612582034
-Current loss is: 103.63806966372643
-Current loss is: 103.63819978911307
-Current loss is: 103.63845020723247
-Current loss is: 103.63837842924305
-Current loss is: 103.63809300028592
-Current loss is: 103.63797994626701
-Current loss is: 103.63811512865078
-Current loss is: 103.63821765206649
-Current loss is: 103.6381060261141
-Current loss is: 103.63793310694972
-Current loss is: 103.63790533225935
-2284.411795 seconds &#40;159.83 M allocations: 1.186 TiB, 9.27&#37; gc time, 0.00&#37; 
-compilation time&#41;
-&#40;&#91;110.99 95.46 … 108.0 102.22&#93;, &#91;2.8941165812997385 8.235248365541239 … 3.6
-20075793629767 5.382796985106699&#93;&#41;
+<pre class="julia-error">
+ERROR: UndefVarError: NeuralPDE not defined
 </pre>
 
 
@@ -1820,6 +823,10 @@ compilation time&#41;
 </pre>
 
 
+<pre class="julia-error">
+ERROR: UndefVarError: SDEProblem not defined
+</pre>
+
 
 <p>##Plotting the Solutions We should reshape the inputs and outputs to make it compatible with our model. This is the most important part. The algorithm gives a distributed function over all initial prices in the xspan.</p>
 
@@ -1834,21 +841,8 @@ compilation time&#41;
 </pre>
 
 
-<pre class="output">
-13×1 Matrix&#123;Float64&#125;:
- 14.720542476965154
- 13.396880517288457
- 12.079875915012039
- 10.77200453151302
-  9.517251800155211
-  8.461262604242414
-  7.507579385738407
-  6.613860534457598
-  5.818858700790878
-  5.118187802383937
-  4.479558426481787
-  3.891172080333362
-  3.3642684068627697
+<pre class="julia-error">
+ERROR: UndefVarError: use_gpu not defined
 </pre>
 
 
@@ -1861,7 +855,10 @@ compilation time&#41;
 </pre>
 
 
-<img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4KPHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB3aWR0aD0iNTc2IiBoZWlnaHQ9IjM4NCIgdmlld0JveD0iMCAwIDIzMDQgMTUzNiI+CjxkZWZzPgogIDxjbGlwUGF0aCBpZD0iY2xpcDA2MCI+CiAgICA8cmVjdCB4PSIwIiB5PSIwIiB3aWR0aD0iMjMwNCIgaGVpZ2h0PSIxNTM2Ii8+CiAgPC9jbGlwUGF0aD4KPC9kZWZzPgo8cGF0aCBjbGlwLXBhdGg9InVybCgjY2xpcDA2MCkiIGQ9IgpNMCAxNTM2IEwyMzA0IDE1MzYgTDIzMDQgMCBMMCAwICBaCiAgIiBmaWxsPSIjZmZmZmZmIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGZpbGwtb3BhY2l0eT0iMSIvPgo8ZGVmcz4KICA8Y2xpcFBhdGggaWQ9ImNsaXAwNjEiPgogICAgPHJlY3QgeD0iNDYwIiB5PSIwIiB3aWR0aD0iMTYxNCIgaGVpZ2h0PSIxNTM2Ii8+CiAgPC9jbGlwUGF0aD4KPC9kZWZzPgo8cGF0aCBjbGlwLXBhdGg9InVybCgjY2xpcDA2MCkiIGQ9IgpNMjQ2LjQ5OSAxMzU5LjgyIEwyMjU2Ljc2IDEzNTkuODIgTDIyNTYuNzYgNDcuMjQ0MSBMMjQ2LjQ5OSA0Ny4yNDQxICBaCiAgIiBmaWxsPSIjZmZmZmZmIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGZpbGwtb3BhY2l0eT0iMSIvPgo8ZGVmcz4KICA8Y2xpcFBhdGggaWQ9ImNsaXAwNjIiPgogICAgPHJlY3QgeD0iMjQ2IiB5PSI0NyIgd2lkdGg9IjIwMTEiIGhlaWdodD0iMTMxNCIvPgogIDwvY2xpcFBhdGg+CjwvZGVmcz4KPHBvbHlsaW5lIGNsaXAtcGF0aD0idXJsKCNjbGlwMDYyKSIgc3R5bGU9InN0cm9rZTojMDAwMDAwOyBzdHJva2Utd2lkdGg6Mjsgc3Ryb2tlLW9wYWNpdHk6MC4xOyBmaWxsOm5vbmUiIHBvaW50cz0iCiAgMzAzLjM5MywxMzU5LjgyIDMwMy4zOTMsNDcuMjQ0MSAKICAiLz4KPHBvbHlsaW5lIGNsaXAtcGF0aD0idXJsKCNjbGlwMDYyKSIgc3R5bGU9InN0cm9rZTojMDAwMDAwOyBzdHJva2Utd2lkdGg6Mjsgc3Ryb2tlLW9wYWNpdHk6MC4xOyBmaWxsOm5vbmUiIHBvaW50cz0iCiAgNjk4LjQ5MSwxMzU5LjgyIDY5OC40OTEsNDcuMjQ0MSAKICAiLz4KPHBvbHlsaW5lIGNsaXAtcGF0aD0idXJsKCNjbGlwMDYyKSIgc3R5bGU9InN0cm9rZTojMDAwMDAwOyBzdHJva2Utd2lkdGg6Mjsgc3Ryb2tlLW9wYWNpdHk6MC4xOyBmaWxsOm5vbmUiIHBvaW50cz0iCiAgMTA5My41OSwxMzU5LjgyIDEwOTMuNTksNDcuMjQ0MSAKICAiLz4KPHBvbHlsaW5lIGNsaXAtcGF0aD0idXJsKCNjbGlwMDYyKSIgc3R5bGU9InN0cm9rZTojMDAwMDAwOyBzdHJva2Utd2lkdGg6Mjsgc3Ryb2tlLW9wYWNpdHk6MC4xOyBmaWxsOm5vbmUiIHBvaW50cz0iCiAgMTQ4OC42OSwxMzU5LjgyIDE0ODguNjksNDcuMjQ0MSAKICAiLz4KPHBvbHlsaW5lIGNsaXAtcGF0aD0idXJsKCNjbGlwMDYyKSIgc3R5bGU9InN0cm9rZTojMDAwMDAwOyBzdHJva2Utd2lkdGg6Mjsgc3Ryb2tlLW9wYWNpdHk6MC4xOyBmaWxsOm5vbmUiIHBvaW50cz0iCiAgMTg4My43OCwxMzU5LjgyIDE4ODMuNzgsNDcuMjQ0MSAKICAiLz4KPHBvbHlsaW5lIGNsaXAtcGF0aD0idXJsKCNjbGlwMDYwKSIgc3R5bGU9InN0cm9rZTojMDAwMDAwOyBzdHJva2Utd2lkdGg6NDsgc3Ryb2tlLW9wYWNpdHk6MTsgZmlsbDpub25lIiBwb2ludHM9IgogIDI0Ni40OTksMTM1OS44MiAyMjU2Ljc2LDEzNTkuODIgCiAgIi8+Cjxwb2x5bGluZSBjbGlwLXBhdGg9InVybCgjY2xpcDA2MCkiIHN0eWxlPSJzdHJva2U6IzAwMDAwMDsgc3Ryb2tlLXdpZHRoOjQ7IHN0cm9rZS1vcGFjaXR5OjE7IGZpbGw6bm9uZSIgcG9pbnRzPSIKICAzMDMuMzkzLDEzNTkuODIgMzAzLjM5MywxMzQ0LjA3IAogICIvPgo8cG9seWxpbmUgY2xpcC1wYXRoPSJ1cmwoI2NsaXAwNjApIiBzdHlsZT0ic3Ryb2tlOiMwMDAwMDA7IHN0cm9rZS13aWR0aDo0OyBzdHJva2Utb3BhY2l0eToxOyBmaWxsOm5vbmUiIHBvaW50cz0iCiAgNjk4LjQ5MSwxMzU5LjgyIDY5OC40OTEsMTM0NC4wNyAKICAiLz4KPHBvbHlsaW5lIGNsaXAtcGF0aD0idXJsKCNjbGlwMDYwKSIgc3R5bGU9InN0cm9rZTojMDAwMDAwOyBzdHJva2Utd2lkdGg6NDsgc3Ryb2tlLW9wYWNpdHk6MTsgZmlsbDpub25lIiBwb2ludHM9IgogIDEwOTMuNTksMTM1OS44MiAxMDkzLjU5LDEzNDQuMDcgCiAgIi8+Cjxwb2x5bGluZSBjbGlwLXBhdGg9InVybCgjY2xpcDA2MCkiIHN0eWxlPSJzdHJva2U6IzAwMDAwMDsgc3Ryb2tlLXdpZHRoOjQ7IHN0cm9rZS1vcGFjaXR5OjE7IGZpbGw6bm9uZSIgcG9pbnRzPSIKICAxNDg4LjY5LDEzNTkuODIgMTQ4OC42OSwxMzQ0LjA3IAogICIvPgo8cG9seWxpbmUgY2xpcC1wYXRoPSJ1cmwoI2NsaXAwNjApIiBzdHlsZT0ic3Ryb2tlOiMwMDAwMDA7IHN0cm9rZS13aWR0aDo0OyBzdHJva2Utb3BhY2l0eToxOyBmaWxsOm5vbmUiIHBvaW50cz0iCiAgMTg4My43OCwxMzU5LjgyIDE4ODMuNzgsMTM0NC4wNyAKICAiLz4KPHBhdGggY2xpcC1wYXRoPSJ1cmwoI2NsaXAwNjApIiBkPSJNIDAgMCBNMjg4Ljc2MyAxNDAzLjMxIFEyODUuNDMgMTQwMy4zMSAyODMuNTA5IDE0MDUuMDkgUTI4MS42MSAxNDA2Ljg4IDI4MS42MSAxNDEwIFEyODEuNjEgMTQxMy4xMyAyODMuNTA5IDE0MTQuOTEgUTI4NS40MyAxNDE2LjY5IDI4OC43NjMgMTQxNi42OSBRMjkyLjA5NyAxNDE2LjY5IDI5NC4wMTggMTQxNC45MSBRMjk1LjkzOSAxNDEzLjEgMjk1LjkzOSAxNDEwIFEyOTUuOTM5IDE0MDYuODggMjk0LjAxOCAxNDA1LjA5IFEyOTIuMTIgMTQwMy4zMSAyODguNzYzIDE0MDMuMzEgTTI4NC4wODcgMTQwMS4zMiBRMjgxLjA3OCAxNDAwLjU4IDI3OS4zODggMTM5OC41MiBRMjc3LjcyMiAxMzk2LjQ2IDI3Ny43MjIgMTM5My41IFEyNzcuNzIyIDEzODkuMzUgMjgwLjY2MSAxMzg2Ljk1IFEyODMuNjI0IDEzODQuNTQgMjg4Ljc2MyAxMzg0LjU0IFEyOTMuOTI1IDEzODQuNTQgMjk2Ljg2NSAxMzg2Ljk1IFEyOTkuODA1IDEzODkuMzUgMjk5LjgwNSAxMzkzLjUgUTI5OS44MDUgMTM5Ni40NiAyOTguMTE1IDEzOTguNTIgUTI5Ni40NDggMTQwMC41OCAyOTMuNDYyIDE0MDEuMzIgUTI5Ni44NDIgMTQwMi4xMSAyOTguNzE3IDE0MDQuNCBRMzAwLjYxNSAxNDA2LjY5IDMwMC42MTUgMTQxMCBRMzAwLjYxNSAxNDE1LjAyIDI5Ny41MzYgMTQxNy43MSBRMjk0LjQ4MSAxNDIwLjQgMjg4Ljc2MyAxNDIwLjQgUTI4My4wNDYgMTQyMC40IDI3OS45NjcgMTQxNy43MSBRMjc2LjkxMSAxNDE1LjAyIDI3Ni45MTEgMTQxMCBRMjc2LjkxMSAxNDA2LjY5IDI3OC44MSAxNDA0LjQgUTI4MC43MDggMTQwMi4xMSAyODQuMDg3IDE0MDEuMzIgTTI4Mi4zNzQgMTM5My45NCBRMjgyLjM3NCAxMzk2LjYyIDI4NC4wNDEgMTM5OC4xMyBRMjg1LjczMSAxMzk5LjYzIDI4OC43NjMgMTM5OS42MyBRMjkxLjc3MiAxMzk5LjYzIDI5My40NjIgMTM5OC4xMyBRMjk1LjE3NSAxMzk2LjYyIDI5NS4xNzUgMTM5My45NCBRMjk1LjE3NSAxMzkxLjI1IDI5My40NjIgMTM4OS43NSBRMjkxLjc3MiAxMzg4LjI0IDI4OC43NjMgMTM4OC4yNCBRMjg1LjczMSAxMzg4LjI0IDI4NC4wNDEgMTM4OS43NSBRMjgyLjM3NCAxMzkxLjI1IDI4Mi4zNzQgMTM5My45NCBaIiBmaWxsPSIjMDAwMDAwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGZpbGwtb3BhY2l0eT0iMSIgLz48cGF0aCBjbGlwLXBhdGg9InVybCgjY2xpcDA2MCkiIGQ9Ik0gMCAwIE0zMDguOTcxIDEzODUuMTYgTDMyNy4zMjggMTM4NS4xNiBMMzI3LjMyOCAxMzg5LjEgTDMxMy4yNTQgMTM4OS4xIEwzMTMuMjU0IDEzOTcuNTcgUTMxNC4yNzIgMTM5Ny4yMiAzMTUuMjkxIDEzOTcuMDYgUTMxNi4zMDkgMTM5Ni44OCAzMTcuMzI4IDEzOTYuODggUTMyMy4xMTUgMTM5Ni44OCAzMjYuNDk1IDE0MDAuMDUgUTMyOS44NzQgMTQwMy4yMiAzMjkuODc0IDE0MDguNjQgUTMyOS44NzQgMTQxNC4yMSAzMjYuNDAyIDE0MTcuMzIgUTMyMi45MyAxNDIwLjQgMzE2LjYxIDE0MjAuNCBRMzE0LjQzNCAxNDIwLjQgMzEyLjE2NiAxNDIwLjAyIFEzMDkuOTIxIDE0MTkuNjUgMzA3LjUxMyAxNDE4LjkxIEwzMDcuNTEzIDE0MTQuMjEgUTMwOS41OTYgMTQxNS4zNSAzMTEuODE5IDE0MTUuOSBRMzE0LjA0MSAxNDE2LjQ2IDMxNi41MTggMTQxNi40NiBRMzIwLjUyMiAxNDE2LjQ2IDMyMi44NiAxNDE0LjM1IFEzMjUuMTk4IDE0MTIuMjUgMzI1LjE5OCAxNDA4LjY0IFEzMjUuMTk4IDE0MDUuMDIgMzIyLjg2IDE0MDIuOTIgUTMyMC41MjIgMTQwMC44MSAzMTYuNTE4IDE0MDAuODEgUTMxNC42NDMgMTQwMC44MSAzMTIuNzY4IDE0MDEuMjMgUTMxMC45MTYgMTQwMS42NSAzMDguOTcxIDE0MDIuNTIgTDMwOC45NzEgMTM4NS4xNiBaIiBmaWxsPSIjMDAwMDAwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGZpbGwtb3BhY2l0eT0iMSIgLz48cGF0aCBjbGlwLXBhdGg9InVybCgjY2xpcDA2MCkiIGQ9Ik0gMCAwIE02NzMuNjE4IDE0MTkuMDEgTDY3My42MTggMTQxNC43NSBRNjc1LjM3NyAxNDE1LjU4IDY3Ny4xODMgMTQxNi4wMiBRNjc4Ljk4OCAxNDE2LjQ2IDY4MC43MjQgMTQxNi40NiBRNjg1LjM1NCAxNDE2LjQ2IDY4Ny43ODUgMTQxMy4zNiBRNjkwLjIzOCAxNDEwLjIzIDY5MC41ODUgMTQwMy44OSBRNjg5LjI0MyAxNDA1Ljg4IDY4Ny4xODMgMTQwNi45NSBRNjg1LjEyMyAxNDA4LjAxIDY4Mi42MjMgMTQwOC4wMSBRNjc3LjQzNyAxNDA4LjAxIDY3NC40MDUgMTQwNC44OSBRNjcxLjM5NiAxNDAxLjc0IDY3MS4zOTYgMTM5Ni4zIFE2NzEuMzk2IDEzOTAuOTcgNjc0LjU0NCAxMzg3Ljc2IFE2NzcuNjkyIDEzODQuNTQgNjgyLjkyMyAxMzg0LjU0IFE2ODguOTE5IDEzODQuNTQgNjkyLjA2NyAxMzg5LjE1IFE2OTUuMjM4IDEzOTMuNzMgNjk1LjIzOCAxNDAyLjQ4IFE2OTUuMjM4IDE0MTAuNjUgNjkxLjM0OSAxNDE1LjUzIFE2ODcuNDg0IDE0MjAuNCA2ODAuOTMzIDE0MjAuNCBRNjc5LjE3MyAxNDIwLjQgNjc3LjM2OCAxNDIwLjA1IFE2NzUuNTYyIDE0MTkuNyA2NzMuNjE4IDE0MTkuMDEgTTY4Mi45MjMgMTQwNC4zNSBRNjg2LjA3MiAxNDA0LjM1IDY4Ny45IDE0MDIuMiBRNjg5Ljc1MiAxNDAwLjA1IDY4OS43NTIgMTM5Ni4zIFE2ODkuNzUyIDEzOTIuNTcgNjg3LjkgMTM5MC40MiBRNjg2LjA3MiAxMzg4LjI0IDY4Mi45MjMgMTM4OC4yNCBRNjc5Ljc3NSAxMzg4LjI0IDY3Ny45MjMgMTM5MC40MiBRNjc2LjA5NSAxMzkyLjU3IDY3Ni4wOTUgMTM5Ni4zIFE2NzYuMDk1IDE0MDAuMDUgNjc3LjkyMyAxNDAyLjIgUTY3OS43NzUgMTQwNC4zNSA2ODIuOTIzIDE0MDQuMzUgWiIgZmlsbD0iIzAwMDAwMCIgZmlsbC1ydWxlPSJldmVub2RkIiBmaWxsLW9wYWNpdHk9IjEiIC8+PHBhdGggY2xpcC1wYXRoPSJ1cmwoI2NsaXAwNjApIiBkPSJNIDAgMCBNNzEzLjY0MSAxMzg4LjI0IFE3MTAuMDMgMTM4OC4yNCA3MDguMjAxIDEzOTEuODEgUTcwNi4zOTYgMTM5NS4zNSA3MDYuMzk2IDE0MDIuNDggUTcwNi4zOTYgMTQwOS41OSA3MDguMjAxIDE0MTMuMTUgUTcxMC4wMyAxNDE2LjY5IDcxMy42NDEgMTQxNi42OSBRNzE3LjI3NSAxNDE2LjY5IDcxOS4wODEgMTQxMy4xNSBRNzIwLjkwOSAxNDA5LjU5IDcyMC45MDkgMTQwMi40OCBRNzIwLjkwOSAxMzk1LjM1IDcxOS4wODEgMTM5MS44MSBRNzE3LjI3NSAxMzg4LjI0IDcxMy42NDEgMTM4OC4yNCBNNzEzLjY0MSAxMzg0LjU0IFE3MTkuNDUxIDEzODQuNTQgNzIyLjUwNyAxMzg5LjE1IFE3MjUuNTg1IDEzOTMuNzMgNzI1LjU4NSAxNDAyLjQ4IFE3MjUuNTg1IDE0MTEuMjEgNzIyLjUwNyAxNDE1LjgxIFE3MTkuNDUxIDE0MjAuNCA3MTMuNjQxIDE0MjAuNCBRNzA3LjgzMSAxNDIwLjQgNzA0Ljc1MiAxNDE1LjgxIFE3MDEuNjk3IDE0MTEuMjEgNzAxLjY5NyAxNDAyLjQ4IFE3MDEuNjk3IDEzOTMuNzMgNzA0Ljc1MiAxMzg5LjE1IFE3MDcuODMxIDEzODQuNTQgNzEzLjY0MSAxMzg0LjU0IFoiIGZpbGw9IiMwMDAwMDAiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZmlsbC1vcGFjaXR5PSIxIiAvPjxwYXRoIGNsaXAtcGF0aD0idXJsKCNjbGlwMDYwKSIgZD0iTSAwIDAgTTEwNjkuMjEgMTQxOS4wMSBMMTA2OS4yMSAxNDE0Ljc1IFExMDcwLjk3IDE0MTUuNTggMTA3Mi43OCAxNDE2LjAyIFExMDc0LjU4IDE0MTYuNDYgMTA3Ni4zMiAxNDE2LjQ2IFExMDgwLjk1IDE0MTYuNDYgMTA4My4zOCAxNDEzLjM2IFExMDg1LjgzIDE0MTAuMjMgMTA4Ni4xOCAxNDAzLjg5IFExMDg0Ljg0IDE0MDUuODggMTA4Mi43OCAxNDA2Ljk1IFExMDgwLjcyIDE0MDguMDEgMTA3OC4yMiAxNDA4LjAxIFExMDczLjAzIDE0MDguMDEgMTA3MCAxNDA0Ljg5IFExMDY2Ljk5IDE0MDEuNzQgMTA2Ni45OSAxMzk2LjMgUTEwNjYuOTkgMTM5MC45NyAxMDcwLjE0IDEzODcuNzYgUTEwNzMuMjkgMTM4NC41NCAxMDc4LjUyIDEzODQuNTQgUTEwODQuNTEgMTM4NC41NCAxMDg3LjY2IDEzODkuMTUgUTEwOTAuODMgMTM5My43MyAxMDkwLjgzIDE0MDIuNDggUTEwOTAuODMgMTQxMC42NSAxMDg2Ljk0IDE0MTUuNTMgUTEwODMuMDggMTQyMC40IDEwNzYuNTMgMTQyMC40IFExMDc0Ljc3IDE0MjAuNCAxMDcyLjk2IDE0MjAuMDUgUTEwNzEuMTYgMTQxOS43IDEwNjkuMjEgMTQxOS4wMSBNMTA3OC41MiAxNDA0LjM1IFExMDgxLjY3IDE0MDQuMzUgMTA4My41IDE0MDIuMiBRMTA4NS4zNSAxNDAwLjA1IDEwODUuMzUgMTM5Ni4zIFExMDg1LjM1IDEzOTIuNTcgMTA4My41IDEzOTAuNDIgUTEwODEuNjcgMTM4OC4yNCAxMDc4LjUyIDEzODguMjQgUTEwNzUuMzcgMTM4OC4yNCAxMDczLjUyIDEzOTAuNDIgUTEwNzEuNjkgMTM5Mi41NyAxMDcxLjY5IDEzOTYuMyBRMTA3MS42OSAxNDAwLjA1IDEwNzMuNTIgMTQwMi4yIFExMDc1LjM3IDE0MDQuMzUgMTA3OC41MiAxNDA0LjM1IFoiIGZpbGw9IiMwMDAwMDAiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZmlsbC1vcGFjaXR5PSIxIiAvPjxwYXRoIGNsaXAtcGF0aD0idXJsKCNjbGlwMDYwKSIgZD0iTSAwIDAgTTEwOTkuMjggMTM4NS4xNiBMMTExNy42NCAxMzg1LjE2IEwxMTE3LjY0IDEzODkuMSBMMTEwMy41NyAxMzg5LjEgTDExMDMuNTcgMTM5Ny41NyBRMTEwNC41OCAxMzk3LjIyIDExMDUuNiAxMzk3LjA2IFExMTA2LjYyIDEzOTYuODggMTEwNy42NCAxMzk2Ljg4IFExMTEzLjQzIDEzOTYuODggMTExNi44MSAxNDAwLjA1IFExMTIwLjE5IDE0MDMuMjIgMTEyMC4xOSAxNDA4LjY0IFExMTIwLjE5IDE0MTQuMjEgMTExNi43MSAxNDE3LjMyIFExMTEzLjI0IDE0MjAuNCAxMTA2LjkyIDE0MjAuNCBRMTEwNC43NSAxNDIwLjQgMTEwMi40OCAxNDIwLjAyIFExMTAwLjIzIDE0MTkuNjUgMTA5Ny44MiAxNDE4LjkxIEwxMDk3LjgyIDE0MTQuMjEgUTEwOTkuOTEgMTQxNS4zNSAxMTAyLjEzIDE0MTUuOSBRMTEwNC4zNSAxNDE2LjQ2IDExMDYuODMgMTQxNi40NiBRMTExMC44MyAxNDE2LjQ2IDExMTMuMTcgMTQxNC4zNSBRMTExNS41MSAxNDEyLjI1IDExMTUuNTEgMTQwOC42NCBRMTExNS41MSAxNDA1LjAyIDExMTMuMTcgMTQwMi45MiBRMTExMC44MyAxNDAwLjgxIDExMDYuODMgMTQwMC44MSBRMTEwNC45NSAxNDAwLjgxIDExMDMuMDggMTQwMS4yMyBRMTEwMS4yMyAxNDAxLjY1IDEwOTkuMjggMTQwMi41MiBMMTA5OS4yOCAxMzg1LjE2IFoiIGZpbGw9IiMwMDAwMDAiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZmlsbC1vcGFjaXR5PSIxIiAvPjxwYXRoIGNsaXAtcGF0aD0idXJsKCNjbGlwMDYwKSIgZD0iTSAwIDAgTTE0NDguMjkgMTQxNS43OSBMMTQ1NS45MyAxNDE1Ljc5IEwxNDU1LjkzIDEzODkuNDIgTDE0NDcuNjIgMTM5MS4wOSBMMTQ0Ny42MiAxMzg2LjgzIEwxNDU1Ljg5IDEzODUuMTYgTDE0NjAuNTYgMTM4NS4xNiBMMTQ2MC41NiAxNDE1Ljc5IEwxNDY4LjIgMTQxNS43OSBMMTQ2OC4yIDE0MTkuNzIgTDE0NDguMjkgMTQxOS43MiBMMTQ0OC4yOSAxNDE1Ljc5IFoiIGZpbGw9IiMwMDAwMDAiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZmlsbC1vcGFjaXR5PSIxIiAvPjxwYXRoIGNsaXAtcGF0aD0idXJsKCNjbGlwMDYwKSIgZD0iTSAwIDAgTTE0ODcuNjQgMTM4OC4yNCBRMTQ4NC4wMyAxMzg4LjI0IDE0ODIuMiAxMzkxLjgxIFExNDgwLjQgMTM5NS4zNSAxNDgwLjQgMTQwMi40OCBRMTQ4MC40IDE0MDkuNTkgMTQ4Mi4yIDE0MTMuMTUgUTE0ODQuMDMgMTQxNi42OSAxNDg3LjY0IDE0MTYuNjkgUTE0OTEuMjggMTQxNi42OSAxNDkzLjA4IDE0MTMuMTUgUTE0OTQuOTEgMTQwOS41OSAxNDk0LjkxIDE0MDIuNDggUTE0OTQuOTEgMTM5NS4zNSAxNDkzLjA4IDEzOTEuODEgUTE0OTEuMjggMTM4OC4yNCAxNDg3LjY0IDEzODguMjQgTTE0ODcuNjQgMTM4NC41NCBRMTQ5My40NSAxMzg0LjU0IDE0OTYuNTEgMTM4OS4xNSBRMTQ5OS41OSAxMzkzLjczIDE0OTkuNTkgMTQwMi40OCBRMTQ5OS41OSAxNDExLjIxIDE0OTYuNTEgMTQxNS44MSBRMTQ5My40NSAxNDIwLjQgMTQ4Ny42NCAxNDIwLjQgUTE0ODEuODMgMTQyMC40IDE0NzguNzYgMTQxNS44MSBRMTQ3NS43IDE0MTEuMjEgMTQ3NS43IDE0MDIuNDggUTE0NzUuNyAxMzkzLjczIDE0NzguNzYgMTM4OS4xNSBRMTQ4MS44MyAxMzg0LjU0IDE0ODcuNjQgMTM4NC41NCBaIiBmaWxsPSIjMDAwMDAwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGZpbGwtb3BhY2l0eT0iMSIgLz48cGF0aCBjbGlwLXBhdGg9InVybCgjY2xpcDA2MCkiIGQ9Ik0gMCAwIE0xNTE3LjgxIDEzODguMjQgUTE1MTQuMiAxMzg4LjI0IDE1MTIuMzcgMTM5MS44MSBRMTUxMC41NiAxMzk1LjM1IDE1MTAuNTYgMTQwMi40OCBRMTUxMC41NiAxNDA5LjU5IDE1MTIuMzcgMTQxMy4xNSBRMTUxNC4yIDE0MTYuNjkgMTUxNy44MSAxNDE2LjY5IFExNTIxLjQ0IDE0MTYuNjkgMTUyMy4yNSAxNDEzLjE1IFExNTI1LjA3IDE0MDkuNTkgMTUyNS4wNyAxNDAyLjQ4IFExNTI1LjA3IDEzOTUuMzUgMTUyMy4yNSAxMzkxLjgxIFExNTIxLjQ0IDEzODguMjQgMTUxNy44MSAxMzg4LjI0IE0xNTE3LjgxIDEzODQuNTQgUTE1MjMuNjIgMTM4NC41NCAxNTI2LjY3IDEzODkuMTUgUTE1MjkuNzUgMTM5My43MyAxNTI5Ljc1IDE0MDIuNDggUTE1MjkuNzUgMTQxMS4yMSAxNTI2LjY3IDE0MTUuODEgUTE1MjMuNjIgMTQyMC40IDE1MTcuODEgMTQyMC40IFExNTEyIDE0MjAuNCAxNTA4LjkyIDE0MTUuODEgUTE1MDUuODYgMTQxMS4yMSAxNTA1Ljg2IDE0MDIuNDggUTE1MDUuODYgMTM5My43MyAxNTA4LjkyIDEzODkuMTUgUTE1MTIgMTM4NC41NCAxNTE3LjgxIDEzODQuNTQgWiIgZmlsbD0iIzAwMDAwMCIgZmlsbC1ydWxlPSJldmVub2RkIiBmaWxsLW9wYWNpdHk9IjEiIC8+PHBhdGggY2xpcC1wYXRoPSJ1cmwoI2NsaXAwNjApIiBkPSJNIDAgMCBNMTg0My44OSAxNDE1Ljc5IEwxODUxLjUzIDE0MTUuNzkgTDE4NTEuNTMgMTM4OS40MiBMMTg0My4yMiAxMzkxLjA5IEwxODQzLjIyIDEzODYuODMgTDE4NTEuNDggMTM4NS4xNiBMMTg1Ni4xNiAxMzg1LjE2IEwxODU2LjE2IDE0MTUuNzkgTDE4NjMuOCAxNDE1Ljc5IEwxODYzLjggMTQxOS43MiBMMTg0My44OSAxNDE5LjcyIEwxODQzLjg5IDE0MTUuNzkgWiIgZmlsbD0iIzAwMDAwMCIgZmlsbC1ydWxlPSJldmVub2RkIiBmaWxsLW9wYWNpdHk9IjEiIC8+PHBhdGggY2xpcC1wYXRoPSJ1cmwoI2NsaXAwNjApIiBkPSJNIDAgMCBNMTg4My4yNCAxMzg4LjI0IFExODc5LjYzIDEzODguMjQgMTg3Ny44IDEzOTEuODEgUTE4NzUuOTkgMTM5NS4zNSAxODc1Ljk5IDE0MDIuNDggUTE4NzUuOTkgMTQwOS41OSAxODc3LjggMTQxMy4xNSBRMTg3OS42MyAxNDE2LjY5IDE4ODMuMjQgMTQxNi42OSBRMTg4Ni44NyAxNDE2LjY5IDE4ODguNjggMTQxMy4xNSBRMTg5MC41MSAxNDA5LjU5IDE4OTAuNTEgMTQwMi40OCBRMTg5MC41MSAxMzk1LjM1IDE4ODguNjggMTM5MS44MSBRMTg4Ni44NyAxMzg4LjI0IDE4ODMuMjQgMTM4OC4yNCBNMTg4My4yNCAxMzg0LjU0IFExODg5LjA1IDEzODQuNTQgMTg5Mi4xMSAxMzg5LjE1IFExODk1LjE4IDEzOTMuNzMgMTg5NS4xOCAxNDAyLjQ4IFExODk1LjE4IDE0MTEuMjEgMTg5Mi4xMSAxNDE1LjgxIFExODg5LjA1IDE0MjAuNCAxODgzLjI0IDE0MjAuNCBRMTg3Ny40MyAxNDIwLjQgMTg3NC4zNSAxNDE1LjgxIFExODcxLjMgMTQxMS4yMSAxODcxLjMgMTQwMi40OCBRMTg3MS4zIDEzOTMuNzMgMTg3NC4zNSAxMzg5LjE1IFExODc3LjQzIDEzODQuNTQgMTg4My4yNCAxMzg0LjU0IFoiIGZpbGw9IiMwMDAwMDAiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZmlsbC1vcGFjaXR5PSIxIiAvPjxwYXRoIGNsaXAtcGF0aD0idXJsKCNjbGlwMDYwKSIgZD0iTSAwIDAgTTE5MDMuNDUgMTM4NS4xNiBMMTkyMS44IDEzODUuMTYgTDE5MjEuOCAxMzg5LjEgTDE5MDcuNzMgMTM4OS4xIEwxOTA3LjczIDEzOTcuNTcgUTE5MDguNzUgMTM5Ny4yMiAxOTA5Ljc3IDEzOTcuMDYgUTE5MTAuNzkgMTM5Ni44OCAxOTExLjggMTM5Ni44OCBRMTkxNy41OSAxMzk2Ljg4IDE5MjAuOTcgMTQwMC4wNSBRMTkyNC4zNSAxNDAzLjIyIDE5MjQuMzUgMTQwOC42NCBRMTkyNC4zNSAxNDE0LjIxIDE5MjAuODggMTQxNy4zMiBRMTkxNy40MSAxNDIwLjQgMTkxMS4wOSAxNDIwLjQgUTE5MDguOTEgMTQyMC40IDE5MDYuNjQgMTQyMC4wMiBRMTkwNC40IDE0MTkuNjUgMTkwMS45OSAxNDE4LjkxIEwxOTAxLjk5IDE0MTQuMjEgUTE5MDQuMDcgMTQxNS4zNSAxOTA2LjMgMTQxNS45IFExOTA4LjUyIDE0MTYuNDYgMTkxMC45OSAxNDE2LjQ2IFExOTE1IDE0MTYuNDYgMTkxNy4zNCAxNDE0LjM1IFExOTE5LjY3IDE0MTIuMjUgMTkxOS42NyAxNDA4LjY0IFExOTE5LjY3IDE0MDUuMDIgMTkxNy4zNCAxNDAyLjkyIFExOTE1IDE0MDAuODEgMTkxMC45OSAxNDAwLjgxIFExOTA5LjEyIDE0MDAuODEgMTkwNy4yNCAxNDAxLjIzIFExOTA1LjM5IDE0MDEuNjUgMTkwMy40NSAxNDAyLjUyIEwxOTAzLjQ1IDEzODUuMTYgWiIgZmlsbD0iIzAwMDAwMCIgZmlsbC1ydWxlPSJldmVub2RkIiBmaWxsLW9wYWNpdHk9IjEiIC8+PHBhdGggY2xpcC1wYXRoPSJ1cmwoI2NsaXAwNjApIiBkPSJNIDAgMCBNOTc1Ljk0NCAxNDU1LjcyIEw5ODIuMzc0IDE0NTUuNzIgTDk4Mi4zNzQgMTUwMy4yNCBMOTc1Ljk0NCAxNTAzLjI0IEw5NzUuOTQ0IDE0NTUuNzIgWiIgZmlsbD0iIzAwMDAwMCIgZmlsbC1ydWxlPSJldmVub2RkIiBmaWxsLW9wYWNpdHk9IjEiIC8+PHBhdGggY2xpcC1wYXRoPSJ1cmwoI2NsaXAwNjApIiBkPSJNIDAgMCBNMTAyNC41NSAxNDgxLjczIEwxMDI0LjU1IDE1MDMuMjQgTDEwMTguNjkgMTUwMy4yNCBMMTAxOC42OSAxNDgxLjkyIFExMDE4LjY5IDE0NzYuODYgMTAxNi43MiAxNDc0LjM0IFExMDE0Ljc0IDE0NzEuODMgMTAxMC44IDE0NzEuODMgUTEwMDYuMDUgMTQ3MS44MyAxMDAzLjMyIDE0NzQuODUgUTEwMDAuNTggMTQ3Ny44OCAxMDAwLjU4IDE0ODMuMSBMMTAwMC41OCAxNTAzLjI0IEw5OTQuNjkxIDE1MDMuMjQgTDk5NC42OTEgMTQ2Ny42IEwxMDAwLjU4IDE0NjcuNiBMMTAwMC41OCAxNDczLjEzIFExMDAyLjY4IDE0NjkuOTIgMTAwNS41MSAxNDY4LjMzIFExMDA4LjM4IDE0NjYuNzQgMTAxMi4xIDE0NjYuNzQgUTEwMTguMjQgMTQ2Ni43NCAxMDIxLjQgMTQ3MC41NiBRMTAyNC41NSAxNDc0LjM0IDEwMjQuNTUgMTQ4MS43MyBaIiBmaWxsPSIjMDAwMDAwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGZpbGwtb3BhY2l0eT0iMSIgLz48cGF0aCBjbGlwLXBhdGg9InVybCgjY2xpcDA2MCkiIGQ9Ik0gMCAwIE0xMDM2LjIzIDE0NjcuNiBMMTA0Mi4wOCAxNDY3LjYgTDEwNDIuMDggMTUwMy4yNCBMMTAzNi4yMyAxNTAzLjI0IEwxMDM2LjIzIDE0NjcuNiBNMTAzNi4yMyAxNDUzLjcyIEwxMDQyLjA4IDE0NTMuNzIgTDEwNDIuMDggMTQ2MS4xMyBMMTAzNi4yMyAxNDYxLjEzIEwxMDM2LjIzIDE0NTMuNzIgWiIgZmlsbD0iIzAwMDAwMCIgZmlsbC1ydWxlPSJldmVub2RkIiBmaWxsLW9wYWNpdHk9IjEiIC8+PHBhdGggY2xpcC1wYXRoPSJ1cmwoI2NsaXAwNjApIiBkPSJNIDAgMCBNMTA2MC4xMyAxNDU3LjQ3IEwxMDYwLjEzIDE0NjcuNiBMMTA3Mi4xOSAxNDY3LjYgTDEwNzIuMTkgMTQ3Mi4xNSBMMTA2MC4xMyAxNDcyLjE1IEwxMDYwLjEzIDE0OTEuNSBRMTA2MC4xMyAxNDk1Ljg2IDEwNjEuMzEgMTQ5Ny4xIFExMDYyLjUyIDE0OTguMzQgMTA2Ni4xOCAxNDk4LjM0IEwxMDcyLjE5IDE0OTguMzQgTDEwNzIuMTkgMTUwMy4yNCBMMTA2Ni4xOCAxNTAzLjI0IFExMDU5LjQgMTUwMy4yNCAxMDU2LjgyIDE1MDAuNzMgUTEwNTQuMjQgMTQ5OC4xOCAxMDU0LjI0IDE0OTEuNSBMMTA1NC4yNCAxNDcyLjE1IEwxMDQ5Ljk1IDE0NzIuMTUgTDEwNDkuOTUgMTQ2Ny42IEwxMDU0LjI0IDE0NjcuNiBMMTA1NC4yNCAxNDU3LjQ3IEwxMDYwLjEzIDE0NTcuNDcgWiIgZmlsbD0iIzAwMDAwMCIgZmlsbC1ydWxlPSJldmVub2RkIiBmaWxsLW9wYWNpdHk9IjEiIC8+PHBhdGggY2xpcC1wYXRoPSJ1cmwoI2NsaXAwNjApIiBkPSJNIDAgMCBNMTA3OS45IDE0NjcuNiBMMTA4NS43NSAxNDY3LjYgTDEwODUuNzUgMTUwMy4yNCBMMTA3OS45IDE1MDMuMjQgTDEwNzkuOSAxNDY3LjYgTTEwNzkuOSAxNDUzLjcyIEwxMDg1Ljc1IDE0NTMuNzIgTDEwODUuNzUgMTQ2MS4xMyBMMTA3OS45IDE0NjEuMTMgTDEwNzkuOSAxNDUzLjcyIFoiIGZpbGw9IiMwMDAwMDAiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZmlsbC1vcGFjaXR5PSIxIiAvPjxwYXRoIGNsaXAtcGF0aD0idXJsKCNjbGlwMDYwKSIgZD0iTSAwIDAgTTExMTQuMjEgMTQ4NS4zMiBRMTEwNy4xMSAxNDg1LjMyIDExMDQuMzcgMTQ4Ni45NSBRMTEwMS42NCAxNDg4LjU3IDExMDEuNjQgMTQ5Mi40OSBRMTEwMS42NCAxNDk1LjYgMTEwMy42NyAxNDk3LjQ1IFExMTA1Ljc0IDE0OTkuMjcgMTEwOS4yNyAxNDk5LjI3IFExMTE0LjE0IDE0OTkuMjcgMTExNy4wNyAxNDk1LjgzIFExMTIwLjAzIDE0OTIuMzYgMTEyMC4wMyAxNDg2LjYzIEwxMTIwLjAzIDE0ODUuMzIgTDExMTQuMjEgMTQ4NS4zMiBNMTEyNS44OSAxNDgyLjkxIEwxMTI1Ljg5IDE1MDMuMjQgTDExMjAuMDMgMTUwMy4yNCBMMTEyMC4wMyAxNDk3LjgzIFExMTE4LjAzIDE1MDEuMDggMTExNS4wNCAxNTAyLjY0IFExMTEyLjA0IDE1MDQuMTcgMTEwNy43MSAxNTA0LjE3IFExMTAyLjI0IDE1MDQuMTcgMTA5OC45OSAxNTAxLjExIFExMDk1Ljc4IDE0OTguMDIgMTA5NS43OCAxNDkyLjg3IFExMDk1Ljc4IDE0ODYuODUgMTA5OS43OSAxNDgzLjggUTExMDMuODMgMTQ4MC43NCAxMTExLjgyIDE0ODAuNzQgTDExMjAuMDMgMTQ4MC43NCBMMTEyMC4wMyAxNDgwLjE3IFExMTIwLjAzIDE0NzYuMTMgMTExNy4zNiAxNDczLjkzIFExMTE0LjcyIDE0NzEuNyAxMTA5LjkxIDE0NzEuNyBRMTEwNi44NiAxNDcxLjcgMTEwMy45NiAxNDcyLjQzIFExMTAxLjA2IDE0NzMuMTcgMTA5OC4zOSAxNDc0LjYzIEwxMDk4LjM5IDE0NjkuMjIgUTExMDEuNiAxNDY3Ljk4IDExMDQuNjMgMTQ2Ny4zNyBRMTEwNy42NSAxNDY2Ljc0IDExMTAuNTIgMTQ2Ni43NCBRMTExOC4yNSAxNDY2Ljc0IDExMjIuMDcgMTQ3MC43NSBRMTEyNS44OSAxNDc0Ljc2IDExMjUuODkgMTQ4Mi45MSBaIiBmaWxsPSIjMDAwMDAwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGZpbGwtb3BhY2l0eT0iMSIgLz48cGF0aCBjbGlwLXBhdGg9InVybCgjY2xpcDA2MCkiIGQ9Ik0gMCAwIE0xMTM3Ljk1IDE0NTMuNzIgTDExNDMuODEgMTQ1My43MiBMMTE0My44MSAxNTAzLjI0IEwxMTM3Ljk1IDE1MDMuMjQgTDExMzcuOTUgMTQ1My43MiBaIiBmaWxsPSIjMDAwMDAwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGZpbGwtb3BhY2l0eT0iMSIgLz48cGF0aCBjbGlwLXBhdGg9InVybCgjY2xpcDA2MCkiIGQ9Ik0gMCAwIE0xMjA1LjUyIDE0NTcuMjggTDEyMDUuNTIgMTQ2My41NSBRMTIwMS44NiAxNDYxLjggMTE5OC42MiAxNDYwLjk0IFExMTk1LjM3IDE0NjAuMDggMTE5Mi4zNSAxNDYwLjA4IFExMTg3LjA5IDE0NjAuMDggMTE4NC4yMyAxNDYyLjEyIFExMTgxLjQgMTQ2NC4xNiAxMTgxLjQgMTQ2Ny45MSBRMTE4MS40IDE0NzEuMDcgMTE4My4yOCAxNDcyLjY5IFExMTg1LjE5IDE0NzQuMjggMTE5MC40NyAxNDc1LjI3IEwxMTk0LjM1IDE0NzYuMDYgUTEyMDEuNTUgMTQ3Ny40MyAxMjA0Ljk1IDE0ODAuOSBRMTIwOC4zOSAxNDg0LjM0IDEyMDguMzkgMTQ5MC4xMyBRMTIwOC4zOSAxNDk3LjA0IDEyMDMuNzQgMTUwMC42IFExMTk5LjEzIDE1MDQuMTcgMTE5MC4xOCAxNTA0LjE3IFExMTg2LjgxIDE1MDQuMTcgMTE4Mi45OSAxNTAzLjQgUTExNzkuMiAxNTAyLjY0IDExNzUuMTMgMTUwMS4xNCBMMTE3NS4xMyAxNDk0LjUyIFExMTc5LjA0IDE0OTYuNzIgMTE4Mi44IDE0OTcuODMgUTExODYuNTUgMTQ5OC45NSAxMTkwLjE4IDE0OTguOTUgUTExOTUuNjkgMTQ5OC45NSAxMTk4LjY4IDE0OTYuNzggUTEyMDEuNjcgMTQ5NC42MiAxMjAxLjY3IDE0OTAuNjEgUTEyMDEuNjcgMTQ4Ny4xMSAxMTk5LjUxIDE0ODUuMTMgUTExOTcuMzggMTQ4My4xNiAxMTkyLjQ3IDE0ODIuMTcgTDExODguNTYgMTQ4MS40MSBRMTE4MS4zNyAxNDc5Ljk4IDExNzguMTUgMTQ3Ni45MiBRMTE3NC45NCAxNDczLjg3IDExNzQuOTQgMTQ2OC40MiBRMTE3NC45NCAxNDYyLjEyIDExNzkuMzYgMTQ1OC40OSBRMTE4My44MiAxNDU0Ljg2IDExOTEuNjEgMTQ1NC44NiBRMTE5NC45NiAxNDU0Ljg2IDExOTguNDMgMTQ1NS40NyBRMTIwMS45IDE0NTYuMDcgMTIwNS41MiAxNDU3LjI4IFoiIGZpbGw9IiMwMDAwMDAiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZmlsbC1vcGFjaXR5PSIxIiAvPjxwYXRoIGNsaXAtcGF0aD0idXJsKCNjbGlwMDYwKSIgZD0iTSAwIDAgTTEyMjMuOTUgMTQ1Ny40NyBMMTIyMy45NSAxNDY3LjYgTDEyMzYuMDIgMTQ2Ny42IEwxMjM2LjAyIDE0NzIuMTUgTDEyMjMuOTUgMTQ3Mi4xNSBMMTIyMy45NSAxNDkxLjUgUTEyMjMuOTUgMTQ5NS44NiAxMjI1LjEzIDE0OTcuMSBRMTIyNi4zNCAxNDk4LjM0IDEyMzAgMTQ5OC4zNCBMMTIzNi4wMiAxNDk4LjM0IEwxMjM2LjAyIDE1MDMuMjQgTDEyMzAgMTUwMy4yNCBRMTIyMy4yMiAxNTAzLjI0IDEyMjAuNjQgMTUwMC43MyBRMTIxOC4wNiAxNDk4LjE4IDEyMTguMDYgMTQ5MS41IEwxMjE4LjA2IDE0NzIuMTUgTDEyMTMuNzcgMTQ3Mi4xNSBMMTIxMy43NyAxNDY3LjYgTDEyMTguMDYgMTQ2Ny42IEwxMjE4LjA2IDE0NTcuNDcgTDEyMjMuOTUgMTQ1Ny40NyBaIiBmaWxsPSIjMDAwMDAwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGZpbGwtb3BhY2l0eT0iMSIgLz48cGF0aCBjbGlwLXBhdGg9InVybCgjY2xpcDA2MCkiIGQ9Ik0gMCAwIE0xMjU3LjUzIDE0NzEuNyBRMTI1Mi44MiAxNDcxLjcgMTI1MC4wOCAxNDc1LjM5IFExMjQ3LjM1IDE0NzkuMDUgMTI0Ny4zNSAxNDg1LjQ1IFExMjQ3LjM1IDE0OTEuODUgMTI1MC4wNSAxNDk1LjU0IFExMjUyLjc5IDE0OTkuMiAxMjU3LjUzIDE0OTkuMiBRMTI2Mi4yMSAxNDk5LjIgMTI2NC45NSAxNDk1LjUxIFExMjY3LjY4IDE0OTEuODIgMTI2Ny42OCAxNDg1LjQ1IFExMjY3LjY4IDE0NzkuMTIgMTI2NC45NSAxNDc1LjQzIFExMjYyLjIxIDE0NzEuNyAxMjU3LjUzIDE0NzEuNyBNMTI1Ny41MyAxNDY2Ljc0IFExMjY1LjE3IDE0NjYuNzQgMTI2OS41MyAxNDcxLjcgUTEyNzMuODkgMTQ3Ni42NyAxMjczLjg5IDE0ODUuNDUgUTEyNzMuODkgMTQ5NC4yIDEyNjkuNTMgMTQ5OS4yIFExMjY1LjE3IDE1MDQuMTcgMTI1Ny41MyAxNTA0LjE3IFExMjQ5Ljg2IDE1MDQuMTcgMTI0NS41IDE0OTkuMiBRMTI0MS4xNyAxNDk0LjIgMTI0MS4xNyAxNDg1LjQ1IFExMjQxLjE3IDE0NzYuNjcgMTI0NS41IDE0NzEuNyBRMTI0OS44NiAxNDY2Ljc0IDEyNTcuNTMgMTQ2Ni43NCBaIiBmaWxsPSIjMDAwMDAwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGZpbGwtb3BhY2l0eT0iMSIgLz48cGF0aCBjbGlwLXBhdGg9InVybCgjY2xpcDA2MCkiIGQ9Ik0gMCAwIE0xMzA5LjI1IDE0NjguOTYgTDEzMDkuMjUgMTQ3NC40NCBRMTMwNi43NyAxNDczLjA3IDEzMDQuMjYgMTQ3Mi40IFExMzAxLjc3IDE0NzEuNyAxMjk5LjIzIDE0NzEuNyBRMTI5My41MyAxNDcxLjcgMTI5MC4zOCAxNDc1LjMzIFExMjg3LjIzIDE0NzguOTMgMTI4Ny4yMyAxNDg1LjQ1IFExMjg3LjIzIDE0OTEuOTggMTI5MC4zOCAxNDk1LjYgUTEyOTMuNTMgMTQ5OS4yIDEyOTkuMjMgMTQ5OS4yIFExMzAxLjc3IDE0OTkuMiAxMzA0LjI2IDE0OTguNTMgUTEzMDYuNzcgMTQ5Ny44MyAxMzA5LjI1IDE0OTYuNDYgTDEzMDkuMjUgMTUwMS44OCBRMTMwNi44IDE1MDMuMDIgMTMwNC4xNiAxNTAzLjU5IFExMzAxLjU1IDE1MDQuMTcgMTI5OC41OSAxNTA0LjE3IFExMjkwLjU0IDE1MDQuMTcgMTI4NS44IDE0OTkuMTEgUTEyODEuMDUgMTQ5NC4wNSAxMjgxLjA1IDE0ODUuNDUgUTEyODEuMDUgMTQ3Ni43MyAxMjg1LjgzIDE0NzEuNzMgUTEyOTAuNjMgMTQ2Ni43NCAxMjk4Ljk3IDE0NjYuNzQgUTEzMDEuNjggMTQ2Ni43NCAxMzA0LjI2IDE0NjcuMzEgUTEzMDYuODMgMTQ2Ny44NSAxMzA5LjI1IDE0NjguOTYgWiIgZmlsbD0iIzAwMDAwMCIgZmlsbC1ydWxlPSJldmVub2RkIiBmaWxsLW9wYWNpdHk9IjEiIC8+PHBhdGggY2xpcC1wYXRoPSJ1cmwoI2NsaXAwNjApIiBkPSJNIDAgMCBNMTMxOS4yMiAxNDUzLjcyIEwxMzI1LjEgMTQ1My43MiBMMTMyNS4xIDE0ODIuOTcgTDEzNDIuNTggMTQ2Ny42IEwxMzUwLjA2IDE0NjcuNiBMMTMzMS4xNSAxNDg0LjI3IEwxMzUwLjg1IDE1MDMuMjQgTDEzNDMuMjEgMTUwMy4yNCBMMTMyNS4xIDE0ODUuODMgTDEzMjUuMSAxNTAzLjI0IEwxMzE5LjIyIDE1MDMuMjQgTDEzMTkuMjIgMTQ1My43MiBaIiBmaWxsPSIjMDAwMDAwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGZpbGwtb3BhY2l0eT0iMSIgLz48cGF0aCBjbGlwLXBhdGg9InVybCgjY2xpcDA2MCkiIGQ9Ik0gMCAwIE0xMzg0LjU5IDE0NjEuMDEgTDEzODQuNTkgMTQ3OC44NiBMMTM5Mi42OCAxNDc4Ljg2IFExMzk3LjE2IDE0NzguODYgMTM5OS42MSAxNDc2LjU0IFExNDAyLjA2IDE0NzQuMjIgMTQwMi4wNiAxNDY5LjkyIFExNDAyLjA2IDE0NjUuNjUgMTM5OS42MSAxNDYzLjMzIFExMzk3LjE2IDE0NjEuMDEgMTM5Mi42OCAxNDYxLjAxIEwxMzg0LjU5IDE0NjEuMDEgTTEzNzguMTYgMTQ1NS43MiBMMTM5Mi42OCAxNDU1LjcyIFExNDAwLjY2IDE0NTUuNzIgMTQwNC43NCAxNDU5LjM1IFExNDA4Ljg0IDE0NjIuOTUgMTQwOC44NCAxNDY5LjkyIFExNDA4Ljg0IDE0NzYuOTUgMTQwNC43NCAxNDgwLjU1IFExNDAwLjY2IDE0ODQuMTUgMTM5Mi42OCAxNDg0LjE1IEwxMzg0LjU5IDE0ODQuMTUgTDEzODQuNTkgMTUwMy4yNCBMMTM3OC4xNiAxNTAzLjI0IEwxMzc4LjE2IDE0NTUuNzIgWiIgZmlsbD0iIzAwMDAwMCIgZmlsbC1ydWxlPSJldmVub2RkIiBmaWxsLW9wYWNpdHk9IjEiIC8+PHBhdGggY2xpcC1wYXRoPSJ1cmwoI2NsaXAwNjApIiBkPSJNIDAgMCBNMTQzNi43MyAxNDczLjA3IFExNDM1Ljc0IDE0NzIuNSAxNDM0LjU2IDE0NzIuMjQgUTE0MzMuNDIgMTQ3MS45NiAxNDMyLjAyIDE0NzEuOTYgUTE0MjcuMDUgMTQ3MS45NiAxNDI0LjM4IDE0NzUuMiBRMTQyMS43MyAxNDc4LjQyIDE0MjEuNzMgMTQ4NC40NyBMMTQyMS43MyAxNTAzLjI0IEwxNDE1Ljg1IDE1MDMuMjQgTDE0MTUuODUgMTQ2Ny42IEwxNDIxLjczIDE0NjcuNiBMMTQyMS43MyAxNDczLjEzIFExNDIzLjU4IDE0NjkuODkgMTQyNi41NCAxNDY4LjMzIFExNDI5LjUgMTQ2Ni43NCAxNDMzLjczIDE0NjYuNzQgUTE0MzQuMzQgMTQ2Ni43NCAxNDM1LjA3IDE0NjYuODMgUTE0MzUuOCAxNDY2LjkgMTQzNi42OSAxNDY3LjA1IEwxNDM2LjczIDE0NzMuMDcgWiIgZmlsbD0iIzAwMDAwMCIgZmlsbC1ydWxlPSJldmVub2RkIiBmaWxsLW9wYWNpdHk9IjEiIC8+PHBhdGggY2xpcC1wYXRoPSJ1cmwoI2NsaXAwNjApIiBkPSJNIDAgMCBNMTQ0Mi44NyAxNDY3LjYgTDE0NDguNzMgMTQ2Ny42IEwxNDQ4LjczIDE1MDMuMjQgTDE0NDIuODcgMTUwMy4yNCBMMTQ0Mi44NyAxNDY3LjYgTTE0NDIuODcgMTQ1My43MiBMMTQ0OC43MyAxNDUzLjcyIEwxNDQ4LjczIDE0NjEuMTMgTDE0NDIuODcgMTQ2MS4xMyBMMTQ0Mi44NyAxNDUzLjcyIFoiIGZpbGw9IiMwMDAwMDAiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZmlsbC1vcGFjaXR5PSIxIiAvPjxwYXRoIGNsaXAtcGF0aD0idXJsKCNjbGlwMDYwKSIgZD0iTSAwIDAgTTE0ODYuNjMgMTQ2OC45NiBMMTQ4Ni42MyAxNDc0LjQ0IFExNDg0LjE1IDE0NzMuMDcgMTQ4MS42NCAxNDcyLjQgUTE0NzkuMTUgMTQ3MS43IDE0NzYuNjEgMTQ3MS43IFExNDcwLjkxIDE0NzEuNyAxNDY3Ljc2IDE0NzUuMzMgUTE0NjQuNjEgMTQ3OC45MyAxNDY0LjYxIDE0ODUuNDUgUTE0NjQuNjEgMTQ5MS45OCAxNDY3Ljc2IDE0OTUuNiBRMTQ3MC45MSAxNDk5LjIgMTQ3Ni42MSAxNDk5LjIgUTE0NzkuMTUgMTQ5OS4yIDE0ODEuNjQgMTQ5OC41MyBRMTQ4NC4xNSAxNDk3LjgzIDE0ODYuNjMgMTQ5Ni40NiBMMTQ4Ni42MyAxNTAxLjg4IFExNDg0LjE4IDE1MDMuMDIgMTQ4MS41NCAxNTAzLjU5IFExNDc4LjkzIDE1MDQuMTcgMTQ3NS45NyAxNTA0LjE3IFExNDY3LjkyIDE1MDQuMTcgMTQ2My4xOCAxNDk5LjExIFExNDU4LjQzIDE0OTQuMDUgMTQ1OC40MyAxNDg1LjQ1IFExNDU4LjQzIDE0NzYuNzMgMTQ2My4yMSAxNDcxLjczIFExNDY4LjAxIDE0NjYuNzQgMTQ3Ni4zNSAxNDY2Ljc0IFExNDc5LjA2IDE0NjYuNzQgMTQ4MS42NCAxNDY3LjMxIFExNDg0LjIxIDE0NjcuODUgMTQ4Ni42MyAxNDY4Ljk2IFoiIGZpbGw9IiMwMDAwMDAiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZmlsbC1vcGFjaXR5PSIxIiAvPjxwYXRoIGNsaXAtcGF0aD0idXJsKCNjbGlwMDYwKSIgZD0iTSAwIDAgTTE1MjcuMzEgMTQ4My45NiBMMTUyNy4zMSAxNDg2LjgyIEwxNTAwLjM4IDE0ODYuODIgUTE1MDAuNzcgMTQ5Mi44NyAxNTA0LjAxIDE0OTYuMDUgUTE1MDcuMjkgMTQ5OS4yIDE1MTMuMTEgMTQ5OS4yIFExNTE2LjQ5IDE0OTkuMiAxNTE5LjY0IDE0OTguMzcgUTE1MjIuODIgMTQ5Ny41NSAxNTI1Ljk0IDE0OTUuODkgTDE1MjUuOTQgMTUwMS40MyBRMTUyMi43OSAxNTAyLjc3IDE1MTkuNDggMTUwMy40NyBRMTUxNi4xNyAxNTA0LjE3IDE1MTIuNzYgMTUwNC4xNyBRMTUwNC4yMyAxNTA0LjE3IDE0OTkuMjQgMTQ5OS4yIFExNDk0LjI3IDE0OTQuMjQgMTQ5NC4yNyAxNDg1Ljc3IFExNDk0LjI3IDE0NzcuMDIgMTQ5OC45OCAxNDcxLjg5IFExNTAzLjczIDE0NjYuNzQgMTUxMS43NSAxNDY2Ljc0IFExNTE4Ljk0IDE0NjYuNzQgMTUyMy4xMSAxNDcxLjM4IFExNTI3LjMxIDE0NzYgMTUyNy4zMSAxNDgzLjk2IE0xNTIxLjQ1IDE0ODIuMjQgUTE1MjEuMzkgMTQ3Ny40MyAxNTE4Ljc1IDE0NzQuNTcgUTE1MTYuMTQgMTQ3MS43IDE1MTEuODEgMTQ3MS43IFExNTA2LjkxIDE0NzEuNyAxNTAzLjk1IDE0NzQuNDcgUTE1MDEuMDIgMTQ3Ny4yNCAxNTAwLjU3IDE0ODIuMjcgTDE1MjEuNDUgMTQ4Mi4yNCBaIiBmaWxsPSIjMDAwMDAwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGZpbGwtb3BhY2l0eT0iMSIgLz48cG9seWxpbmUgY2xpcC1wYXRoPSJ1cmwoI2NsaXAwNjIpIiBzdHlsZT0ic3Ryb2tlOiMwMDAwMDA7IHN0cm9rZS13aWR0aDoyOyBzdHJva2Utb3BhY2l0eTowLjE7IGZpbGw6bm9uZSIgcG9pbnRzPSIKICAyNDYuNDk5LDExNDQuMzEgMjI1Ni43NiwxMTQ0LjMxIAogICIvPgo8cG9seWxpbmUgY2xpcC1wYXRoPSJ1cmwoI2NsaXAwNjIpIiBzdHlsZT0ic3Ryb2tlOiMwMDAwMDA7IHN0cm9rZS13aWR0aDoyOyBzdHJva2Utb3BhY2l0eTowLjE7IGZpbGw6bm9uZSIgcG9pbnRzPSIKICAyNDYuNDk5LDg3MS43MTUgMjI1Ni43Niw4NzEuNzE1IAogICIvPgo8cG9seWxpbmUgY2xpcC1wYXRoPSJ1cmwoI2NsaXAwNjIpIiBzdHlsZT0ic3Ryb2tlOiMwMDAwMDA7IHN0cm9rZS13aWR0aDoyOyBzdHJva2Utb3BhY2l0eTowLjE7IGZpbGw6bm9uZSIgcG9pbnRzPSIKICAyNDYuNDk5LDU5OS4xMTcgMjI1Ni43Niw1OTkuMTE3IAogICIvPgo8cG9seWxpbmUgY2xpcC1wYXRoPSJ1cmwoI2NsaXAwNjIpIiBzdHlsZT0ic3Ryb2tlOiMwMDAwMDA7IHN0cm9rZS13aWR0aDoyOyBzdHJva2Utb3BhY2l0eTowLjE7IGZpbGw6bm9uZSIgcG9pbnRzPSIKICAyNDYuNDk5LDMyNi41MTkgMjI1Ni43NiwzMjYuNTE5IAogICIvPgo8cG9seWxpbmUgY2xpcC1wYXRoPSJ1cmwoI2NsaXAwNjIpIiBzdHlsZT0ic3Ryb2tlOiMwMDAwMDA7IHN0cm9rZS13aWR0aDoyOyBzdHJva2Utb3BhY2l0eTowLjE7IGZpbGw6bm9uZSIgcG9pbnRzPSIKICAyNDYuNDk5LDUzLjkyMDYgMjI1Ni43Niw1My45MjA2IAogICIvPgo8cG9seWxpbmUgY2xpcC1wYXRoPSJ1cmwoI2NsaXAwNjApIiBzdHlsZT0ic3Ryb2tlOiMwMDAwMDA7IHN0cm9rZS13aWR0aDo0OyBzdHJva2Utb3BhY2l0eToxOyBmaWxsOm5vbmUiIHBvaW50cz0iCiAgMjQ2LjQ5OSwxMzU5LjgyIDI0Ni40OTksNDcuMjQ0MSAKICAiLz4KPHBvbHlsaW5lIGNsaXAtcGF0aD0idXJsKCNjbGlwMDYwKSIgc3R5bGU9InN0cm9rZTojMDAwMDAwOyBzdHJva2Utd2lkdGg6NDsgc3Ryb2tlLW9wYWNpdHk6MTsgZmlsbDpub25lIiBwb2ludHM9IgogIDI0Ni40OTksMTE0NC4zMSAyNzAuNjIyLDExNDQuMzEgCiAgIi8+Cjxwb2x5bGluZSBjbGlwLXBhdGg9InVybCgjY2xpcDA2MCkiIHN0eWxlPSJzdHJva2U6IzAwMDAwMDsgc3Ryb2tlLXdpZHRoOjQ7IHN0cm9rZS1vcGFjaXR5OjE7IGZpbGw6bm9uZSIgcG9pbnRzPSIKICAyNDYuNDk5LDg3MS43MTUgMjcwLjYyMiw4NzEuNzE1IAogICIvPgo8cG9seWxpbmUgY2xpcC1wYXRoPSJ1cmwoI2NsaXAwNjApIiBzdHlsZT0ic3Ryb2tlOiMwMDAwMDA7IHN0cm9rZS13aWR0aDo0OyBzdHJva2Utb3BhY2l0eToxOyBmaWxsOm5vbmUiIHBvaW50cz0iCiAgMjQ2LjQ5OSw1OTkuMTE3IDI3MC42MjIsNTk5LjExNyAKICAiLz4KPHBvbHlsaW5lIGNsaXAtcGF0aD0idXJsKCNjbGlwMDYwKSIgc3R5bGU9InN0cm9rZTojMDAwMDAwOyBzdHJva2Utd2lkdGg6NDsgc3Ryb2tlLW9wYWNpdHk6MTsgZmlsbDpub25lIiBwb2ludHM9IgogIDI0Ni40OTksMzI2LjUxOSAyNzAuNjIyLDMyNi41MTkgCiAgIi8+Cjxwb2x5bGluZSBjbGlwLXBhdGg9InVybCgjY2xpcDA2MCkiIHN0eWxlPSJzdHJva2U6IzAwMDAwMDsgc3Ryb2tlLXdpZHRoOjQ7IHN0cm9rZS1vcGFjaXR5OjE7IGZpbGw6bm9uZSIgcG9pbnRzPSIKICAyNDYuNDk5LDUzLjkyMDYgMjcwLjYyMiw1My45MjA2IAogICIvPgo8cGF0aCBjbGlwLXBhdGg9InVybCgjY2xpcDA2MCkiIGQ9Ik0gMCAwIE0xNDQuODA5IDExMjcuMDMgTDE2My4xNjYgMTEyNy4wMyBMMTYzLjE2NiAxMTMwLjk3IEwxNDkuMDkyIDExMzAuOTcgTDE0OS4wOTIgMTEzOS40NCBRMTUwLjExIDExMzkuMDkgMTUxLjEyOSAxMTM4LjkzIFExNTIuMTQ3IDExMzguNzUgMTUzLjE2NiAxMTM4Ljc1IFExNTguOTUzIDExMzguNzUgMTYyLjMzMiAxMTQxLjkyIFExNjUuNzEyIDExNDUuMDkgMTY1LjcxMiAxMTUwLjUgUTE2NS43MTIgMTE1Ni4wOCAxNjIuMjQgMTE1OS4xOSBRMTU4Ljc2OCAxMTYyLjI2IDE1Mi40NDggMTE2Mi4yNiBRMTUwLjI3MiAxMTYyLjI2IDE0OC4wMDQgMTE2MS44OSBRMTQ1Ljc1OSAxMTYxLjUyIDE0My4zNTEgMTE2MC43OCBMMTQzLjM1MSAxMTU2LjA4IFExNDUuNDM0IDExNTcuMjIgMTQ3LjY1NyAxMTU3Ljc3IFExNDkuODc5IDExNTguMzMgMTUyLjM1NiAxMTU4LjMzIFExNTYuMzYgMTE1OC4zMyAxNTguNjk4IDExNTYuMjIgUTE2MS4wMzYgMTE1NC4xMiAxNjEuMDM2IDExNTAuNSBRMTYxLjAzNiAxMTQ2Ljg5IDE1OC42OTggMTE0NC43OSBRMTU2LjM2IDExNDIuNjggMTUyLjM1NiAxMTQyLjY4IFExNTAuNDgxIDExNDIuNjggMTQ4LjYwNiAxMTQzLjEgUTE0Ni43NTQgMTE0My41MSAxNDQuODA5IDExNDQuMzkgTDE0NC44MDkgMTEyNy4wMyBaIiBmaWxsPSIjMDAwMDAwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGZpbGwtb3BhY2l0eT0iMSIgLz48cGF0aCBjbGlwLXBhdGg9InVybCgjY2xpcDA2MCkiIGQ9Ik0gMCAwIE0xNzQuOTI1IDExNTUuNzEgTDE3OS44MDkgMTE1NS43MSBMMTc5LjgwOSAxMTYxLjU5IEwxNzQuOTI1IDExNjEuNTkgTDE3NC45MjUgMTE1NS43MSBaIiBmaWxsPSIjMDAwMDAwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGZpbGwtb3BhY2l0eT0iMSIgLz48cGF0aCBjbGlwLXBhdGg9InVybCgjY2xpcDA2MCkiIGQ9Ik0gMCAwIE0xOTkuOTk0IDExMzAuMTEgUTE5Ni4zODMgMTEzMC4xMSAxOTQuNTU1IDExMzMuNjggUTE5Mi43NDkgMTEzNy4yMiAxOTIuNzQ5IDExNDQuMzUgUTE5Mi43NDkgMTE1MS40NSAxOTQuNTU1IDExNTUuMDIgUTE5Ni4zODMgMTE1OC41NiAxOTkuOTk0IDExNTguNTYgUTIwMy42MjkgMTE1OC41NiAyMDUuNDM0IDExNTUuMDIgUTIwNy4yNjMgMTE1MS40NSAyMDcuMjYzIDExNDQuMzUgUTIwNy4yNjMgMTEzNy4yMiAyMDUuNDM0IDExMzMuNjggUTIwMy42MjkgMTEzMC4xMSAxOTkuOTk0IDExMzAuMTEgTTE5OS45OTQgMTEyNi40MSBRMjA1LjgwNCAxMTI2LjQxIDIwOC44NiAxMTMxLjAxIFEyMTEuOTM5IDExMzUuNiAyMTEuOTM5IDExNDQuMzUgUTIxMS45MzkgMTE1My4wNyAyMDguODYgMTE1Ny42OCBRMjA1LjgwNCAxMTYyLjI2IDE5OS45OTQgMTE2Mi4yNiBRMTk0LjE4NCAxMTYyLjI2IDE5MS4xMDUgMTE1Ny42OCBRMTg4LjA1IDExNTMuMDcgMTg4LjA1IDExNDQuMzUgUTE4OC4wNSAxMTM1LjYgMTkxLjEwNSAxMTMxLjAxIFExOTQuMTg0IDExMjYuNDEgMTk5Ljk5NCAxMTI2LjQxIFoiIGZpbGw9IiMwMDAwMDAiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZmlsbC1vcGFjaXR5PSIxIiAvPjxwYXRoIGNsaXAtcGF0aD0idXJsKCNjbGlwMDYwKSIgZD0iTSAwIDAgTTE0NC41NzggODU0LjQzNSBMMTY2LjggODU0LjQzNSBMMTY2LjggODU2LjQyNSBMMTU0LjI1NCA4ODguOTk1IEwxNDkuMzcgODg4Ljk5NSBMMTYxLjE3NSA4NTguMzcgTDE0NC41NzggODU4LjM3IEwxNDQuNTc4IDg1NC40MzUgWiIgZmlsbD0iIzAwMDAwMCIgZmlsbC1ydWxlPSJldmVub2RkIiBmaWxsLW9wYWNpdHk9IjEiIC8+PHBhdGggY2xpcC1wYXRoPSJ1cmwoI2NsaXAwNjApIiBkPSJNIDAgMCBNMTc1LjkyIDg4My4xMTUgTDE4MC44MDUgODgzLjExNSBMMTgwLjgwNSA4ODguOTk1IEwxNzUuOTIgODg4Ljk5NSBMMTc1LjkyIDg4My4xMTUgWiIgZmlsbD0iIzAwMDAwMCIgZmlsbC1ydWxlPSJldmVub2RkIiBmaWxsLW9wYWNpdHk9IjEiIC8+PHBhdGggY2xpcC1wYXRoPSJ1cmwoI2NsaXAwNjApIiBkPSJNIDAgMCBNMTkxLjAzNiA4NTQuNDM1IEwyMDkuMzkyIDg1NC40MzUgTDIwOS4zOTIgODU4LjM3IEwxOTUuMzE4IDg1OC4zNyBMMTk1LjMxOCA4NjYuODQyIFExOTYuMzM3IDg2Ni40OTUgMTk3LjM1NSA4NjYuMzMzIFExOTguMzc0IDg2Ni4xNDggMTk5LjM5MiA4NjYuMTQ4IFEyMDUuMTc5IDg2Ni4xNDggMjA4LjU1OSA4NjkuMzE5IFEyMTEuOTM5IDg3Mi40OSAyMTEuOTM5IDg3Ny45MDcgUTIxMS45MzkgODgzLjQ4NSAyMDguNDY3IDg4Ni41ODcgUTIwNC45OTQgODg5LjY2NiAxOTguNjc1IDg4OS42NjYgUTE5Ni40OTkgODg5LjY2NiAxOTQuMjMgODg5LjI5NiBRMTkxLjk4NSA4ODguOTI1IDE4OS41NzggODg4LjE4NCBMMTg5LjU3OCA4ODMuNDg1IFExOTEuNjYxIDg4NC42MiAxOTMuODgzIDg4NS4xNzUgUTE5Ni4xMDUgODg1LjczMSAxOTguNTgyIDg4NS43MzEgUTIwMi41ODcgODg1LjczMSAyMDQuOTI1IDg4My42MjQgUTIwNy4yNjMgODgxLjUxOCAyMDcuMjYzIDg3Ny45MDcgUTIwNy4yNjMgODc0LjI5NiAyMDQuOTI1IDg3Mi4xODkgUTIwMi41ODcgODcwLjA4MyAxOTguNTgyIDg3MC4wODMgUTE5Ni43MDcgODcwLjA4MyAxOTQuODMyIDg3MC40OTkgUTE5Mi45OCA4NzAuOTE2IDE5MS4wMzYgODcxLjc5NiBMMTkxLjAzNiA4NTQuNDM1IFoiIGZpbGw9IiMwMDAwMDAiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZmlsbC1vcGFjaXR5PSIxIiAvPjxwYXRoIGNsaXAtcGF0aD0idXJsKCNjbGlwMDYwKSIgZD0iTSAwIDAgTTExNS40MTEgNjEyLjQ2MSBMMTIzLjA1IDYxMi40NjEgTDEyMy4wNSA1ODYuMDk2IEwxMTQuNzQgNTg3Ljc2MyBMMTE0Ljc0IDU4My41MDMgTDEyMy4wMDQgNTgxLjgzNyBMMTI3LjY4IDU4MS44MzcgTDEyNy42OCA2MTIuNDYxIEwxMzUuMzE5IDYxMi40NjEgTDEzNS4zMTkgNjE2LjM5NyBMMTE1LjQxMSA2MTYuMzk3IEwxMTUuNDExIDYxMi40NjEgWiIgZmlsbD0iIzAwMDAwMCIgZmlsbC1ydWxlPSJldmVub2RkIiBmaWxsLW9wYWNpdHk9IjEiIC8+PHBhdGggY2xpcC1wYXRoPSJ1cmwoI2NsaXAwNjApIiBkPSJNIDAgMCBNMTU0Ljc2MyA1ODQuOTE1IFExNTEuMTUyIDU4NC45MTUgMTQ5LjMyMyA1ODguNDggUTE0Ny41MTggNTkyLjAyMiAxNDcuNTE4IDU5OS4xNTEgUTE0Ny41MTggNjA2LjI1OCAxNDkuMzIzIDYwOS44MjMgUTE1MS4xNTIgNjEzLjM2NCAxNTQuNzYzIDYxMy4zNjQgUTE1OC4zOTcgNjEzLjM2NCAxNjAuMjAzIDYwOS44MjMgUTE2Mi4wMzIgNjA2LjI1OCAxNjIuMDMyIDU5OS4xNTEgUTE2Mi4wMzIgNTkyLjAyMiAxNjAuMjAzIDU4OC40OCBRMTU4LjM5NyA1ODQuOTE1IDE1NC43NjMgNTg0LjkxNSBNMTU0Ljc2MyA1ODEuMjEyIFExNjAuNTczIDU4MS4yMTIgMTYzLjYyOSA1ODUuODE4IFExNjYuNzA3IDU5MC40MDEgMTY2LjcwNyA1OTkuMTUxIFExNjYuNzA3IDYwNy44NzggMTYzLjYyOSA2MTIuNDg1IFExNjAuNTczIDYxNy4wNjggMTU0Ljc2MyA2MTcuMDY4IFExNDguOTUzIDYxNy4wNjggMTQ1Ljg3NCA2MTIuNDg1IFExNDIuODE5IDYwNy44NzggMTQyLjgxOSA1OTkuMTUxIFExNDIuODE5IDU5MC40MDEgMTQ1Ljg3NCA1ODUuODE4IFExNDguOTUzIDU4MS4yMTIgMTU0Ljc2MyA1ODEuMjEyIFoiIGZpbGw9IiMwMDAwMDAiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZmlsbC1vcGFjaXR5PSIxIiAvPjxwYXRoIGNsaXAtcGF0aD0idXJsKCNjbGlwMDYwKSIgZD0iTSAwIDAgTTE3NC45MjUgNjEwLjUxNyBMMTc5LjgwOSA2MTAuNTE3IEwxNzkuODA5IDYxNi4zOTcgTDE3NC45MjUgNjE2LjM5NyBMMTc0LjkyNSA2MTAuNTE3IFoiIGZpbGw9IiMwMDAwMDAiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZmlsbC1vcGFjaXR5PSIxIiAvPjxwYXRoIGNsaXAtcGF0aD0idXJsKCNjbGlwMDYwKSIgZD0iTSAwIDAgTTE5OS45OTQgNTg0LjkxNSBRMTk2LjM4MyA1ODQuOTE1IDE5NC41NTUgNTg4LjQ4IFExOTIuNzQ5IDU5Mi4wMjIgMTkyLjc0OSA1OTkuMTUxIFExOTIuNzQ5IDYwNi4yNTggMTk0LjU1NSA2MDkuODIzIFExOTYuMzgzIDYxMy4zNjQgMTk5Ljk5NCA2MTMuMzY0IFEyMDMuNjI5IDYxMy4zNjQgMjA1LjQzNCA2MDkuODIzIFEyMDcuMjYzIDYwNi4yNTggMjA3LjI2MyA1OTkuMTUxIFEyMDcuMjYzIDU5Mi4wMjIgMjA1LjQzNCA1ODguNDggUTIwMy42MjkgNTg0LjkxNSAxOTkuOTk0IDU4NC45MTUgTTE5OS45OTQgNTgxLjIxMiBRMjA1LjgwNCA1ODEuMjEyIDIwOC44NiA1ODUuODE4IFEyMTEuOTM5IDU5MC40MDEgMjExLjkzOSA1OTkuMTUxIFEyMTEuOTM5IDYwNy44NzggMjA4Ljg2IDYxMi40ODUgUTIwNS44MDQgNjE3LjA2OCAxOTkuOTk0IDYxNy4wNjggUTE5NC4xODQgNjE3LjA2OCAxOTEuMTA1IDYxMi40ODUgUTE4OC4wNSA2MDcuODc4IDE4OC4wNSA1OTkuMTUxIFExODguMDUgNTkwLjQwMSAxOTEuMTA1IDU4NS44MTggUTE5NC4xODQgNTgxLjIxMiAxOTkuOTk0IDU4MS4yMTIgWiIgZmlsbD0iIzAwMDAwMCIgZmlsbC1ydWxlPSJldmVub2RkIiBmaWxsLW9wYWNpdHk9IjEiIC8+PHBhdGggY2xpcC1wYXRoPSJ1cmwoI2NsaXAwNjApIiBkPSJNIDAgMCBNMTE2LjQwNyAzMzkuODYzIEwxMjQuMDQ2IDMzOS44NjMgTDEyNC4wNDYgMzEzLjQ5OCBMMTE1LjczNiAzMTUuMTY1IEwxMTUuNzM2IDMxMC45MDUgTDEyMy45OTkgMzA5LjIzOSBMMTI4LjY3NSAzMDkuMjM5IEwxMjguNjc1IDMzOS44NjMgTDEzNi4zMTQgMzM5Ljg2MyBMMTM2LjMxNCAzNDMuNzk5IEwxMTYuNDA3IDM0My43OTkgTDExNi40MDcgMzM5Ljg2MyBaIiBmaWxsPSIjMDAwMDAwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGZpbGwtb3BhY2l0eT0iMSIgLz48cGF0aCBjbGlwLXBhdGg9InVybCgjY2xpcDA2MCkiIGQ9Ik0gMCAwIE0xNDkuNzg2IDMzOS44NjMgTDE2Ni4xMDYgMzM5Ljg2MyBMMTY2LjEwNiAzNDMuNzk5IEwxNDQuMTYxIDM0My43OTkgTDE0NC4xNjEgMzM5Ljg2MyBRMTQ2LjgyMyAzMzcuMTA5IDE1MS40MDcgMzMyLjQ3OSBRMTU2LjAxMyAzMjcuODI2IDE1Ny4xOTQgMzI2LjQ4NCBRMTU5LjQzOSAzMjMuOTYxIDE2MC4zMTkgMzIyLjIyNSBRMTYxLjIyMSAzMjAuNDY1IDE2MS4yMjEgMzE4Ljc3NiBRMTYxLjIyMSAzMTYuMDIxIDE1OS4yNzcgMzE0LjI4NSBRMTU3LjM1NiAzMTIuNTQ5IDE1NC4yNTQgMzEyLjU0OSBRMTUyLjA1NSAzMTIuNTQ5IDE0OS42MDEgMzEzLjMxMyBRMTQ3LjE3MSAzMTQuMDc3IDE0NC4zOTMgMzE1LjYyNyBMMTQ0LjM5MyAzMTAuOTA1IFExNDcuMjE3IDMwOS43NzEgMTQ5LjY3MSAzMDkuMTkyIFExNTIuMTI0IDMwOC42MTQgMTU0LjE2MSAzMDguNjE0IFExNTkuNTMyIDMwOC42MTQgMTYyLjcyNiAzMTEuMjk5IFExNjUuOTIgMzEzLjk4NCAxNjUuOTIgMzE4LjQ3NSBRMTY1LjkyIDMyMC42MDQgMTY1LjExIDMyMi41MjYgUTE2NC4zMjMgMzI0LjQyNCAxNjIuMjE3IDMyNy4wMTYgUTE2MS42MzggMzI3LjY4OCAxNTguNTM2IDMzMC45MDUgUTE1NS40MzQgMzM0LjEgMTQ5Ljc4NiAzMzkuODYzIFoiIGZpbGw9IiMwMDAwMDAiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZmlsbC1vcGFjaXR5PSIxIiAvPjxwYXRoIGNsaXAtcGF0aD0idXJsKCNjbGlwMDYwKSIgZD0iTSAwIDAgTTE3NS45MiAzMzcuOTE5IEwxODAuODA1IDMzNy45MTkgTDE4MC44MDUgMzQzLjc5OSBMMTc1LjkyIDM0My43OTkgTDE3NS45MiAzMzcuOTE5IFoiIGZpbGw9IiMwMDAwMDAiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZmlsbC1vcGFjaXR5PSIxIiAvPjxwYXRoIGNsaXAtcGF0aD0idXJsKCNjbGlwMDYwKSIgZD0iTSAwIDAgTTE5MS4wMzYgMzA5LjIzOSBMMjA5LjM5MiAzMDkuMjM5IEwyMDkuMzkyIDMxMy4xNzQgTDE5NS4zMTggMzEzLjE3NCBMMTk1LjMxOCAzMjEuNjQ2IFExOTYuMzM3IDMyMS4yOTkgMTk3LjM1NSAzMjEuMTM3IFExOTguMzc0IDMyMC45NTIgMTk5LjM5MiAzMjAuOTUyIFEyMDUuMTc5IDMyMC45NTIgMjA4LjU1OSAzMjQuMTIzIFEyMTEuOTM5IDMyNy4yOTQgMjExLjkzOSAzMzIuNzExIFEyMTEuOTM5IDMzOC4yODkgMjA4LjQ2NyAzNDEuMzkxIFEyMDQuOTk0IDM0NC40NyAxOTguNjc1IDM0NC40NyBRMTk2LjQ5OSAzNDQuNDcgMTk0LjIzIDM0NC4xIFExOTEuOTg1IDM0My43MjkgMTg5LjU3OCAzNDIuOTg4IEwxODkuNTc4IDMzOC4yODkgUTE5MS42NjEgMzM5LjQyNCAxOTMuODgzIDMzOS45NzkgUTE5Ni4xMDUgMzQwLjUzNSAxOTguNTgyIDM0MC41MzUgUTIwMi41ODcgMzQwLjUzNSAyMDQuOTI1IDMzOC40MjggUTIwNy4yNjMgMzM2LjMyMiAyMDcuMjYzIDMzMi43MTEgUTIwNy4yNjMgMzI5LjEgMjA0LjkyNSAzMjYuOTkzIFEyMDIuNTg3IDMyNC44ODcgMTk4LjU4MiAzMjQuODg3IFExOTYuNzA3IDMyNC44ODcgMTk0LjgzMiAzMjUuMzAzIFExOTIuOTggMzI1LjcyIDE5MS4wMzYgMzI2LjYgTDE5MS4wMzYgMzA5LjIzOSBaIiBmaWxsPSIjMDAwMDAwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGZpbGwtb3BhY2l0eT0iMSIgLz48cGF0aCBjbGlwLXBhdGg9InVybCgjY2xpcDA2MCkiIGQ9Ik0gMCAwIE0xMTUuNDExIDY3LjI2NTUgTDEyMy4wNSA2Ny4yNjU1IEwxMjMuMDUgNDAuODk5OSBMMTE0Ljc0IDQyLjU2NjUgTDExNC43NCAzOC4zMDczIEwxMjMuMDA0IDM2LjY0MDYgTDEyNy42OCAzNi42NDA2IEwxMjcuNjggNjcuMjY1NSBMMTM1LjMxOSA2Ny4yNjU1IEwxMzUuMzE5IDcxLjIwMDYgTDExNS40MTEgNzEuMjAwNiBMMTE1LjQxMSA2Ny4yNjU1IFoiIGZpbGw9IiMwMDAwMDAiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZmlsbC1vcGFjaXR5PSIxIiAvPjxwYXRoIGNsaXAtcGF0aD0idXJsKCNjbGlwMDYwKSIgZD0iTSAwIDAgTTE0NC44MDkgMzYuNjQwNiBMMTYzLjE2NiAzNi42NDA2IEwxNjMuMTY2IDQwLjU3NTggTDE0OS4wOTIgNDAuNTc1OCBMMTQ5LjA5MiA0OS4wNDggUTE1MC4xMSA0OC43MDA4IDE1MS4xMjkgNDguNTM4NyBRMTUyLjE0NyA0OC4zNTM1IDE1My4xNjYgNDguMzUzNSBRMTU4Ljk1MyA0OC4zNTM1IDE2Mi4zMzIgNTEuNTI0OCBRMTY1LjcxMiA1NC42OTYxIDE2NS43MTIgNjAuMTEyNyBRMTY1LjcxMiA2NS42OTE0IDE2Mi4yNCA2OC43OTMyIFExNTguNzY4IDcxLjg3MTkgMTUyLjQ0OCA3MS44NzE5IFExNTAuMjcyIDcxLjg3MTkgMTQ4LjAwNCA3MS41MDE2IFExNDUuNzU5IDcxLjEzMTIgMTQzLjM1MSA3MC4zOTA1IEwxNDMuMzUxIDY1LjY5MTQgUTE0NS40MzQgNjYuODI1NyAxNDcuNjU3IDY3LjM4MTIgUTE0OS44NzkgNjcuOTM2OCAxNTIuMzU2IDY3LjkzNjggUTE1Ni4zNiA2Ny45MzY4IDE1OC42OTggNjUuODMwMyBRMTYxLjAzNiA2My43MjM4IDE2MS4wMzYgNjAuMTEyNyBRMTYxLjAzNiA1Ni41MDE2IDE1OC42OTggNTQuMzk1MiBRMTU2LjM2IDUyLjI4ODcgMTUyLjM1NiA1Mi4yODg3IFExNTAuNDgxIDUyLjI4ODcgMTQ4LjYwNiA1Mi43MDU0IFExNDYuNzU0IDUzLjEyMiAxNDQuODA5IDU0LjAwMTcgTDE0NC44MDkgMzYuNjQwNiBaIiBmaWxsPSIjMDAwMDAwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGZpbGwtb3BhY2l0eT0iMSIgLz48cGF0aCBjbGlwLXBhdGg9InVybCgjY2xpcDA2MCkiIGQ9Ik0gMCAwIE0xNzQuOTI1IDY1LjMyMSBMMTc5LjgwOSA2NS4zMjEgTDE3OS44MDkgNzEuMjAwNiBMMTc0LjkyNSA3MS4yMDA2IEwxNzQuOTI1IDY1LjMyMSBaIiBmaWxsPSIjMDAwMDAwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGZpbGwtb3BhY2l0eT0iMSIgLz48cGF0aCBjbGlwLXBhdGg9InVybCgjY2xpcDA2MCkiIGQ9Ik0gMCAwIE0xOTkuOTk0IDM5LjcxOTMgUTE5Ni4zODMgMzkuNzE5MyAxOTQuNTU1IDQzLjI4NDEgUTE5Mi43NDkgNDYuODI1OCAxOTIuNzQ5IDUzLjk1NTQgUTE5Mi43NDkgNjEuMDYxOCAxOTQuNTU1IDY0LjYyNjYgUTE5Ni4zODMgNjguMTY4MiAxOTkuOTk0IDY4LjE2ODIgUTIwMy42MjkgNjguMTY4MiAyMDUuNDM0IDY0LjYyNjYgUTIwNy4yNjMgNjEuMDYxOCAyMDcuMjYzIDUzLjk1NTQgUTIwNy4yNjMgNDYuODI1OCAyMDUuNDM0IDQzLjI4NDEgUTIwMy42MjkgMzkuNzE5MyAxOTkuOTk0IDM5LjcxOTMgTTE5OS45OTQgMzYuMDE1NiBRMjA1LjgwNCAzNi4wMTU2IDIwOC44NiA0MC42MjIxIFEyMTEuOTM5IDQ1LjIwNTQgMjExLjkzOSA1My45NTU0IFEyMTEuOTM5IDYyLjY4MjIgMjA4Ljg2IDY3LjI4ODYgUTIwNS44MDQgNzEuODcxOSAxOTkuOTk0IDcxLjg3MTkgUTE5NC4xODQgNzEuODcxOSAxOTEuMTA1IDY3LjI4ODYgUTE4OC4wNSA2Mi42ODIyIDE4OC4wNSA1My45NTU0IFExODguMDUgNDUuMjA1NCAxOTEuMTA1IDQwLjYyMjEgUTE5NC4xODQgMzYuMDE1NiAxOTkuOTk0IDM2LjAxNTYgWiIgZmlsbD0iIzAwMDAwMCIgZmlsbC1ydWxlPSJldmVub2RkIiBmaWxsLW9wYWNpdHk9IjEiIC8+PHBhdGggY2xpcC1wYXRoPSJ1cmwoI2NsaXAwNjApIiBkPSJNIDAgMCBNMjMuNjg3NyA3OTQuODY0IEw0MS41NDM1IDc5NC44NjQgTDQxLjU0MzUgNzg2Ljc3OSBRNDEuNTQzNSA3ODIuMjkyIDM5LjIyIDc3OS44NDEgUTM2Ljg5NjUgNzc3LjM5IDMyLjU5OTcgNzc3LjM5IFEyOC4zMzQ3IDc3Ny4zOSAyNi4wMTEyIDc3OS44NDEgUTIzLjY4NzcgNzgyLjI5MiAyMy42ODc3IDc4Ni43NzkgTDIzLjY4NzcgNzk0Ljg2NCBNMTguNDA0MiA4MDEuMjkzIEwxOC40MDQyIDc4Ni43NzkgUTE4LjQwNDIgNzc4Ljc5MSAyMi4wMzI2IDc3NC43MTYgUTI1LjYyOTIgNzcwLjYxMSAzMi41OTk3IDc3MC42MTEgUTM5LjYzMzggNzcwLjYxMSA0My4yMzA0IDc3NC43MTYgUTQ2LjgyNyA3NzguNzkxIDQ2LjgyNyA3ODYuNzc5IEw0Ni44MjcgNzk0Ljg2NCBMNjUuOTI0MiA3OTQuODY0IEw2NS45MjQyIDgwMS4yOTMgTDE4LjQwNDIgODAxLjI5MyBaIiBmaWxsPSIjMDAwMDAwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGZpbGwtb3BhY2l0eT0iMSIgLz48cGF0aCBjbGlwLXBhdGg9InVybCgjY2xpcDA2MCkiIGQ9Ik0gMCAwIE00OC4wMDQ3IDc0OC45NjcgUTQ4LjAwNDcgNzU2LjA2NSA0OS42Mjc5IDc1OC44MDIgUTUxLjI1MTIgNzYxLjUzOSA1NS4xNjYxIDc2MS41MzkgUTU4LjI4NTMgNzYxLjUzOSA2MC4xMzE0IDc1OS41MDIgUTYxLjk0NTYgNzU3LjQzNCA2MS45NDU2IDc1My45MDEgUTYxLjk0NTYgNzQ5LjAzMSA1OC41MDgxIDc0Ni4xMDMgUTU1LjAzODggNzQzLjE0MyA0OS4zMDk3IDc0My4xNDMgTDQ4LjAwNDcgNzQzLjE0MyBMNDguMDA0NyA3NDguOTY3IE00NS41ODU3IDczNy4yODYgTDY1LjkyNDIgNzM3LjI4NiBMNjUuOTI0MiA3NDMuMTQzIEw2MC41MTMzIDc0My4xNDMgUTYzLjc1OTggNzQ1LjE0OCA2NS4zMTk0IDc0OC4xNCBRNjYuODQ3MiA3NTEuMTMyIDY2Ljg0NzIgNzU1LjQ2IFE2Ni44NDcyIDc2MC45MzUgNjMuNzkxNiA3NjQuMTgxIFE2MC43MDQzIDc2Ny4zOTYgNTUuNTQ4MSA3NjcuMzk2IFE0OS41MzI1IDc2Ny4zOTYgNDYuNDc2OSA3NjMuMzg2IFE0My40MjE0IDc1OS4zNDMgNDMuNDIxNCA3NTEuMzU0IEw0My40MjE0IDc0My4xNDMgTDQyLjg0ODUgNzQzLjE0MyBRMzguODA2MiA3NDMuMTQzIDM2LjYxMDEgNzQ1LjgxNiBRMzQuMzgyMSA3NDguNDU4IDM0LjM4MjEgNzUzLjI2NCBRMzQuMzgyMSA3NTYuMzIgMzUuMTE0MSA3NTkuMjE2IFEzNS44NDYyIDc2Mi4xMTIgMzcuMzEwMyA3NjQuNzg2IEwzMS44OTk1IDc2NC43ODYgUTMwLjY1ODEgNzYxLjU3MSAzMC4wNTM0IDc1OC41NDggUTI5LjQxNjggNzU1LjUyNCAyOS40MTY4IDc1Mi42NTkgUTI5LjQxNjggNzQ0LjkyNSAzMy40MjcyIDc0MS4xMDYgUTM3LjQzNzYgNzM3LjI4NiA0NS41ODU3IDczNy4yODYgWiIgZmlsbD0iIzAwMDAwMCIgZmlsbC1ydWxlPSJldmVub2RkIiBmaWxsLW9wYWNpdHk9IjEiIC8+PHBhdGggY2xpcC1wYXRoPSJ1cmwoI2NsaXAwNjApIiBkPSJNIDAgMCBNNjkuMjM0MyA3MTAuMzkxIFE3NS42IDcxMi44NzQgNzcuNTQxNiA3MTUuMjI5IFE3OS40ODMxIDcxNy41ODQgNzkuNDgzMSA3MjEuNTMxIEw3OS40ODMxIDcyNi4yMSBMNzQuNTgxNSA3MjYuMjEgTDc0LjU4MTUgNzIyLjc3MiBRNzQuNTgxNSA3MjAuMzUzIDczLjQzNTcgNzE5LjAxNyBRNzIuMjg5OSA3MTcuNjggNjguMDI0OCA3MTYuMDU2IEw2NS4zNTEyIDcxNS4wMDYgTDMwLjI3NjIgNzI5LjQyNCBMMzAuMjc2MiA3MjMuMjE4IEw1OC4xNTggNzEyLjA3OCBMMzAuMjc2MiA3MDAuOTM4IEwzMC4yNzYyIDY5NC43MzEgTDY5LjIzNDMgNzEwLjM5MSBaIiBmaWxsPSIjMDAwMDAwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGZpbGwtb3BhY2l0eT0iMSIgLz48cGF0aCBjbGlwLXBhdGg9InVybCgjY2xpcDA2MCkiIGQ9Ik0gMCAwIE0zNC4zODIxIDY3Mi44MzMgUTM0LjM4MjEgNjc3LjU0NCAzOC4wNzQyIDY4MC4yODEgUTQxLjczNDUgNjgzLjAxOCA0OC4xMzIgNjgzLjAxOCBRNTQuNTI5NSA2ODMuMDE4IDU4LjIyMTcgNjgwLjMxMyBRNjEuODgxOSA2NzcuNTc2IDYxLjg4MTkgNjcyLjgzMyBRNjEuODgxOSA2NjguMTU1IDU4LjE4OTggNjY1LjQxNyBRNTQuNDk3NyA2NjIuNjggNDguMTMyIDY2Mi42OCBRNDEuNzk4MSA2NjIuNjggMzguMTA2IDY2NS40MTcgUTM0LjM4MjEgNjY4LjE1NSAzNC4zODIxIDY3Mi44MzMgTTI5LjQxNjggNjcyLjgzMyBRMjkuNDE2OCA2NjUuMTk1IDM0LjM4MjEgNjYwLjgzNCBRMzkuMzQ3MyA2NTYuNDczIDQ4LjEzMiA2NTYuNDczIFE1Ni44ODQ5IDY1Ni40NzMgNjEuODgxOSA2NjAuODM0IFE2Ni44NDcyIDY2NS4xOTUgNjYuODQ3MiA2NzIuODMzIFE2Ni44NDcyIDY4MC41MDQgNjEuODgxOSA2ODQuODY1IFE1Ni44ODQ5IDY4OS4xOTMgNDguMTMyIDY4OS4xOTMgUTM5LjM0NzMgNjg5LjE5MyAzNC4zODIxIDY4NC44NjUgUTI5LjQxNjggNjgwLjUwNCAyOS40MTY4IDY3Mi44MzMgWiIgZmlsbD0iIzAwMDAwMCIgZmlsbC1ydWxlPSJldmVub2RkIiBmaWxsLW9wYWNpdHk9IjEiIC8+PHBhdGggY2xpcC1wYXRoPSJ1cmwoI2NsaXAwNjApIiBkPSJNIDAgMCBNMTYuMzk5IDYyOC43MTkgTDIxLjI2ODcgNjI4LjcxOSBMMjEuMjY4NyA2MzQuMzIxIFEyMS4yNjg3IDYzNy40NzIgMjIuNTQxOSA2MzguNzEzIFEyMy44MTUgNjM5LjkyMyAyNy4xMjUyIDYzOS45MjMgTDMwLjI3NjIgNjM5LjkyMyBMMzAuMjc2MiA2MzAuMjc5IEwzNC44Mjc3IDYzMC4yNzkgTDM0LjgyNzcgNjM5LjkyMyBMNjUuOTI0MiA2MzkuOTIzIEw2NS45MjQyIDY0NS44MTEgTDM0LjgyNzcgNjQ1LjgxMSBMMzQuODI3NyA2NTEuNDEzIEwzMC4yNzYyIDY1MS40MTMgTDMwLjI3NjIgNjQ1LjgxMSBMMjcuNzkzNiA2NDUuODExIFEyMS44NDE2IDY0NS44MTEgMTkuMTM2MiA2NDMuMDQyIFExNi4zOTkgNjQwLjI3MyAxNi4zOTkgNjM0LjI1NyBMMTYuMzk5IDYyOC43MTkgWiIgZmlsbD0iIzAwMDAwMCIgZmlsbC1ydWxlPSJldmVub2RkIiBmaWxsLW9wYWNpdHk9IjEiIC8+PHBhdGggY2xpcC1wYXRoPSJ1cmwoI2NsaXAwNjApIiBkPSJNIDAgMCBNMTYuMzk5IDYwNS43NzEgTDIxLjI2ODcgNjA1Ljc3MSBMMjEuMjY4NyA2MTEuMzcyIFEyMS4yNjg3IDYxNC41MjMgMjIuNTQxOSA2MTUuNzY1IFEyMy44MTUgNjE2Ljk3NCAyNy4xMjUyIDYxNi45NzQgTDMwLjI3NjIgNjE2Ljk3NCBMMzAuMjc2MiA2MDcuMzMgTDM0LjgyNzcgNjA3LjMzIEwzNC44Mjc3IDYxNi45NzQgTDY1LjkyNDIgNjE2Ljk3NCBMNjUuOTI0MiA2MjIuODYzIEwzNC44Mjc3IDYyMi44NjMgTDM0LjgyNzcgNjI4LjQ2NCBMMzAuMjc2MiA2MjguNDY0IEwzMC4yNzYyIDYyMi44NjMgTDI3Ljc5MzYgNjIyLjg2MyBRMjEuODQxNiA2MjIuODYzIDE5LjEzNjIgNjIwLjA5MyBRMTYuMzk5IDYxNy4zMjQgMTYuMzk5IDYxMS4zMDkgTDE2LjM5OSA2MDUuNzcxIFoiIGZpbGw9IiMwMDAwMDAiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZmlsbC1vcGFjaXR5PSIxIiAvPjxwb2x5bGluZSBjbGlwLXBhdGg9InVybCgjY2xpcDA2MikiIHN0eWxlPSJzdHJva2U6IzAwOWFmOTsgc3Ryb2tlLXdpZHRoOjEyOyBzdHJva2Utb3BhY2l0eToxOyBmaWxsOm5vbmUiIHBvaW50cz0iCiAgMzAzLjM5Myw4NC4zOTI1IDQ2MS40MzIsMjI4LjcyNCA2MTkuNDcxLDM3Mi4zMjkgNzc3LjUxLDUxNC45MzggOTM1LjU0OSw2NTEuNzU1IDEwOTMuNTksNzY2Ljg5OSAxMjUxLjYzLDg3MC44ODggMTQwOS42Nyw5NjguMzM5IDE1NjcuNzEsMTA1NS4wMiAxNzI1Ljc0LDExMzEuNDMgCiAgMTg4My43OCwxMjAxLjA2IDIwNDEuODIsMTI2NS4yMiAyMTk5Ljg2LDEzMjIuNjcgCiAgIi8+Cjxwb2x5bGluZSBjbGlwLXBhdGg9InVybCgjY2xpcDA2MikiIHN0eWxlPSJzdHJva2U6I2UyNmY0Njsgc3Ryb2tlLXdpZHRoOjEyOyBzdHJva2Utb3BhY2l0eToxOyBmaWxsOm5vbmUiIHBvaW50cz0iCiAgMzAzLjM5Myw5OS44OTI2IDQ2MS40MzIsMjQ3Ljc1NiA2MTkuNDcxLDM5Ny41NzggNzc3LjUxLDUzMi42NTEgOTM1LjU0OSw2NDcuNTY3IDEwOTMuNTksNzU4LjAxMyAxMjUxLjYzLDg3MC44NzYgMTQwOS42Nyw5NjAuOTMgMTU2Ny43MSwxMDUzLjE3IDE3MjUuNzQsMTEyNS45MSAKICAxODgzLjc4LDEyMDIuMTggMjA0MS44MiwxMjYzLjgyIDIxOTkuODYsMTMxOS40MSAKICAiLz4KPHBhdGggY2xpcC1wYXRoPSJ1cmwoI2NsaXAwNjApIiBkPSIKTTE0NTMuODcgMjcyLjQzNyBMMjE4OS43NSAyNzIuNDM3IEwyMTg5Ljc1IDkwLjk5NjYgTDE0NTMuODcgOTAuOTk2NiAgWgogICIgZmlsbD0iI2ZmZmZmZiIgZmlsbC1ydWxlPSJldmVub2RkIiBmaWxsLW9wYWNpdHk9IjEiLz4KPHBvbHlsaW5lIGNsaXAtcGF0aD0idXJsKCNjbGlwMDYwKSIgc3R5bGU9InN0cm9rZTojMDAwMDAwOyBzdHJva2Utd2lkdGg6NDsgc3Ryb2tlLW9wYWNpdHk6MTsgZmlsbDpub25lIiBwb2ludHM9IgogIDE0NTMuODcsMjcyLjQzNyAyMTg5Ljc1LDI3Mi40MzcgMjE4OS43NSw5MC45OTY2IDE0NTMuODcsOTAuOTk2NiAxNDUzLjg3LDI3Mi40MzcgCiAgIi8+Cjxwb2x5bGluZSBjbGlwLXBhdGg9InVybCgjY2xpcDA2MCkiIHN0eWxlPSJzdHJva2U6IzAwOWFmOTsgc3Ryb2tlLXdpZHRoOjQ7IHN0cm9rZS1vcGFjaXR5OjE7IGZpbGw6bm9uZSIgcG9pbnRzPSIKICAxNDc2LjIsMTUxLjQ3NyAxNjEwLjIyLDE1MS40NzcgCiAgIi8+CjxwYXRoIGNsaXAtcGF0aD0idXJsKCNjbGlwMDYwKSIgZD0iTSAwIDAgTTE2MzIuNTUgMTM0LjE5NyBMMTYzOC44NSAxMzQuMTk3IEwxNjU0LjE3IDE2My4xMDkgTDE2NTQuMTcgMTM0LjE5NyBMMTY1OC43MSAxMzQuMTk3IEwxNjU4LjcxIDE2OC43NTcgTDE2NTIuNDIgMTY4Ljc1NyBMMTYzNy4wOSAxMzkuODQ1IEwxNjM3LjA5IDE2OC43NTcgTDE2MzIuNTUgMTY4Ljc1NyBMMTYzMi41NSAxMzQuMTk3IFoiIGZpbGw9IiMwMDAwMDAiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZmlsbC1vcGFjaXR5PSIxIiAvPjxwYXRoIGNsaXAtcGF0aD0idXJsKCNjbGlwMDYwKSIgZD0iTSAwIDAgTTE2NjguMDIgMTM0LjE5NyBMMTY3NC4zMSAxMzQuMTk3IEwxNjg5LjY0IDE2My4xMDkgTDE2ODkuNjQgMTM0LjE5NyBMMTY5NC4xNyAxMzQuMTk3IEwxNjk0LjE3IDE2OC43NTcgTDE2ODcuODggMTY4Ljc1NyBMMTY3Mi41NSAxMzkuODQ1IEwxNjcyLjU1IDE2OC43NTcgTDE2NjguMDIgMTY4Ljc1NyBMMTY2OC4wMiAxMzQuMTk3IFoiIGZpbGw9IiMwMDAwMDAiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZmlsbC1vcGFjaXR5PSIxIiAvPjxwYXRoIGNsaXAtcGF0aD0idXJsKCNjbGlwMDYwKSIgZD0iTSAwIDAgTTE3MDMuNDggMTM0LjE5NyBMMTcwOC4xNiAxMzQuMTk3IEwxNzA4LjE2IDE0OC44MDMgTDE3MjMuNjcgMTM0LjE5NyBMMTcyOS42OCAxMzQuMTk3IEwxNzEyLjUzIDE1MC4zMDggTDE3MzAuOTEgMTY4Ljc1NyBMMTcyNC43NSAxNjguNzU3IEwxNzA4LjE2IDE1Mi4xMTMgTDE3MDguMTYgMTY4Ljc1NyBMMTcwMy40OCAxNjguNzU3IEwxNzAzLjQ4IDEzNC4xOTcgWiIgZmlsbD0iIzAwMDAwMCIgZmlsbC1ydWxlPSJldmVub2RkIiBmaWxsLW9wYWNpdHk9IjEiIC8+PHBhdGggY2xpcC1wYXRoPSJ1cmwoI2NsaXAwNjApIiBkPSJNIDAgMCBNMTc0Mi4wNyAxNDUuODE3IFExNzM4LjY0IDE0NS44MTcgMTczNi42NSAxNDguNTAyIFExNzM0LjY2IDE1MS4xNjQgMTczNC42NiAxNTUuODE3IFExNzM0LjY2IDE2MC40NyAxNzM2LjYzIDE2My4xNTUgUTE3MzguNjIgMTY1LjgxNyAxNzQyLjA3IDE2NS44MTcgUTE3NDUuNDcgMTY1LjgxNyAxNzQ3LjQ2IDE2My4xMzIgUTE3NDkuNDUgMTYwLjQ0NiAxNzQ5LjQ1IDE1NS44MTcgUTE3NDkuNDUgMTUxLjIxIDE3NDcuNDYgMTQ4LjUyNSBRMTc0NS40NyAxNDUuODE3IDE3NDIuMDcgMTQ1LjgxNyBNMTc0Mi4wNyAxNDIuMjA2IFExNzQ3LjYyIDE0Mi4yMDYgMTc1MC43OSAxNDUuODE3IFExNzUzLjk3IDE0OS40MjggMTc1My45NyAxNTUuODE3IFExNzUzLjk3IDE2Mi4xODMgMTc1MC43OSAxNjUuODE3IFExNzQ3LjYyIDE2OS40MjggMTc0Mi4wNyAxNjkuNDI4IFExNzM2LjQ5IDE2OS40MjggMTczMy4zMiAxNjUuODE3IFExNzMwLjE3IDE2Mi4xODMgMTczMC4xNyAxNTUuODE3IFExNzMwLjE3IDE0OS40MjggMTczMy4zMiAxNDUuODE3IFExNzM2LjQ5IDE0Mi4yMDYgMTc0Mi4wNyAxNDIuMjA2IFoiIGZpbGw9IiMwMDAwMDAiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZmlsbC1vcGFjaXR5PSIxIiAvPjxwYXRoIGNsaXAtcGF0aD0idXJsKCNjbGlwMDYwKSIgZD0iTSAwIDAgTTE3NjEuMDMgMTMyLjczOCBMMTc2NS4yOSAxMzIuNzM4IEwxNzY1LjI5IDE2OC43NTcgTDE3NjEuMDMgMTY4Ljc1NyBMMTc2MS4wMyAxMzIuNzM4IFoiIGZpbGw9IiMwMDAwMDAiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZmlsbC1vcGFjaXR5PSIxIiAvPjxwYXRoIGNsaXAtcGF0aD0idXJsKCNjbGlwMDYwKSIgZD0iTSAwIDAgTTE3OTQuMzggMTQ3LjgwOCBRMTc5NS45OCAxNDQuOTM3IDE3OTguMiAxNDMuNTcyIFExODAwLjQyIDE0Mi4yMDYgMTgwMy40MyAxNDIuMjA2IFExODA3LjQ4IDE0Mi4yMDYgMTgwOS42OCAxNDUuMDUzIFExODExLjg4IDE0Ny44NzcgMTgxMS44OCAxNTMuMTA5IEwxODExLjg4IDE2OC43NTcgTDE4MDcuNiAxNjguNzU3IEwxODA3LjYgMTUzLjI0NyBRMTgwNy42IDE0OS41MjEgMTgwNi4yOCAxNDcuNzE1IFExODA0Ljk2IDE0NS45MSAxODAyLjI1IDE0NS45MSBRMTc5OC45NCAxNDUuOTEgMTc5Ny4wMiAxNDguMTA5IFExNzk1LjEgMTUwLjMwOCAxNzk1LjEgMTU0LjEwNCBMMTc5NS4xIDE2OC43NTcgTDE3OTAuODIgMTY4Ljc1NyBMMTc5MC44MiAxNTMuMjQ3IFExNzkwLjgyIDE0OS40OTcgMTc4OS41IDE0Ny43MTUgUTE3ODguMTggMTQ1LjkxIDE3ODUuNDIgMTQ1LjkxIFExNzgyLjE2IDE0NS45MSAxNzgwLjI0IDE0OC4xMzIgUTE3NzguMzIgMTUwLjMzMSAxNzc4LjMyIDE1NC4xMDQgTDE3NzguMzIgMTY4Ljc1NyBMMTc3NC4wNCAxNjguNzU3IEwxNzc0LjA0IDE0Mi44MzEgTDE3NzguMzIgMTQyLjgzMSBMMTc3OC4zMiAxNDYuODU5IFExNzc5Ljc4IDE0NC40NzQgMTc4MS44MSAxNDMuMzQgUTE3ODMuODUgMTQyLjIwNiAxNzg2LjY1IDE0Mi4yMDYgUTE3ODkuNDggMTQyLjIwNiAxNzkxLjQ0IDE0My42NDEgUTE3OTMuNDMgMTQ1LjA3NiAxNzk0LjM4IDE0Ny44MDggWiIgZmlsbD0iIzAwMDAwMCIgZmlsbC1ydWxlPSJldmVub2RkIiBmaWxsLW9wYWNpdHk9IjEiIC8+PHBhdGggY2xpcC1wYXRoPSJ1cmwoI2NsaXAwNjApIiBkPSJNIDAgMCBNMTgzMC40MiAxNDUuODE3IFExODI3IDE0NS44MTcgMTgyNS4wMSAxNDguNTAyIFExODIzLjAyIDE1MS4xNjQgMTgyMy4wMiAxNTUuODE3IFExODIzLjAyIDE2MC40NyAxODI0Ljk4IDE2My4xNTUgUTE4MjYuOTcgMTY1LjgxNyAxODMwLjQyIDE2NS44MTcgUTE4MzMuODMgMTY1LjgxNyAxODM1LjgyIDE2My4xMzIgUTE4MzcuODEgMTYwLjQ0NiAxODM3LjgxIDE1NS44MTcgUTE4MzcuODEgMTUxLjIxIDE4MzUuODIgMTQ4LjUyNSBRMTgzMy44MyAxNDUuODE3IDE4MzAuNDIgMTQ1LjgxNyBNMTgzMC40MiAxNDIuMjA2IFExODM1Ljk4IDE0Mi4yMDYgMTgzOS4xNSAxNDUuODE3IFExODQyLjMyIDE0OS40MjggMTg0Mi4zMiAxNTUuODE3IFExODQyLjMyIDE2Mi4xODMgMTgzOS4xNSAxNjUuODE3IFExODM1Ljk4IDE2OS40MjggMTgzMC40MiAxNjkuNDI4IFExODI0Ljg1IDE2OS40MjggMTgyMS42NyAxNjUuODE3IFExODE4LjUzIDE2Mi4xODMgMTgxOC41MyAxNTUuODE3IFExODE4LjUzIDE0OS40MjggMTgyMS42NyAxNDUuODE3IFExODI0Ljg1IDE0Mi4yMDYgMTgzMC40MiAxNDIuMjA2IFoiIGZpbGw9IiMwMDAwMDAiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZmlsbC1vcGFjaXR5PSIxIiAvPjxwYXRoIGNsaXAtcGF0aD0idXJsKCNjbGlwMDYwKSIgZD0iTSAwIDAgTTE4NjYuNDQgMTU1LjQ5MyBRMTg2Ni40NCAxNTAuODYzIDE4NjQuNTIgMTQ4LjMxNyBRMTg2Mi42MiAxNDUuNzcxIDE4NTkuMTcgMTQ1Ljc3MSBRMTg1NS43NSAxNDUuNzcxIDE4NTMuODMgMTQ4LjMxNyBRMTg1MS45MyAxNTAuODYzIDE4NTEuOTMgMTU1LjQ5MyBRMTg1MS45MyAxNjAuMDk5IDE4NTMuODMgMTYyLjY0NiBRMTg1NS43NSAxNjUuMTkyIDE4NTkuMTcgMTY1LjE5MiBRMTg2Mi42MiAxNjUuMTkyIDE4NjQuNTIgMTYyLjY0NiBRMTg2Ni40NCAxNjAuMDk5IDE4NjYuNDQgMTU1LjQ5MyBNMTg3MC43IDE2NS41MzkgUTE4NzAuNyAxNzIuMTU5IDE4NjcuNzYgMTc1LjM3NyBRMTg2NC44MiAxNzguNjE4IDE4NTguNzYgMTc4LjYxOCBRMTg1Ni41MSAxNzguNjE4IDE4NTQuNTIgMTc4LjI3IFExODUyLjUzIDE3Ny45NDYgMTg1MC42NiAxNzcuMjUyIEwxODUwLjY2IDE3My4xMDggUTE4NTIuNTMgMTc0LjEyNyAxODU0LjM2IDE3NC42MTMgUTE4NTYuMTkgMTc1LjA5OSAxODU4LjA5IDE3NS4wOTkgUTE4NjIuMjggMTc1LjA5OSAxODY0LjM2IDE3Mi45IFExODY2LjQ0IDE3MC43MjQgMTg2Ni40NCAxNjYuMzAzIEwxODY2LjQ0IDE2NC4xOTYgUTE4NjUuMTIgMTY2LjQ4OCAxODYzLjA2IDE2Ny42MjIgUTE4NjEgMTY4Ljc1NyAxODU4LjEzIDE2OC43NTcgUTE4NTMuMzYgMTY4Ljc1NyAxODUwLjQ1IDE2NS4xMjIgUTE4NDcuNTMgMTYxLjQ4OCAxODQ3LjUzIDE1NS40OTMgUTE4NDcuNTMgMTQ5LjQ3NCAxODUwLjQ1IDE0NS44NCBRMTg1My4zNiAxNDIuMjA2IDE4NTguMTMgMTQyLjIwNiBRMTg2MSAxNDIuMjA2IDE4NjMuMDYgMTQzLjM0IFExODY1LjEyIDE0NC40NzQgMTg2Ni40NCAxNDYuNzY2IEwxODY2LjQ0IDE0Mi44MzEgTDE4NzAuNyAxNDIuODMxIEwxODcwLjcgMTY1LjUzOSBaIiBmaWxsPSIjMDAwMDAwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGZpbGwtb3BhY2l0eT0iMSIgLz48cGF0aCBjbGlwLXBhdGg9InVybCgjY2xpcDA2MCkiIGQ9Ik0gMCAwIE0xODg5LjUyIDE0NS44MTcgUTE4ODYuMDkgMTQ1LjgxNyAxODg0LjEgMTQ4LjUwMiBRMTg4Mi4xMSAxNTEuMTY0IDE4ODIuMTEgMTU1LjgxNyBRMTg4Mi4xMSAxNjAuNDcgMTg4NC4wOCAxNjMuMTU1IFExODg2LjA3IDE2NS44MTcgMTg4OS41MiAxNjUuODE3IFExODkyLjkyIDE2NS44MTcgMTg5NC45MSAxNjMuMTMyIFExODk2LjkgMTYwLjQ0NiAxODk2LjkgMTU1LjgxNyBRMTg5Ni45IDE1MS4yMSAxODk0LjkxIDE0OC41MjUgUTE4OTIuOTIgMTQ1LjgxNyAxODg5LjUyIDE0NS44MTcgTTE4ODkuNTIgMTQyLjIwNiBRMTg5NS4wOCAxNDIuMjA2IDE4OTguMjUgMTQ1LjgxNyBRMTkwMS40MiAxNDkuNDI4IDE5MDEuNDIgMTU1LjgxNyBRMTkwMS40MiAxNjIuMTgzIDE4OTguMjUgMTY1LjgxNyBRMTg5NS4wOCAxNjkuNDI4IDE4ODkuNTIgMTY5LjQyOCBRMTg4My45NCAxNjkuNDI4IDE4ODAuNzcgMTY1LjgxNyBRMTg3Ny42MiAxNjIuMTgzIDE4NzcuNjIgMTU1LjgxNyBRMTg3Ny42MiAxNDkuNDI4IDE4ODAuNzcgMTQ1LjgxNyBRMTg4My45NCAxNDIuMjA2IDE4ODkuNTIgMTQyLjIwNiBaIiBmaWxsPSIjMDAwMDAwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGZpbGwtb3BhY2l0eT0iMSIgLz48cGF0aCBjbGlwLXBhdGg9InVybCgjY2xpcDA2MCkiIGQ9Ik0gMCAwIE0xOTIzLjUgMTQ2LjgxMiBRMTkyMi43OCAxNDYuMzk2IDE5MjEuOTMgMTQ2LjIxIFExOTIxLjA5IDE0Ni4wMDIgMTkyMC4wOCAxNDYuMDAyIFExOTE2LjQ3IDE0Ni4wMDIgMTkxNC41MiAxNDguMzYzIFExOTEyLjYgMTUwLjcwMSAxOTEyLjYgMTU1LjA5OSBMMTkxMi42IDE2OC43NTcgTDE5MDguMzIgMTY4Ljc1NyBMMTkwOC4zMiAxNDIuODMxIEwxOTEyLjYgMTQyLjgzMSBMMTkxMi42IDE0Ni44NTkgUTE5MTMuOTQgMTQ0LjQ5NyAxOTE2LjA5IDE0My4zNjMgUTE5MTguMjUgMTQyLjIwNiAxOTIxLjMzIDE0Mi4yMDYgUTE5MjEuNzcgMTQyLjIwNiAxOTIyLjMgMTQyLjI3NSBRMTkyMi44MyAxNDIuMzIyIDE5MjMuNDggMTQyLjQzNyBMMTkyMy41IDE0Ni44MTIgWiIgZmlsbD0iIzAwMDAwMCIgZmlsbC1ydWxlPSJldmVub2RkIiBmaWxsLW9wYWNpdHk9IjEiIC8+PHBhdGggY2xpcC1wYXRoPSJ1cmwoI2NsaXAwNjApIiBkPSJNIDAgMCBNMTkzNi45NyAxNDUuODE3IFExOTMzLjU1IDE0NS44MTcgMTkzMS41NiAxNDguNTAyIFExOTI5LjU3IDE1MS4xNjQgMTkyOS41NyAxNTUuODE3IFExOTI5LjU3IDE2MC40NyAxOTMxLjUzIDE2My4xNTUgUTE5MzMuNTMgMTY1LjgxNyAxOTM2Ljk3IDE2NS44MTcgUTE5NDAuMzggMTY1LjgxNyAxOTQyLjM3IDE2My4xMzIgUTE5NDQuMzYgMTYwLjQ0NiAxOTQ0LjM2IDE1NS44MTcgUTE5NDQuMzYgMTUxLjIxIDE5NDIuMzcgMTQ4LjUyNSBRMTk0MC4zOCAxNDUuODE3IDE5MzYuOTcgMTQ1LjgxNyBNMTkzNi45NyAxNDIuMjA2IFExOTQyLjUzIDE0Mi4yMDYgMTk0NS43IDE0NS44MTcgUTE5NDguODcgMTQ5LjQyOCAxOTQ4Ljg3IDE1NS44MTcgUTE5NDguODcgMTYyLjE4MyAxOTQ1LjcgMTY1LjgxNyBRMTk0Mi41MyAxNjkuNDI4IDE5MzYuOTcgMTY5LjQyOCBRMTkzMS40IDE2OS40MjggMTkyOC4yMiAxNjUuODE3IFExOTI1LjA4IDE2Mi4xODMgMTkyNS4wOCAxNTUuODE3IFExOTI1LjA4IDE0OS40MjggMTkyOC4yMiAxNDUuODE3IFExOTMxLjQgMTQyLjIwNiAxOTM2Ljk3IDE0Mi4yMDYgWiIgZmlsbD0iIzAwMDAwMCIgZmlsbC1ydWxlPSJldmVub2RkIiBmaWxsLW9wYWNpdHk9IjEiIC8+PHBhdGggY2xpcC1wYXRoPSJ1cmwoI2NsaXAwNjApIiBkPSJNIDAgMCBNMTk1Mi44OCAxNDIuODMxIEwxOTU3LjM5IDE0Mi44MzEgTDE5NjUuNDkgMTY0LjU5IEwxOTczLjU5IDE0Mi44MzEgTDE5NzguMTEgMTQyLjgzMSBMMTk2OC4zOSAxNjguNzU3IEwxOTYyLjYgMTY4Ljc1NyBMMTk1Mi44OCAxNDIuODMxIFoiIGZpbGw9IiMwMDAwMDAiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZmlsbC1vcGFjaXR5PSIxIiAvPjxwb2x5bGluZSBjbGlwLXBhdGg9InVybCgjY2xpcDA2MCkiIHN0eWxlPSJzdHJva2U6I2UyNmY0Njsgc3Ryb2tlLXdpZHRoOjQ7IHN0cm9rZS1vcGFjaXR5OjE7IGZpbGw6bm9uZSIgcG9pbnRzPSIKICAxNDc2LjIsMjExLjk1NyAxNjEwLjIyLDIxMS45NTcgCiAgIi8+CjxwYXRoIGNsaXAtcGF0aD0idXJsKCNjbGlwMDYwKSIgZD0iTSAwIDAgTTE2MzIuNTUgMTk0LjY3NyBMMTYzOS41MiAxOTQuNjc3IEwxNjQ4LjM0IDIxOC4xOTUgTDE2NTcuMjEgMTk0LjY3NyBMMTY2NC4xNyAxOTQuNjc3IEwxNjY0LjE3IDIyOS4yMzcgTDE2NTkuNjEgMjI5LjIzNyBMMTY1OS42MSAxOTguODkgTDE2NTAuNyAyMjIuNTkzIEwxNjQ2IDIyMi41OTMgTDE2MzcuMDkgMTk4Ljg5IEwxNjM3LjA5IDIyOS4yMzcgTDE2MzIuNTUgMjI5LjIzNyBMMTYzMi41NSAxOTQuNjc3IFoiIGZpbGw9IiMwMDAwMDAiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZmlsbC1vcGFjaXR5PSIxIiAvPjxwYXRoIGNsaXAtcGF0aD0idXJsKCNjbGlwMDYwKSIgZD0iTSAwIDAgTTE2ODMuMzIgMjA2LjI5NyBRMTY3OS44OSAyMDYuMjk3IDE2NzcuOSAyMDguOTgyIFExNjc1LjkxIDIxMS42NDQgMTY3NS45MSAyMTYuMjk3IFExNjc1LjkxIDIyMC45NSAxNjc3Ljg4IDIyMy42MzUgUTE2NzkuODcgMjI2LjI5NyAxNjgzLjMyIDIyNi4yOTcgUTE2ODYuNzIgMjI2LjI5NyAxNjg4LjcxIDIyMy42MTIgUTE2OTAuNyAyMjAuOTI2IDE2OTAuNyAyMTYuMjk3IFExNjkwLjcgMjExLjY5IDE2ODguNzEgMjA5LjAwNSBRMTY4Ni43MiAyMDYuMjk3IDE2ODMuMzIgMjA2LjI5NyBNMTY4My4zMiAyMDIuNjg2IFExNjg4Ljg3IDIwMi42ODYgMTY5Mi4wNCAyMDYuMjk3IFExNjk1LjIyIDIwOS45MDggMTY5NS4yMiAyMTYuMjk3IFExNjk1LjIyIDIyMi42NjMgMTY5Mi4wNCAyMjYuMjk3IFExNjg4Ljg3IDIyOS45MDggMTY4My4zMiAyMjkuOTA4IFExNjc3Ljc0IDIyOS45MDggMTY3NC41NyAyMjYuMjk3IFExNjcxLjQyIDIyMi42NjMgMTY3MS40MiAyMTYuMjk3IFExNjcxLjQyIDIwOS45MDggMTY3NC41NyAyMDYuMjk3IFExNjc3Ljc0IDIwMi42ODYgMTY4My4zMiAyMDIuNjg2IFoiIGZpbGw9IiMwMDAwMDAiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZmlsbC1vcGFjaXR5PSIxIiAvPjxwYXRoIGNsaXAtcGF0aD0idXJsKCNjbGlwMDYwKSIgZD0iTSAwIDAgTTE3MjMuODMgMjEzLjU4OSBMMTcyMy44MyAyMjkuMjM3IEwxNzE5LjU3IDIyOS4yMzcgTDE3MTkuNTcgMjEzLjcyNyBRMTcxOS41NyAyMTAuMDQ3IDE3MTguMTMgMjA4LjIxOCBRMTcxNi43IDIwNi4zOSAxNzEzLjgzIDIwNi4zOSBRMTcxMC4zOCAyMDYuMzkgMTcwOC4zOSAyMDguNTg5IFExNzA2LjQgMjEwLjc4OCAxNzA2LjQgMjE0LjU4NCBMMTcwNi40IDIyOS4yMzcgTDE3MDIuMTEgMjI5LjIzNyBMMTcwMi4xMSAyMDMuMzExIEwxNzA2LjQgMjAzLjMxMSBMMTcwNi40IDIwNy4zMzkgUTE3MDcuOTIgMjA1LjAwMSAxNzA5Ljk4IDIwMy44NDMgUTE3MTIuMDcgMjAyLjY4NiAxNzE0Ljc4IDIwMi42ODYgUTE3MTkuMjQgMjAyLjY4NiAxNzIxLjU0IDIwNS40NjQgUTE3MjMuODMgMjA4LjIxOCAxNzIzLjgzIDIxMy41ODkgWiIgZmlsbD0iIzAwMDAwMCIgZmlsbC1ydWxlPSJldmVub2RkIiBmaWxsLW9wYWNpdHk9IjEiIC8+PHBhdGggY2xpcC1wYXRoPSJ1cmwoI2NsaXAwNjApIiBkPSJNIDAgMCBNMTczNi41NCAxOTUuOTUgTDE3MzYuNTQgMjAzLjMxMSBMMTc0NS4zMSAyMDMuMzExIEwxNzQ1LjMxIDIwNi42MjEgTDE3MzYuNTQgMjA2LjYyMSBMMTczNi41NCAyMjAuNjk1IFExNzM2LjU0IDIyMy44NjYgMTczNy4zOSAyMjQuNzY5IFExNzM4LjI3IDIyNS42NzIgMTc0MC45MyAyMjUuNjcyIEwxNzQ1LjMxIDIyNS42NzIgTDE3NDUuMzEgMjI5LjIzNyBMMTc0MC45MyAyMjkuMjM3IFExNzM2IDIyOS4yMzcgMTczNC4xMyAyMjcuNDA4IFExNzMyLjI1IDIyNS41NTYgMTczMi4yNSAyMjAuNjk1IEwxNzMyLjI1IDIwNi42MjEgTDE3MjkuMTMgMjA2LjYyMSBMMTcyOS4xMyAyMDMuMzExIEwxNzMyLjI1IDIwMy4zMTEgTDE3MzIuMjUgMTk1Ljk1IEwxNzM2LjU0IDE5NS45NSBaIiBmaWxsPSIjMDAwMDAwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGZpbGwtb3BhY2l0eT0iMSIgLz48cGF0aCBjbGlwLXBhdGg9InVybCgjY2xpcDA2MCkiIGQ9Ik0gMCAwIE0xNzczLjA5IDIxNS4yMDkgTDE3NzMuMDkgMjE3LjI5MiBMMTc1My41IDIxNy4yOTIgUTE3NTMuNzggMjIxLjY5IDE3NTYuMTQgMjI0LjAwNSBRMTc1OC41MyAyMjYuMjk3IDE3NjIuNzYgMjI2LjI5NyBRMTc2NS4yMiAyMjYuMjk3IDE3NjcuNTEgMjI1LjY5NSBRMTc2OS44MiAyMjUuMDkzIDE3NzIuMDkgMjIzLjg4OSBMMTc3Mi4wOSAyMjcuOTE3IFExNzY5LjggMjI4Ljg4OSAxNzY3LjM5IDIyOS4zOTkgUTE3NjQuOTggMjI5LjkwOCAxNzYyLjUxIDIyOS45MDggUTE3NTYuMyAyMjkuOTA4IDE3NTIuNjcgMjI2LjI5NyBRMTc0OS4wNiAyMjIuNjg2IDE3NDkuMDYgMjE2LjUyOCBRMTc0OS4wNiAyMTAuMTYzIDE3NTIuNDggMjA2LjQzNiBRMTc1NS45MyAyMDIuNjg2IDE3NjEuNzcgMjAyLjY4NiBRMTc2NyAyMDIuNjg2IDE3NzAuMDMgMjA2LjA2NSBRMTc3My4wOSAyMDkuNDIyIDE3NzMuMDkgMjE1LjIwOSBNMTc2OC44MyAyMTMuOTU5IFExNzY4Ljc4IDIxMC40NjQgMTc2Ni44NiAyMDguMzggUTE3NjQuOTYgMjA2LjI5NyAxNzYxLjgxIDIwNi4yOTcgUTE3NTguMjUgMjA2LjI5NyAxNzU2LjEgMjA4LjMxMSBRMTc1My45NyAyMTAuMzI1IDE3NTMuNjQgMjEzLjk4MiBMMTc2OC44MyAyMTMuOTU5IFoiIGZpbGw9IiMwMDAwMDAiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZmlsbC1vcGFjaXR5PSIxIiAvPjxwYXRoIGNsaXAtcGF0aD0idXJsKCNjbGlwMDYwKSIgZD0iTSAwIDAgTTE4MjEuMjEgMTk3LjMzOSBMMTgyMS4yMSAyMDIuMjY5IFExODE4Ljg1IDIwMC4wNyAxODE2LjE2IDE5OC45ODIgUTE4MTMuNSAxOTcuODk0IDE4MTAuNDkgMTk3Ljg5NCBRMTgwNC41NyAxOTcuODk0IDE4MDEuNDIgMjAxLjUyOCBRMTc5OC4yNyAyMDUuMTQgMTc5OC4yNyAyMTEuOTkxIFExNzk4LjI3IDIxOC44MiAxODAxLjQyIDIyMi40NTQgUTE4MDQuNTcgMjI2LjA2NSAxODEwLjQ5IDIyNi4wNjUgUTE4MTMuNSAyMjYuMDY1IDE4MTYuMTYgMjI0Ljk3NyBRMTgxOC44NSAyMjMuODg5IDE4MjEuMjEgMjIxLjY5IEwxODIxLjIxIDIyNi41NzUgUTE4MTguNzYgMjI4LjI0MSAxODE2IDIyOS4wNzUgUTE4MTMuMjcgMjI5LjkwOCAxODEwLjIyIDIyOS45MDggUTE4MDIuMzcgMjI5LjkwOCAxNzk3Ljg1IDIyNS4xMTYgUTE3OTMuMzQgMjIwLjMwMSAxNzkzLjM0IDIxMS45OTEgUTE3OTMuMzQgMjAzLjY1OCAxNzk3Ljg1IDE5OC44NjYgUTE4MDIuMzcgMTk0LjA1MiAxODEwLjIyIDE5NC4wNTIgUTE4MTMuMzIgMTk0LjA1MiAxODE2LjA1IDE5NC44ODUgUTE4MTguOCAxOTUuNjk1IDE4MjEuMjEgMTk3LjMzOSBaIiBmaWxsPSIjMDAwMDAwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGZpbGwtb3BhY2l0eT0iMSIgLz48cGF0aCBjbGlwLXBhdGg9InVybCgjY2xpcDA2MCkiIGQ9Ik0gMCAwIE0xODQwLjAzIDIxNi4yMDQgUTE4MzQuODcgMjE2LjIwNCAxODMyLjg4IDIxNy4zODUgUTE4MzAuODkgMjE4LjU2NSAxODMwLjg5IDIyMS40MTMgUTE4MzAuODkgMjIzLjY4MSAxODMyLjM3IDIyNS4wMjQgUTE4MzMuODcgMjI2LjM0MyAxODM2LjQ0IDIyNi4zNDMgUTE4MzkuOTggMjI2LjM0MyAxODQyLjExIDIyMy44NDMgUTE4NDQuMjcgMjIxLjMyIDE4NDQuMjcgMjE3LjE1MyBMMTg0NC4yNyAyMTYuMjA0IEwxODQwLjAzIDIxNi4yMDQgTTE4NDguNTMgMjE0LjQ0NSBMMTg0OC41MyAyMjkuMjM3IEwxODQ0LjI3IDIyOS4yMzcgTDE4NDQuMjcgMjI1LjMwMSBRMTg0Mi44MSAyMjcuNjYzIDE4NDAuNjMgMjI4Ljc5NyBRMTgzOC40NiAyMjkuOTA4IDE4MzUuMzEgMjI5LjkwOCBRMTgzMS4zMyAyMjkuOTA4IDE4MjguOTcgMjI3LjY4NiBRMTgyNi42MyAyMjUuNDQgMTgyNi42MyAyMjEuNjkgUTE4MjYuNjMgMjE3LjMxNSAxODI5LjU0IDIxNS4wOTMgUTE4MzIuNDggMjEyLjg3MSAxODM4LjI5IDIxMi44NzEgTDE4NDQuMjcgMjEyLjg3MSBMMTg0NC4yNyAyMTIuNDU0IFExODQ0LjI3IDIwOS41MTUgMTg0Mi4zMiAyMDcuOTE3IFExODQwLjQgMjA2LjI5NyAxODM2LjkxIDIwNi4yOTcgUTE4MzQuNjggMjA2LjI5NyAxODMyLjU4IDIwNi44MjkgUTE4MzAuNDcgMjA3LjM2MiAxODI4LjUzIDIwOC40MjcgTDE4MjguNTMgMjA0LjQ5MSBRMTgzMC44NiAyMDMuNTg5IDE4MzMuMDYgMjAzLjE0OSBRMTgzNS4yNiAyMDIuNjg2IDE4MzcuMzUgMjAyLjY4NiBRMTg0Mi45NyAyMDIuNjg2IDE4NDUuNzUgMjA1LjYwMiBRMTg0OC41MyAyMDguNTE5IDE4NDguNTMgMjE0LjQ0NSBaIiBmaWxsPSIjMDAwMDAwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGZpbGwtb3BhY2l0eT0iMSIgLz48cGF0aCBjbGlwLXBhdGg9InVybCgjY2xpcDA2MCkiIGQ9Ik0gMCAwIE0xODcyLjMyIDIwNy4yOTIgUTE4NzEuNiAyMDYuODc2IDE4NzAuNzUgMjA2LjY5IFExODY5LjkxIDIwNi40ODIgMTg2OC45IDIwNi40ODIgUTE4NjUuMjggMjA2LjQ4MiAxODYzLjM0IDIwOC44NDMgUTE4NjEuNDIgMjExLjE4MSAxODYxLjQyIDIxNS41NzkgTDE4NjEuNDIgMjI5LjIzNyBMMTg1Ny4xNCAyMjkuMjM3IEwxODU3LjE0IDIwMy4zMTEgTDE4NjEuNDIgMjAzLjMxMSBMMTg2MS40MiAyMDcuMzM5IFExODYyLjc2IDIwNC45NzcgMTg2NC45MSAyMDMuODQzIFExODY3LjA3IDIwMi42ODYgMTg3MC4xNSAyMDIuNjg2IFExODcwLjU5IDIwMi42ODYgMTg3MS4xMiAyMDIuNzU1IFExODcxLjY1IDIwMi44MDIgMTg3Mi4zIDIwMi45MTcgTDE4NzIuMzIgMjA3LjI5MiBaIiBmaWxsPSIjMDAwMDAwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGZpbGwtb3BhY2l0eT0iMSIgLz48cGF0aCBjbGlwLXBhdGg9InVybCgjY2xpcDA2MCkiIGQ9Ik0gMCAwIE0xODc2Ljc5IDE5My4yMTggTDE4ODEuMDUgMTkzLjIxOCBMMTg4MS4wNSAyMjkuMjM3IEwxODc2Ljc5IDIyOS4yMzcgTDE4NzYuNzkgMTkzLjIxOCBaIiBmaWxsPSIjMDAwMDAwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGZpbGwtb3BhY2l0eT0iMSIgLz48cGF0aCBjbGlwLXBhdGg9InVybCgjY2xpcDA2MCkiIGQ9Ik0gMCAwIE0xOTAwLjAxIDIwNi4yOTcgUTE4OTYuNTggMjA2LjI5NyAxODk0LjU5IDIwOC45ODIgUTE4OTIuNiAyMTEuNjQ0IDE4OTIuNiAyMTYuMjk3IFExODkyLjYgMjIwLjk1IDE4OTQuNTcgMjIzLjYzNSBRMTg5Ni41NiAyMjYuMjk3IDE5MDAuMDEgMjI2LjI5NyBRMTkwMy40MSAyMjYuMjk3IDE5MDUuNCAyMjMuNjEyIFExOTA3LjM5IDIyMC45MjYgMTkwNy4zOSAyMTYuMjk3IFExOTA3LjM5IDIxMS42OSAxOTA1LjQgMjA5LjAwNSBRMTkwMy40MSAyMDYuMjk3IDE5MDAuMDEgMjA2LjI5NyBNMTkwMC4wMSAyMDIuNjg2IFExOTA1LjU2IDIwMi42ODYgMTkwOC43MyAyMDYuMjk3IFExOTExLjkgMjA5LjkwOCAxOTExLjkgMjE2LjI5NyBRMTkxMS45IDIyMi42NjMgMTkwOC43MyAyMjYuMjk3IFExOTA1LjU2IDIyOS45MDggMTkwMC4wMSAyMjkuOTA4IFExODk0LjQzIDIyOS45MDggMTg5MS4yNiAyMjYuMjk3IFExODg4LjExIDIyMi42NjMgMTg4OC4xMSAyMTYuMjk3IFExODg4LjExIDIwOS45MDggMTg5MS4yNiAyMDYuMjk3IFExODk0LjQzIDIwMi42ODYgMTkwMC4wMSAyMDIuNjg2IFoiIGZpbGw9IiMwMDAwMDAiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZmlsbC1vcGFjaXR5PSIxIiAvPjxwYXRoIGNsaXAtcGF0aD0idXJsKCNjbGlwMDYwKSIgZD0iTSAwIDAgTTE5NTQuOTQgMTk1LjgxMSBMMTk1NC45NCAyMDAuMzcxIFExOTUyLjI4IDE5OS4wOTggMTk0OS45MSAxOTguNDczIFExOTQ3LjU1IDE5Ny44NDggMTk0NS4zNSAxOTcuODQ4IFExOTQxLjUzIDE5Ny44NDggMTkzOS40NSAxOTkuMzI5IFExOTM3LjM5IDIwMC44MTEgMTkzNy4zOSAyMDMuNTQyIFExOTM3LjM5IDIwNS44MzQgMTkzOC43NiAyMDcuMDE1IFExOTQwLjE1IDIwOC4xNzIgMTk0My45OSAyMDguODkgTDE5NDYuODEgMjA5LjQ2OCBRMTk1Mi4wNCAyMTAuNDY0IDE5NTQuNTIgMjEyLjk4NyBRMTk1Ny4wMiAyMTUuNDg3IDE5NTcuMDIgMjE5LjcgUTE5NTcuMDIgMjI0LjcyMyAxOTUzLjY0IDIyNy4zMTUgUTE5NTAuMjggMjI5LjkwOCAxOTQzLjc4IDIyOS45MDggUTE5NDEuMzMgMjI5LjkwOCAxOTM4LjU1IDIyOS4zNTIgUTE5MzUuNzkgMjI4Ljc5NyAxOTMyLjgzIDIyNy43MDkgTDE5MzIuODMgMjIyLjg5NCBRMTkzNS42OCAyMjQuNDkxIDE5MzguNDEgMjI1LjMwMSBRMTk0MS4xNCAyMjYuMTEyIDE5NDMuNzggMjI2LjExMiBRMTk0Ny43OCAyMjYuMTEyIDE5NDkuOTYgMjI0LjUzOCBRMTk1Mi4xNCAyMjIuOTY0IDE5NTIuMTQgMjIwLjA0NyBRMTk1Mi4xNCAyMTcuNTAxIDE5NTAuNTYgMjE2LjA2NSBRMTk0OS4wMSAyMTQuNjMgMTk0NS40NSAyMTMuOTEzIEwxOTQyLjYgMjEzLjM1NyBRMTkzNy4zNyAyMTIuMzE1IDE5MzUuMDMgMjEwLjA5MyBRMTkzMi42OSAyMDcuODcxIDE5MzIuNjkgMjAzLjkxMyBRMTkzMi42OSAxOTkuMzI5IDE5MzUuOTEgMTk2LjY5IFExOTM5LjE1IDE5NC4wNTIgMTk0NC44MiAxOTQuMDUyIFExOTQ3LjI1IDE5NC4wNTIgMTk0OS43OCAxOTQuNDkxIFExOTUyLjMgMTk0LjkzMSAxOTU0Ljk0IDE5NS44MTEgWiIgZmlsbD0iIzAwMDAwMCIgZmlsbC1ydWxlPSJldmVub2RkIiBmaWxsLW9wYWNpdHk9IjEiIC8+PHBhdGggY2xpcC1wYXRoPSJ1cmwoI2NsaXAwNjApIiBkPSJNIDAgMCBNMTk3NC4xNyAyMDYuMjk3IFExOTcwLjc1IDIwNi4yOTcgMTk2OC43NiAyMDguOTgyIFExOTY2Ljc3IDIxMS42NDQgMTk2Ni43NyAyMTYuMjk3IFExOTY2Ljc3IDIyMC45NSAxOTY4LjczIDIyMy42MzUgUTE5NzAuNzIgMjI2LjI5NyAxOTc0LjE3IDIyNi4yOTcgUTE5NzcuNTggMjI2LjI5NyAxOTc5LjU3IDIyMy42MTIgUTE5ODEuNTYgMjIwLjkyNiAxOTgxLjU2IDIxNi4yOTcgUTE5ODEuNTYgMjExLjY5IDE5NzkuNTcgMjA5LjAwNSBRMTk3Ny41OCAyMDYuMjk3IDE5NzQuMTcgMjA2LjI5NyBNMTk3NC4xNyAyMDIuNjg2IFExOTc5LjczIDIwMi42ODYgMTk4Mi45IDIwNi4yOTcgUTE5ODYuMDcgMjA5LjkwOCAxOTg2LjA3IDIxNi4yOTcgUTE5ODYuMDcgMjIyLjY2MyAxOTgyLjkgMjI2LjI5NyBRMTk3OS43MyAyMjkuOTA4IDE5NzQuMTcgMjI5LjkwOCBRMTk2OC41OSAyMjkuOTA4IDE5NjUuNDIgMjI2LjI5NyBRMTk2Mi4yOCAyMjIuNjYzIDE5NjIuMjggMjE2LjI5NyBRMTk2Mi4yOCAyMDkuOTA4IDE5NjUuNDIgMjA2LjI5NyBRMTk2OC41OSAyMDIuNjg2IDE5NzQuMTcgMjAyLjY4NiBaIiBmaWxsPSIjMDAwMDAwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGZpbGwtb3BhY2l0eT0iMSIgLz48cGF0aCBjbGlwLXBhdGg9InVybCgjY2xpcDA2MCkiIGQ9Ik0gMCAwIE0xOTkzLjEzIDE5My4yMTggTDE5OTcuMzkgMTkzLjIxOCBMMTk5Ny4zOSAyMjkuMjM3IEwxOTkzLjEzIDIyOS4yMzcgTDE5OTMuMTMgMTkzLjIxOCBaIiBmaWxsPSIjMDAwMDAwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGZpbGwtb3BhY2l0eT0iMSIgLz48cGF0aCBjbGlwLXBhdGg9InVybCgjY2xpcDA2MCkiIGQ9Ik0gMCAwIE0yMDA1Ljg2IDIxOS4wMDUgTDIwMDUuODYgMjAzLjMxMSBMMjAxMC4xMiAyMDMuMzExIEwyMDEwLjEyIDIxOC44NDMgUTIwMTAuMTIgMjIyLjUyNCAyMDExLjU2IDIyNC4zNzYgUTIwMTIuOTkgMjI2LjIwNCAyMDE1Ljg2IDIyNi4yMDQgUTIwMTkuMzEgMjI2LjIwNCAyMDIxLjMgMjI0LjAwNSBRMjAyMy4zMiAyMjEuODA2IDIwMjMuMzIgMjE4LjAxIEwyMDIzLjMyIDIwMy4zMTEgTDIwMjcuNTggMjAzLjMxMSBMMjAyNy41OCAyMjkuMjM3IEwyMDIzLjMyIDIyOS4yMzcgTDIwMjMuMzIgMjI1LjI1NSBRMjAyMS43NyAyMjcuNjE2IDIwMTkuNzEgMjI4Ljc3NCBRMjAxNy42NyAyMjkuOTA4IDIwMTQuOTYgMjI5LjkwOCBRMjAxMC40OSAyMjkuOTA4IDIwMDguMTggMjI3LjEzIFEyMDA1Ljg2IDIyNC4zNTIgMjAwNS44NiAyMTkuMDA1IE0yMDE2LjU4IDIwMi42ODYgTDIwMTYuNTggMjAyLjY4NiBaIiBmaWxsPSIjMDAwMDAwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGZpbGwtb3BhY2l0eT0iMSIgLz48cGF0aCBjbGlwLXBhdGg9InVybCgjY2xpcDA2MCkiIGQ9Ik0gMCAwIE0yMDQwLjU2IDE5NS45NSBMMjA0MC41NiAyMDMuMzExIEwyMDQ5LjMzIDIwMy4zMTEgTDIwNDkuMzMgMjA2LjYyMSBMMjA0MC41NiAyMDYuNjIxIEwyMDQwLjU2IDIyMC42OTUgUTIwNDAuNTYgMjIzLjg2NiAyMDQxLjQyIDIyNC43NjkgUTIwNDIuMyAyMjUuNjcyIDIwNDQuOTYgMjI1LjY3MiBMMjA0OS4zMyAyMjUuNjcyIEwyMDQ5LjMzIDIyOS4yMzcgTDIwNDQuOTYgMjI5LjIzNyBRMjA0MC4wMyAyMjkuMjM3IDIwMzguMTUgMjI3LjQwOCBRMjAzNi4yOCAyMjUuNTU2IDIwMzYuMjggMjIwLjY5NSBMMjAzNi4yOCAyMDYuNjIxIEwyMDMzLjE1IDIwNi42MjEgTDIwMzMuMTUgMjAzLjMxMSBMMjAzNi4yOCAyMDMuMzExIEwyMDM2LjI4IDE5NS45NSBMMjA0MC41NiAxOTUuOTUgWiIgZmlsbD0iIzAwMDAwMCIgZmlsbC1ydWxlPSJldmVub2RkIiBmaWxsLW9wYWNpdHk9IjEiIC8+PHBhdGggY2xpcC1wYXRoPSJ1cmwoI2NsaXAwNjApIiBkPSJNIDAgMCBNMjA1NC45NCAyMDMuMzExIEwyMDU5LjIgMjAzLjMxMSBMMjA1OS4yIDIyOS4yMzcgTDIwNTQuOTQgMjI5LjIzNyBMMjA1NC45NCAyMDMuMzExIE0yMDU0Ljk0IDE5My4yMTggTDIwNTkuMiAxOTMuMjE4IEwyMDU5LjIgMTk4LjYxMiBMMjA1NC45NCAxOTguNjEyIEwyMDU0Ljk0IDE5My4yMTggWiIgZmlsbD0iIzAwMDAwMCIgZmlsbC1ydWxlPSJldmVub2RkIiBmaWxsLW9wYWNpdHk9IjEiIC8+PHBhdGggY2xpcC1wYXRoPSJ1cmwoI2NsaXAwNjApIiBkPSJNIDAgMCBNMjA3OC4xNSAyMDYuMjk3IFEyMDc0LjczIDIwNi4yOTcgMjA3Mi43NCAyMDguOTgyIFEyMDcwLjc1IDIxMS42NDQgMjA3MC43NSAyMTYuMjk3IFEyMDcwLjc1IDIyMC45NSAyMDcyLjcxIDIyMy42MzUgUTIwNzQuNyAyMjYuMjk3IDIwNzguMTUgMjI2LjI5NyBRMjA4MS41NiAyMjYuMjk3IDIwODMuNTUgMjIzLjYxMiBRMjA4NS41NCAyMjAuOTI2IDIwODUuNTQgMjE2LjI5NyBRMjA4NS41NCAyMTEuNjkgMjA4My41NSAyMDkuMDA1IFEyMDgxLjU2IDIwNi4yOTcgMjA3OC4xNSAyMDYuMjk3IE0yMDc4LjE1IDIwMi42ODYgUTIwODMuNzEgMjAyLjY4NiAyMDg2Ljg4IDIwNi4yOTcgUTIwOTAuMDUgMjA5LjkwOCAyMDkwLjA1IDIxNi4yOTcgUTIwOTAuMDUgMjIyLjY2MyAyMDg2Ljg4IDIyNi4yOTcgUTIwODMuNzEgMjI5LjkwOCAyMDc4LjE1IDIyOS45MDggUTIwNzIuNTggMjI5LjkwOCAyMDY5LjQgMjI2LjI5NyBRMjA2Ni4yNiAyMjIuNjYzIDIwNjYuMjYgMjE2LjI5NyBRMjA2Ni4yNiAyMDkuOTA4IDIwNjkuNCAyMDYuMjk3IFEyMDcyLjU4IDIwMi42ODYgMjA3OC4xNSAyMDIuNjg2IFoiIGZpbGw9IiMwMDAwMDAiIGZpbGwtcnVsZT0iZXZlbm9kZCIgZmlsbC1vcGFjaXR5PSIxIiAvPjxwYXRoIGNsaXAtcGF0aD0idXJsKCNjbGlwMDYwKSIgZD0iTSAwIDAgTTIxMTguNjYgMjEzLjU4OSBMMjExOC42NiAyMjkuMjM3IEwyMTE0LjQgMjI5LjIzNyBMMjExNC40IDIxMy43MjcgUTIxMTQuNCAyMTAuMDQ3IDIxMTIuOTcgMjA4LjIxOCBRMjExMS41MyAyMDYuMzkgMjEwOC42NiAyMDYuMzkgUTIxMDUuMjEgMjA2LjM5IDIxMDMuMjIgMjA4LjU4OSBRMjEwMS4yMyAyMTAuNzg4IDIxMDEuMjMgMjE0LjU4NCBMMjEwMS4yMyAyMjkuMjM3IEwyMDk2Ljk1IDIyOS4yMzcgTDIwOTYuOTUgMjAzLjMxMSBMMjEwMS4yMyAyMDMuMzExIEwyMTAxLjIzIDIwNy4zMzkgUTIxMDIuNzYgMjA1LjAwMSAyMTA0LjgyIDIwMy44NDMgUTIxMDYuOSAyMDIuNjg2IDIxMDkuNjEgMjAyLjY4NiBRMjExNC4wOCAyMDIuNjg2IDIxMTYuMzcgMjA1LjQ2NCBRMjExOC42NiAyMDguMjE4IDIxMTguNjYgMjEzLjU4OSBaIiBmaWxsPSIjMDAwMDAwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGZpbGwtb3BhY2l0eT0iMSIgLz48cGF0aCBjbGlwLXBhdGg9InVybCgjY2xpcDA2MCkiIGQ9Ik0gMCAwIE0yMTQzLjY5IDIwNC4wNzUgTDIxNDMuNjkgMjA4LjEwMiBRMjE0MS44OCAyMDcuMTc3IDIxMzkuOTQgMjA2LjcxNCBRMjEzNy45OSAyMDYuMjUxIDIxMzUuOTEgMjA2LjI1MSBRMjEzMi43NCAyMDYuMjUxIDIxMzEuMTQgMjA3LjIyMyBRMjEyOS41NyAyMDguMTk1IDIxMjkuNTcgMjEwLjEzOSBRMjEyOS41NyAyMTEuNjIxIDIxMzAuNyAyMTIuNDc3IFEyMTMxLjgzIDIxMy4zMTEgMjEzNS4yNiAyMTQuMDc1IEwyMTM2LjcyIDIxNC4zOTkgUTIxNDEuMjYgMjE1LjM3MSAyMTQzLjE1IDIxNy4xNTMgUTIxNDUuMDcgMjE4LjkxMyAyMTQ1LjA3IDIyMi4wODQgUTIxNDUuMDcgMjI1LjY5NSAyMTQyLjIgMjI3LjgwMSBRMjEzOS4zNiAyMjkuOTA4IDIxMzQuMzYgMjI5LjkwOCBRMjEzMi4yNyAyMjkuOTA4IDIxMzAuMDEgMjI5LjQ5MSBRMjEyNy43NiAyMjkuMDk4IDIxMjUuMjYgMjI4LjI4OCBMMjEyNS4yNiAyMjMuODg5IFEyMTI3LjYyIDIyNS4xMTYgMjEyOS45MSAyMjUuNzQxIFEyMTMyLjIgMjI2LjM0MyAyMTM0LjQ1IDIyNi4zNDMgUTIxMzcuNDYgMjI2LjM0MyAyMTM5LjA4IDIyNS4zMjUgUTIxNDAuNyAyMjQuMjgzIDIxNDAuNyAyMjIuNDA4IFEyMTQwLjcgMjIwLjY3MiAyMTM5LjUyIDIxOS43NDYgUTIxMzguMzYgMjE4LjgyIDIxMzQuNCAyMTcuOTY0IEwyMTMyLjkyIDIxNy42MTYgUTIxMjguOTYgMjE2Ljc4MyAyMTI3LjIgMjE1LjA3IFEyMTI1LjQ1IDIxMy4zMzQgMjEyNS40NSAyMTAuMzI1IFEyMTI1LjQ1IDIwNi42NjcgMjEyOC4wNCAyMDQuNjc3IFEyMTMwLjYzIDIwMi42ODYgMjEzNS40IDIwMi42ODYgUTIxMzcuNzYgMjAyLjY4NiAyMTM5Ljg0IDIwMy4wMzMgUTIxNDEuOTMgMjAzLjM4IDIxNDMuNjkgMjA0LjA3NSBaIiBmaWxsPSIjMDAwMDAwIiBmaWxsLXJ1bGU9ImV2ZW5vZGQiIGZpbGwtb3BhY2l0eT0iMSIgLz48L3N2Zz4K"  />
+<pre class="julia-error">
+ERROR: UndefVarError: plot not defined
+</pre>
+
 
 
 <div class="markdown"><h2>Appendix</h2>
@@ -1873,8 +870,8 @@ SciMLTutorials.weave_file&#40;&quot;tutorials/advanced&quot;,&quot;03-kolmogorov
 </div>
 <div class="markdown"><p>Computer Information:</p>
 </div>
-<div class="markdown"><pre><code>Julia Version 1.6.1
-Commit 6aaedecc44 &#40;2021-04-23 05:59 UTC&#41;
+<div class="markdown"><pre><code>Julia Version 1.6.2
+Commit 1b93d53fc4 &#40;2021-07-14 15:36 UTC&#41;
 Platform Info:
   OS: Linux &#40;x86_64-pc-linux-gnu&#41;
   CPU: AMD EPYC 7502 32-Core Processor
@@ -1888,7 +885,7 @@ Environment:
 </div>
 <div class="markdown"><p>Package Information:</p>
 </div>
-<div class="markdown"><pre><code>      Status &#96;/var/lib/buildkite-agent/builds/1-amdci4-julia-csail-mit-edu/julialang/scimltutorials-dot-jl/tutorials/advanced/Project.toml&#96;
+<div class="markdown"><pre><code>      Status &#96;/var/lib/buildkite-agent/builds/6-amdci4-julia-csail-mit-edu/julialang/scimltutorials-dot-jl/tutorials/advanced/Project.toml&#96;
   &#91;2169fc97&#93; AlgebraicMultigrid v0.4.0
   &#91;6e4b80f9&#93; BenchmarkTools v1.0.0
   &#91;052768ef&#93; CUDA v2.6.3
@@ -1910,7 +907,7 @@ Environment:
   &#91;37e2e46d&#93; LinearAlgebra
   &#91;2f01184e&#93; SparseArrays</code></pre>
 <p>And the full manifest:</p>
-<pre><code>      Status &#96;/var/lib/buildkite-agent/builds/1-amdci4-julia-csail-mit-edu/julialang/scimltutorials-dot-jl/tutorials/advanced/Manifest.toml&#96;
+<pre><code>      Status &#96;/var/lib/buildkite-agent/builds/6-amdci4-julia-csail-mit-edu/julialang/scimltutorials-dot-jl/tutorials/advanced/Manifest.toml&#96;
   &#91;c3fe647b&#93; AbstractAlgebra v0.16.0
   &#91;621f4979&#93; AbstractFFTs v1.0.1
   &#91;1520ce14&#93; AbstractTrees v0.3.4
@@ -2261,7 +1258,7 @@ Environment:
         <div class="footer">
           <p>
             Published from <a href="03-kolmogorov_equations.jmd">03-kolmogorov_equations.jmd</a>
-            using <a href="http://github.com/JunoLab/Weave.jl">Weave.jl</a> v0.10.10 on 2021-07-07.
+            using <a href="http://github.com/JunoLab/Weave.jl">Weave.jl</a> v0.10.10 on 2021-08-07.
           </p>
         </div>
       </div>
