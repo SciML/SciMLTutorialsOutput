@@ -83,6 +83,6 @@ scatter!([minx],[minf],label="Global Min")
 scatter!([maxx],[maxf],label="Global Max")
 
 
-using DiffEqTutorials
-DiffEqTutorials.tutorial_footer(WEAVE_ARGS[:folder],WEAVE_ARGS[:file])
+using SciMLTutorials
+SciMLTutorials.tutorial_footer(WEAVE_ARGS[:folder],WEAVE_ARGS[:file])
 

@@ -10,7 +10,7 @@ DifferentialEquations.jl includes Feagin's explicit Runge-Kutta methods of order
 
 We can use Feagin's order 16 method as follows. Let's use a two-dimensional linear ODE. Like in the Solving Equations in With Chosen Number Types notebook, we change the initial condition to BigFloats to tell the solver to use BigFloat types.
 
-````julia
+```julia
 using DifferentialEquations
 const linear_bigα = big(1.01)
 f(u,p,t) = (linear_bigα*u)
@@ -20,80 +20,20 @@ f_analytic(u0,p,t) = u0*exp(linear_bigα*t)
 ff = ODEFunction(f,analytic=f_analytic)
 prob = ODEProblem(ff,big(0.5),(0.0,1.0))
 sol = solve(prob,Feagin14(),dt=1//16,adaptive=false);
-````
+```
 
 
-````
-retcode: Success
-Interpolation: 3rd order Hermite
-t: 17-element Array{Float64,1}:
- 0.0
- 0.0625
- 0.125
- 0.1875
- 0.25
- 0.3125
- 0.375
- 0.4375
- 0.5
- 0.5625
- 0.625
- 0.6875
- 0.75
- 0.8125
- 0.875
- 0.9375
- 1.0
-u: 17-element Array{BigFloat,1}:
- 0.50
- 0.532579987953539129415175692266310012757570127936767465729988951844872703
-1384926
- 0.567282887137183768410176093811331902816684984885556550153431181534165966
-2084392
- 0.604247026395540457858840348261076470751584579123060668349121048671882781
-8716904
- 0.643619748077397554810695151333134437286938781958375274884622802079377793
-549762
- 0.685557995355440557982096349246370736930808950070979750802507189818563351
-642024
- 0.730228937815705933608434940588601030880998724704814215187999930588230616
-9718902
- 0.777810637810428680311119693945339493753691675945670302006794689942184819
-812709
- 0.828492760230425386904283967004764522632796405328715089108453503441096967
-5378266
- 0.882477328526228669757698486772395431354193449529466082277853631417758596
-1942936
- 0.939979529991540515340224856861894727292044008413711564360467630700841985
-3257788
- 1.001228573518936040932179654581424903118245024943528049619445960282439336
-451516
- 1.066468603246908246544672423846706082660227135054504931710469065776180175
-33485
- 1.135959671740132190447259472795962527154069506739201242159983984002811333
-382739
- 1.209978776582131731617034761065124311009358614495571372335128166979326800
-445978
- 1.288820964512299462579706253102020998553494397009716401282671347081826473
-196884
- 1.372800507508458259187784036450083092262707343306282981254591926965493411
-372691
-````
-
-
-
-````julia
+```julia
 println(sol.errors)
-````
+```
 
-
-````
-Dict{Symbol,BigFloat}(:l∞ => 2.19751040342660991781470263264956056068365936
-7683780324635801610297349872909655e-23,:final => 2.197510403426609917814702
-632649560560683659367683780324635801610297349872909655e-23,:l2 => 1.0615015
-97814768635894514677590712762248364686527596359902826841740549975688161e-23
-)
-````
+```
+Dict{Symbol, BigFloat}(:l∞ => 2.1975104034266099178147026326495605606836593
+67683780324635801610297349872909655e-23, :final => 2.1975104034266099178147
+02632649560560683659367683780324635801610297349872909655e-23, :l2 => 1.0615
+01597814768635894514677590712762248364686527596359902826841740549975688161e
+-23)
+```
 
 
 
@@ -101,14 +41,13 @@ Dict{Symbol,BigFloat}(:l∞ => 2.19751040342660991781470263264956056068365936
 
 Compare that to machine $\epsilon$ for Float64:
 
-````julia
+```julia
 eps(Float64)
-````
+```
 
-
-````
+```
 2.220446049250313e-16
-````
+```
 
 
 
@@ -116,20 +55,19 @@ eps(Float64)
 
 The error for Feagin's method when the stepsize is 1/16 is 8 orders of magnitude below machine $\epsilon$! However, that is dependent on the stepsize. If we instead use adaptive timestepping with the default tolerances, we get
 
-````julia
+```julia
 sol =solve(prob,Feagin14());
 println(sol.errors); print("The length was $(length(sol))")
-````
+```
 
-
-````
-Dict{Symbol,BigFloat}(:l∞ => 1.54573888394314096254653759860975921981641479
-0728029220638828884206395861982752e-09,:final => 1.545738883943140962546537
-598609759219816414790728029220638828884206395861982752e-09,:l2 => 8.9250668
-70202330409924421192162193462506388332261074725109949218067763405137993e-10
-)
+```
+Dict{Symbol, BigFloat}(:l∞ => 1.5457388839431409625465375986097592198164147
+90728029220638828884206395861982752e-09, :final => 1.5457388839431409625465
+37598609759219816414790728029220638828884206395861982752e-09, :l2 => 8.9250
+66870202330409924421192162193462506388332261074725109949218067763405137993e
+-10)
 The length was 3
-````
+```
 
 
 
@@ -141,46 +79,47 @@ Notice that when the stepsize is much higher, the error goes up quickly as well.
 
 The Order 14 method is awesome, but we need to make sure it's really that awesome. The following convergence test is used in the package tests in order to make sure the implementation is correct. Note that all methods have such tests in place.
 
-````julia
+```julia
 using DiffEqDevTools
 dts = 1.0 ./ 2.0 .^(10:-1:4)
 sim = test_convergence(dts,prob,Feagin14())
-````
+```
 
-
-````
-DiffEqDevTools.ConvergenceSimulation{DiffEqBase.ODESolution{BigFloat,1,Arra
-y{BigFloat,1},Array{BigFloat,1},Dict{Symbol,BigFloat},Array{Float64,1},Arra
-y{Array{BigFloat,1},1},DiffEqBase.ODEProblem{BigFloat,Tuple{Float64,Float64
-},false,DiffEqBase.NullParameters,DiffEqBase.ODEFunction{false,typeof(Main.
-##WeaveSandBox#258.f),LinearAlgebra.UniformScaling{Bool},typeof(Main.##Weav
-eSandBox#258.f_analytic),Nothing,Nothing,Nothing,Nothing,Nothing,Nothing,No
-thing,Nothing,Nothing,Nothing,Nothing},Base.Iterators.Pairs{Union{},Union{}
-,Tuple{},NamedTuple{(),Tuple{}}},DiffEqBase.StandardODEProblem},OrdinaryDif
-fEq.Feagin14,OrdinaryDiffEq.InterpolationData{DiffEqBase.ODEFunction{false,
-typeof(Main.##WeaveSandBox#258.f),LinearAlgebra.UniformScaling{Bool},typeof
-(Main.##WeaveSandBox#258.f_analytic),Nothing,Nothing,Nothing,Nothing,Nothin
-g,Nothing,Nothing,Nothing,Nothing,Nothing,Nothing},Array{BigFloat,1},Array{
-Float64,1},Array{Array{BigFloat,1},1},OrdinaryDiffEq.Feagin14ConstantCache{
-BigFloat,Float64}},DiffEqBase.DEStats}}(DiffEqBase.ODESolution{BigFloat,1,A
-rray{BigFloat,1},Array{BigFloat,1},Dict{Symbol,BigFloat},Array{Float64,1},A
-rray{Array{BigFloat,1},1},DiffEqBase.ODEProblem{BigFloat,Tuple{Float64,Floa
-t64},false,DiffEqBase.NullParameters,DiffEqBase.ODEFunction{false,typeof(Ma
-in.##WeaveSandBox#258.f),LinearAlgebra.UniformScaling{Bool},typeof(Main.##W
-eaveSandBox#258.f_analytic),Nothing,Nothing,Nothing,Nothing,Nothing,Nothing
-,Nothing,Nothing,Nothing,Nothing,Nothing},Base.Iterators.Pairs{Union{},Unio
-n{},Tuple{},NamedTuple{(),Tuple{}}},DiffEqBase.StandardODEProblem},Ordinary
-DiffEq.Feagin14,OrdinaryDiffEq.InterpolationData{DiffEqBase.ODEFunction{fal
-se,typeof(Main.##WeaveSandBox#258.f),LinearAlgebra.UniformScaling{Bool},typ
-eof(Main.##WeaveSandBox#258.f_analytic),Nothing,Nothing,Nothing,Nothing,Not
-hing,Nothing,Nothing,Nothing,Nothing,Nothing,Nothing},Array{BigFloat,1},Arr
-ay{Float64,1},Array{Array{BigFloat,1},1},OrdinaryDiffEq.Feagin14ConstantCac
-he{BigFloat,Float64}},DiffEqBase.DEStats}[retcode: Success
-Interpolation: 3rd order Hermite
-t: [0.0, 0.0009765625, 0.001953125, 0.0029296875, 0.00390625, 0.0048828125,
- 0.005859375, 0.0068359375, 0.0078125, 0.0087890625  …  0.9912109375, 0.992
-1875, 0.9931640625, 0.994140625, 0.9951171875, 0.99609375, 0.9970703125, 0.
-998046875, 0.9990234375, 1.0]
+```
+DiffEqDevTools.ConvergenceSimulation{SciMLBase.ODESolution{BigFloat, 1, Vec
+tor{BigFloat}, Vector{BigFloat}, Dict{Symbol, BigFloat}, Vector{Float64}, V
+ector{Vector{BigFloat}}, SciMLBase.ODEProblem{BigFloat, Tuple{Float64, Floa
+t64}, false, SciMLBase.NullParameters, SciMLBase.ODEFunction{false, typeof(
+Main.##WeaveSandBox#2261.f), LinearAlgebra.UniformScaling{Bool}, typeof(Mai
+n.##WeaveSandBox#2261.f_analytic), Nothing, Nothing, Nothing, Nothing, Noth
+ing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, typeof(SciMLBase
+.DEFAULT_OBSERVED), Nothing}, Base.Iterators.Pairs{Union{}, Union{}, Tuple{
+}, NamedTuple{(), Tuple{}}}, SciMLBase.StandardODEProblem}, OrdinaryDiffEq.
+Feagin14, OrdinaryDiffEq.InterpolationData{SciMLBase.ODEFunction{false, typ
+eof(Main.##WeaveSandBox#2261.f), LinearAlgebra.UniformScaling{Bool}, typeof
+(Main.##WeaveSandBox#2261.f_analytic), Nothing, Nothing, Nothing, Nothing, 
+Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, Nothing, typeof(SciML
+Base.DEFAULT_OBSERVED), Nothing}, Vector{BigFloat}, Vector{Float64}, Vector
+{Vector{BigFloat}}, OrdinaryDiffEq.Feagin14ConstantCache{BigFloat, Float64}
+}, DiffEqBase.DEStats}}(SciMLBase.ODESolution{BigFloat, 1, Vector{BigFloat}
+, Vector{BigFloat}, Dict{Symbol, BigFloat}, Vector{Float64}, Vector{Vector{
+BigFloat}}, SciMLBase.ODEProblem{BigFloat, Tuple{Float64, Float64}, false, 
+SciMLBase.NullParameters, SciMLBase.ODEFunction{false, typeof(Main.##WeaveS
+andBox#2261.f), LinearAlgebra.UniformScaling{Bool}, typeof(Main.##WeaveSand
+Box#2261.f_analytic), Nothing, Nothing, Nothing, Nothing, Nothing, Nothing,
+ Nothing, Nothing, Nothing, Nothing, Nothing, typeof(SciMLBase.DEFAULT_OBSE
+RVED), Nothing}, Base.Iterators.Pairs{Union{}, Union{}, Tuple{}, NamedTuple
+{(), Tuple{}}}, SciMLBase.StandardODEProblem}, OrdinaryDiffEq.Feagin14, Ord
+inaryDiffEq.InterpolationData{SciMLBase.ODEFunction{false, typeof(Main.##We
+aveSandBox#2261.f), LinearAlgebra.UniformScaling{Bool}, typeof(Main.##Weave
+SandBox#2261.f_analytic), Nothing, Nothing, Nothing, Nothing, Nothing, Noth
+ing, Nothing, Nothing, Nothing, Nothing, Nothing, typeof(SciMLBase.DEFAULT_
+OBSERVED), Nothing}, Vector{BigFloat}, Vector{Float64}, Vector{Vector{BigFl
+oat}}, OrdinaryDiffEq.Feagin14ConstantCache{BigFloat, Float64}}, DiffEqBase
+.DEStats}[t: [0.0, 0.0009765625, 0.001953125, 0.0029296875, 0.00390625, 0.0
+048828125, 0.005859375, 0.0068359375, 0.0078125, 0.0087890625  …  0.9912109
+375, 0.9921875, 0.9931640625, 0.994140625, 0.9951171875, 0.99609375, 0.9970
+703125, 0.998046875, 0.9990234375, 1.0]
 u: BigFloat[0.50, 0.5004934073532741442240167407783486492180603021615841294
 52202794115660211219599, 0.500987301608180818440355281223188950584910597683
 3766213492949239260841368026092, 0.5014816832452017142719825709983542121453
@@ -202,12 +141,10 @@ u: BigFloat[0.50, 0.5004934073532741442240167407783486492180603021615841294
 91032425293813214601928520794629811024108089775792586183724683573052, 1.371
 447143298197959472340593110913203812626370594321605117950295569839313271375
 , 1.37280050750845825918780601155411735836188549033294491231479506286094526
-5969766], retcode: Success
-Interpolation: 3rd order Hermite
-t: [0.0, 0.001953125, 0.00390625, 0.005859375, 0.0078125, 0.009765625, 0.01
-171875, 0.013671875, 0.015625, 0.017578125  …  0.982421875, 0.984375, 0.986
-328125, 0.98828125, 0.990234375, 0.9921875, 0.994140625, 0.99609375, 0.9980
-46875, 1.0]
+5969766], t: [0.0, 0.001953125, 0.00390625, 0.005859375, 0.0078125, 0.00976
+5625, 0.01171875, 0.013671875, 0.015625, 0.017578125  …  0.982421875, 0.984
+375, 0.986328125, 0.98828125, 0.990234375, 0.9921875, 0.994140625, 0.996093
+75, 0.998046875, 1.0]
 u: BigFloat[0.50, 0.5009873016081808184403552812231889505849105976869970947
 216582055241988418330043, 0.50197655274529266974138630312196643283380886018
 94997464536470643897825028575861, 0.502967757260881651510643519167524604642
@@ -229,11 +166,9 @@ u: BigFloat[0.50, 0.5009873016081808184403552812231889505849105976869970947
 029284574375015655225687307700625954299855029057120653933933847354, 1.37009
 51132910324252938132146019285207946298160836390422151163694340862252063, 1.
 372800507508458259187806011554117358361885495412387216596637263939057644809
-585], retcode: Success
-Interpolation: 3rd order Hermite
-t: [0.0, 0.00390625, 0.0078125, 0.01171875, 0.015625, 0.01953125, 0.0234375
-, 0.02734375, 0.03125, 0.03515625  …  0.96484375, 0.96875, 0.97265625, 0.97
-65625, 0.98046875, 0.984375, 0.98828125, 0.9921875, 0.99609375, 1.0]
+585], t: [0.0, 0.00390625, 0.0078125, 0.01171875, 0.015625, 0.01953125, 0.0
+234375, 0.02734375, 0.03125, 0.03515625  …  0.96484375, 0.96875, 0.97265625
+, 0.9765625, 0.98046875, 0.984375, 0.98828125, 0.9921875, 0.99609375, 1.0]
 u: BigFloat[0.50, 0.5019765527452926697413863031219664328338089596679027919
 888741103974398448576829, 0.50396091901209518746154563970525241120918092433
 73910752677848686355143273445556, 0.505953129688082334547174602038947130490
@@ -255,11 +190,9 @@ u: BigFloat[0.50, 0.5019765527452926697413863031219664328338089596679027919
 7946183268827001169225864534157312078314101084876138019637668867105307, 1.3
 673950506260292845743750156552256873077697261945049092191653877874628467060
 66, 1.372800507508458259187806011554117358361955140865683163444664161725836
-562110807], retcode: Success
-Interpolation: 3rd order Hermite
-t: [0.0, 0.0078125, 0.015625, 0.0234375, 0.03125, 0.0390625, 0.046875, 0.05
-46875, 0.0625, 0.0703125  …  0.9296875, 0.9375, 0.9453125, 0.953125, 0.9609
-375, 0.96875, 0.9765625, 0.984375, 0.9921875, 1.0]
+562110807], t: [0.0, 0.0078125, 0.015625, 0.0234375, 0.03125, 0.0390625, 0.
+046875, 0.0546875, 0.0625, 0.0703125  …  0.9296875, 0.9375, 0.9453125, 0.95
+3125, 0.9609375, 0.96875, 0.9765625, 0.984375, 0.9921875, 1.0]
 u: BigFloat[0.50, 0.5039609190120951874615456397052524112111879130152678185
 972878772909801438539725, 0.50795321578303112915468385810466743883495202114
 45279229156914347577732228682629, 0.511977138882330923641985750275520143860
@@ -281,11 +214,9 @@ u: BigFloat[0.50, 0.5039609190120951874615456397052524112111879130152678185
 294640673153598414547925881640827460343653263042386265204459670148168, 1.36
 201087794618326882700116922586453484617428790917305214715458105432837901989
 4, 1.3728005075084582591878060115541173590617414861285190771349018784370260
-32283726], retcode: Success
-Interpolation: 3rd order Hermite
-t: [0.0, 0.015625, 0.03125, 0.046875, 0.0625, 0.078125, 0.09375, 0.109375, 
-0.125, 0.140625  …  0.859375, 0.875, 0.890625, 0.90625, 0.921875, 0.9375, 0
-.953125, 0.96875, 0.984375, 1.0]
+32283726], t: [0.0, 0.015625, 0.03125, 0.046875, 0.0625, 0.078125, 0.09375,
+ 0.109375, 0.125, 0.140625  …  0.859375, 0.875, 0.890625, 0.90625, 0.921875
+, 0.9375, 0.953125, 0.96875, 0.984375, 1.0]
 u: BigFloat[0.50, 0.5079532157830311291546838581046674228648435931525498190
 278213939882467623443407, 0.51603293884864516922308309058199688204679557555
 37640078345474392168602557520595, 0.524241181476275133777497321881213386612
@@ -307,11 +238,9 @@ u: BigFloat[0.50, 0.5079532157830311291546838581046674228648435931525498190
 3993405462867526880344470992985954682818207565575624581067560987566062, 1.3
 513060502946406731535984145479232050719649354675944552369964535610982815942
 27, 1.372800507508458259187806011554114596757211232433432893362855858032659
-14211007], retcode: Success
-Interpolation: 3rd order Hermite
-t: [0.0, 0.03125, 0.0625, 0.09375, 0.125, 0.15625, 0.1875, 0.21875, 0.25, 0
-.28125  …  0.71875, 0.75, 0.78125, 0.8125, 0.84375, 0.875, 0.90625, 0.9375,
- 0.96875, 1.0]
+14211007], t: [0.0, 0.03125, 0.0625, 0.09375, 0.125, 0.15625, 0.1875, 0.218
+75, 0.25, 0.28125  …  0.71875, 0.75, 0.78125, 0.8125, 0.84375, 0.875, 0.906
+25, 0.9375, 0.96875, 1.0]
 u: BigFloat[0.50, 0.5160329388486451692230830905761645510166025236059793420
 81272221990055728561679, 0.532579987953539129415176225083903894641931169817
 6330530726315794171525645034893, 0.5496576327112816769034687550802866340567
@@ -333,10 +262,8 @@ u: BigFloat[0.50, 0.5160329388486451692230830905761645510166025236059793420
 1229946257972559404143259768018368155787883476891071715795301279543, 1.3301
 48139934054628675268802978666438630864641254421813595879534440847470751688,
  1.372800507508458259187806011057611283394590006590596578199873499201906331
-611072], retcode: Success
-Interpolation: 3rd order Hermite
-t: [0.0, 0.0625, 0.125, 0.1875, 0.25, 0.3125, 0.375, 0.4375, 0.5, 0.5625, 0
-.625, 0.6875, 0.75, 0.8125, 0.875, 0.9375, 1.0]
+611072], t: [0.0, 0.0625, 0.125, 0.1875, 0.25, 0.3125, 0.375, 0.4375, 0.5, 
+0.5625, 0.625, 0.6875, 0.75, 0.8125, 0.875, 0.9375, 1.0]
 u: BigFloat[0.50, 0.5325799879535391294151756922663100127575701279367674657
 299889518448727031384926, 0.56728288713718376841017609381133190281668498488
 55565501534311815341659662084392, 0.604247026395540457858840348261076470751
@@ -354,39 +281,39 @@ u: BigFloat[0.50, 0.5325799879535391294151756922663100127575701279367674657
 69506739201242159983984002811333382739, 1.209978776582131731617034761065124
 311009358614495571372335128166979326800445978, 1.28882096451229946257970625
 3102020998553494397009716401282671347081826473196884, 1.3728005075084582591
-87784036450083092262707343306282981254591926965493411372691]], Dict{Any,Any
-}(:l∞ => BigFloat[3.3543545459629930177501679382781291302012408187338947472
-46416797762893693012556e-49, 5.07977773973643850037988739563364757867015516
-067866884666732578123388975047482e-45, 6.9650533073686584465398166666312934
-86902250519752824131061460869466635839790668e-41, 6.99855995795909600274703
-1148778557831077884643242480170494801380170765753974579e-37, 2.761604674257
-899176583497342905526511107065867988065457455490380825745507598647e-33, 4.9
-650607496729548374201289866032526435726391756486604232601712118906759519607
-09e-28, 2.19751040342660991781470263264956056068365936768378032463580161029
-7349872909655e-23],:final => BigFloat[3.35435454596299301775016793827812913
-0201240818733894747246416797762893693012556e-49, 5.079777739736438500379887
-39563364757867015516067866884666732578123388975047482e-45, 6.96505330736865
-8446539816666631293486902250519752824131061460869466635839790668e-41, 6.998
-559957959096002747031148778557831077884643242480170494801380170765753974579
-e-37, 2.7616046742578991765834973429055265111070658679880654574554903808257
-45507598647e-33, 4.96506074967295483742012898660325264357263917564866042326
-0171211890675951960709e-28, 2.197510403426609917814702632649560560683659367
-683780324635801610297349872909655e-23],:l2 => BigFloat[1.557658061895966325
-846207347700821566122250234951867982385249845278493662676944e-49, 2.3604116
-57197547333498547223212880765989953910523198376084992961121455787643313e-45
-, 3.24060760516074676637178554271828070823716806609832930426777898390162348
-7961701e-41, 3.264565979149024498598621687244084221464920048688554495210368
-172485686228822379e-37, 1.2947776667473864852636114197311110560713898649841
-76915402703871046417929063523e-33, 2.35148503019100306142594944698233564880
-1181524332244933545614443786091245762492e-28, 1.061501597814768635894514677
-590712762248364686527596359902826841740549975688161e-23]), 7, Dict(:dts => 
-[0.0009765625, 0.001953125, 0.00390625, 0.0078125, 0.015625, 0.03125, 0.062
-5]), Dict{Any,Any}(:l∞ => 14.2933275461038524350008931328481604055650481625
-4374715376150534187461411604701,:final => 14.293327546103852435000893132848
-16040556504816254374715376150534187461411604701,:l2 => 14.30280974051840423
-232019057634315242594313233119811212889763182960978082577156), [0.000976562
-5, 0.001953125, 0.00390625, 0.0078125, 0.015625, 0.03125, 0.0625])
-````
+87784036450083092262707343306282981254591926965493411372691]], Dict{Any, An
+y}(:l∞ => BigFloat[3.354354545962993017750167938278129130201240818733894747
+246416797762893693012556e-49, 5.0797777397364385003798873956336475786701551
+6067866884666732578123388975047482e-45, 6.965053307368658446539816666631293
+486902250519752824131061460869466635839790668e-41, 6.9985599579590960027470
+31148778557831077884643242480170494801380170765753974579e-37, 2.76160467425
+7899176583497342905526511107065867988065457455490380825745507598647e-33, 4.
+965060749672954837420128986603252643572639175648660423260171211890675951960
+709e-28, 2.1975104034266099178147026326495605606836593676837803246358016102
+97349872909655e-23], :final => BigFloat[3.354354545962993017750167938278129
+130201240818733894747246416797762893693012556e-49, 5.0797777397364385003798
+8739563364757867015516067866884666732578123388975047482e-45, 6.965053307368
+658446539816666631293486902250519752824131061460869466635839790668e-41, 6.9
+985599579590960027470311487785578310778846432424801704948013801707657539745
+79e-37, 2.76160467425789917658349734290552651110706586798806545745549038082
+5745507598647e-33, 4.965060749672954837420128986603252643572639175648660423
+260171211890675951960709e-28, 2.1975104034266099178147026326495605606836593
+67683780324635801610297349872909655e-23], :l2 => BigFloat[1.557658061895966
+325846207347700821566122250234951867982385249845278493662676944e-49, 2.3604
+11657197547333498547223212880765989953910523198376084992961121455787643313e
+-45, 3.24060760516074676637178554271828070823716806609832930426777898390162
+3487961701e-41, 3.264565979149024498598621687244084221464920048688554495210
+368172485686228822379e-37, 1.2947776667473864852636114197311110560713898649
+84176915402703871046417929063523e-33, 2.35148503019100306142594944698233564
+8801181524332244933545614443786091245762492e-28, 1.061501597814768635894514
+677590712762248364686527596359902826841740549975688161e-23]), 7, Dict(:dts 
+=> [0.0009765625, 0.001953125, 0.00390625, 0.0078125, 0.015625, 0.03125, 0.
+0625]), Dict{Any, Any}(:l∞ => 14.293327546103852435000893132848160405565048
+16254374715376150534187461411604701, :final => 14.2933275461038524350008931
+3284816040556504816254374715376150534187461411604701, :l2 => 14.30280974051
+840423232019057634315242594313233119811212889763182960978082577142), [0.000
+9765625, 0.001953125, 0.00390625, 0.0078125, 0.015625, 0.03125, 0.0625])
+```
 
 
 
@@ -394,12 +321,11 @@ e-37, 2.7616046742578991765834973429055265111070658679880654574554903808257
 
 For a view of what's going on, let's plot the simulation results.
 
-````julia
+```julia
 using Plots
 gr()
 plot(sim)
-````
-
+```
 
 ![](figures/02-feagin_6_1.png)
 
@@ -411,44 +337,335 @@ is the estimated slope.
 
 ## Appendix
 
- This tutorial is part of the DiffEqTutorials.jl repository, found at: <https://github.com/JuliaDiffEq/DiffEqTutorials.jl>
+These tutorials are a part of the SciMLTutorials.jl repository, found at: [https://github.com/SciML/SciMLTutorials.jl](https://github.com/SciML/SciMLTutorials.jl). For more information on high-performance scientific machine learning, check out the SciML Open Source Software Organization [https://sciml.ai](https://sciml.ai).
 
 To locally run this tutorial, do the following commands:
+
 ```
-using DiffEqTutorials
-DiffEqTutorials.weave_file("ode_extras","02-feagin.jmd")
+using SciMLTutorials
+SciMLTutorials.weave_file("tutorials/ode_extras","02-feagin.jmd")
 ```
 
 Computer Information:
+
 ```
-Julia Version 1.4.2
-Commit 44fa15b150* (2020-05-23 18:35 UTC)
+Julia Version 1.6.2
+Commit 1b93d53fc4 (2021-07-14 15:36 UTC)
 Platform Info:
   OS: Linux (x86_64-pc-linux-gnu)
-  CPU: Intel(R) Core(TM) i7-9700K CPU @ 3.60GHz
+  CPU: AMD EPYC 7502 32-Core Processor
   WORD_SIZE: 64
   LIBM: libopenlibm
-  LLVM: libLLVM-8.0.1 (ORCJIT, skylake)
+  LLVM: libLLVM-11.0.1 (ORCJIT, znver2)
 Environment:
-  JULIA_DEPOT_PATH = /builds/JuliaGPU/DiffEqTutorials.jl/.julia
-  JULIA_CUDA_MEMORY_LIMIT = 536870912
-  JULIA_PROJECT = @.
-  JULIA_NUM_THREADS = 4
+  JULIA_DEPOT_PATH = /root/.cache/julia-buildkite-plugin/depots/a6029d3a-f78b-41ea-bc97-28aa57c6c6ea
+  JULIA_NUM_THREADS = 16
 
 ```
 
 Package Information:
 
 ```
-Status `/builds/JuliaGPU/DiffEqTutorials.jl/tutorials/ode_extras/Project.toml`
-[f3b72e0c-5b89-59e1-b016-84e28bfd966d] DiffEqDevTools 2.22.0
-[0c46a032-eb83-5123-abaf-570d42b7fbaa] DifferentialEquations 6.14.0
-[961ee093-0014-501f-94e3-6117800e7a78] ModelingToolkit 3.11.0
-[76087f3c-5699-56af-9a33-bf431cd00edd] NLopt 0.6.0
-[2774e3e8-f4cf-5e23-947b-6d7e65073b56] NLsolve 4.4.0
-[429524aa-4258-5aef-a3af-852621145aeb] Optim 0.22.0
-[1dea7af3-3e70-54e6-95c3-0bf5283fa5ed] OrdinaryDiffEq 5.41.0
-[91a5bcdd-55d7-5caf-9e0b-520d859cae80] Plots 1.5.1
-[37e2e46d-f89d-539d-b4ee-838fcccc9c8e] LinearAlgebra
-[2f01184e-e22b-5df5-ae63-d93ebab69eaf] SparseArrays
+      Status `/var/lib/buildkite-agent/builds/5-amdci4-julia-csail-mit-edu/julialang/scimltutorials-dot-jl/tutorials/ode_extras/Project.toml`
+  [f3b72e0c] DiffEqDevTools v2.27.2
+  [0c46a032] DifferentialEquations v6.17.1
+  [961ee093] ModelingToolkit v5.17.3
+  [76087f3c] NLopt v0.6.2
+  [2774e3e8] NLsolve v4.5.1
+  [429524aa] Optim v1.3.0
+  [1dea7af3] OrdinaryDiffEq v5.56.0
+  [91a5bcdd] Plots v1.15.2
+  [30cb0354] SciMLTutorials v0.9.0
+  [37e2e46d] LinearAlgebra
+  [2f01184e] SparseArrays
 ```
+
+And the full manifest:
+
+```
+      Status `/var/lib/buildkite-agent/builds/5-amdci4-julia-csail-mit-edu/julialang/scimltutorials-dot-jl/tutorials/ode_extras/Manifest.toml`
+  [c3fe647b] AbstractAlgebra v0.16.0
+  [1520ce14] AbstractTrees v0.3.4
+  [79e6a3ab] Adapt v3.3.0
+  [ec485272] ArnoldiMethod v0.1.0
+  [4fba245c] ArrayInterface v3.1.15
+  [4c555306] ArrayLayouts v0.7.0
+  [aae01518] BandedMatrices v0.16.9
+  [6e4b80f9] BenchmarkTools v1.0.0
+  [764a87c0] BoundaryValueDiffEq v2.7.1
+  [fa961155] CEnum v0.4.1
+  [00ebfdb7] CSTParser v2.5.0
+  [d360d2e6] ChainRulesCore v0.9.44
+  [b630d9fa] CheapThreads v0.2.5
+  [523fee87] CodecBzip2 v0.7.2
+  [944b1d66] CodecZlib v0.7.0
+  [35d6a980] ColorSchemes v3.12.1
+  [3da002f7] ColorTypes v0.11.0
+  [5ae59095] Colors v0.12.8
+  [861a8166] Combinatorics v1.0.2
+  [a80b9123] CommonMark v0.8.1
+  [38540f10] CommonSolve v0.2.0
+  [bbf7d656] CommonSubexpressions v0.3.0
+  [34da2185] Compat v3.30.0
+  [8f4d0f93] Conda v1.5.2
+  [187b0558] ConstructionBase v1.2.1
+  [d38c429a] Contour v0.5.7
+  [a8cc5b0e] Crayons v4.0.4
+  [9a962f9c] DataAPI v1.6.0
+  [864edb3b] DataStructures v0.18.9
+  [e2d170a0] DataValueInterfaces v1.0.0
+  [bcd4f6db] DelayDiffEq v5.31.0
+  [2b5f629d] DiffEqBase v6.62.2
+  [459566f4] DiffEqCallbacks v2.16.1
+  [f3b72e0c] DiffEqDevTools v2.27.2
+  [5a0ffddc] DiffEqFinancial v2.4.0
+  [c894b116] DiffEqJump v6.14.2
+  [77a26b50] DiffEqNoiseProcess v5.7.3
+  [055956cb] DiffEqPhysics v3.9.0
+  [163ba53b] DiffResults v1.0.3
+  [b552c78f] DiffRules v1.0.2
+  [0c46a032] DifferentialEquations v6.17.1
+  [c619ae07] DimensionalPlotRecipes v1.2.0
+  [b4f34e82] Distances v0.10.3
+  [31c24e10] Distributions v0.24.18
+  [ffbed154] DocStringExtensions v0.8.4
+  [e30172f5] Documenter v0.26.3
+  [d4d017d3] ExponentialUtilities v1.8.4
+  [e2ba6199] ExprTools v0.1.3
+  [c87230d0] FFMPEG v0.4.0
+  [7034ab61] FastBroadcast v0.1.8
+  [9aa1b823] FastClosures v0.3.2
+  [1a297f60] FillArrays v0.11.7
+  [6a86dc24] FiniteDiff v2.8.0
+  [53c48c17] FixedPointNumbers v0.8.4
+  [59287772] Formatting v0.4.2
+  [f6369f11] ForwardDiff v0.10.18
+  [069b7b12] FunctionWrappers v1.1.2
+  [28b8d3ca] GR v0.57.4
+  [5c1252a2] GeometryBasics v0.3.12
+  [42e2da0e] Grisu v1.0.2
+  [cd3eb016] HTTP v0.9.9
+  [eafb193a] Highlights v0.4.5
+  [0e44f5e4] Hwloc v2.0.0
+  [7073ff75] IJulia v1.23.2
+  [b5f81e59] IOCapture v0.1.1
+  [615f187c] IfElse v0.1.0
+  [d25df0c9] Inflate v0.1.2
+  [83e8ac13] IniFile v0.5.0
+  [c8e1da08] IterTools v1.3.0
+  [42fd0dbc] IterativeSolvers v0.9.1
+  [82899510] IteratorInterfaceExtensions v1.0.0
+  [692b3bcd] JLLWrappers v1.3.0
+  [682c06a0] JSON v0.21.1
+  [7d188eb4] JSONSchema v0.3.3
+  [98e50ef6] JuliaFormatter v0.13.7
+  [b964fa9f] LaTeXStrings v1.2.1
+  [2ee39098] LabelledArrays v1.6.1
+  [23fbe1c1] Latexify v0.15.5
+  [093fc24a] LightGraphs v1.3.5
+  [d3d80556] LineSearches v7.1.1
+  [2ab3a3ac] LogExpFunctions v0.2.4
+  [bdcacae8] LoopVectorization v0.12.23
+  [1914dd2f] MacroTools v0.5.6
+  [b8f27783] MathOptInterface v0.9.22
+  [fdba3010] MathProgBase v0.7.8
+  [739be429] MbedTLS v1.0.3
+  [442fdcdd] Measures v0.3.1
+  [e1d29d7a] Missings v1.0.0
+  [961ee093] ModelingToolkit v5.17.3
+  [46d2c3a1] MuladdMacro v0.2.2
+  [f9640e96] MultiScaleArrays v1.8.1
+  [ffc61752] Mustache v1.0.10
+  [d8a4904e] MutableArithmetics v0.2.19
+  [d41bc354] NLSolversBase v7.8.0
+  [76087f3c] NLopt v0.6.2
+  [2774e3e8] NLsolve v4.5.1
+  [77ba4419] NaNMath v0.3.5
+  [8913a72c] NonlinearSolve v0.3.8
+  [6fe1bfb0] OffsetArrays v1.9.0
+  [429524aa] Optim v1.3.0
+  [bac558e1] OrderedCollections v1.4.1
+  [1dea7af3] OrdinaryDiffEq v5.56.0
+  [90014a1f] PDMats v0.11.0
+  [65888b18] ParameterizedFunctions v5.10.0
+  [d96e819e] Parameters v0.12.2
+  [69de0a69] Parsers v1.1.0
+  [ccf2f8ad] PlotThemes v2.0.1
+  [995b91a9] PlotUtils v1.0.10
+  [91a5bcdd] Plots v1.15.2
+  [e409e4f3] PoissonRandom v0.4.0
+  [f517fe37] Polyester v0.3.1
+  [85a6dd25] PositiveFactorizations v0.2.4
+  [21216c6a] Preferences v1.2.2
+  [1fd47b50] QuadGK v2.4.1
+  [74087812] Random123 v1.3.1
+  [fb686558] RandomExtensions v0.4.3
+  [e6cf234a] RandomNumbers v1.4.0
+  [3cdcf5f2] RecipesBase v1.1.1
+  [01d81517] RecipesPipeline v0.3.2
+  [731186ca] RecursiveArrayTools v2.11.4
+  [f2c3362d] RecursiveFactorization v0.1.12
+  [189a3867] Reexport v1.0.0
+  [ae029012] Requires v1.1.3
+  [ae5879a3] ResettableStacks v1.1.0
+  [79098fc4] Rmath v0.7.0
+  [47965b36] RootedTrees v1.0.0
+  [7e49a35a] RuntimeGeneratedFunctions v0.5.2
+  [476501e8] SLEEFPirates v0.6.20
+  [1bc83da4] SafeTestsets v0.0.1
+  [0bca4576] SciMLBase v1.13.4
+  [30cb0354] SciMLTutorials v0.9.0
+  [6c6a2e73] Scratch v1.0.3
+  [efcf1570] Setfield v0.7.0
+  [992d4aef] Showoff v1.0.3
+  [699a6c99] SimpleTraits v0.9.3
+  [b85f4697] SoftGlobalScope v1.1.0
+  [a2af1166] SortingAlgorithms v1.0.0
+  [47a9eef4] SparseDiffTools v1.13.2
+  [276daf66] SpecialFunctions v1.4.1
+  [aedffcd0] Static v0.2.4
+  [90137ffa] StaticArrays v1.2.0
+  [82ae8749] StatsAPI v1.0.0
+  [2913bbd2] StatsBase v0.33.8
+  [4c63d2b9] StatsFuns v0.9.8
+  [9672c7b4] SteadyStateDiffEq v1.6.2
+  [789caeaf] StochasticDiffEq v6.34.1
+  [7792a7ef] StrideArraysCore v0.1.11
+  [09ab397b] StructArrays v0.5.1
+  [c3572dad] Sundials v4.4.3
+  [d1185830] SymbolicUtils v0.11.2
+  [0c5d862f] Symbolics v0.1.25
+  [3783bdb8] TableTraits v1.0.1
+  [bd369af6] Tables v1.4.2
+  [8290d209] ThreadingUtilities v0.4.4
+  [a759f4b9] TimerOutputs v0.5.9
+  [0796e94c] Tokenize v0.5.16
+  [3bb67fe8] TranscodingStreams v0.9.5
+  [a2a6695c] TreeViews v0.3.0
+  [5c2747f8] URIs v1.3.0
+  [3a884ed6] UnPack v1.0.2
+  [1986cc42] Unitful v1.7.0
+  [3d5dd08c] VectorizationBase v0.20.11
+  [81def892] VersionParsing v1.2.0
+  [19fa3120] VertexSafeGraphs v0.1.2
+  [44d3d7a6] Weave v0.10.8
+  [ddb6d928] YAML v0.4.6
+  [c2297ded] ZMQ v1.2.1
+  [a5390f91] ZipFile v0.9.3
+  [700de1a5] ZygoteRules v0.2.1
+  [6e34b625] Bzip2_jll v1.0.6+5
+  [83423d85] Cairo_jll v1.16.0+6
+  [5ae413db] EarCut_jll v2.1.5+1
+  [2e619515] Expat_jll v2.2.10+0
+  [b22a6f82] FFMPEG_jll v4.3.1+4
+  [a3f928ae] Fontconfig_jll v2.13.1+14
+  [d7e528f0] FreeType2_jll v2.10.1+5
+  [559328eb] FriBidi_jll v1.0.5+6
+  [0656b61e] GLFW_jll v3.3.4+0
+  [d2c73de3] GR_jll v0.57.2+0
+  [78b55507] Gettext_jll v0.21.0+0
+  [7746bdde] Glib_jll v2.68.1+0
+  [e33a78d0] Hwloc_jll v2.4.1+0
+  [aacddb02] JpegTurbo_jll v2.0.1+3
+  [c1c5ebd0] LAME_jll v3.100.0+3
+  [dd4b983a] LZO_jll v2.10.1+0
+  [dd192d2f] LibVPX_jll v1.9.0+1
+  [e9f186c6] Libffi_jll v3.2.2+0
+  [d4300ac3] Libgcrypt_jll v1.8.7+0
+  [7e76a0d4] Libglvnd_jll v1.3.0+3
+  [7add5ba3] Libgpg_error_jll v1.42.0+0
+  [94ce4f54] Libiconv_jll v1.16.1+0
+  [4b2f31a3] Libmount_jll v2.35.0+0
+  [89763e89] Libtiff_jll v4.1.0+2
+  [38a345b3] Libuuid_jll v2.36.0+0
+  [079eb43e] NLopt_jll v2.7.0+0
+  [e7412a2a] Ogg_jll v1.3.4+2
+  [458c3c95] OpenSSL_jll v1.1.1+6
+  [efe28fd5] OpenSpecFun_jll v0.5.4+0
+  [91d4177d] Opus_jll v1.3.1+3
+  [2f80f16e] PCRE_jll v8.44.0+0
+  [30392449] Pixman_jll v0.40.1+0
+  [ea2cea3b] Qt5Base_jll v5.15.2+0
+  [f50d1b31] Rmath_jll v0.3.0+0
+  [fb77eaff] Sundials_jll v5.2.0+1
+  [a2964d1f] Wayland_jll v1.17.0+4
+  [2381bf8a] Wayland_protocols_jll v1.18.0+4
+  [02c8fc9c] XML2_jll v2.9.12+0
+  [aed1982a] XSLT_jll v1.1.34+0
+  [4f6342f7] Xorg_libX11_jll v1.6.9+4
+  [0c0b7dd1] Xorg_libXau_jll v1.0.9+4
+  [935fb764] Xorg_libXcursor_jll v1.2.0+4
+  [a3789734] Xorg_libXdmcp_jll v1.1.3+4
+  [1082639a] Xorg_libXext_jll v1.3.4+4
+  [d091e8ba] Xorg_libXfixes_jll v5.0.3+4
+  [a51aa0fd] Xorg_libXi_jll v1.7.10+4
+  [d1454406] Xorg_libXinerama_jll v1.1.4+4
+  [ec84b674] Xorg_libXrandr_jll v1.5.2+4
+  [ea2f1a96] Xorg_libXrender_jll v0.9.10+4
+  [14d82f49] Xorg_libpthread_stubs_jll v0.1.0+3
+  [c7cfdc94] Xorg_libxcb_jll v1.13.0+3
+  [cc61e674] Xorg_libxkbfile_jll v1.1.0+4
+  [12413925] Xorg_xcb_util_image_jll v0.4.0+1
+  [2def613f] Xorg_xcb_util_jll v0.4.0+1
+  [975044d2] Xorg_xcb_util_keysyms_jll v0.4.0+1
+  [0d47668e] Xorg_xcb_util_renderutil_jll v0.3.9+1
+  [c22f9ab0] Xorg_xcb_util_wm_jll v0.4.1+1
+  [35661453] Xorg_xkbcomp_jll v1.4.2+4
+  [33bec58e] Xorg_xkeyboard_config_jll v2.27.0+4
+  [c5fb5394] Xorg_xtrans_jll v1.4.0+3
+  [8f1865be] ZeroMQ_jll v4.3.2+6
+  [3161d3a3] Zstd_jll v1.5.0+0
+  [0ac62f75] libass_jll v0.14.0+4
+  [f638f0a6] libfdk_aac_jll v0.1.6+4
+  [b53b4c65] libpng_jll v1.6.38+0
+  [a9144af2] libsodium_jll v1.0.20+0
+  [f27f6e37] libvorbis_jll v1.3.6+6
+  [1270edf5] x264_jll v2020.7.14+2
+  [dfaa095f] x265_jll v3.0.0+3
+  [d8fb68d0] xkbcommon_jll v0.9.1+5
+  [0dad84c5] ArgTools
+  [56f22d72] Artifacts
+  [2a0f44e3] Base64
+  [ade2ca70] Dates
+  [8bb1440f] DelimitedFiles
+  [8ba89e20] Distributed
+  [f43a241f] Downloads
+  [7b1f6079] FileWatching
+  [9fa8497b] Future
+  [b77e0a4c] InteractiveUtils
+  [b27032c2] LibCURL
+  [76f85450] LibGit2
+  [8f399da3] Libdl
+  [37e2e46d] LinearAlgebra
+  [56ddb016] Logging
+  [d6f4376e] Markdown
+  [a63ad114] Mmap
+  [ca575930] NetworkOptions
+  [44cfe95a] Pkg
+  [de0858da] Printf
+  [3fa0cd96] REPL
+  [9a3f8284] Random
+  [ea8e919c] SHA
+  [9e88b42a] Serialization
+  [1a1011a3] SharedArrays
+  [6462fe0b] Sockets
+  [2f01184e] SparseArrays
+  [10745b16] Statistics
+  [4607b0f0] SuiteSparse
+  [fa267f1f] TOML
+  [a4e569a6] Tar
+  [8dfed614] Test
+  [cf7118a7] UUIDs
+  [4ec0a83e] Unicode
+  [e66e0078] CompilerSupportLibraries_jll
+  [deac9b47] LibCURL_jll
+  [29816b5a] LibSSH2_jll
+  [c8ffd9c3] MbedTLS_jll
+  [14a3606d] MozillaCACerts_jll
+  [4536629a] OpenBLAS_jll
+  [bea87d4a] SuiteSparse_jll
+  [83775a58] Zlib_jll
+  [8e850ede] nghttp2_jll
+  [3f19e933] p7zip_jll
+```
+
