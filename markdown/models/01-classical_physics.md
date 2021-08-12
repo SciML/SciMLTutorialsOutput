@@ -14,7 +14,7 @@ $$f(t,u) = \frac{du}{dt}$$
 
 The Radioactive decay problem is the first order linear ODE problem of an exponential with a negative coefficient, which represents the half-life of the process in question. Should the coefficient be positive, this would represent a population growth equation.
 
-````julia
+```julia
 using OrdinaryDiffEq, Plots
 gr()
 
@@ -35,8 +35,7 @@ sol = solve(prob,Tsit5())
 #Plot
 plot(sol,linewidth=2,title ="Carbon-14 half-life", xaxis = "Time in thousands of years", yaxis = "Percentage left", label = "Numerical Solution")
 plot!(sol.t, t->exp(-C₁*t),lw=3,ls=:dash,label="Analytical Solution")
-````
-
+```
 
 ![](figures/01-classical_physics_1_1.png)
 
@@ -67,7 +66,7 @@ $c_1$ is the initial position and $\omega c_2$ is the initial velocity.
 Instead of transforming this to a system of ODEs to solve with `ODEProblem`,
 we can use `SecondOrderODEProblem` as follows.
 
-````julia
+```julia
 # Simple Harmonic Oscillator Problem
 using OrdinaryDiffEq, Plots
 
@@ -95,8 +94,7 @@ sol = solve(prob, DPRKN6())
 plot(sol, vars=[2,1], linewidth=2, title ="Simple Harmonic Oscillator", xaxis = "Time", yaxis = "Elongation", label = ["x" "dx"])
 plot!(t->A*cos(ω*t-ϕ), lw=3, ls=:dash, label="Analytical Solution x")
 plot!(t->-A*ω*sin(ω*t-ϕ), lw=3, ls=:dash, label="Analytical Solution dx")
-````
-
+```
 
 ![](figures/01-classical_physics_2_1.png)
 
@@ -128,7 +126,7 @@ $$
 \end{align*}
 $$
 
-````julia
+```julia
 # Simple Pendulum Problem
 using OrdinaryDiffEq, Plots
 
@@ -154,8 +152,7 @@ sol = solve(prob,Tsit5())
 
 #Plot
 plot(sol,linewidth=2,title ="Simple Pendulum Problem", xaxis = "Time", yaxis = "Height", label = ["\\theta" "d\\theta"])
-````
-
+```
 
 ![](figures/01-classical_physics_3_1.png)
 
@@ -163,7 +160,7 @@ plot(sol,linewidth=2,title ="Simple Pendulum Problem", xaxis = "Time", yaxis = "
 
 So now we know that behaviour of the position versus time. However, it will be useful to us to look at the phase space of the pendulum, i.e., and representation of all possible states of the system in question (the pendulum) by looking at its velocity and position. Phase space analysis is ubiquitous in the analysis of dynamical systems, and thus we will provide a few facilities for it.
 
-````julia
+```julia
 p = plot(sol,vars = (1,2), xlims = (-9,9), title = "Phase Space Plot", xaxis = "Velocity", yaxis = "Position", leg=false)
 function phase_plot(prob, u0, p, tspan=2pi)
     _prob = ODEProblem(prob.f,u0,(0.0,tspan))
@@ -176,8 +173,7 @@ for i in -4pi:pi/2:4π
     end
 end
 plot(p,xlims = (-9,9))
-````
-
+```
 
 ![](figures/01-classical_physics_4_1.png)
 
@@ -199,7 +195,7 @@ $$\frac{d}{dt}
 -\sin(\alpha+\beta) - 2\sin(\beta)\frac{(l_\alpha-l_\beta)l_\beta}{3-\cos2\beta} + 2\sin(2\beta)\frac{l_\alpha^2-2(1+\cos\beta)l_\alpha l_\beta + (3+2\cos\beta)l_\beta^2}{(3-\cos2\beta)^2}
 \end{pmatrix}$$
 
-````julia
+```julia
 #Double Pendulum Problem
 using OrdinaryDiffEq, Plots
 
@@ -232,82 +228,14 @@ end
 #Pass to Solvers
 double_pendulum_problem = ODEProblem(double_pendulum, initial, tspan)
 sol = solve(double_pendulum_problem, Vern7(), abs_tol=1e-10, dt=0.05);
-````
+```
 
 
-````
-retcode: Success
-Interpolation: specialized 7th order lazy interpolation
-t: 302-element Array{Float64,1}:
-  0.0
-  0.05
-  0.1223079052234777
-  0.21763564439678446
-  0.32592132827555614
-  0.45428546205171927
-  0.609957416358271
-  0.7734779293497827
-  0.9540060574595153
-  1.1799033713407105
-  ⋮
- 48.68829170708072
- 48.90897270610238
- 49.074198457665524
- 49.26762992059672
- 49.41331132773069
- 49.58656471302393
- 49.73635419325158
- 49.929069338760755
- 50.0
-u: 302-element Array{Array{Float64,1},1}:
- [0.0, 1.0471975511965976, 0.0, 1.8849555921538759]
- [0.05276815671595484, 1.071438957072351, 0.09384176137401032, 1.8607344940
-613866]
- [0.13361722361756873, 1.1748571429557286, 0.2248435889699277, 1.7496025555
-94999]
- [0.2537554611755441, 1.3400852896072526, 0.38108445951036796, 1.5187573131
-93717]
- [0.40410119950098694, 1.4024410831505718, 0.5301603161398095, 1.2396279286
-879397]
- [0.5728649474072226, 1.169954418422348, 0.6718502052458136, 0.985420423048
-6661]
- [0.7088857697515267, 0.5369386864730226, 0.8084759913872458, 0.77868578782
-44005]
- [0.7353785982784866, -0.19338512009518283, 0.9169953717631636, 0.529156767
-0987339]
- [0.6472090513598847, -0.715269349725902, 0.9734453010510711, 0.05435804962
-99323]
- [0.46935732113951517, -0.7327102879675962, 0.887866370720516, -0.862790816
-96396]
- ⋮
- [-0.67975290420246, 0.13973286964103626, -0.6514876665177031, 1.4454143327
-848226]
- [-0.4549919175434134, 1.9015781454592204, -0.36771741048108453, 1.07270407
-51077042]
- [-0.08586635119481108, 2.28552090644888, -0.19809628081445166, 1.112713727
-902364]
- [0.2498746728460613, 1.030480739331191, 0.08577212263454681, 1.84513901689
-03863]
- [0.3320815110176066, 0.25499621194857525, 0.3793211991189911, 2.0716610618
-98589]
- [0.39238335257281043, 0.5691064464087552, 0.6955158132179681, 1.4770421393
-438187]
- [0.5050439638383725, 0.8813133553208242, 0.8649801258453232, 0.79454052641
-52658]
- [0.6711792406408479, 0.7375180832629122, 0.9459177363546021, 0.09015063400
-030744]
- [0.7166955252930275, 0.5339053276716273, 0.9454344718959518, -0.0972716375
-5146666]
-````
-
-
-
-````julia
+```julia
 #Obtain coordinates in Cartesian Geometry
 ts, ps = polar2cart(sol, l1=L₁, l2=L₂, dt=0.01)
 plot(ps...)
-````
-
+```
 
 ![](figures/01-classical_physics_6_1.png)
 
@@ -322,7 +250,7 @@ This helps to understand the dynamics of interactions and is wonderfully pretty.
 
 The Poincaré section in this is given by the collection of $(β,l_β)$ when $α=0$ and $\frac{dα}{dt}>0$.
 
-````julia
+```julia
 #Constants and setup
 using OrdinaryDiffEq
 initial2 = [0.01, 0.005, 0.01, 0.01]
@@ -356,24 +284,22 @@ function poincare_map(prob, u₀, p; callback=cb)
     sol = solve(_prob, Vern9(), save_everystep = false, save_start=false, save_end=false, callback=cb, abstol=1e-16, reltol=1e-16)
     scatter!(p, sol, vars=(3,4), markersize = 3, msw=0)
 end
-````
+```
 
-
-````
+```
 poincare_map (generic function with 1 method)
-````
+```
 
 
 
-````julia
+```julia
 lβrange = -0.02:0.0025:0.02
 p = scatter(sol2, vars=(3,4), leg=false, markersize = 3, msw=0)
 for lβ in lβrange
     poincare_map(poincare, [0.01, 0.01, 0.01, lβ], p)
 end
 plot(p, xlabel="\\beta", ylabel="l_\\beta", ylims=(0, 0.03))
-````
-
+```
 
 ![](figures/01-classical_physics_8_1.png)
 
@@ -404,7 +330,7 @@ $$E = T+V = V(x,y)+\frac{1}{2}(\dot{x}^2+\dot{y}^2).$$
 
 The total energy should conserve as this system evolves.
 
-````julia
+```julia
 using OrdinaryDiffEq, Plots
 
 #Setup
@@ -431,127 +357,47 @@ end
 #Pass to solvers
 prob = ODEProblem(Hénon_Heiles, initial, tspan)
 sol = solve(prob, Vern9(), abs_tol=1e-16, rel_tol=1e-16);
-````
+```
 
 
-````
-retcode: Success
-Interpolation: specialized 9th order lazy interpolation
-t: 92-element Array{Float64,1}:
-   0.0
-   0.002767153900836259
-   0.019390834923504494
-   0.12119935187168689
-   0.530301790748649
-   1.1815820951240696
-   1.9076818589199944
-   2.760621588805973
-   3.605356397694905
-   4.619986523154658
-   ⋮
-  91.46207401166643
-  92.80356604989571
-  93.85953574845666
-  95.06904060013457
-  96.26535461031364
-  97.42922082465732
-  98.66129338374192
-  99.77739539466218
- 100.0
-u: 92-element Array{Array{Float64,1},1}:
- [0.0, 0.1, 0.5, 0.0]
- [0.0013835748315707893, 0.09999965542762242, 0.4999977028602053, -0.000249
-04536251688065]
- [0.00969468838029096, 0.09998307727738429, 0.4998872044881803, -0.00174569
-51735989768]
- [0.06042185852124362, 0.09933514655181921, 0.49560211524963727, -0.0110343
-31488800994]
- [0.25058314954625777, 0.08601880052006405, 0.41888733977799825, -0.0574223
-4854837401]
- [0.4444070725050881, 0.011729989621118292, 0.15861982132709898, -0.1786214
-7581375334]
- [0.4473066382282281, -0.16320285100673101, -0.13126053699732168, -0.278919
-260652333]
- [0.2584572479002514, -0.35063663280889906, -0.2790546850571461, -0.0991017
-7915852485]
- [0.004597212445906916, -0.2765685142768536, -0.312548979741221, 0.26654022
-206668787]
- [-0.2725985862807251, 0.0888755547420482, -0.17762619800611465, 0.36446229
-045208195]
- ⋮
- [-0.2114517878067161, 0.0730906156176862, -0.2152584827559103, 0.395877687
-0516688]
- [-0.1651820081856587, 0.39689185721893394, 0.3024690065429725, 0.055847135
-94737721]
- [0.1983089199690154, 0.31747189605713433, 0.2712578251378906, -0.205083319
-12354352]
- [0.2589198172932789, -0.09448897836357471, -0.1423573171660115, -0.4186496
-601369496]
- [0.012425073399517497, -0.4034830628308482, -0.22915816033577166, 0.016158
-45936515269]
- [-0.23244506354682215, -0.08009238032616647, -0.15414702520990145, 0.42836
-918054426903]
- [-0.18927473635920564, 0.34544617499081803, 0.2560388635086127, 0.20350117
-082002062]
- [0.1741544372800989, 0.41603304066553226, 0.26940699405279905, -0.07855686
-343548968]
- [0.2254464439669529, 0.3916330728294025, 0.18834406694149203, -0.141257764
-88921374]
-````
-
-
-
-````julia
+```julia
 # Plot the orbit
 plot(sol, vars=(1,2), title = "The orbit of the Hénon-Heiles system", xaxis = "x", yaxis = "y", leg=false)
-````
-
+```
 
 ![](figures/01-classical_physics_10_1.png)
 
-````julia
+```julia
 #Optional Sanity check - what do you think this returns and why?
 @show sol.retcode
-````
-
-
-````
-sol.retcode = :Success
-````
-
-
-
-````julia
 
 #Plot -
 plot(sol, vars=(1,3), title = "Phase space for the Hénon-Heiles system", xaxis = "Position", yaxis = "Velocity")
 plot!(sol, vars=(2,4), leg = false)
-````
+```
+
+```
+sol.retcode = :Success
+```
 
 
 ![](figures/01-classical_physics_11_1.png)
 
-````julia
+```julia
 #We map the Total energies during the time intervals of the solution (sol.u here) to a new vector
 #pass it to the plotter a bit more conveniently
 energy = map(x->E(x...), sol.u)
 
 #We use @show here to easily spot erratic behaviour in our system by seeing if the loss in energy was too great.
 @show ΔE = energy[1]-energy[end]
-````
-
-
-````
-ΔE = energy[1] - energy[end] = -3.0986034517260785e-5
-````
-
-
-
-````julia
 
 #Plot
 plot(sol.t, energy .- energy[1], title = "Change in Energy over Time", xaxis = "Time in iterations", yaxis = "Change in Energy")
-````
+```
+
+```
+ΔE = energy[1] - energy[end] = -3.098606125834236e-5
+```
 
 
 ![](figures/01-classical_physics_12_1.png)
@@ -562,7 +408,7 @@ plot(sol.t, energy .- energy[1], title = "Change in Energy over Time", xaxis = "
 
 To prevent energy drift, we can instead use a symplectic integrator. We can directly define and solve the `SecondOrderODEProblem`:
 
-````julia
+```julia
 function HH_acceleration!(dv,v,u,p,t)
     x,y  = u
     dx,dy = dv
@@ -573,94 +419,24 @@ initial_positions = [0.0,0.1]
 initial_velocities = [0.5,0.0]
 prob = SecondOrderODEProblem(HH_acceleration!,initial_velocities,initial_positions,tspan)
 sol2 = solve(prob, KahanLi8(), dt=1/10);
-````
-
-
-````
-retcode: Success
-Interpolation: 3rd order Hermite
-t: 1002-element Array{Float64,1}:
-   0.0
-   0.1
-   0.2
-   0.30000000000000004
-   0.4
-   0.5
-   0.6
-   0.7
-   0.7999999999999999
-   0.8999999999999999
-   ⋮
-  99.29999999999863
-  99.39999999999863
-  99.49999999999862
-  99.59999999999862
-  99.69999999999861
-  99.7999999999986
-  99.8999999999986
-  99.9999999999986
- 100.0
-u: 1002-element Array{RecursiveArrayTools.ArrayPartition{Float64,Tuple{Arra
-y{Float64,1},Array{Float64,1}}},1}:
- [0.5, 0.0][0.0, 0.1]
- [0.497004124813899, -0.009071101031878595][0.049900082497367014, 0.0995482
-2053953173]
- [0.488065986503409, -0.01856325999777532][0.09920263962777168, 0.098171713
-8550656]
- [0.4733339415930383, -0.028870094978230895][0.1473200401467506, 0.09580835
-287880228]
- [0.45305474121099776, -0.040331734000937175][0.1936844146808317, 0.0923591
-1550101675]
- [0.4275722362076315, -0.0532114683862374][0.2377574398051348, 0.0876946285
-7458447]
- [0.39732459499168415, -0.06767627591286327][0.279039924450448, 0.081663862
-02131776]
- [0.36283926518715554, -0.08378216859669584][0.3170810117622551, 0.07410453
-631898412]
- [0.3247249463611115, -0.10146505675930295][0.35148673325356056, 0.06485472
-395637552]
- [0.2836600192614762, -0.12053752272622162][0.3819275865822665, 0.053765070
-97805092]
- ⋮
- [0.3573608346071073, 0.043775799566172786][0.018901094264629065, 0.4241854
-6702794857]
- [0.35056546788922516, 0.01917894635581023][0.054352325047751296, 0.4273357
-603171658]
- [0.3372619546371046, -0.00582469608876845][0.08879705585509527, 0.42800766
-78341491]
- [0.317723101892544, -0.031415069954177][0.12159668542307678, 0.42615121224
-761354]
- [0.2923883191107272, -0.057726485993246215][0.15214830714764738, 0.4217005
-4930538214]
- [0.2618505981512214, -0.0848309469334548][0.17990076750513168, 0.414579396
-5132324]
- [0.22683770400643935, -0.11272570532234003][0.2043691308538718, 0.40470792
-450133325]
- [0.1881879739856503, -0.1413256709667938][0.22514698919068493, 0.392010653
-57989734]
- [0.18818797398508524, -0.14132567096720045][0.2251469891909496, 0.39201065
-35796987]
-````
-
+```
 
 
 
 
 Notice that we get the same results:
 
-````julia
+```julia
 # Plot the orbit
 plot(sol2, vars=(3,4), title = "The orbit of the Hénon-Heiles system", xaxis = "x", yaxis = "y", leg=false)
-````
-
+```
 
 ![](figures/01-classical_physics_14_1.png)
 
-````julia
+```julia
 plot(sol2, vars=(3,1), title = "Phase space for the Hénon-Heiles system", xaxis = "Position", yaxis = "Velocity")
 plot!(sol2, vars=(4,2), leg = false)
-````
-
+```
 
 ![](figures/01-classical_physics_15_1.png)
 
@@ -668,24 +444,18 @@ plot!(sol2, vars=(4,2), leg = false)
 
 but now the energy change is essentially zero:
 
-````julia
+```julia
 energy = map(x->E(x[3], x[4], x[1], x[2]), sol2.u)
 #We use @show here to easily spot erratic behaviour in our system by seeing if the loss in energy was too great.
 @show ΔE = energy[1]-energy[end]
-````
-
-
-````
-ΔE = energy[1] - energy[end] = 9.020562075079397e-15
-````
-
-
-
-````julia
 
 #Plot
 plot(sol2.t, energy .- energy[1], title = "Change in Energy over Time", xaxis = "Time in iterations", yaxis = "Change in Energy")
-````
+```
+
+```
+ΔE = energy[1] - energy[end] = 9.048317650695026e-15
+```
 
 
 ![](figures/01-classical_physics_16_1.png)
@@ -694,23 +464,17 @@ plot(sol2.t, energy .- energy[1], title = "Change in Energy over Time", xaxis = 
 
 And let's try to use a Runge-Kutta-Nyström solver to solve this. Note that Runge-Kutta-Nyström isn't symplectic.
 
-````julia
+```julia
 sol3 = solve(prob, DPRKN6());
 energy = map(x->E(x[3], x[4], x[1], x[2]), sol3.u)
 @show ΔE = energy[1]-energy[end]
-````
-
-
-````
-ΔE = energy[1] - energy[end] = -8.836874152734486e-6
-````
-
-
-
-````julia
 gr()
 plot(sol3.t, energy .- energy[1], title = "Change in Energy over Time", xaxis = "Time in iterations", yaxis = "Change in Energy")
-````
+```
+
+```
+ΔE = energy[1] - energy[end] = -2.723253093667166e-6
+```
 
 
 ![](figures/01-classical_physics_17_1.png)
@@ -722,52 +486,391 @@ Note that we are using the `DPRKN6` sovler at `reltol=1e-3` (the default), yet i
 
 ## Appendix
 
- This tutorial is part of the DiffEqTutorials.jl repository, found at: <https://github.com/JuliaDiffEq/DiffEqTutorials.jl>
+These tutorials are a part of the SciMLTutorials.jl repository, found at: [https://github.com/SciML/SciMLTutorials.jl](https://github.com/SciML/SciMLTutorials.jl). For more information on high-performance scientific machine learning, check out the SciML Open Source Software Organization [https://sciml.ai](https://sciml.ai).
 
 To locally run this tutorial, do the following commands:
+
 ```
-using DiffEqTutorials
-DiffEqTutorials.weave_file("models","01-classical_physics.jmd")
+using SciMLTutorials
+SciMLTutorials.weave_file("tutorials/models","01-classical_physics.jmd")
 ```
 
 Computer Information:
+
 ```
-Julia Version 1.4.2
-Commit 44fa15b150* (2020-05-23 18:35 UTC)
+Julia Version 1.6.2
+Commit 1b93d53fc4 (2021-07-14 15:36 UTC)
 Platform Info:
   OS: Linux (x86_64-pc-linux-gnu)
-  CPU: Intel(R) Core(TM) i7-9700K CPU @ 3.60GHz
+  CPU: AMD EPYC 7502 32-Core Processor
   WORD_SIZE: 64
   LIBM: libopenlibm
-  LLVM: libLLVM-8.0.1 (ORCJIT, skylake)
+  LLVM: libLLVM-11.0.1 (ORCJIT, znver2)
 Environment:
-  JULIA_DEPOT_PATH = /builds/JuliaGPU/DiffEqTutorials.jl/.julia
-  JULIA_CUDA_MEMORY_LIMIT = 536870912
-  JULIA_PROJECT = @.
-  JULIA_NUM_THREADS = 4
+  JULIA_DEPOT_PATH = /root/.cache/julia-buildkite-plugin/depots/a6029d3a-f78b-41ea-bc97-28aa57c6c6ea
+  JULIA_NUM_THREADS = 16
 
 ```
 
 Package Information:
 
 ```
-Status `/builds/JuliaGPU/DiffEqTutorials.jl/tutorials/models/Project.toml`
-[eb300fae-53e8-50a0-950c-e21f52c2b7e0] DiffEqBiological 4.3.0
-[f3b72e0c-5b89-59e1-b016-84e28bfd966d] DiffEqDevTools 2.22.0
-[055956cb-9e8b-5191-98cc-73ae4a59e68a] DiffEqPhysics 3.2.0
-[0c46a032-eb83-5123-abaf-570d42b7fbaa] DifferentialEquations 6.14.0
-[31c24e10-a181-5473-b8eb-7969acd0382f] Distributions 0.23.4
-[587475ba-b771-5e3f-ad9e-33799f191a9c] Flux 0.10.4
-[f6369f11-7733-5829-9624-2563aa707210] ForwardDiff 0.10.11
-[23fbe1c1-3f47-55db-b15f-69d7ec21a316] Latexify 0.13.5
-[961ee093-0014-501f-94e3-6117800e7a78] ModelingToolkit 3.11.0
-[2774e3e8-f4cf-5e23-947b-6d7e65073b56] NLsolve 4.4.0
-[8faf48c0-8b73-11e9-0e63-2155955bfa4d] NeuralNetDiffEq 1.6.0
-[429524aa-4258-5aef-a3af-852621145aeb] Optim 0.21.0
-[1dea7af3-3e70-54e6-95c3-0bf5283fa5ed] OrdinaryDiffEq 5.41.0
-[91a5bcdd-55d7-5caf-9e0b-520d859cae80] Plots 1.4.4
-[731186ca-8d62-57ce-b412-fbd966d074cd] RecursiveArrayTools 2.5.0
-[789caeaf-c7a9-5a7d-9973-96adeb23e2a0] StochasticDiffEq 6.23.1
-[37e2e46d-f89d-539d-b4ee-838fcccc9c8e] LinearAlgebra
-[2f01184e-e22b-5df5-ae63-d93ebab69eaf] SparseArrays
+      Status `/var/lib/buildkite-agent/builds/7-amdci4-julia-csail-mit-edu/julialang/scimltutorials-dot-jl/tutorials/models/Project.toml`
+  [479239e8] Catalyst v6.12.1
+  [459566f4] DiffEqCallbacks v2.16.1
+  [f3b72e0c] DiffEqDevTools v2.27.2
+  [055956cb] DiffEqPhysics v3.9.0
+  [0c46a032] DifferentialEquations v6.17.1
+  [31c24e10] Distributions v0.24.18
+  [587475ba] Flux v0.12.1
+  [f6369f11] ForwardDiff v0.10.18
+  [23fbe1c1] Latexify v0.15.5
+  [961ee093] ModelingToolkit v5.17.3
+  [2774e3e8] NLsolve v4.5.1
+  [315f7962] NeuralPDE v3.10.1
+  [429524aa] Optim v1.3.0
+  [1dea7af3] OrdinaryDiffEq v5.56.0
+  [91a5bcdd] Plots v1.15.2
+  [731186ca] RecursiveArrayTools v2.11.4
+  [30cb0354] SciMLTutorials v0.9.0
+  [789caeaf] StochasticDiffEq v6.34.1
+  [37e2e46d] LinearAlgebra
+  [2f01184e] SparseArrays
 ```
+
+And the full manifest:
+
+```
+      Status `/var/lib/buildkite-agent/builds/7-amdci4-julia-csail-mit-edu/julialang/scimltutorials-dot-jl/tutorials/models/Manifest.toml`
+  [c3fe647b] AbstractAlgebra v0.16.0
+  [621f4979] AbstractFFTs v1.0.1
+  [1520ce14] AbstractTrees v0.3.4
+  [79e6a3ab] Adapt v3.3.0
+  [ec485272] ArnoldiMethod v0.1.0
+  [4fba245c] ArrayInterface v3.1.15
+  [4c555306] ArrayLayouts v0.7.0
+  [13072b0f] AxisAlgorithms v1.0.0
+  [ab4f0b2a] BFloat16s v0.1.0
+  [aae01518] BandedMatrices v0.16.9
+  [764a87c0] BoundaryValueDiffEq v2.7.1
+  [fa961155] CEnum v0.4.1
+  [00ebfdb7] CSTParser v2.5.0
+  [052768ef] CUDA v2.6.3
+  [479239e8] Catalyst v6.12.1
+  [082447d4] ChainRules v0.7.65
+  [d360d2e6] ChainRulesCore v0.9.44
+  [b630d9fa] CheapThreads v0.2.5
+  [944b1d66] CodecZlib v0.7.0
+  [35d6a980] ColorSchemes v3.12.1
+  [3da002f7] ColorTypes v0.11.0
+  [5ae59095] Colors v0.12.8
+  [861a8166] Combinatorics v1.0.2
+  [a80b9123] CommonMark v0.8.1
+  [38540f10] CommonSolve v0.2.0
+  [bbf7d656] CommonSubexpressions v0.3.0
+  [34da2185] Compat v3.30.0
+  [8f4d0f93] Conda v1.5.2
+  [88cd18e8] ConsoleProgressMonitor v0.1.2
+  [187b0558] ConstructionBase v1.2.1
+  [d38c429a] Contour v0.5.7
+  [a8cc5b0e] Crayons v4.0.4
+  [8a292aeb] Cuba v2.2.0
+  [667455a9] Cubature v1.5.1
+  [9a962f9c] DataAPI v1.6.0
+  [82cc6244] DataInterpolations v3.3.1
+  [864edb3b] DataStructures v0.18.9
+  [e2d170a0] DataValueInterfaces v1.0.0
+  [bcd4f6db] DelayDiffEq v5.31.0
+  [2b5f629d] DiffEqBase v6.62.2
+  [459566f4] DiffEqCallbacks v2.16.1
+  [f3b72e0c] DiffEqDevTools v2.27.2
+  [5a0ffddc] DiffEqFinancial v2.4.0
+  [aae7a2af] DiffEqFlux v1.37.0
+  [c894b116] DiffEqJump v6.14.2
+  [77a26b50] DiffEqNoiseProcess v5.7.3
+  [055956cb] DiffEqPhysics v3.9.0
+  [41bf760c] DiffEqSensitivity v6.45.0
+  [163ba53b] DiffResults v1.0.3
+  [b552c78f] DiffRules v1.0.2
+  [0c46a032] DifferentialEquations v6.17.1
+  [c619ae07] DimensionalPlotRecipes v1.2.0
+  [b4f34e82] Distances v0.10.3
+  [31c24e10] Distributions v0.24.18
+  [ced4e74d] DistributionsAD v0.6.26
+  [ffbed154] DocStringExtensions v0.8.4
+  [e30172f5] Documenter v0.26.3
+  [d4d017d3] ExponentialUtilities v1.8.4
+  [e2ba6199] ExprTools v0.1.3
+  [c87230d0] FFMPEG v0.4.0
+  [7a1cc6ca] FFTW v1.4.1
+  [7034ab61] FastBroadcast v0.1.8
+  [9aa1b823] FastClosures v0.3.2
+  [1a297f60] FillArrays v0.11.7
+  [6a86dc24] FiniteDiff v2.8.0
+  [53c48c17] FixedPointNumbers v0.8.4
+  [587475ba] Flux v0.12.1
+  [59287772] Formatting v0.4.2
+  [f6369f11] ForwardDiff v0.10.18
+  [069b7b12] FunctionWrappers v1.1.2
+  [d9f16b24] Functors v0.2.1
+  [0c68f7d7] GPUArrays v6.4.1
+  [61eb1bfa] GPUCompiler v0.10.0
+  [28b8d3ca] GR v0.57.4
+  [a75be94c] GalacticOptim v1.2.0
+  [5c1252a2] GeometryBasics v0.3.12
+  [af5da776] GlobalSensitivity v1.0.0
+  [42e2da0e] Grisu v1.0.2
+  [19dc6840] HCubature v1.5.0
+  [cd3eb016] HTTP v0.9.9
+  [eafb193a] Highlights v0.4.5
+  [0e44f5e4] Hwloc v2.0.0
+  [7073ff75] IJulia v1.23.2
+  [b5f81e59] IOCapture v0.1.1
+  [7869d1d1] IRTools v0.4.2
+  [615f187c] IfElse v0.1.0
+  [d25df0c9] Inflate v0.1.2
+  [83e8ac13] IniFile v0.5.0
+  [a98d9a8b] Interpolations v0.13.2
+  [c8e1da08] IterTools v1.3.0
+  [42fd0dbc] IterativeSolvers v0.9.1
+  [82899510] IteratorInterfaceExtensions v1.0.0
+  [692b3bcd] JLLWrappers v1.3.0
+  [682c06a0] JSON v0.21.1
+  [98e50ef6] JuliaFormatter v0.13.7
+  [e5e0dc1b] Juno v0.8.4
+  [5ab0869b] KernelDensity v0.6.3
+  [929cbde3] LLVM v3.7.1
+  [b964fa9f] LaTeXStrings v1.2.1
+  [2ee39098] LabelledArrays v1.6.1
+  [23fbe1c1] Latexify v0.15.5
+  [a5e1c1ea] LatinHypercubeSampling v1.8.0
+  [73f95e8e] LatticeRules v0.0.1
+  [1d6d02ad] LeftChildRightSiblingTrees v0.1.2
+  [093fc24a] LightGraphs v1.3.5
+  [d3d80556] LineSearches v7.1.1
+  [2ab3a3ac] LogExpFunctions v0.2.4
+  [e6f89c97] LoggingExtras v0.4.6
+  [bdcacae8] LoopVectorization v0.12.23
+  [1914dd2f] MacroTools v0.5.6
+  [739be429] MbedTLS v1.0.3
+  [442fdcdd] Measures v0.3.1
+  [e89f7d12] Media v0.5.0
+  [c03570c3] Memoize v0.4.4
+  [e1d29d7a] Missings v1.0.0
+  [961ee093] ModelingToolkit v5.17.3
+  [4886b29c] MonteCarloIntegration v0.0.2
+  [46d2c3a1] MuladdMacro v0.2.2
+  [f9640e96] MultiScaleArrays v1.8.1
+  [ffc61752] Mustache v1.0.10
+  [d41bc354] NLSolversBase v7.8.0
+  [2774e3e8] NLsolve v4.5.1
+  [872c559c] NNlib v0.7.19
+  [77ba4419] NaNMath v0.3.5
+  [315f7962] NeuralPDE v3.10.1
+  [8913a72c] NonlinearSolve v0.3.8
+  [6fe1bfb0] OffsetArrays v1.9.0
+  [429524aa] Optim v1.3.0
+  [bac558e1] OrderedCollections v1.4.1
+  [1dea7af3] OrdinaryDiffEq v5.56.0
+  [90014a1f] PDMats v0.11.0
+  [65888b18] ParameterizedFunctions v5.10.0
+  [d96e819e] Parameters v0.12.2
+  [69de0a69] Parsers v1.1.0
+  [ccf2f8ad] PlotThemes v2.0.1
+  [995b91a9] PlotUtils v1.0.10
+  [91a5bcdd] Plots v1.15.2
+  [e409e4f3] PoissonRandom v0.4.0
+  [f517fe37] Polyester v0.3.1
+  [85a6dd25] PositiveFactorizations v0.2.4
+  [21216c6a] Preferences v1.2.2
+  [33c8b6b6] ProgressLogging v0.1.4
+  [92933f4c] ProgressMeter v1.6.2
+  [1fd47b50] QuadGK v2.4.1
+  [67601950] Quadrature v1.8.1
+  [8a4e6c94] QuasiMonteCarlo v0.2.2
+  [74087812] Random123 v1.3.1
+  [fb686558] RandomExtensions v0.4.3
+  [e6cf234a] RandomNumbers v1.4.0
+  [c84ed2f1] Ratios v0.4.0
+  [3cdcf5f2] RecipesBase v1.1.1
+  [01d81517] RecipesPipeline v0.3.2
+  [731186ca] RecursiveArrayTools v2.11.4
+  [f2c3362d] RecursiveFactorization v0.1.12
+  [189a3867] Reexport v1.0.0
+  [ae029012] Requires v1.1.3
+  [ae5879a3] ResettableStacks v1.1.0
+  [37e2e3b7] ReverseDiff v1.9.0
+  [79098fc4] Rmath v0.7.0
+  [47965b36] RootedTrees v1.0.0
+  [7e49a35a] RuntimeGeneratedFunctions v0.5.2
+  [476501e8] SLEEFPirates v0.6.20
+  [1bc83da4] SafeTestsets v0.0.1
+  [0bca4576] SciMLBase v1.13.4
+  [30cb0354] SciMLTutorials v0.9.0
+  [6c6a2e73] Scratch v1.0.3
+  [efcf1570] Setfield v0.7.0
+  [992d4aef] Showoff v1.0.3
+  [699a6c99] SimpleTraits v0.9.3
+  [ed01d8cd] Sobol v1.5.0
+  [b85f4697] SoftGlobalScope v1.1.0
+  [a2af1166] SortingAlgorithms v1.0.0
+  [47a9eef4] SparseDiffTools v1.13.2
+  [276daf66] SpecialFunctions v1.4.1
+  [860ef19b] StableRNGs v1.0.0
+  [aedffcd0] Static v0.2.4
+  [90137ffa] StaticArrays v1.2.0
+  [82ae8749] StatsAPI v1.0.0
+  [2913bbd2] StatsBase v0.33.8
+  [4c63d2b9] StatsFuns v0.9.8
+  [9672c7b4] SteadyStateDiffEq v1.6.2
+  [789caeaf] StochasticDiffEq v6.34.1
+  [7792a7ef] StrideArraysCore v0.1.11
+  [09ab397b] StructArrays v0.5.1
+  [c3572dad] Sundials v4.4.3
+  [d1185830] SymbolicUtils v0.11.2
+  [0c5d862f] Symbolics v0.1.25
+  [3783bdb8] TableTraits v1.0.1
+  [bd369af6] Tables v1.4.2
+  [5d786b92] TerminalLoggers v0.1.3
+  [8290d209] ThreadingUtilities v0.4.4
+  [a759f4b9] TimerOutputs v0.5.9
+  [0796e94c] Tokenize v0.5.16
+  [9f7883ad] Tracker v0.2.16
+  [3bb67fe8] TranscodingStreams v0.9.5
+  [592b5752] Trapz v2.0.2
+  [a2a6695c] TreeViews v0.3.0
+  [5c2747f8] URIs v1.3.0
+  [3a884ed6] UnPack v1.0.2
+  [1986cc42] Unitful v1.7.0
+  [3d5dd08c] VectorizationBase v0.20.11
+  [81def892] VersionParsing v1.2.0
+  [19fa3120] VertexSafeGraphs v0.1.2
+  [44d3d7a6] Weave v0.10.8
+  [efce3f68] WoodburyMatrices v0.5.3
+  [ddb6d928] YAML v0.4.6
+  [c2297ded] ZMQ v1.2.1
+  [a5390f91] ZipFile v0.9.3
+  [e88e6eb3] Zygote v0.6.11
+  [700de1a5] ZygoteRules v0.2.1
+  [6e34b625] Bzip2_jll v1.0.6+5
+  [83423d85] Cairo_jll v1.16.0+6
+  [3bed1096] Cuba_jll v4.2.1+0
+  [7bc98958] Cubature_jll v1.0.4+0
+  [5ae413db] EarCut_jll v2.1.5+1
+  [2e619515] Expat_jll v2.2.10+0
+  [b22a6f82] FFMPEG_jll v4.3.1+4
+  [f5851436] FFTW_jll v3.3.9+7
+  [a3f928ae] Fontconfig_jll v2.13.1+14
+  [d7e528f0] FreeType2_jll v2.10.1+5
+  [559328eb] FriBidi_jll v1.0.5+6
+  [0656b61e] GLFW_jll v3.3.4+0
+  [d2c73de3] GR_jll v0.57.2+0
+  [78b55507] Gettext_jll v0.21.0+0
+  [7746bdde] Glib_jll v2.68.1+0
+  [e33a78d0] Hwloc_jll v2.4.1+0
+  [1d5cc7b8] IntelOpenMP_jll v2018.0.3+2
+  [aacddb02] JpegTurbo_jll v2.0.1+3
+  [c1c5ebd0] LAME_jll v3.100.0+3
+  [dd4b983a] LZO_jll v2.10.1+0
+  [dd192d2f] LibVPX_jll v1.9.0+1
+  [e9f186c6] Libffi_jll v3.2.2+0
+  [d4300ac3] Libgcrypt_jll v1.8.7+0
+  [7e76a0d4] Libglvnd_jll v1.3.0+3
+  [7add5ba3] Libgpg_error_jll v1.42.0+0
+  [94ce4f54] Libiconv_jll v1.16.1+0
+  [4b2f31a3] Libmount_jll v2.35.0+0
+  [89763e89] Libtiff_jll v4.1.0+2
+  [38a345b3] Libuuid_jll v2.36.0+0
+  [856f044c] MKL_jll v2021.1.1+1
+  [e7412a2a] Ogg_jll v1.3.4+2
+  [458c3c95] OpenSSL_jll v1.1.1+6
+  [efe28fd5] OpenSpecFun_jll v0.5.4+0
+  [91d4177d] Opus_jll v1.3.1+3
+  [2f80f16e] PCRE_jll v8.44.0+0
+  [30392449] Pixman_jll v0.40.1+0
+  [ea2cea3b] Qt5Base_jll v5.15.2+0
+  [f50d1b31] Rmath_jll v0.3.0+0
+  [fb77eaff] Sundials_jll v5.2.0+1
+  [a2964d1f] Wayland_jll v1.17.0+4
+  [2381bf8a] Wayland_protocols_jll v1.18.0+4
+  [02c8fc9c] XML2_jll v2.9.12+0
+  [aed1982a] XSLT_jll v1.1.34+0
+  [4f6342f7] Xorg_libX11_jll v1.6.9+4
+  [0c0b7dd1] Xorg_libXau_jll v1.0.9+4
+  [935fb764] Xorg_libXcursor_jll v1.2.0+4
+  [a3789734] Xorg_libXdmcp_jll v1.1.3+4
+  [1082639a] Xorg_libXext_jll v1.3.4+4
+  [d091e8ba] Xorg_libXfixes_jll v5.0.3+4
+  [a51aa0fd] Xorg_libXi_jll v1.7.10+4
+  [d1454406] Xorg_libXinerama_jll v1.1.4+4
+  [ec84b674] Xorg_libXrandr_jll v1.5.2+4
+  [ea2f1a96] Xorg_libXrender_jll v0.9.10+4
+  [14d82f49] Xorg_libpthread_stubs_jll v0.1.0+3
+  [c7cfdc94] Xorg_libxcb_jll v1.13.0+3
+  [cc61e674] Xorg_libxkbfile_jll v1.1.0+4
+  [12413925] Xorg_xcb_util_image_jll v0.4.0+1
+  [2def613f] Xorg_xcb_util_jll v0.4.0+1
+  [975044d2] Xorg_xcb_util_keysyms_jll v0.4.0+1
+  [0d47668e] Xorg_xcb_util_renderutil_jll v0.3.9+1
+  [c22f9ab0] Xorg_xcb_util_wm_jll v0.4.1+1
+  [35661453] Xorg_xkbcomp_jll v1.4.2+4
+  [33bec58e] Xorg_xkeyboard_config_jll v2.27.0+4
+  [c5fb5394] Xorg_xtrans_jll v1.4.0+3
+  [8f1865be] ZeroMQ_jll v4.3.2+6
+  [3161d3a3] Zstd_jll v1.5.0+0
+  [0ac62f75] libass_jll v0.14.0+4
+  [f638f0a6] libfdk_aac_jll v0.1.6+4
+  [b53b4c65] libpng_jll v1.6.38+0
+  [a9144af2] libsodium_jll v1.0.20+0
+  [f27f6e37] libvorbis_jll v1.3.6+6
+  [1270edf5] x264_jll v2020.7.14+2
+  [dfaa095f] x265_jll v3.0.0+3
+  [d8fb68d0] xkbcommon_jll v0.9.1+5
+  [0dad84c5] ArgTools
+  [56f22d72] Artifacts
+  [2a0f44e3] Base64
+  [ade2ca70] Dates
+  [8bb1440f] DelimitedFiles
+  [8ba89e20] Distributed
+  [f43a241f] Downloads
+  [7b1f6079] FileWatching
+  [9fa8497b] Future
+  [b77e0a4c] InteractiveUtils
+  [4af54fe1] LazyArtifacts
+  [b27032c2] LibCURL
+  [76f85450] LibGit2
+  [8f399da3] Libdl
+  [37e2e46d] LinearAlgebra
+  [56ddb016] Logging
+  [d6f4376e] Markdown
+  [a63ad114] Mmap
+  [ca575930] NetworkOptions
+  [44cfe95a] Pkg
+  [de0858da] Printf
+  [9abbd945] Profile
+  [3fa0cd96] REPL
+  [9a3f8284] Random
+  [ea8e919c] SHA
+  [9e88b42a] Serialization
+  [1a1011a3] SharedArrays
+  [6462fe0b] Sockets
+  [2f01184e] SparseArrays
+  [10745b16] Statistics
+  [4607b0f0] SuiteSparse
+  [fa267f1f] TOML
+  [a4e569a6] Tar
+  [8dfed614] Test
+  [cf7118a7] UUIDs
+  [4ec0a83e] Unicode
+  [e66e0078] CompilerSupportLibraries_jll
+  [deac9b47] LibCURL_jll
+  [29816b5a] LibSSH2_jll
+  [c8ffd9c3] MbedTLS_jll
+  [14a3606d] MozillaCACerts_jll
+  [4536629a] OpenBLAS_jll
+  [bea87d4a] SuiteSparse_jll
+  [83775a58] Zlib_jll
+  [8e850ede] nghttp2_jll
+  [3f19e933] p7zip_jll
+```
+
