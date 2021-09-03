@@ -64,7 +64,7 @@ end α K n δ γ β μ;
 
 ```
 Error: LoadError: UndefVarError: @reaction_network not defined
-in expression starting at /var/lib/buildkite-agent/builds/7-amdci4-julia-cs
+in expression starting at /var/lib/buildkite-agent/builds/1-amdci4-julia-cs
 ail-mit-edu/julialang/scimltutorials-dot-jl/tutorials/models/03-diffeqbio_I
 _introduction.jmd:2
 ```
@@ -267,7 +267,7 @@ tspan = (0.,4.);
 
 ```
 Error: LoadError: UndefVarError: @reaction_network not defined
-in expression starting at /var/lib/buildkite-agent/builds/7-amdci4-julia-cs
+in expression starting at /var/lib/buildkite-agent/builds/1-amdci4-julia-cs
 ail-mit-edu/julialang/scimltutorials-dot-jl/tutorials/models/03-diffeqbio_I
 _introduction.jmd:2
 ```
@@ -371,10 +371,10 @@ request to SciMLTutorials updating the tutorial!
 Error: MethodError: no method matching tutorial_footer(::String, ::String; 
 remove_homedir=true)
 Closest candidates are:
-  tutorial_footer(::Any, ::Any) at /var/lib/buildkite-agent/builds/7-amdci4
+  tutorial_footer(::Any, ::Any) at /var/lib/buildkite-agent/builds/1-amdci4
 -julia-csail-mit-edu/julialang/scimltutorials-dot-jl/src/SciMLTutorials.jl:
 79 got unsupported keyword argument "remove_homedir"
-  tutorial_footer(::Any) at /var/lib/buildkite-agent/builds/7-amdci4-julia-
+  tutorial_footer(::Any) at /var/lib/buildkite-agent/builds/1-amdci4-julia-
 csail-mit-edu/julialang/scimltutorials-dot-jl/src/SciMLTutorials.jl:79 got 
 unsupported keyword argument "remove_homedir"
 ```
