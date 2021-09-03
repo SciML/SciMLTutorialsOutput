@@ -442,7 +442,7 @@ For stiff reaction-diffusion equations, CVODE_BDF from Sundial library is an exc
 ```
 
 ```
-30.456944 seconds (1.97 M allocations: 122.018 MiB, 0.10% gc time, 3.29% c
+30.348145 seconds (1.98 M allocations: 122.833 MiB, 0.10% gc time, 3.29% c
 ompilation time)
 ```
 
@@ -813,7 +813,7 @@ Environment:
 Package Information:
 
 ```
-      Status `/var/lib/buildkite-agent/builds/6-amdci4-julia-csail-mit-edu/julialang/scimltutorials-dot-jl/tutorials/advanced/Project.toml`
+      Status `/var/lib/buildkite-agent/builds/8-amdci4-julia-csail-mit-edu/julialang/scimltutorials-dot-jl/tutorials/advanced/Project.toml`
   [2169fc97] AlgebraicMultigrid v0.4.0
   [6e4b80f9] BenchmarkTools v1.0.0
   [052768ef] CUDA v2.6.3
@@ -839,7 +839,7 @@ Package Information:
 And the full manifest:
 
 ```
-      Status `/var/lib/buildkite-agent/builds/6-amdci4-julia-csail-mit-edu/julialang/scimltutorials-dot-jl/tutorials/advanced/Manifest.toml`
+      Status `/var/lib/buildkite-agent/builds/8-amdci4-julia-csail-mit-edu/julialang/scimltutorials-dot-jl/tutorials/advanced/Manifest.toml`
   [c3fe647b] AbstractAlgebra v0.16.0
   [621f4979] AbstractFFTs v1.0.1
   [1520ce14] AbstractTrees v0.3.4

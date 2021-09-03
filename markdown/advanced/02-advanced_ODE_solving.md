@@ -154,7 +154,7 @@ using BenchmarkTools
 ```
 
 ```
-571.644 μs (2561 allocations: 186.89 KiB)
+586.464 μs (2561 allocations: 186.89 KiB)
 retcode: Success
 Interpolation: automatic order switching interpolation
 t: 115-element Vector{Float64}:
@@ -230,7 +230,7 @@ prob_jac = ODEProblem(f,[1.0,0.0,0.0],(0.0,1e5),(0.04,3e7,1e4))
 ```
 
 ```
-354.357 μs (2002 allocations: 126.28 KiB)
+360.726 μs (2002 allocations: 126.28 KiB)
 retcode: Success
 Interpolation: automatic order switching interpolation
 t: 115-element Vector{Float64}:
@@ -629,8 +629,8 @@ Now let's see how the version with sparsity compares to the version without:
 ```
 
 ```
-3.988 s (3332 allocations: 65.33 MiB)
-  873.027 ms (40173 allocations: 276.18 MiB)
+4.043 s (3332 allocations: 65.33 MiB)
+  869.262 ms (40173 allocations: 276.18 MiB)
 retcode: Success
 Interpolation: 1st order linear
 t: 2-element Vector{Float64}:
@@ -702,7 +702,7 @@ prob_ode_brusselator_2d_sparse = ODEProblem(f,
 ```
 
 ```
-868.820 ms (7392 allocations: 272.21 MiB)
+865.877 ms (7392 allocations: 272.21 MiB)
 retcode: Success
 Interpolation: 1st order linear
 t: 2-element Vector{Float64}:
@@ -753,8 +753,8 @@ GMRES linear solver.
 ```
 
 ```
-40.803 s (1440760 allocations: 148.08 MiB)
-  3.377 s (487052 allocations: 19.49 MiB)
+42.575 s (1440760 allocations: 148.08 MiB)
+  3.499 s (487052 allocations: 19.49 MiB)
 retcode: Success
 Interpolation: 1st order linear
 t: 2-element Vector{Float64}:
@@ -887,7 +887,7 @@ prob_ode_brusselator_2d_jacfree = ODEProblem(f,u0,(0.,11.5),p)
 ```
 
 ```
-2.050 s (942433 allocations: 1.05 GiB)
+2.134 s (942433 allocations: 1.05 GiB)
 retcode: Success
 Interpolation: 1st order linear
 t: 2-element Vector{Float64}:
@@ -933,7 +933,7 @@ pc = aspreconditioner(ruge_stuben(jac_sparsity))
 ```
 
 ```
-52.565 ms (2126 allocations: 4.62 MiB)
+52.991 ms (2126 allocations: 4.62 MiB)
 retcode: Success
 Interpolation: 1st order linear
 t: 2-element Vector{Float64}:
@@ -1011,8 +1011,8 @@ using Sundials
 ```
 
 ```
-15.126 s (51406 allocations: 3.40 MiB)
-  296.308 ms (54356 allocations: 3.24 MiB)
+15.834 s (51406 allocations: 3.40 MiB)
+  296.692 ms (54356 allocations: 3.24 MiB)
 retcode: Success
 Interpolation: 1st order linear
 t: 2-element Vector{Float64}:
@@ -1134,7 +1134,7 @@ Environment:
 Package Information:
 
 ```
-      Status `/var/lib/buildkite-agent/builds/6-amdci4-julia-csail-mit-edu/julialang/scimltutorials-dot-jl/tutorials/advanced/Project.toml`
+      Status `/var/lib/buildkite-agent/builds/8-amdci4-julia-csail-mit-edu/julialang/scimltutorials-dot-jl/tutorials/advanced/Project.toml`
   [2169fc97] AlgebraicMultigrid v0.4.0
   [6e4b80f9] BenchmarkTools v1.0.0
   [052768ef] CUDA v2.6.3
@@ -1160,7 +1160,7 @@ Package Information:
 And the full manifest:
 
 ```
-      Status `/var/lib/buildkite-agent/builds/6-amdci4-julia-csail-mit-edu/julialang/scimltutorials-dot-jl/tutorials/advanced/Manifest.toml`
+      Status `/var/lib/buildkite-agent/builds/8-amdci4-julia-csail-mit-edu/julialang/scimltutorials-dot-jl/tutorials/advanced/Manifest.toml`
   [c3fe647b] AbstractAlgebra v0.16.0
   [621f4979] AbstractFFTs v1.0.1
   [1520ce14] AbstractTrees v0.3.4
