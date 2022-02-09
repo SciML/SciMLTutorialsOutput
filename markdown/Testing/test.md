@@ -7,6 +7,7 @@ title: "Test"
 This is a test of the builder system.  It often gets bumped manually.
 
 
+
 ## Appendix
 
 These tutorials are a part of the SciMLTutorials.jl repository, found at: [https://github.com/SciML/SciMLTutorials.jl](https://github.com/SciML/SciMLTutorials.jl). For more information on high-performance scientific machine learning, check out the SciML Open Source Software Organization [https://sciml.ai](https://sciml.ai).
@@ -21,8 +22,8 @@ SciMLTutorials.weave_file("Testing","test.jmd")
 Computer Information:
 
 ```
-Julia Version 1.6.3
-Commit ae8452a9e0 (2021-09-23 17:34 UTC)
+Julia Version 1.6.5
+Commit 9058264a69 (2021-12-19 12:30 UTC)
 Platform Info:
   OS: Linux (x86_64-pc-linux-gnu)
   CPU: AMD EPYC 7502 32-Core Processor
@@ -39,14 +40,14 @@ Environment:
 Package Information:
 
 ```
-      Status `/cache/build/amdci4-2/julialang/scimltutorials-dot-jl/tutorials/Testing/Project.toml`
+      Status `/cache/build/default-amdci4-1/julialang/scimltutorials-dot-jl/tutorials/Testing/Project.toml`
   [30cb0354] SciMLTutorials v0.9.0
 ```
 
 And the full manifest:
 
 ```
-      Status `/cache/build/amdci4-2/julialang/scimltutorials-dot-jl/tutorials/Testing/Manifest.toml`
+      Status `/cache/build/default-amdci4-1/julialang/scimltutorials-dot-jl/tutorials/Testing/Manifest.toml`
   [79e6a3ab] Adapt v3.3.0
   [35d6a980] ColorSchemes v3.12.1
   [3da002f7] ColorTypes v0.11.0
