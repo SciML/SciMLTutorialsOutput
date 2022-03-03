@@ -51,7 +51,8 @@ the number of physical cores and not the number of logical cores. See
 To check the number of BLAS threads, use:
 
 ```julia
-ccall((:openblas_get_num_threads64_, Base.libblas_name), Cint, ())
+using LinearAlgebra
+LinearAlgebra.BLAS.get_num_threads()
 ```
 
 ```
@@ -154,7 +155,7 @@ using BenchmarkTools
 ```
 
 ```
-586.464 μs (2561 allocations: 186.89 KiB)
+563.855 μs (2561 allocations: 186.89 KiB)
 retcode: Success
 Interpolation: automatic order switching interpolation
 t: 115-element Vector{Float64}:
@@ -230,7 +231,7 @@ prob_jac = ODEProblem(f,[1.0,0.0,0.0],(0.0,1e5),(0.04,3e7,1e4))
 ```
 
 ```
-360.726 μs (2002 allocations: 126.28 KiB)
+354.177 μs (2002 allocations: 126.28 KiB)
 retcode: Success
 Interpolation: automatic order switching interpolation
 t: 115-element Vector{Float64}:
@@ -295,44 +296,43 @@ ModelingToolkit.generate_jacobian(de)[2] # Second is in-place
 ```
 
 ```
-:(function (var"##out#7621", var"##arg#7619", var"##arg#7620", t)
-      #= /root/.cache/julia-buildkite-plugin/depots/a6029d3a-f78b-41ea-bc97
--28aa57c6c6ea/packages/SymbolicUtils/9iQGH/src/code.jl:282 =#
-      #= /root/.cache/julia-buildkite-plugin/depots/a6029d3a-f78b-41ea-bc97
--28aa57c6c6ea/packages/SymbolicUtils/9iQGH/src/code.jl:283 =#
-      let var"x₁(t)" = #= /root/.cache/julia-buildkite-plugin/depots/a6029d
-3a-f78b-41ea-bc97-28aa57c6c6ea/packages/SymbolicUtils/9iQGH/src/code.jl:169
- =# @inbounds(var"##arg#7619"[1]), var"x₂(t)" = #= /root/.cache/julia-build
-kite-plugin/depots/a6029d3a-f78b-41ea-bc97-28aa57c6c6ea/packages/SymbolicUt
-ils/9iQGH/src/code.jl:169 =# @inbounds(var"##arg#7619"[2]), var"x₃(t)" = #=
- /root/.cache/julia-buildkite-plugin/depots/a6029d3a-f78b-41ea-bc97-28aa57c
-6c6ea/packages/SymbolicUtils/9iQGH/src/code.jl:169 =# @inbounds(var"##arg#7
-619"[3]), α₁ = #= /root/.cache/julia-buildkite-plugin/depots/a6029d3a-f78b-
-41ea-bc97-28aa57c6c6ea/packages/SymbolicUtils/9iQGH/src/code.jl:169 =# @inb
-ounds(var"##arg#7620"[1]), α₂ = #= /root/.cache/julia-buildkite-plugin/depo
-ts/a6029d3a-f78b-41ea-bc97-28aa57c6c6ea/packages/SymbolicUtils/9iQGH/src/co
-de.jl:169 =# @inbounds(var"##arg#7620"[2]), α₃ = #= /root/.cache/julia-buil
-dkite-plugin/depots/a6029d3a-f78b-41ea-bc97-28aa57c6c6ea/packages/SymbolicU
-tils/9iQGH/src/code.jl:169 =# @inbounds(var"##arg#7620"[3])
-          #= /root/.cache/julia-buildkite-plugin/depots/a6029d3a-f78b-41ea-
-bc97-28aa57c6c6ea/packages/Symbolics/h8kPL/src/build_function.jl:331 =#
-          #= /root/.cache/julia-buildkite-plugin/depots/a6029d3a-f78b-41ea-
-bc97-28aa57c6c6ea/packages/SymbolicUtils/9iQGH/src/code.jl:329 =# @inbounds
- begin
-                  #= /root/.cache/julia-buildkite-plugin/depots/a6029d3a-f7
-8b-41ea-bc97-28aa57c6c6ea/packages/SymbolicUtils/9iQGH/src/code.jl:325 =#
-                  var"##out#7621"[1] = (*)(-1, α₁)
-                  var"##out#7621"[2] = α₁
-                  var"##out#7621"[3] = 0
-                  var"##out#7621"[4] = (*)(α₃, var"x₃(t)")
-                  var"##out#7621"[5] = (+)((*)(-2, α₂, var"x₂(t)"), (*)(-1,
+:(function (var"##out#5956", var"##arg#5954", var"##arg#5955", t)
+      #= /cache/julia-buildkite-plugin/depots/a6029d3a-f78b-41ea-bc97-28aa5
+7c6c6ea/packages/SymbolicUtils/9iQGH/src/code.jl:282 =#
+      #= /cache/julia-buildkite-plugin/depots/a6029d3a-f78b-41ea-bc97-28aa5
+7c6c6ea/packages/SymbolicUtils/9iQGH/src/code.jl:283 =#
+      let var"x₁(t)" = #= /cache/julia-buildkite-plugin/depots/a6029d3a-f78
+b-41ea-bc97-28aa57c6c6ea/packages/SymbolicUtils/9iQGH/src/code.jl:169 =# @i
+nbounds(var"##arg#5954"[1]), var"x₂(t)" = #= /cache/julia-buildkite-plugin/
+depots/a6029d3a-f78b-41ea-bc97-28aa57c6c6ea/packages/SymbolicUtils/9iQGH/sr
+c/code.jl:169 =# @inbounds(var"##arg#5954"[2]), var"x₃(t)" = #= /cache/juli
+a-buildkite-plugin/depots/a6029d3a-f78b-41ea-bc97-28aa57c6c6ea/packages/Sym
+bolicUtils/9iQGH/src/code.jl:169 =# @inbounds(var"##arg#5954"[3]), α₁ = #= 
+/cache/julia-buildkite-plugin/depots/a6029d3a-f78b-41ea-bc97-28aa57c6c6ea/p
+ackages/SymbolicUtils/9iQGH/src/code.jl:169 =# @inbounds(var"##arg#5955"[1]
+), α₂ = #= /cache/julia-buildkite-plugin/depots/a6029d3a-f78b-41ea-bc97-28a
+a57c6c6ea/packages/SymbolicUtils/9iQGH/src/code.jl:169 =# @inbounds(var"##a
+rg#5955"[2]), α₃ = #= /cache/julia-buildkite-plugin/depots/a6029d3a-f78b-41
+ea-bc97-28aa57c6c6ea/packages/SymbolicUtils/9iQGH/src/code.jl:169 =# @inbou
+nds(var"##arg#5955"[3])
+          #= /cache/julia-buildkite-plugin/depots/a6029d3a-f78b-41ea-bc97-2
+8aa57c6c6ea/packages/Symbolics/h8kPL/src/build_function.jl:331 =#
+          #= /cache/julia-buildkite-plugin/depots/a6029d3a-f78b-41ea-bc97-2
+8aa57c6c6ea/packages/SymbolicUtils/9iQGH/src/code.jl:329 =# @inbounds begin
+                  #= /cache/julia-buildkite-plugin/depots/a6029d3a-f78b-41e
+a-bc97-28aa57c6c6ea/packages/SymbolicUtils/9iQGH/src/code.jl:325 =#
+                  var"##out#5956"[1] = (*)(-1, α₁)
+                  var"##out#5956"[2] = α₁
+                  var"##out#5956"[3] = 0
+                  var"##out#5956"[4] = (*)(α₃, var"x₃(t)")
+                  var"##out#5956"[5] = (+)((*)(-2, α₂, var"x₂(t)"), (*)(-1,
  α₃, var"x₃(t)"))
-                  var"##out#7621"[6] = (*)(2, α₂, var"x₂(t)")
-                  var"##out#7621"[7] = (*)(α₃, var"x₂(t)")
-                  var"##out#7621"[8] = (*)(-1, α₃, var"x₂(t)")
-                  var"##out#7621"[9] = 0
-                  #= /root/.cache/julia-buildkite-plugin/depots/a6029d3a-f7
-8b-41ea-bc97-28aa57c6c6ea/packages/SymbolicUtils/9iQGH/src/code.jl:327 =#
+                  var"##out#5956"[6] = (*)(2, α₂, var"x₂(t)")
+                  var"##out#5956"[7] = (*)(α₃, var"x₂(t)")
+                  var"##out#5956"[8] = (*)(-1, α₃, var"x₂(t)")
+                  var"##out#5956"[9] = 0
+                  #= /cache/julia-buildkite-plugin/depots/a6029d3a-f78b-41e
+a-bc97-28aa57c6c6ea/packages/SymbolicUtils/9iQGH/src/code.jl:327 =#
                   nothing
               end
       end
@@ -534,7 +534,7 @@ f = ODEFunction(brusselator_2d_loop;jac_prototype=jac_sparsity)
 ```
 
 ```
-(::SciMLBase.ODEFunction{true, typeof(Main.##WeaveSandBox#7213.brusselator_
+(::SciMLBase.ODEFunction{true, typeof(Main.##WeaveSandBox#5548.brusselator_
 2d_loop), LinearAlgebra.UniformScaling{Bool}, Nothing, Nothing, Nothing, No
 thing, Nothing, SparseArrays.SparseMatrixCSC{Float64, Int64}, SparseArrays.
 SparseMatrixCSC{Float64, Int64}, Nothing, Nothing, Nothing, Nothing, Nothin
@@ -629,8 +629,8 @@ Now let's see how the version with sparsity compares to the version without:
 ```
 
 ```
-4.043 s (3332 allocations: 65.33 MiB)
-  869.262 ms (40173 allocations: 276.18 MiB)
+4.100 s (3332 allocations: 65.33 MiB)
+  542.630 ms (40171 allocations: 276.18 MiB)
 retcode: Success
 Interpolation: 1st order linear
 t: 2-element Vector{Float64}:
@@ -702,7 +702,7 @@ prob_ode_brusselator_2d_sparse = ODEProblem(f,
 ```
 
 ```
-865.877 ms (7392 allocations: 272.21 MiB)
+541.163 ms (7386 allocations: 272.21 MiB)
 retcode: Success
 Interpolation: 1st order linear
 t: 2-element Vector{Float64}:
@@ -753,8 +753,8 @@ GMRES linear solver.
 ```
 
 ```
-42.575 s (1440760 allocations: 148.08 MiB)
-  3.499 s (487052 allocations: 19.49 MiB)
+40.444 s (1440760 allocations: 148.08 MiB)
+  1.898 s (487052 allocations: 19.49 MiB)
 retcode: Success
 Interpolation: 1st order linear
 t: 2-element Vector{Float64}:
@@ -804,11 +804,11 @@ Jv = JacVecOperator(brusselator_2d_loop,u0,p,0.0)
 ```
 
 ```
-DiffEqOperators.JacVecOperator{Float64, typeof(Main.##WeaveSandBox#7213.bru
+DiffEqOperators.JacVecOperator{Float64, typeof(Main.##WeaveSandBox#5548.bru
 sselator_2d_loop), Array{ForwardDiff.Dual{DiffEqOperators.JacVecTag, Float6
 4, 1}, 3}, Array{ForwardDiff.Dual{DiffEqOperators.JacVecTag, Float64, 1}, 3
 }, Array{Float64, 3}, NTuple{4, Float64}, Float64, Bool}(Main.##WeaveSandBo
-x#7213.brusselator_2d_loop, ForwardDiff.Dual{DiffEqOperators.JacVecTag, Flo
+x#5548.brusselator_2d_loop, ForwardDiff.Dual{DiffEqOperators.JacVecTag, Flo
 at64, 1}[Dual{DiffEqOperators.JacVecTag}(0.0,0.0) Dual{DiffEqOperators.JacV
 ecTag}(0.12134432813715876,0.12134432813715876) … Dual{DiffEqOperators.JacV
 ecTag}(0.1213443281371586,0.1213443281371586) Dual{DiffEqOperators.JacVecTa
@@ -887,7 +887,7 @@ prob_ode_brusselator_2d_jacfree = ODEProblem(f,u0,(0.,11.5),p)
 ```
 
 ```
-2.134 s (942433 allocations: 1.05 GiB)
+2.014 s (942433 allocations: 1.05 GiB)
 retcode: Success
 Interpolation: 1st order linear
 t: 2-element Vector{Float64}:
@@ -933,7 +933,7 @@ pc = aspreconditioner(ruge_stuben(jac_sparsity))
 ```
 
 ```
-52.991 ms (2126 allocations: 4.62 MiB)
+44.779 ms (2126 allocations: 4.62 MiB)
 retcode: Success
 Interpolation: 1st order linear
 t: 2-element Vector{Float64}:
@@ -1011,8 +1011,8 @@ using Sundials
 ```
 
 ```
-15.834 s (51406 allocations: 3.40 MiB)
-  296.692 ms (54356 allocations: 3.24 MiB)
+14.773 s (51406 allocations: 3.40 MiB)
+  328.528 ms (61034 allocations: 3.62 MiB)
 retcode: Success
 Interpolation: 1st order linear
 t: 2-element Vector{Float64}:
@@ -1026,17 +1026,17 @@ u: 2-element Vector{Array{Float64, 3}}:
 [0.0 0.0 … 0.0 0.0; 0.14892258453196755 0.14892258453196755 … 0.14892258453
 196755 0.14892258453196755; … ; 0.14892258453196738 0.14892258453196738 … 0
 .14892258453196738 0.14892258453196738; 0.0 0.0 … 0.0 0.0]
- [0.73954982624037 0.7395263388402707 … 0.7396351353060872 0.73958594992628
-53; 0.7396041658726187 0.7395794572427602 … 0.739695044334048 0.73964269792
-96304; … ; 0.7394464539934248 0.7394236442964711 … 0.739525711935924 0.7394
-816883777938; 0.7394971311298292 0.7394736007090181 … 0.7395776392281666 0.
-7395310908993405]
+ [0.45369441125092624 0.45367162922766396 … 0.45377307354145824 0.453728249
+24331306; 0.45372813444006976 0.45370139820263283 … 0.45382031508907966 0.4
+537681622154197; … ; 0.4536347409999057 0.4536184243336325 … 0.453690734603
+503 0.4536589378647838; 0.4536631791063342 0.4536436405637919 … 0.453729310
+5001047 0.45369169445940305]
 
-[5.2303939324919755 5.230393890057542 … 5.2303959984740604 5.23039480844585
-2; 5.230381468535975 5.230378860934974 … 5.23039032191521 5.230385777894235
-; … ; 5.230417475089114 5.230421848938212 … 5.2304069866992995 5.2304127960
-05578; 5.230406186817664 5.230408247767747 … 5.230402329506947 5.2304044894
-92586]
+[5.023428953606044 5.023425514309876 … 5.02343972583798 5.0234337753788845;
+ 5.023442660236476 5.023439873077652 … 5.02345101637559 5.023446317614284; 
+… ; 5.023404093671991 5.023399216246354 … 5.023419229667771 5.0234107290209
+42; 5.023415926060523 5.023411776722086 … 5.02342895844194 5.02342180621704
+3]
 ```
 
 
@@ -1111,14 +1111,14 @@ To locally run this tutorial, do the following commands:
 
 ```
 using SciMLTutorials
-SciMLTutorials.weave_file("tutorials/advanced","02-advanced_ODE_solving.jmd")
+SciMLTutorials.weave_file("advanced","02-advanced_ODE_solving.jmd")
 ```
 
 Computer Information:
 
 ```
-Julia Version 1.6.2
-Commit 1b93d53fc4 (2021-07-14 15:36 UTC)
+Julia Version 1.6.5
+Commit 9058264a69 (2021-12-19 12:30 UTC)
 Platform Info:
   OS: Linux (x86_64-pc-linux-gnu)
   CPU: AMD EPYC 7502 32-Core Processor
@@ -1126,15 +1126,16 @@ Platform Info:
   LIBM: libopenlibm
   LLVM: libLLVM-11.0.1 (ORCJIT, znver2)
 Environment:
-  JULIA_DEPOT_PATH = /root/.cache/julia-buildkite-plugin/depots/a6029d3a-f78b-41ea-bc97-28aa57c6c6ea
-  JULIA_NUM_THREADS = 16
+  JULIA_CPU_THREADS = 16
+  BUILDKITE_PLUGIN_JULIA_CACHE_DIR = /cache/julia-buildkite-plugin
+  JULIA_DEPOT_PATH = /cache/julia-buildkite-plugin/depots/a6029d3a-f78b-41ea-bc97-28aa57c6c6ea
 
 ```
 
 Package Information:
 
 ```
-      Status `/var/lib/buildkite-agent/builds/8-amdci4-julia-csail-mit-edu/julialang/scimltutorials-dot-jl/tutorials/advanced/Project.toml`
+      Status `/cache/build/default-amdci4-2/julialang/scimltutorials-dot-jl/tutorials/advanced/Project.toml`
   [2169fc97] AlgebraicMultigrid v0.4.0
   [6e4b80f9] BenchmarkTools v1.0.0
   [052768ef] CUDA v2.6.3
@@ -1160,7 +1161,7 @@ Package Information:
 And the full manifest:
 
 ```
-      Status `/var/lib/buildkite-agent/builds/8-amdci4-julia-csail-mit-edu/julialang/scimltutorials-dot-jl/tutorials/advanced/Manifest.toml`
+      Status `/cache/build/default-amdci4-2/julialang/scimltutorials-dot-jl/tutorials/advanced/Manifest.toml`
   [c3fe647b] AbstractAlgebra v0.16.0
   [621f4979] AbstractFFTs v1.0.1
   [1520ce14] AbstractTrees v0.3.4

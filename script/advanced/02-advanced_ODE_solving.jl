@@ -1,5 +1,6 @@
 
-ccall((:openblas_get_num_threads64_, Base.libblas_name), Cint, ())
+using LinearAlgebra
+LinearAlgebra.BLAS.get_num_threads()
 
 
 using LinearAlgebra
