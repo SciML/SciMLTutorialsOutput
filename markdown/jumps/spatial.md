@@ -1,6 +1,5 @@
 ---
-author: |-
-  Vasily Ilin"
+author: "Vasily Ilin"
 title: "Tutorial on using spatial SSAs in DiffEqJump"
 ---
 
@@ -54,11 +53,11 @@ starting_state
 
 ```
 3×25 Matrix{Int64}:
- 25  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0   
+ 25  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
 0
   0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  2
 5
-  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0   
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
 0
 ```
 
@@ -93,11 +92,11 @@ prob = DiscreteProblem(starting_state, tspan, rates)
 DiscreteProblem with uType Matrix{Int64} and tType Float64. In-place: true
 timespan: (0.0, 3.0)
 u0: 3×25 Matrix{Int64}:
- 25  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0   
+ 25  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
 0
   0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  2
 5
-  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0   
+  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0  0
 0
 ```
 
@@ -124,7 +123,7 @@ othing)
 
 
 
-The last thing to set up is the hopping constants -- the probability per time of an individual molecule of each species hopping from one site to another site. In practice this parameter, as well as reaction rates, are obtained empirically. Suppose that molecule $$C$$ cannot diffuse, while molecules $$A$$ and $$B$$ diffuse at probability per time 1 (i.e. the time of the diffusive hop is exponentially distributed with mean 1). Entry $$(s,i)$$ of `hopping_constants` is the hopping rate of species $$s$$ at site $$i$$ to any of its neighboring sites (diagonal hops are not allowed). 
+The last thing to set up is the hopping constants -- the probability per time of an individual molecule of each species hopping from one site to another site. In practice this parameter, as well as reaction rates, are obtained empirically. Suppose that molecule $$C$$ cannot diffuse, while molecules $$A$$ and $$B$$ diffuse at probability per time 1 (i.e. the time of the diffusive hop is exponentially distributed with mean 1). Entry $$(s,i)$$ of `hopping_constants` is the hopping rate of species $$s$$ at site $$i$$ to any of its neighboring sites (diagonal hops are not allowed).
 
 ```julia
 hopping_constants = ones(num_species, num_nodes)
@@ -146,7 +145,7 @@ hopping_constants
 
 
 
-We are now ready to set up the `JumpProblem` with the Next Subvolume Method. 
+We are now ready to set up the `JumpProblem` with the Next Subvolume Method.
 
 ```julia
 alg = NSM()
