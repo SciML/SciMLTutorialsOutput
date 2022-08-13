@@ -1,3 +1,8 @@
+---
+author: "Chris Rackauckas"
+title: "Bayesian Inference on a Pendulum"
+---
+
 ### Set up simple pendulum problem
 
 ````julia
