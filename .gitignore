@@ -11,3 +11,5 @@ Manifest.toml
 tutorials/**/*.html
 tutorials/**/*.pdf
 /*/*/jl_*/
+docs/src/*
+docs/build/*
