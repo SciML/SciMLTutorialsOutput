@@ -1,133 +1,128 @@
 ---
-author: "Chris Rackauckas"
-title: "Conditional Dosing Pharmacometric Example"
+author: "Yingbo Ma, Chris Rackauckas"
+title: "The Outer Solar System"
 ---
 
 
-In this example we will show how to model a conditional dosing using the `DiscreteCallbacks`. The problem is as follows. The patient has a drug `A(t)` in their system. The concentration of the drug is given as `C(t)=A(t)/V` for some volume constant `V`. At `t=4`, the patient goes to the clinic and is checked. If the concentration of the drug in their body is below `4`, then they will receive a new dose.
+## Data
 
-For our model, we will use the simple decay equation. We will write this in the in-place form to make it easy to extend to more complicated examples:
+
+The chosen units are: masses relative to the sun, so that the sun has mass $1$. We have taken $m_0 = 1.00000597682$ to take account of the inner planets. Distances are in astronomical units , times in earth days, and the gravitational constant is thus $G = 2.95912208286 \cdot 10^{-4}$.
+
+| planet | mass | initial position | initial velocity |
+| --- | --- | --- | --- |
+| Jupiter | $m_1 = 0.000954786104043$ | <ul><li>-3.5023653</li><li>-3.8169847</li><li>-1.5507963</li></ul> | <ul><li>0.00565429</li><li>-0.00412490</li><li>-0.00190589</li></ul>
+| Saturn | $m_2 = 0.000285583733151$ | <ul><li>9.0755314</li><li>-3.0458353</li><li>-1.6483708</li></ul> | <ul><li>0.00168318</li><li>0.00483525</li><li>0.00192462</li></ul>
+| Uranus | $m_3 = 0.0000437273164546$ | <ul><li>8.3101420</li><li>-16.2901086</li><li>-7.2521278</li></ul> | <ul><li>0.00354178</li><li>0.00137102</li><li>0.00055029</li></ul>
+| Neptune | $m_4 = 0.0000517759138449$ | <ul><li>11.4707666</li><li>-25.7294829</li><li>-10.8169456</li></ul> | <ul><li>0.00288930</li><li>0.00114527</li><li>0.00039677</li></ul>
+| Pluto | $ m_5 = 1/(1.3 \cdot 10^8 )$ | <ul><li>-15.5387357</li><li>-25.2225594</li><li>-3.1902382</li></ul> | <ul><li>0.00276725</li><li>-0.00170702</li><li>-0.00136504</li></ul>
+
+The data is taken from the book "Geometric Numerical Integration" by E. Hairer, C. Lubich and G. Wanner.
 
 ```julia
-using DifferentialEquations
-function f(du,u,p,t)
-    du[1] = -u[1]
+using Plots, OrdinaryDiffEq, ModelingToolkit
+gr()
+
+G = 2.95912208286e-4
+M = [1.00000597682, 0.000954786104043, 0.000285583733151, 0.0000437273164546, 0.0000517759138449, 1/1.3e8]
+planets = ["Sun", "Jupiter", "Saturn", "Uranus", "Neptune", "Pluto"]
+
+pos =  [0.0  -3.5023653   9.0755314    8.310142    11.4707666  -15.5387357
+        0.0  -3.8169847  -3.0458353  -16.2901086  -25.7294829  -25.2225594
+        0.0  -1.5507963  -1.6483708   -7.2521278  -10.8169456   -3.1902382]
+vel = [0.0   0.00565429  0.00168318  0.00354178  0.0028893    0.00276725
+       0.0  -0.0041249   0.00483525  0.00137102  0.00114527  -0.00170702
+       0.0  -0.00190589  0.00192462  0.00055029  0.00039677  -0.00136504]
+tspan = (0.0, 200_000.0)
+```
+
+```
+(0.0, 200000.0)
+```
+
+
+
+
+
+The N-body problem's Hamiltonian is
+
+$$H(p,q) = \frac{1}{2}\sum_{i=0}^{N}\frac{p_{i}^{T}p_{i}}{m_{i}} - G\sum_{i=1}^{N}\sum_{j=0}^{i-1}\frac{m_{i}m_{j}}{\left\lVert q_{i}-q_{j} \right\rVert}$$
+
+Here, we want to solve for the motion of the five outer planets relative to the sun, namely, Jupiter, Saturn, Uranus, Neptune and Pluto.
+
+```julia
+const ∑ = sum
+const N = 6
+@variables t u(t)[1:3, 1:N]
+u = collect(u)
+D = Differential(t)
+potential = -G*∑(i->∑(j->(M[i]*M[j])/√(∑(k->(u[k, i]-u[k, j])^2, 1:3)), 1:i-1), 2:N)
+```
+
+```
+-2.8253455313622585e-7 / sqrt(((u(t))[1, 2] - (u(t))[1, 1])^2 + ((u(t))[2, 
+2] - (u(t))[2, 1])^2 + ((u(t))[3, 2] - (u(t))[3, 1])^2) + -8.45082182146621
+2e-8 / sqrt(((u(t))[1, 3] - (u(t))[1, 1])^2 + ((u(t))[2, 3] - (u(t))[2, 1])
+^2 + ((u(t))[3, 3] - (u(t))[3, 1])^2) + -1.2939524111245703e-8 / sqrt(((u(t
+))[1, 4] - (u(t))[1, 1])^2 + ((u(t))[2, 4] - (u(t))[2, 1])^2 + ((u(t))[3, 4
+] - (u(t))[3, 1])^2) + -8.068679017837167e-11 / sqrt(((u(t))[1, 3] - (u(t))
+[1, 2])^2 + ((u(t))[2, 3] - (u(t))[2, 2])^2 + ((u(t))[3, 3] - (u(t))[3, 2])
+^2) + -1.2354403974297985e-11 / sqrt(((u(t))[1, 4] - (u(t))[1, 2])^2 + ((u(
+t))[2, 4] - (u(t))[2, 2])^2 + ((u(t))[3, 4] - (u(t))[3, 2])^2) + -1.5321216
+573476373e-8 / sqrt(((u(t))[1, 5] - (u(t))[1, 1])^2 + ((u(t))[2, 5] - (u(t)
+)[2, 1])^2 + ((u(t))[3, 5] - (u(t))[3, 1])^2) + -2.2762613607692674e-12 / s
+qrt(((u(t))[1, 6] - (u(t))[1, 1])^2 + ((u(t))[2, 6] - (u(t))[2, 1])^2 + ((u
+(t))[3, 6] - (u(t))[3, 1])^2) + -1.4628397250091296e-11 / sqrt(((u(t))[1, 5
+] - (u(t))[1, 2])^2 + ((u(t))[2, 5] - (u(t))[2, 2])^2 + ((u(t))[3, 5] - (u(
+t))[3, 2])^2) + -2.1733297268319285e-15 / sqrt(((u(t))[1, 6] - (u(t))[1, 2]
+)^2 + ((u(t))[2, 6] - (u(t))[2, 2])^2 + ((u(t))[3, 6] - (u(t))[3, 2])^2) + 
+-3.695295514770784e-12 / sqrt(((u(t))[1, 4] - (u(t))[1, 3])^2 + ((u(t))[2, 
+4] - (u(t))[2, 3])^2 + ((u(t))[3, 4] - (u(t))[3, 3])^2) + -4.37546407410716
+75e-12 / sqrt(((u(t))[1, 5] - (u(t))[1, 3])^2 + ((u(t))[2, 5] - (u(t))[2, 3
+])^2 + ((u(t))[3, 5] - (u(t))[3, 3])^2) + -6.500593317482474e-16 / sqrt(((u
+(t))[1, 6] - (u(t))[1, 3])^2 + ((u(t))[2, 6] - (u(t))[2, 3])^2 + ((u(t))[3,
+ 6] - (u(t))[3, 3])^2) + -6.699516813972553e-13 / sqrt(((u(t))[1, 5] - (u(t
+))[1, 4])^2 + ((u(t))[2, 5] - (u(t))[2, 4])^2 + ((u(t))[3, 5] - (u(t))[3, 4
+])^2) + -9.953420595770331e-17 / sqrt(((u(t))[1, 6] - (u(t))[1, 4])^2 + ((u
+(t))[2, 6] - (u(t))[2, 4])^2 + ((u(t))[3, 6] - (u(t))[3, 4])^2) + -1.178548
+077066926e-16 / sqrt(((u(t))[1, 6] - (u(t))[1, 5])^2 + ((u(t))[2, 6] - (u(t
+))[2, 5])^2 + ((u(t))[3, 6] - (u(t))[3, 5])^2)
+```
+
+
+
+
+
+## Hamiltonian System
+
+`NBodyProblem` constructs a second order ODE problem under the hood. We know that a Hamiltonian system has the form of
+
+$$\dot{p} = -H_{q}(p,q)\quad \dot{q}=H_{p}(p,q)$$
+
+For an N-body system, we can symplify this as:
+
+$$\dot{p} = -\nabla{V}(q)\quad \dot{q}=M^{-1}p.$$
+
+Thus $\dot{q}$ is defined by the masses. We only need to define $\dot{p}$, and this is done internally by taking the gradient of $V$. Therefore, we only need to pass the potential function and the rest is taken care of.
+
+```julia
+eqs = vec(@. D(D(u))) .~ .- ModelingToolkit.gradient(potential, vec(u)) ./ repeat(M, inner=3)
+@named sys = ODESystem(eqs, t)
+ss = structural_simplify(sys)
+prob = ODEProblem(ss, [vec(u .=> pos); vec(D.(u) .=> vel)], tspan)
+sol = solve(prob, Tsit5());
+```
+
+
+```julia
+plt = plot()
+for i in 1:N
+    plot!(plt, sol, idxs=(u[:, i]...,), lab = planets[i])
 end
-u0 = [10.0]
-const V = 1
-prob = ODEProblem(f,u0,(0.0,10.0))
+plot!(plt; xlab = "x", ylab = "y", zlab = "z", title = "Outer solar system")
 ```
 
-```
-ODEProblem with uType Vector{Float64} and tType Float64. In-place: true
-timespan: (0.0, 10.0)
-u0: 1-element Vector{Float64}:
- 10.0
-```
-
-
-
-
-
-Let's see what the solution looks like without any events.
-
-```julia
-sol = solve(prob,Tsit5())
-using Plots; gr()
-plot(sol)
-```
-
-![](figures/02-conditional_dosing_2_1.png)
-
-
-
-We see that at time `t=4`, the patient should receive a dose. Let's code up that event. We need to check at `t=4` if the concentration `u[1]/4` is `<4`, and if so, add `10` to `u[1]`. We do this with the following:
-
-```julia
-condition(u,t,integrator) = t==4 && u[1]/V<4
-affect!(integrator) = integrator.u[1] += 10
-cb = DiscreteCallback(condition,affect!)
-```
-
-```
-SciMLBase.DiscreteCallback{typeof(Main.var"##WeaveSandBox#686".condition), 
-typeof(Main.var"##WeaveSandBox#686".affect!), typeof(SciMLBase.INITIALIZE_D
-EFAULT), typeof(SciMLBase.FINALIZE_DEFAULT)}(Main.var"##WeaveSandBox#686".c
-ondition, Main.var"##WeaveSandBox#686".affect!, SciMLBase.INITIALIZE_DEFAUL
-T, SciMLBase.FINALIZE_DEFAULT, Bool[1, 1])
-```
-
-
-
-
-
-Now we will give this callback to the solver, and tell it to stop at `t=4` so that way the condition can be checked:
-
-```julia
-sol = solve(prob,Tsit5(),tstops=[4.0],callback=cb)
-using Plots; gr()
-plot(sol)
-```
-
-![](figures/02-conditional_dosing_4_1.png)
-
-
-
-Let's show that it actually added 10 instead of setting the value to 10. We could have set the value using `affect!(integrator) = integrator.u[1] = 10`
-
-```julia
-println(sol(4.00000))
-println(sol(4.000000000001))
-```
-
-```
-[0.18316389221855156]
-[10.183163892208368]
-```
-
-
-
-
-
-Now let's model a patient whose decay rate for the drug is lower:
-
-```julia
-function f(du,u,p,t)
-    du[1] = -u[1]/6
-end
-u0 = [10.0]
-const V = 1
-prob = ODEProblem(f,u0,(0.0,10.0))
-```
-
-```
-ODEProblem with uType Vector{Float64} and tType Float64. In-place: true
-timespan: (0.0, 10.0)
-u0: 1-element Vector{Float64}:
- 10.0
-```
-
-
-
-```julia
-sol = solve(prob,Tsit5())
-using Plots; gr()
-plot(sol)
-```
-
-![](figures/02-conditional_dosing_7_1.png)
-
-
-
-Under the same criteria, with the same event, this patient will not receive a second dose:
-
-```julia
-sol = solve(prob,Tsit5(),tstops=[4.0],callback=cb)
-using Plots; gr()
-plot(sol)
-```
-
-![](figures/02-conditional_dosing_8_1.png)
+![](figures/05-outer_solar_system_4_1.png)
 
 
 ## Appendix
@@ -138,7 +133,7 @@ To locally run this tutorial, do the following commands:
 
 ```
 using SciMLTutorials
-SciMLTutorials.weave_file("tutorials/models","02-conditional_dosing.jmd")
+SciMLTutorials.weave_file("tutorials/models","05-outer_solar_system.jmd")
 ```
 
 Computer Information:
