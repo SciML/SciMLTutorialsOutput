@@ -25,7 +25,7 @@ makedocs(
     format=Documenter.HTML(#analytics = "UA-90474609-3",
         assets=["assets/favicon.ico"],
         canonical="https://tutorials.sciml.ai/stable/",
-        mathengine),
+        mathengine = mathengine),
     pages=pages
 )
 
