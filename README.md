@@ -16,79 +16,79 @@ and the [devdocs](http://devdocs.sciml.ai/latest/)
 by providing practical examples of the concepts. For more details, please
 consult the docs.
 
-## Interactive Notebooks
+## Results
 
-To run the tutorials interactively via Jupyter notebooks, install the package
-and open the tutorials like:
+To view the SciML Tutorials, go to [tutorials.sciml.ai](https://tutorials.sciml.ai/stable/). By default, this
+will lead to the latest tagged version of the tutorials. To see the in-development version of the tutorials, go to
+[https://tutorials.sciml.ai/dev/](https://tutorials.sciml.ai/dev/).
 
-```julia
-using Pkg
-pkg"add https://github.com/SciML/SciMLTutorials.jl"
-using SciMLTutorials
-SciMLTutorials.open_notebooks()
-```
+Static outputs in pdf, markdown, and html reside in [SciMLTutorialsOutput](https://github.com/SciML/SciMLTutorialsOutput).
 
 ## Video Tutorial
 
 [![Video Tutorial](https://user-images.githubusercontent.com/1814174/36342812-bdfd0606-13b8-11e8-9eff-ff219de909e5.PNG)](https://youtu.be/KPEqYtEd-zY)
 
-## Table of Contents
+## Interactive Notebooks
 
-- Introduction
-  - [Introduction to DifferentialEquations.jl through ODEs](http://tutorials.sciml.ai/html/introduction/01-ode_introduction.html)
-  - [Detecting Stiffness and Choosing an ODE Algorithm](http://tutorials.sciml.ai/html/introduction/02-choosing_algs.html)
-  - [Optimizing your DiffEq Code](http://tutorials.sciml.ai/html/introduction/03-optimizing_diffeq_code.html)
-  - [Callbacks and Event Handling](http://tutorials.sciml.ai/html/introduction/04-callbacks_and_events.html)
-  - [Formatting Plots](http://tutorials.sciml.ai/html/introduction/05-formatting_plots.html)
-- Exercise Sheets
-  - [DifferentialEquations.jl Workshop Exercises](http://tutorials.sciml.ai/html/exercises/01-workshop_exercises.html)
-  - [DifferentialEquations.jl Workshop Exercise Solutions](http://tutorials.sciml.ai/html/exercises/02-workshop_solutions.html)
-- Modeling Examples
-  - [Classical Physics Models](http://tutorials.sciml.ai/html/models/01-classical_physics.html)
-  - [Conditional Dosing Example](http://tutorials.sciml.ai/html/models/02-conditional_dosing.html)
-  - [DiffEqBiological Tutorial I: Introduction](http://tutorials.sciml.ai/html/models/03-diffeqbio_I_introduction.html)
-  - [DiffEqBiological Tutorial II: Network Properties API](http://tutorials.sciml.ai/html/models/04-diffeqbio_II_networkproperties.html)
-  - [DiffEqBiological Tutorial III: Steady-States and Bifurcations](http://tutorials.sciml.ai/html/models/04b-diffeqbio_III_steadystates.html)
-  - [Tutorial on using spatial SSAs in DiffEqJump](http://tutorials.sciml.ai/html/jumps/spatial.html)
-  - [Kepler Problem Orbit](http://tutorials.sciml.ai/html/models/05-kepler_problem.html)
-  - [Spiking Neural Systems](http://tutorials.sciml.ai/html/models/08-spiking_neural_systems.html)
-  - [Outer Solar System](http://tutorials.sciml.ai/html/models/05-outer_solar_system.html)
-- Advanced ODE Features
-  - [Feagin's Order 10, 12, and 14 Methods](http://tutorials.sciml.ai/html/ode_extras/01-feagin.html)
-  - [Finding Maxima and Minima of DiffEq Solutions](http://tutorials.sciml.ai/html/ode_extras/02-ode_minmax.html)
-- Model Inference
-  - [Bayesian Inference of Pendulum Parameters](http://tutorials.sciml.ai/html/model_inference/01-pendulum_bayesian_inference.html)
-  - [Monte Carlo Parameter Estimation from Data](http://tutorials.sciml.ai/html/model_inference/02-monte_carlo_parameter_estim.html)
-- Type Handling
-  - [Solving Equations with Julia-Defined Types](http://tutorials.sciml.ai/html/type_handling/01-number_types.html)
-  - [Numbers with Uncertainties](http://tutorials.sciml.ai/html/type_handling/02-uncertainties.html)
-  - [Unit Check Arithmetic via Unitful.jl](http://tutorials.sciml.ai/html/type_handling/03-unitful.html)
-- DiffEqUncertainty
-  - [An Intro to Expectations via DiffEqUncertainty.jl](http://tutorials.sciml.ai/html/DiffEqUncertainty/01-expectation_introduction.html)
-  - [Optimization Under Uncertainty with DiffEqUncertainty.jl](http://tutorials.sciml.ai/html/DiffEqUncertainty/02-AD_and_optimization.html)
-  - [GPU-Accelerated Data-Driven Bayesian Uncertainty Quantification with Koopman Operators](http://tutorials.sciml.ai/html/DiffEqUncertainty/03-GPU_Bayesian_Koopman.html)
-- Advanced
-  - [A 2D Cardiac Electrophysiology Model (CUDA-accelerated PDE solver)](http://tutorials.sciml.ai/html/advanced/01-beeler_reuter.html)
-  - [Solving Stiff Equations](http://tutorials.sciml.ai/html/advanced/02-advanced_ODE_solving.html)
-  - [Solving the heat equation with diffusion-implicit time-stepping](http://tutorials.sciml.ai/html/advanced/04-diffusion_implicit_heat_equation.html)
-  - [Kolmogorov Backward Equations](http://tutorials.sciml.ai/html/advanced/03-kolmogorov_equations.html)
-- Perturbation Theory
-  - [Mixed Symbolic/Numerical Methods for Perturbation Theory - Algebraic Equations](http://tutorials.sciml.ai/html/perturbation/01-perturbation_algebraic.html)
-  - [Mixed Symbolic/Numerical Methods for Perturbation Theory - Differential Equations](http://tutorials.sciml.ai/html/perturbation/02-perturbation_differential.html)
+To generate the interactive notebooks, first install the SciMLTutorials, instantiate the
+environment, and then run `SciMLTutorials.open_notebooks()`. This looks as follows:
 
+```julia
+]add SciMLTutorials#master
+]activate SciMLTutorials
+]instantiate
+using SciMLTutorials
+SciMLTutorials.open_notebooks()
+```
+
+The tutorials will be generated at your `pwd()` in a folder called `generated_notebooks`.
+
+Note that when running the tutorials, the packages are not automatically added. Thus you
+will need to add the packages manually or use the internal Project/Manifest tomls to
+instantiate the correct packages. This can be done by activating the folder of the tutorials.
+For example,
+
+```julia
+using Pkg
+Pkg.activate(joinpath(pkgdir(SciMLTutorials),"tutorials","models"))
+Pkg.instantiate()
+```
+
+will add all of the packages required to run any tutorial in the `models` folder.
 
 ## Contributing
 
-First of all, make sure that your current directory is `SciMLTutorials`. All
-of the files are generated from the Weave.jl files in the `tutorials` folder.
+All of the files are generated from the Weave.jl files in the `tutorials` folder. The generation process runs automatically,
+and thus one does not necessarily need to test the Weave process locally. Instead, simply open a PR that adds/updates a
+file in the "tutorials" folder and the PR will generate the tutorial on demand. Its artifacts can then be inspected in the
+Buildkite as described below before merging. Note that it will use the Project.toml and Manifest.toml of the subfolder, so
+any changes to dependencies requires that those are updated.
+
+### Reporting Bugs and Issues
+
+Report any bugs or issues at [the SciMLTutorials repository](https://github.com/SciML/SciMLTutorials.jl/issues).
+
+### Inspecting Tutorial Results
+
+To see tutorial results before merging, click into the BuildKite, click onto
+Artifacts, and then investigate the trained results.
+
+![](https://user-images.githubusercontent.com/1814174/118359358-02ddc980-b551-11eb-8a9b-24de947cefee.PNG)
+
+### Manually Generating Files
+
 To run the generation process, do for example:
 
 ```julia
-using Pkg, SciMLTutorials
-cd(joinpath(dirname(pathof(SciMLTutorials)), ".."))
-Pkg.pkg"activate ."
-Pkg.pkg"instantiate"
-SciMLTutorials.weave_file("introduction","01-ode_introduction.jmd")
+]activate SciMLTutorials # Get all of the packages
+using SciMLTutorials
+SciMLTutorials.weave_file(joinpath(pkgdir(SciMLTutorials),"tutorials","models"),"01-classical_physics.jmd")
+```
+
+To generate all of the files in a folder, for example, run:
+
+```julia
+SciMLTutorials.weave_folder(joinpath(pkgdir(SciMLTutorials),"tutorials","models"))
 ```
 
 To generate all of the notebooks, do:
@@ -97,6 +97,5 @@ To generate all of the notebooks, do:
 SciMLTutorials.weave_all()
 ```
 
-If you add new tutorials which require new packages, simply updating your local
-environment will change the project and manifest files. When this occurs, the
-updated environment files should be included in the PR.
+Each of the tuturials displays the computer characteristics at the bottom of
+the benchmark.
