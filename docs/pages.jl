@@ -48,7 +48,6 @@ names = [
     "Inference and Parameter Estimation on ODEs",
     "Analyzing Jump Process Equations",
     "Advanced ODE Examples",
-    "Uncertainty Quantification on ODEs",
     "Symbolic-Numeric Approaches",
     "Workshop Exercises"]
 
