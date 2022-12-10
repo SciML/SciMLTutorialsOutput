@@ -37,18 +37,11 @@ end
 # The result is in alphabetical order, change to the wanted order
 
 permute!(pages,
-    [1, 7, 9, 6, 5, 3, 2, 8, 4]
+    [1, 2]
 )
 
 names = [
     "SciMLTutorials.jl: Tutorials for Scientific Machine Learning (SciML) and Equation Solvers",
-    "Ordinary Differential Equation (ODE) Examples",
-    "Special Analyses of ODEs",
-    "Mixing Julia Types with Differential Equations",
-    "Inference and Parameter Estimation on ODEs",
-    "Analyzing Jump Process Equations",
-    "Advanced ODE Examples",
-    "Symbolic-Numeric Approaches",
     "Workshop Exercises"]
 
 for i in 1:length(pages)
