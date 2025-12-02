@@ -55,11 +55,12 @@ using OrdinaryDiffEq, Plots
 
 #Constants
 const g = 9.81
-L = 1.0
+const L = 1.0
 
-#Initial Conditions
+#Initial conditions
 u₀ = [0,π/2]
-tspan = (0.0,6.3)
+#Integration time
+tspan = (0.0,2pi)
 
 #Define the problem
 function simplependulum(du,u,p,t)
@@ -71,24 +72,29 @@ end
 
 #Pass to solvers
 prob = ODEProblem(simplependulum, u₀, tspan)
-sol = solve(prob,Tsit5())
+sol = solve(prob, Tsit5())
 
 #Plot
-plot(sol,linewidth=2,title ="Simple Pendulum Problem", xaxis = "Time", yaxis = "Height", label = ["\\theta" "d\\theta"])
+plot(sol, linewidth=2, title="Simple Pendulum Problem", xaxis="Time", yaxis="Height", label=["\\theta" "d\\theta"])
 
 
-p = plot(sol,vars = (1,2), xlims = (-9,9), title = "Phase Space Plot", xaxis = "Velocity", yaxis = "Position", leg=false)
-function phase_plot(prob, u0, p, tspan=2pi)
-    _prob = ODEProblem(prob.f,u0,(0.0,tspan))
-    sol = solve(_prob,Vern9()) # Use Vern9 solver for higher accuracy
-    plot!(p,sol,vars = (1,2), xlims = nothing, ylims = nothing)
+plt = plot(sol, vars=(1, 2), xlims=(-9, 9), title="Phase Space Plot", xaxis="Velocity", yaxis="Position", leg=false)
+function phase_plot!(plt, prob, u0, T=2pi)
+    # remake ODEProblem with updated initial conditions
+    _prob = ODEProblem(simplependulum, u0, (0.0, T))
+    # solve ODEProblem with updated initial conditions
+    sol = solve(_prob, Vern9()) # Use Vern9 solver for higher accuracy
+    # add solution to the plot
+    plot!(plt, sol, vars=(1, 2))
 end
+# Loop over initial conditions
 for i in -4pi:pi/2:4π
     for j in -4pi:pi/2:4π
-        phase_plot(prob, [j,i], p)
+        # update Phase Space Plot with new trajectories for different initial conditions
+        phase_plot!(plt, prob, [j, i])
     end
 end
-plot(p,xlims = (-9,9))
+plot(plt, xlims=(-9, 9))
 
 
 #Double Pendulum Problem
@@ -261,4 +267,3 @@ plot(sol3.t, energy .- energy[1], title = "Change in Energy over Time", xaxis = 
 
 using SciMLTutorials
 SciMLTutorials.tutorial_footer(WEAVE_ARGS[:folder],WEAVE_ARGS[:file])
-
